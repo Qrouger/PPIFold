@@ -1,0 +1,448 @@
+# STOCKHOLM 1.0
+
+#=GS UniRef90_P09776/39-121        DE [subseq from] Protein virB2 n=16 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=VIRB2_RHIRD
+#=GS UniRef90_P17792/40-120        DE [subseq from] Protein virB2 n=34 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=VIRB2_AGRFC
+#=GS UniRef90_A0A4Z1Q517/44-121    DE [subseq from] Pilin major subunit VirB2 n=2 Tax=Agrobacterium TaxID=357 RepID=A0A4Z1Q517_RHIRD
+#=GS UniRef90_Q9F5A1/41-119        DE [subseq from] Pilin major subunit VirB2 n=5 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=Q9F5A1_RHIRH
+#=GS UniRef90_K0Q6F4/39-117        DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=K0Q6F4_9HYPH
+#=GS UniRef90_A0A2Z2PX48/43-119    DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=A0A2Z2PX48_RHIRD
+#=GS UniRef90_B9K417/44-119        DE [subseq from] VirB2 n=2 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=B9K417_ALLAM
+#=GS UniRef90_Q8VTA1/43-119        DE [subseq from] VirB2 n=1 Tax=Rhizobium radiobacter TaxID=358 RepID=Q8VTA1_RHIRD
+#=GS UniRef90_UPI000A11B8A7/41-119 DE [subseq from] pilin major subunit VirB2 n=2 Tax=Rhizobiaceae TaxID=82115 RepID=UPI000A11B8A7
+#=GS UniRef90_A0A9Q8J6B2/43-119    DE [subseq from] Pilin major subunit VirB2 n=3 Tax=Rhizobium TaxID=379 RepID=A0A9Q8J6B2_9HYPH
+#=GS UniRef90_A0A1S1T2S7/41-119    DE [subseq from] Type IV secretion system protein VirB2 n=4 Tax=Sinorhizobium/Ensifer group TaxID=227292 RepID=A0A1S1T2S7_9HYPH
+#=GS UniRef90_A0A178Y0A6/38-115    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Sinorhizobium saheli TaxID=36856 RepID=A0A178Y0A6_SINSA
+#=GS UniRef90_UPI0024C3F4E2/41-119 DE [subseq from] pilin major subunit VirB2 n=2 Tax=unclassified Sinorhizobium TaxID=2613772 RepID=UPI0024C3F4E2
+#=GS UniRef90_A0A1H8WWE1/42-119    DE [subseq from] Type IV secretion system pilin subunit VirB2 n=9 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=A0A1H8WWE1_9HYPH
+#=GS UniRef90_A6UMA7/42-119        DE [subseq from] VIRB2 type IV secretion fmaily protein n=8 Tax=Sinorhizobium TaxID=28105 RepID=A6UMA7_SINMW
+#=GS UniRef90_A0A530BRZ2/2-80      DE [subseq from] Pilin major subunit VirB2 (Fragment) n=1 Tax=Mesorhizobium sp. TaxID=1871066 RepID=A0A530BRZ2_9HYPH
+#=GS UniRef90_L0KTD3/42-120        DE [subseq from] Type IV secretory pathway, VirB2 component (Pilin) n=70 Tax=Phyllobacteriaceae TaxID=69277 RepID=L0KTD3_MESAW
+#=GS UniRef90_A0A7G6T4Q7/41-119    DE [subseq from] Pilin major subunit VirB2 n=2 Tax=Mesorhizobium TaxID=68287 RepID=A0A7G6T4Q7_9HYPH
+#=GS UniRef90_A0A6N7LEK9/41-119    DE [subseq from] Pilin major subunit VirB2 n=2 Tax=Sinorhizobium TaxID=28105 RepID=A0A6N7LEK9_SINTE
+#=GS UniRef90_UPI0020B169B8/46-124 DE [subseq from] pilin major subunit VirB2 n=1 Tax=Acidisphaera sp. S103 TaxID=1747223 RepID=UPI0020B169B8
+#=GS UniRef90_UPI002091051E/23-100 DE [subseq from] pilin major subunit VirB2 n=3 Tax=Rhizobiaceae TaxID=82115 RepID=UPI002091051E
+#=GS UniRef90_UPI00243363FE/37-111 DE [subseq from] pilin major subunit VirB2 n=2 Tax=Rhizobium TaxID=379 RepID=UPI00243363FE
+#=GS UniRef90_A0A330H1F2/43-119    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Mesorhizobium hawassense TaxID=1209954 RepID=A0A330H1F2_9HYPH
+#=GS UniRef90_A0A1A5R397/42-120    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Mesorhizobium sp. WSM3873 TaxID=1854056 RepID=A0A1A5R397_9HYPH
+#=GS UniRef90_A0A4R3PYJ0/43-119    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Rhizobium sullae TaxID=50338 RepID=A0A4R3PYJ0_RHISU
+#=GS UniRef90_UPI000FEC2D38/41-118 DE [subseq from] pilin major subunit VirB2 n=1 Tax=Rhizobium hidalgonense TaxID=1538159 RepID=UPI000FEC2D38
+#=GS UniRef90_A0A839V727/49-124    DE [subseq from] Type IV secretory pathway VirB2 component (Pilin) n=2 Tax=Endobacter medicaginis TaxID=1181271 RepID=A0A839V727_9PROT
+#=GS UniRef90_J0W6I9/43-120        DE [subseq from] Type IV secretory pathway, VirB2 component (Pilin) n=1 Tax=Rhizobium leguminosarum bv. trifolii WSM2297 TaxID=754762 RepID=J0W6I9_RHILT
+#=GS UniRef90_UPI002114261D/26-98  DE [subseq from] pilin major subunit VirB2 n=1 Tax=Bradyrhizobium sp. CCGUVB23 TaxID=2949630 RepID=UPI002114261D
+#=GS UniRef90_A0A258LC18/35-112    DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=Acidocella TaxID=50709 RepID=A0A258LC18_9PROT
+#=GS UniRef90_UPI0025EA4289/53-128 DE [subseq from] pilin major subunit VirB2 n=1 Tax=uncultured Acidocella sp. TaxID=240143 RepID=UPI0025EA4289
+#=GS UniRef90_UPI0025838C25/17-92  DE [subseq from] pilin major subunit VirB2 n=1 Tax=Acidiphilium sp. TaxID=527 RepID=UPI0025838C25
+#=GS UniRef90_UPI001FF812B6/37-107 DE [subseq from] pilin major subunit VirB2 n=1 Tax=unclassified Bradyrhizobium TaxID=2631580 RepID=UPI001FF812B6
+#=GS UniRef90_UPI002631225F/48-123 DE [subseq from] pilin major subunit VirB2 n=1 Tax=Acidocella sp. TaxID=50710 RepID=UPI002631225F
+#=GS UniRef90_A0A0D6PFU6/44-119    DE [subseq from] Secretion system type IV pilin subunit VirB2 n=2 Tax=Acidocella TaxID=50709 RepID=A0A0D6PFU6_9PROT
+#=GS UniRef90_A0A257Q174/44-119    DE [subseq from] Type IV secretion system protein VirB2 n=5 Tax=Acetobacteraceae TaxID=433 RepID=A0A257Q174_9PROT
+#=GS UniRef90_A0A257Q039/44-119    DE [subseq from] Type IV secretion system protein VirB2 n=8 Tax=Acidocella TaxID=50709 RepID=A0A257Q039_9PROT
+#=GS UniRef90_UPI0024791F98/28-104 DE [subseq from] pilin major subunit VirB2 n=1 Tax=Phyllobacterium myrsinacearum TaxID=28101 RepID=UPI0024791F98
+#=GS UniRef90_A0A949MES1/37-112    DE [subseq from] Pilin major subunit VirB2 n=2 Tax=Pseudomonadota TaxID=1224 RepID=A0A949MES1_UNCPS
+#=GS UniRef90_UPI001C952EDE/35-109 DE [subseq from] pilin major subunit VirB2 n=2 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=UPI001C952EDE
+#=GS UniRef90_UPI001031F16F/41-115 DE [subseq from] pilin major subunit VirB2 n=1 Tax=Rhizobium leguminosarum TaxID=384 RepID=UPI001031F16F
+#=GS UniRef90_A0A1S8GSC8/19-94     DE [subseq from] Type IV secretion system pilin subunit VirB2 n=4 Tax=Bombella TaxID=1654741 RepID=A0A1S8GSC8_9PROT
+#=GS UniRef90_A0A149RY15/34-108    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Acetobacter malorum TaxID=178901 RepID=A0A149RY15_9PROT
+#=GS UniRef90_A0A401WNV3/34-108    DE [subseq from] Transport secretion system IV VirB2 protein n=2 Tax=Acetobacter TaxID=434 RepID=A0A401WNV3_ACEPA
+#=GS UniRef90_M9MKT3/33-107        DE [subseq from] Transport secretion system IV VirB2 protein n=7 Tax=Acetobacteraceae TaxID=433 RepID=M9MKT3_GLUTH
+#=GS UniRef90_A0A257UT00/44-119    DE [subseq from] Type VI secretion protein n=1 Tax=Acidiphilium sp. 37-64-53 TaxID=1970299 RepID=A0A257UT00_9PROT
+#=GS UniRef90_UPI0004940C7B/49-123 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Acidiphilium angustum TaxID=523 RepID=UPI0004940C7B
+#=GS UniRef90_UPI0022A80A21/49-124 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Acidiphilium iwatense TaxID=768198 RepID=UPI0022A80A21
+#=GS UniRef90_F0J778/45-120        DE [subseq from] Type IV secretion system VirB2 n=8 Tax=Acetobacteraceae TaxID=433 RepID=F0J778_ACIMA
+#=GS UniRef90_A0A066PQD7/46-121    DE [subseq from] Type IV secretory pathway, VirB2 component n=2 Tax=Acidiphilium sp. JA12-A1 TaxID=1464546 RepID=A0A066PQD7_9PROT
+#=GS UniRef90_F0J7S9/45-120        DE [subseq from] Type IV secretion system VirB2 n=2 Tax=Acidiphilium multivorum TaxID=62140 RepID=F0J7S9_ACIMA
+#=GS UniRef90_A0A3S0SVT3/38-113    DE [subseq from] Type VI secretion protein n=3 Tax=Sphingomonadaceae TaxID=41297 RepID=A0A3S0SVT3_9SPHN
+#=GS UniRef90_UPI0007A7566B/35-110 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Sphingobium yanoikuyae TaxID=13690 RepID=UPI0007A7566B
+#=GS UniRef90_UPI002358A2E6/35-110 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Sphingomonas naphthae TaxID=1813468 RepID=UPI002358A2E6
+#=GS UniRef90_A0A1H7C6E3/38-113    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Sphingobium sp. AP50 TaxID=1884369 RepID=A0A1H7C6E3_9SPHN
+#=GS UniRef90_K9CKY0/38-113        DE [subseq from] Type IV secretion system protein virB2 n=6 Tax=Sphingomonadaceae TaxID=41297 RepID=K9CKY0_SPHYA
+#=GS UniRef90_A0A196MQA0/38-113    DE [subseq from] Type VI secretion protein n=3 Tax=unclassified Sphingobium TaxID=2611147 RepID=A0A196MQA0_9SPHN
+#=GS UniRef90_A0A5E7Z2W6/54-133    DE [subseq from] Type IV secretion system protein virB2 n=3 Tax=Sphingomonas TaxID=13687 RepID=A0A5E7Z2W6_9SPHN
+#=GS UniRef90_A0A328AFX9/18-95     DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Phenylobacterium deserti TaxID=1914756 RepID=A0A328AFX9_9CAUL
+#=GS UniRef90_A0A0J7XMN3/38-113    DE [subseq from] Type VI secretion protein n=20 Tax=Pseudomonadota TaxID=1224 RepID=A0A0J7XMN3_9SPHN
+#=GS UniRef90_T0I746/38-113        DE [subseq from] Type VI secretion protein n=6 Tax=Sphingomonadaceae TaxID=41297 RepID=T0I746_9SPHN
+#=GS UniRef90_UPI001C20A996/27-105 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Falsiroseomonas tokyonensis TaxID=430521 RepID=UPI001C20A996
+#=GS UniRef90_A0A918PJ55/37-112    DE [subseq from] Type VI secretion protein n=32 Tax=Sphingomonadaceae TaxID=41297 RepID=A0A918PJ55_9SPHN
+#=GS UniRef90_A0A0Q8Q8I2/37-112    DE [subseq from] Type VI secretion protein n=4 Tax=Sphingomonadaceae TaxID=41297 RepID=A0A0Q8Q8I2_9SPHN
+#=GS UniRef90_A0A0Q8UEG4/17-97     DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=unclassified Phenylobacterium TaxID=2640670 RepID=A0A0Q8UEG4_9CAUL
+#=GS UniRef90_A0A1E4YF15/25-100    DE [subseq from] Type IV secretory pathway AvhB2 protein n=18 Tax=Rhizobiaceae TaxID=82115 RepID=A0A1E4YF15_9HYPH
+#=GS UniRef90_A0A1G7BU53/28-106    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Belnapia rosea TaxID=938405 RepID=A0A1G7BU53_9PROT
+#=GS UniRef90_A0A258D207/34-98     DE [subseq from] Type IV secretory pathway AvhB2 protein n=1 Tax=Bosea sp. 32-68-6 TaxID=1970325 RepID=A0A258D207_9HYPH
+#=GS UniRef90_I4EB49/24-96         DE [subseq from] Type IV secretory pathway protein, AvhB2 n=3 Tax=Alphaproteobacteria TaxID=28211 RepID=I4EB49_METSZ
+#=GS UniRef90_UPI00271E647E/28-105 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Falsiroseomonas sp. TaxID=2870721 RepID=UPI00271E647E
+#=GS UniRef90_A0A7X6FFA1/26-100    DE [subseq from] Type IV secretion system protein VirB2 n=4 Tax=Rhizobium/Agrobacterium group TaxID=227290 RepID=A0A7X6FFA1_9HYPH
+#=GS UniRef90_UPI0023512782/49-130 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium aquaticum TaxID=1763816 RepID=UPI0023512782
+#=GS UniRef90_A0A1E4MCF8/28-102    DE [subseq from] Type VI secretion protein n=1 Tax=Novosphingobium sp. SCN 66-18 TaxID=1660121 RepID=A0A1E4MCF8_9SPHN
+#=GS UniRef90_A0A4V2QXR0/26-100    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Rhizobium sp. PP-F2F-G48 TaxID=2135651 RepID=A0A4V2QXR0_9HYPH
+#=GS UniRef90_A0A0N1F002/21-93     DE [subseq from] Type IV secretory pathway AvhB2 protein n=3 Tax=Hyphomicrobiales TaxID=356 RepID=A0A0N1F002_9HYPH
+#=GS UniRef90_UPI001B52E02A/20-98  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium sp. TaxID=1871053 RepID=UPI001B52E02A
+#=GS UniRef90_A0A654CT45/25-98     DE [subseq from] Type IV secretion system protein virB2 n=11 Tax=Bosea TaxID=85413 RepID=A0A654CT45_9HYPH
+#=GS UniRef90_A0A259LA11/25-100    DE [subseq from] Type IV secretory pathway AvhB2 protein n=6 Tax=Hyphomicrobiales TaxID=356 RepID=A0A259LA11_9HYPH
+#=GS UniRef90_A0A1E4GZD8/22-102    DE [subseq from] Type IV secretion system protein VirB2 n=5 Tax=Caulobacterales TaxID=204458 RepID=A0A1E4GZD8_9CAUL
+#=GS UniRef90_UPI001BECCC28/22-98  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Sphingobium sp. BHU LFT2 TaxID=2807634 RepID=UPI001BECCC28
+#=GS UniRef90_A0A519FC62/68-146    DE [subseq from] Conjugal transfer protein TrbC n=2 Tax=Pseudomonas sp. TaxID=306 RepID=A0A519FC62_PSESP
+#=GS UniRef90_A0A9W6GZL0/34-96     DE [subseq from] VirB2 type IV secretion protein n=1 Tax=Methylocystis echinoides TaxID=29468 RepID=A0A9W6GZL0_9HYPH
+#=GS UniRef90_A0A974PN99/25-100    DE [subseq from] TrbC/VirB2 family protein n=9 Tax=Xanthobacteraceae TaxID=335928 RepID=A0A974PN99_9HYPH
+#=GS UniRef90_A0A1I4ISP4/24-97     DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=Methylorubrum TaxID=2282523 RepID=A0A1I4ISP4_9HYPH
+#=GS UniRef90_UPI001BAA3DED/25-97  DE [subseq from] TrbC/VirB2 family protein n=2 Tax=Bradyrhizobium TaxID=374 RepID=UPI001BAA3DED
+#=GS UniRef90_A0A0Q6D6H8/27-100    DE [subseq from] Type IV secretory pathway AvhB2 protein n=3 Tax=Hyphomicrobiales TaxID=356 RepID=A0A0Q6D6H8_9HYPH
+#=GS UniRef90_UPI0020772B6C/24-101 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Azospirillum sp. A1-3 TaxID=185874 RepID=UPI0020772B6C
+#=GS UniRef90_A0A1L4A0B9/36-110    DE [subseq from] Type VI secretion protein n=3 Tax=Sphingomonadales TaxID=204457 RepID=A0A1L4A0B9_9SPHN
+#=GS UniRef90_B4RFU5/17-97         DE [subseq from] Type IV secretory pathway, VirB2 components (Pilins) n=1 Tax=Phenylobacterium zucineum (strain HLK1) TaxID=450851 RepID=B4RFU5_PHEZH
+#=GS UniRef90_UPI001AE97776/14-92  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Azospirillum picis TaxID=488438 RepID=UPI001AE97776
+#=GS UniRef90_A0A1H9X7U7/26-100    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Rhizobium sp. NFR03 TaxID=1566263 RepID=A0A1H9X7U7_9HYPH
+#=GS UniRef90_UPI00280E3B2A/25-97  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Bradyrhizobium sp. LHD-71 TaxID=3072141 RepID=UPI00280E3B2A
+#=GS UniRef90_UPI00224743D8/54-132 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Roseomonas mucosa TaxID=207340 RepID=UPI00224743D8
+#=GS UniRef90_A0A840ZN11/24-97     DE [subseq from] Type IV secretion system protein VirB2 n=4 Tax=Methylobacteriaceae TaxID=119045 RepID=A0A840ZN11_9HYPH
+#=GS UniRef90_A0A2U1X3A1/14-90     DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Azospirillum sp. TSH20 TaxID=652754 RepID=A0A2U1X3A1_9PROT
+#=GS UniRef90_A0A258FVP4/23-104    DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Caulobacterales TaxID=204458 RepID=A0A258FVP4_9PROT
+#=GS UniRef90_A0A948N0M1/22-100    DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Alphaproteobacteria bacterium TaxID=1913988 RepID=A0A948N0M1_9PROT
+#=GS UniRef90_A5EUQ1/25-97         DE [subseq from] Type IV secretory pathway AvhB2 protein n=55 Tax=Nitrobacteraceae TaxID=41294 RepID=A5EUQ1_BRASB
+#=GS UniRef90_UPI0004857842/25-97  DE [subseq from] TrbC/VirB2 family protein n=3 Tax=Bradyrhizobium TaxID=374 RepID=UPI0004857842
+#=GS UniRef90_UPI00190404E5/22-102 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas TaxID=41275 RepID=UPI00190404E5
+#=GS UniRef90_A0A9W4Q357/28-105    DE [subseq from] Type IV secretion system protein virB2 n=1 Tax=Chelatococcus asaccharovorans TaxID=28210 RepID=A0A9W4Q357_9HYPH
+#=GS UniRef90_UPI0027D8E07E/58-136 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Azospirillum picis TaxID=488438 RepID=UPI0027D8E07E
+#=GS UniRef90_A0A0J8A8F3/29-103    DE [subseq from] VirB2 type IV secretion protein n=2 Tax=Sphingobium TaxID=165695 RepID=A0A0J8A8F3_9SPHN
+#=GS UniRef90_A0A1Z8Q435/33-94     DE [subseq from] VIRB2 type IV secretion n=3 Tax=Bacteria TaxID=2 RepID=A0A1Z8Q435_9BACT
+#=GS UniRef90_A0A525JJ07/26-104    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Phenylobacterium sp. TaxID=1871053 RepID=A0A525JJ07_9CAUL
+#=GS UniRef90_A0A8I1YDZ9/54-126    DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=Bacteria TaxID=2 RepID=A0A8I1YDZ9_BRAEL
+#=GS UniRef90_A0A7W9CIZ4/26-100    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Brevundimonas variabilis TaxID=74312 RepID=A0A7W9CIZ4_9CAUL
+#=GS UniRef90_UPI00240EE079/64-141 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Caulobacter segnis TaxID=88688 RepID=UPI00240EE079
+#=GS UniRef90_UPI0025C5554F/28-103 DE [subseq from] TrbC/VirB2 family protein n=4 Tax=Brevundimonas TaxID=41275 RepID=UPI0025C5554F
+#=GS UniRef90_UPI0025DFEFC2/22-102 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=uncultured Phenylobacterium sp. TaxID=349273 RepID=UPI0025DFEFC2
+#=GS UniRef90_UPI0028D53B8C/34-103 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=uncultured Brevundimonas sp. TaxID=213418 RepID=UPI0028D53B8C
+#=GS UniRef90_A0A521PNT3/19-96     DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=Phenylobacterium sp. TaxID=1871053 RepID=A0A521PNT3_9CAUL
+#=GS UniRef90_A0A520FSH5/38-114    DE [subseq from] Type VI secretion protein n=2 Tax=unclassified Sphingomonas TaxID=196159 RepID=A0A520FSH5_SPHSX
+#=GS UniRef90_A0A0P0DNL5/28-103    DE [subseq from] Type IV secretion system protein VirB2 n=7 Tax=Alphaproteobacteria TaxID=28211 RepID=A0A0P0DNL5_9CAUL
+#=GS UniRef90_A0A6B8MES1/25-96     DE [subseq from] Type IV secretory pathway AvhB2 protein n=2 Tax=Methylocystis TaxID=133 RepID=A0A6B8MES1_9HYPH
+#=GS UniRef90_UPI0003A352A5/24-96  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Methylocystis rosea TaxID=173366 RepID=UPI0003A352A5
+#=GS UniRef90_UPI0025CBA8CD/22-102 DE [subseq from] TrbC/VirB2 family protein n=2 Tax=Phenylobacterium sp. TaxID=1871053 RepID=UPI0025CBA8CD
+#=GS UniRef90_A0A2W6X8H3/28-103    DE [subseq from] Type IV secretion system protein VirB2 n=6 Tax=Brevundimonas TaxID=41275 RepID=A0A2W6X8H3_9CAUL
+#=GS UniRef90_UPI00026CD837/28-101 DE [subseq from] TrbC/VirB2 family protein n=3 Tax=Sphingomonas TaxID=13687 RepID=UPI00026CD837
+#=GS UniRef90_A0A1L3LZ25/26-99     DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=Sinorhizobium/Ensifer group TaxID=227292 RepID=A0A1L3LZ25_9HYPH
+#=GS UniRef90_C3KQX1/25-99         DE [subseq from] VirB2 type IV secretion protein n=1 Tax=Sinorhizobium fredii (strain NBRC 101917 / NGR234) TaxID=394 RepID=C3KQX1_SINFN
+#=GS UniRef90_A0A4Q7SKD0/40-112    DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Sphingomonas sp. BK036 TaxID=2512122 RepID=A0A4Q7SKD0_9SPHN
+#=GS UniRef90_UPI0021510DE0/21-97  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium sp. J367 TaxID=2898435 RepID=UPI0021510DE0
+#=GS UniRef90_A0A2W5HGY1/36-101    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Micavibrio aeruginosavorus TaxID=349221 RepID=A0A2W5HGY1_9BACT
+#=GS UniRef90_A0A4V1DEA4/71-147    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Azospirillum sp. TSA2s TaxID=709810 RepID=A0A4V1DEA4_9PROT
+#=GS UniRef90_UPI0024731A26/25-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Sinorhizobium numidicum TaxID=680248 RepID=UPI0024731A26
+#=GS UniRef90_UPI001C5F415C/23-98  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas nasdae TaxID=172043 RepID=UPI001C5F415C
+#=GS UniRef90_UPI0025F03B64/18-96  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium sp. TaxID=1871053 RepID=UPI0025F03B64
+#=GS UniRef90_UPI00289CB4C8/23-98  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas diminuta TaxID=293 RepID=UPI00289CB4C8
+#=GS UniRef90_UPI001A1C5579/36-111 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas sp. TaxID=1871086 RepID=UPI001A1C5579
+#=GS UniRef90_A0A2M8CWC2/33-94     DE [subseq from] VIRB2 type IV secretion n=1 Tax=Alphaproteobacteria bacterium CG_4_9_14_3_um_filter_47_13 TaxID=1973899 RepID=A0A2M8CWC2_9PROT
+#=GS UniRef90_UPI0020C86C97/30-107 DE [subseq from] TrbC/VirB2 family protein n=2 Tax=Bartonella TaxID=773 RepID=UPI0020C86C97
+#=GS UniRef90_A0A3C0Q667/76-133    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Rhodospirillaceae bacterium TaxID=1898112 RepID=A0A3C0Q667_9PROT
+#=GS UniRef90_UPI0028D0702C/25-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=uncultured Brevundimonas sp. TaxID=213418 RepID=UPI0028D0702C
+#=GS UniRef90_A0A1L3T0B1/19-89     DE [subseq from] VIRB2 type IV secretion n=20 Tax=Hyphomicrobiales TaxID=356 RepID=A0A1L3T0B1_9HYPH
+#=GS UniRef90_A0A442MJV7/21-91     DE [subseq from] VIRB2 type IV secretion n=4 Tax=Hyphomicrobiales TaxID=356 RepID=A0A442MJV7_9HYPH
+#=GS UniRef90_A0A8J7RQV8/28-98     DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Tianweitania sediminis TaxID=1502156 RepID=A0A8J7RQV8_9HYPH
+#=GS UniRef90_UPI0025968851/24-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=uncultured Brevundimonas sp. TaxID=213418 RepID=UPI0025968851
+#=GS UniRef90_UPI001A235A83/20-97  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium sp. TaxID=1871053 RepID=UPI001A235A83
+#=GS UniRef90_A0A328BJ25/21-97     DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Phenylobacterium TaxID=20 RepID=A0A328BJ25_9CAUL
+#=GS UniRef90_UPI00261711C1/31-101 DE [subseq from] TrbC/VirB2 family protein n=2 Tax=Phyllobacteriaceae TaxID=69277 RepID=UPI00261711C1
+#=GS UniRef90_A0A1R3U9B7/56-133    DE [subseq from] Type IV secretion system protein virB2 n=1 Tax=Agrobacterium rosae TaxID=1972867 RepID=A0A1R3U9B7_9HYPH
+#=GS UniRef90_A0A494RQM4/19-84     DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Brevundimonas naejangsanensis TaxID=588932 RepID=A0A494RQM4_9CAUL
+#=GS UniRef90_UPI001ABA9F07/25-102 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Bartonella taylorii TaxID=33046 RepID=UPI001ABA9F07
+#=GS UniRef90_A0A0Q8M9K4/29-96     DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Phenylobacterium sp. Root700 TaxID=1736591 RepID=A0A0Q8M9K4_9CAUL
+#=GS UniRef90_UPI002489E202/30-100 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=unclassified Brevundimonas TaxID=2622653 RepID=UPI002489E202
+#=GS UniRef90_A0A8J3DZE0/27-99     DE [subseq from] VirB2 type IV secretion protein n=6 Tax=Hyphomicrobiales TaxID=356 RepID=A0A8J3DZE0_9HYPH
+#=GS UniRef90_A0A4P8QB87/28-99     DE [subseq from] Type IV secretion system protein VirB2 n=8 Tax=Caulobacterales TaxID=204458 RepID=A0A4P8QB87_9CAUL
+#=GS UniRef90_UPI0027E03309/31-101 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Mesorhizobium sp. LHD-90 TaxID=3071414 RepID=UPI0027E03309
+#=GS UniRef90_A0A1G2VXH4/22-98     DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Phenylobacterium sp. RIFCSPHIGHO2_01_FULL_69_31 TaxID=1801944 RepID=A0A1G2VXH4_9CAUL
+#=GS UniRef90_UPI001CD32FAF/29-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Bradyrhizobium quebecense TaxID=2748629 RepID=UPI001CD32FAF
+#=GS UniRef90_A0A7X5YLR3/28-99     DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Brevundimonas alba TaxID=74314 RepID=A0A7X5YLR3_9CAUL
+#=GS UniRef90_A0A7V8B0J0/25-99     DE [subseq from] Type IV secretory pathway AvhB2 protein n=1 Tax=Brucella tritici TaxID=94626 RepID=A0A7V8B0J0_9HYPH
+#=GS UniRef90_A0A8E0NE02/26-99     DE [subseq from] Major pilus subunit of type IV secretion complex, VirB2 n=1 Tax=Brevundimonas abyssalis TAR-001 TaxID=1391729 RepID=A0A8E0NE02_9CAUL
+#=GS UniRef90_UPI002734F6EE/30-96  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium sp. TaxID=1871053 RepID=UPI002734F6EE
+#=GS UniRef90_UPI0028EAFF86/29-97  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Bradyrhizobium cosmicum TaxID=1404864 RepID=UPI0028EAFF86
+#=GS UniRef90_A0A5R8Q9S1/26-97     DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Methylocystis sp. B8 TaxID=544938 RepID=A0A5R8Q9S1_9HYPH
+#=GS UniRef90_A0A1Z3LTC5/24-99     DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Brevundimonas diminuta TaxID=293 RepID=A0A1Z3LTC5_BREDI
+#=GS UniRef90_UPI0023517777/20-98  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium aquaticum TaxID=1763816 RepID=UPI0023517777
+#=GS UniRef90_UPI00235FF084/27-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brucella intermedia TaxID=94625 RepID=UPI00235FF084
+#=GS UniRef90_A0A2V3TTF6/31-101    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Chelatococcus asaccharovorans TaxID=28210 RepID=A0A2V3TTF6_9HYPH
+#=GS UniRef90_UPI001A9CE973/31-100 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas pondensis TaxID=2774189 RepID=UPI001A9CE973
+#=GS UniRef90_UPI0028A0F437/18-95  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium sp. TaxID=1871053 RepID=UPI0028A0F437
+#=GS UniRef90_A0A1X7EZP6/47-124    DE [subseq from] TrbC/VIRB2 family protein n=2 Tax=Azospirillum TaxID=191 RepID=A0A1X7EZP6_9PROT
+#=GS UniRef90_A0A7X0KM44/31-101    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Aminobacter aganoensis TaxID=83264 RepID=A0A7X0KM44_9HYPH
+#=GS UniRef90_UPI000FE7A334/26-97  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Mesorhizobium sp. TaxID=1871066 RepID=UPI000FE7A334
+#=GS UniRef90_A0A2S8VSZ4/34-100    DE [subseq from] Type IV secretion system protein VirB2 n=6 Tax=Brevundimonas TaxID=41275 RepID=A0A2S8VSZ4_9CAUL
+#=GS UniRef90_A0A6P1GB41/17-91     DE [subseq from] Type VI secretion protein n=1 Tax=Neorickettsia findlayensis TaxID=2686014 RepID=A0A6P1GB41_9RICK
+#=GS UniRef90_UPI0026EF7571/24-99  DE [subseq from] TrbC/VirB2 family protein n=3 Tax=Brevundimonas TaxID=41275 RepID=UPI0026EF7571
+#=GS UniRef90_A0A0L0MGU3/77-151    DE [subseq from] Major pilus subunit of type IV secretion complex, VirB2 n=2 Tax=Candidatus Burkholderia verschuerenii TaxID=242163 RepID=A0A0L0MGU3_9BURK
+#=GS UniRef90_UPI0028A97242/25-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas diminuta TaxID=293 RepID=UPI0028A97242
+#=GS UniRef90_UPI000C2876BE/30-99  DE [subseq from] TrbC/VirB2 family protein n=2 Tax=Brucella intermedia TaxID=94625 RepID=UPI000C2876BE
+#=GS UniRef90_A0A7W6ZYN8/25-100    DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Rhizobium leucaenae TaxID=29450 RepID=A0A7W6ZYN8_9HYPH
+#=GS UniRef90_UPI001ADF3E66/33-99  DE [subseq from] TrbC/VirB2 family protein n=2 Tax=unclassified Brevundimonas TaxID=2622653 RepID=UPI001ADF3E66
+#=GS UniRef90_A0A840E1L3/29-100    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Bartonella fuyuanensis TaxID=1460968 RepID=A0A840E1L3_9HYPH
+#=GS UniRef90_UPI00157A6956/44-120 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Azospirillum melinis TaxID=328839 RepID=UPI00157A6956
+#=GS UniRef90_A0A1V8RJH1/31-101    DE [subseq from] VIRB2 type IV secretion n=3 Tax=Hyphomicrobiales TaxID=356 RepID=A0A1V8RJH1_9HYPH
+#=GS UniRef90_UPI0014202A49/26-101 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Sphingomonas vulcanisoli TaxID=1658060 RepID=UPI0014202A49
+#=GS UniRef90_UPI00289BDB97/36-100 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas sp. TaxID=1871086 RepID=UPI00289BDB97
+#=GS UniRef90_UPI002034475D/31-103 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Allorhizobium sonneratiae TaxID=2934936 RepID=UPI002034475D
+#=GS UniRef90_UPI0022B6CBED/22-96  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Caulobacter sp. NIBR2454 TaxID=3015996 RepID=UPI0022B6CBED
+#=GS UniRef90_A0A1G5ZBU8/31-102    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Mesorhizobium qingshengii TaxID=1165689 RepID=A0A1G5ZBU8_9HYPH
+#=GS UniRef90_UPI002936DF3A/26-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Parasphingorhabdus sp. SCSIO 66989 TaxID=3071408 RepID=UPI002936DF3A
+#=GS UniRef90_A0A354EN87/27-95     DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Brevundimonas sp. TaxID=1871086 RepID=A0A354EN87_9CAUL
+#=GS UniRef90_A0A8I0CAP8/28-105    DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Phenylobacterium sp. TaxID=1871053 RepID=A0A8I0CAP8_9CAUL
+#=GS UniRef90_A0A2U1VYA7/36-113    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Azospirillum sp. TSO35-2 TaxID=716796 RepID=A0A2U1VYA7_9PROT
+#=GS UniRef90_A0A2S5N3X9/25-96     DE [subseq from] Type IV secretory pathway AvhB2 protein n=3 Tax=Methylocystis TaxID=133 RepID=A0A2S5N3X9_9HYPH
+#=GS UniRef90_UPI002006BED4/29-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brucella pituitosa TaxID=571256 RepID=UPI002006BED4
+#=GS UniRef90_A0A5B6U3G5/17-90     DE [subseq from] VIRB2 type IV secretion n=2 Tax=Hyphomicrobiales TaxID=356 RepID=A0A5B6U3G5_9HYPH
+#=GS UniRef90_E6YNZ9/25-102        DE [subseq from] Type IV secretion system protein VirB2 n=3 Tax=unclassified Bartonella TaxID=2645622 RepID=E6YNZ9_9HYPH
+#=GS UniRef90_UPI00201B61FC/34-98  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas albigilva TaxID=1312364 RepID=UPI00201B61FC
+#=GS UniRef90_UPI001A1DA690/27-98  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas sp. TaxID=1871086 RepID=UPI001A1DA690
+#=GS UniRef90_UPI000DD3E435/32-107 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Agrobacterium fabacearum (strain H13-3) TaxID=1183401 RepID=UPI000DD3E435
+#=GS UniRef90_Q2GD01/17-90         DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Neorickettsia sennetsu (strain ATCC VR-367 / Miyayama) TaxID=222891 RepID=Q2GD01_NEOSM
+#=GS UniRef90_UPI0015669BF3/23-94  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Mesorhizobium sediminum TaxID=1849104 RepID=UPI0015669BF3
+#=GS UniRef90_UPI001A9FB5FA/27-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas TaxID=41275 RepID=UPI001A9FB5FA
+#=GS UniRef90_A0A5E4P4P5/17-92     DE [subseq from] Conjugal transfer protein TrbC n=1 Tax=Beijerinckiaceae bacterium RH AL1 TaxID=2572036 RepID=A0A5E4P4P5_9HYPH
+#=GS UniRef90_A0A0Q7UZ54/9-86      DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Caulobacteraceae TaxID=76892 RepID=A0A0Q7UZ54_9CAUL
+#=GS UniRef90_A0A1I1MPT3/21-94     DE [subseq from] Type IV secretion system protein VirB2 n=4 Tax=Hyphomicrobiales TaxID=356 RepID=A0A1I1MPT3_9HYPH
+#=GS UniRef90_A0A1H7DPQ9/27-102    DE [subseq from] Type IV secretion system protein VirB2 n=2 Tax=Sphingobium TaxID=165695 RepID=A0A1H7DPQ9_9SPHN
+#=GS UniRef90_UPI002362DA38/31-100 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Bartonella grahamii TaxID=33045 RepID=UPI002362DA38
+#=GS UniRef90_UPI0027DD81CE/19-90  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Sinorhizobium medicae TaxID=110321 RepID=UPI0027DD81CE
+#=GS UniRef90_E6YJV0/25-103        DE [subseq from] Type IV secretion system protein VirB2 n=6 Tax=Bartonella TaxID=773 RepID=E6YJV0_9HYPH
+#=GS UniRef90_UPI001AD9CFAA/37-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Brevundimonas sp. A19_0 TaxID=2821087 RepID=UPI001AD9CFAA
+#=GS UniRef90_Q11MQ1/27-99         DE [subseq from] VIRB2 type IV secretion n=6 Tax=Hyphomicrobiales TaxID=356 RepID=Q11MQ1_CHESB
+#=GS UniRef90_UPI001AE69A07/27-101 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Rhizobium leguminosarum TaxID=384 RepID=UPI001AE69A07
+#=GS UniRef90_C6V5P6/20-91         DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Neorickettsia risticii (strain Illinois) TaxID=434131 RepID=C6V5P6_NEORI
+#=GS UniRef90_A0A1M3CBV0/20-93     DE [subseq from] Conjugal transfer protein TrbC n=2 Tax=Nitrobacteraceae TaxID=41294 RepID=A0A1M3CBV0_9BRAD
+#=GS UniRef90_UPI0020B2B88D/29-99  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Bradyrhizobium sp. CCGUVB1N3 TaxID=2949629 RepID=UPI0020B2B88D
+#=GS UniRef90_A0A3M9X170/32-104    DE [subseq from] Conjugal transfer protein TrbC n=5 Tax=Phyllobacteriaceae TaxID=69277 RepID=A0A3M9X170_9HYPH
+#=GS UniRef90_UPI000846FFDE/32-107 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Sphingobium yanoikuyae TaxID=13690 RepID=UPI000846FFDE
+#=GS UniRef90_A0A2W6RSJ9/33-98     DE [subseq from] Type IV secretion system protein VirB2 n=11 Tax=Caulobacteraceae TaxID=76892 RepID=A0A2W6RSJ9_9CAUL
+#=GS UniRef90_A0A7W9F2Y1/37-110    DE [subseq from] Type IV secretion system protein VirB2 n=4 Tax=Sphingomonas TaxID=13687 RepID=A0A7W9F2Y1_9SPHN
+#=GS UniRef90_UPI0009E7D19A/30-94  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Aureimonas sp. N4 TaxID=1638165 RepID=UPI0009E7D19A
+#=GS UniRef90_A0A151A004/17-90     DE [subseq from] Type VI secretion protein n=1 Tax=Neorickettsia sp. 179522 TaxID=1714371 RepID=A0A151A004_9RICK
+#=GS UniRef90_UPI001FCEDB52/29-97  DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Bradyrhizobium algeriense TaxID=634784 RepID=UPI001FCEDB52
+#=GS UniRef90_A0A2T3CY49/30-101    DE [subseq from] VIRB2 type IV secretion n=1 Tax=Ensifer sp. NM-2 TaxID=2109730 RepID=A0A2T3CY49_9HYPH
+#=GS UniRef90_A0A2M6UVC7/30-105    DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Bartonella tribocorum TaxID=85701 RepID=A0A2M6UVC7_9HYPH
+#=GS UniRef90_A0A437LY49/37-108    DE [subseq from] Type VI secretion protein n=1 Tax=Sphingomonas crocodyli TaxID=1979270 RepID=A0A437LY49_9SPHN
+#=GS UniRef90_UPI00178B35AB/28-102 DE [subseq from] TrbC/VirB2 family protein n=1 Tax=Sphingobium sp. OAS761 TaxID=2817901 RepID=UPI00178B35AB
+#=GS UniRef90_A0A1H1KNV6/19-94     DE [subseq from] Type IV secretion system protein VirB2 n=1 Tax=Rhizobiales bacterium GAS113 TaxID=1884352 RepID=A0A1H1KNV6_9HYPH
+
+P0A3V6                                ISSCGPAAA-QS-AG-G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGISWMFGRRSLGLVAGVVGGIVIMFG-ASFLGQTLTGGS
+UniRef90_P09776/39-121                ISSCGPAAA-QS-AG-G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGISWMFGRRSLGLVAGVVGGIVIMFG-ASFLGQTLTGGS
+UniRef90_P17792/40-120                -FSSGPAAA-QS-AG-G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVVGGIVIMFG-ASFLGKTLTGG-
+UniRef90_A0A4Z1Q517/44-121            -----AALA-QS-AG-G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVVGGIVIMFG-ASFLGQTLTGGS
+UniRef90_Q9F5A1/41-119                --FCEPAAA-QA-A--G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVVGGIVIMFG-ASFLGQTLTGG-
+UniRef90_K0Q6F4/39-117                ---SGPVAA-QS-AG-G-GT-DP-V-T-MVNNICTFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVVGGIVIMFG-ASFLGKTLIGG-
+UniRef90_A0A2Z2PX48/43-119            ----EPAAA-QA-A--G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVVGGIVIMFG-ASFLGQTLTGG-
+UniRef90_B9K417/44-119                -----PAAA-QA-A--G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVVGGIVIMFG-ASFLGQTLTGG-
+UniRef90_Q8VTA1/43-119                ----RPAAA-QA-A--G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVVGGIVIMFG-ASFLGQTLTGG-
+UniRef90_UPI000A11B8A7/41-119         --SSGPAAA-QA-AG-G-G--DP-A-T-MINNICTFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVVGGIVIMFG-ASFLGKTLIGG-
+UniRef90_A0A9Q8J6B2/43-119            ----RPAAA-QA--S-G-GT-DP-T-A-MVNNICTFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVVGGIVIMFG-ASFLGQTLTGG-
+UniRef90_A0A1S1T2S7/41-119            --SSGPAAA-Q--VG-G-SA-DP-A-T-MLNNICTFILGPFGQSLAVLGIVAIGLSWMFGRASLGLVAGVVGGIVIMFG-ASFLGKTLIGA-
+UniRef90_A0A178Y0A6/38-115            --SSGPAAA-QV-AG----S-NP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVIGGIVIMFG-ASFLGQTLIGA-
+UniRef90_UPI0024C3F4E2/41-119         --SSGPAVA-QV-AG---AA-DP-A-A-MVNNICTFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVVGGIVIMFG-ASFLGKTLIGG-
+UniRef90_A0A1H8WWE1/42-119            ---SAPAMA-QV--T-G-GT-DP-A-T-MVNNICTFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVIGGIVIMFG-ASFLGKALIGG-
+UniRef90_A6UMA7/42-119                ---SGPATA-QV-T--G-GT-DP-A-T-MVNNICAFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVIGGIVIMFG-ASFLGKALIGA-
+UniRef90_A0A530BRZ2/2-80              --SSGPAAA-QV-T--G-GT-DP-A-K-MIQNICTFILGPFGQSLAVLGLEAIGISWMFGRASLGLVAGVVGGIVIMFG-ASFLGKALIGG-
+UniRef90_L0KTD3/42-120                --SSGPAAA-QV-T--G-GT-DP-A-K-MVQNICTFILGPFGQSLAVLGLVAIGISWMFGRASLGLVAGVVGGIVIMFG-ASFLGKALIGA-
+UniRef90_A0A7G6T4Q7/41-119            --SSAPAAA-QV-T--G-GT-DP-A-K-MVENICTFILGPFGQSLAVLGLVAIGISWMFGRASLGLVAGVVGGIVIMFG-ASFLGKALIGA-
+UniRef90_A0A6N7LEK9/41-119            --SSGPVAA-QV----G-GS-DP-A-A-MVNNICGFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVVGGIVIMFG-ASFLGKTLIGGA
+UniRef90_UPI0020B169B8/46-124         ----GLANA-QT-VT-G-GA-SP-A-T-MINNICTFILGPFGQSLAVLGIIAIGLSWMFGRVSLGLIAGVIGGIVIMFG-ASYLGSTLTGGT
+UniRef90_UPI002091051E/23-100         ---SGPAMA-QV-T--G-GT-DP-A-A-MVDNICKFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVIGGIVIMFG-ASFLGKALIGG-
+UniRef90_UPI00243363FE/37-111         -------TR-TA-SA-Q-GA-DP-A-A-MLNNICDFILGPFGQSLAVLGIVAIGLSWMFGRASLGLVAGVVGGIVIMFG-ASFLGQTLTGG-
+UniRef90_A0A330H1F2/43-119            ---SGPAVA-QV-TG---GA-DP-S-K-MVENICTFILGPFGQSLAVLGIVAIGLSWMFGRASLGLVAGVVGGIVIMFG-ASFLGKALIG--
+UniRef90_A0A1A5R397/42-120            --SGGPAAA-QV-T--G-GT-DP-A-K-MIQNISTFILGPFGQSLAVLGLVAIGISWMFGRASLGLVAGVVGGIVIMFG-AGFLGKALIGG-
+UniRef90_A0A4R3PYJ0/43-119            ----WPAMA-QV-T--S-GT-DP-T-Q-MVQRICQFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVIGGIVIMFG-ASFLGRTLIGG-
+UniRef90_UPI000FEC2D38/41-118         ---SAPAMA-QV-T--G-GA-DP-G-A-MVNNICAFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVIGGIVIMFG-ATFLGKALIGA-
+UniRef90_A0A839V727/49-124            ------AQA-QT-VS-G-GA-DP-T-T-MIKNVCTFILGPFGQTLAVLGIIGIGLAWMFGRVSMSIIAGVIGGIVVMFG-AAYLGQTLTGG-
+UniRef90_J0W6I9/43-120                ---SAPAMA-QV-T--G-GA-NP-A-A-MVDNICAFILGPFGQSLAVLGIVAIGISWMFGRASLGLVAGVIGGIVIMFG-ASFLGKALIGA-
+UniRef90_UPI002114261D/26-98          ----------PA-AA-D-GA-DP-A-A-MLNNICKFILGPFGQSLAVLGIVAIGVSWMFGRASLGLVAGVVGGVVIMFG-ASFLAQALIGS-
+UniRef90_A0A258LC18/35-112            -----MAYA-QT-VT-G-GA-SP-A-T-MVNSICTFILGPFGETIAVLGIIGIGFMFMFGRASLGVIAGVIGGIVIMFG-ASYLGQTLTGGA
+UniRef90_UPI0025EA4289/53-128         ------AHA-QT-VS-G-GA-SP-A-T-MVNNICTFILGTFGQTIAVLGLIAIGFLFMFGRASLGVIAGIVGGIVIMFG-ASYLGQTLTGG-
+UniRef90_UPI0025838C25/17-92          ------ADA-QM-VA-G-GA-SP-Q-M-MINNVCQFILGPFGQSLAVLGIIAIGVLFMFGRASLGIIAGVIGGIVIMFG-ASYLGMTLTGG-
+UniRef90_UPI001FF812B6/37-107         -------------SA-E-GA-DP-A-A-MLNNICQFILGPFGKSLAMLGIVAIGVSWMFGRASLGLVAGVVGGVVIMFG-ASFLARALIGN-
+UniRef90_UPI002631225F/48-123         ------AYA-QT-VS-G-GA-SP-Q-T-MINNVCTFILGPFGETIAVLGIIGIGFLFMFGRASLGVIAGIIGGIVIMFG-ASYLGQTLTGG-
+UniRef90_A0A0D6PFU6/44-119            ------AYA-QT-VS-G-GA-SP-Q-T-MINNVCTFILGPFGETIAVLGIIGIGFLFMFGRASLGVIAGIIGGIVIMFG-ASYLGQTLTGG-
+UniRef90_A0A257Q174/44-119            ------AYA-QT-VS-G-GA-SP-Q-T-MINNVCTFILGPFGETIAVLGIIGIGFLFMFGRASLGVIAGIIGGIVIMFG-ASYLGQTLTGG-
+UniRef90_A0A257Q039/44-119            ------AYA-QT-VS-G-GA-SP-Q-T-MINNVCTFILGPFGETIAVLGIIGIGFLFMFGRASLGVIAGIIGGIVIMFG-ASYLGQTLTGG-
+UniRef90_UPI0024791F98/28-104         ----GFATP-AF-AA-G-GA-TP-A-A-MVQNVCDFILGPFGKSLAVLGIIAIGVSWMFGRASLGLVAGVVGGIVIMFG-AAFLGGMITG--
+UniRef90_A0A949MES1/37-112            ------AYA-QT-VT-G-GA-SP-Q-T-MINNVCTFILGPFGETIAVLGIIGIGFLFMFGRASLGIIAGIIGGIVIMFG-ASYLGSTLTGG-
+UniRef90_UPI001C952EDE/35-109         ------AFA-Q--AT-G-GS-TP-A-A-MVQNICNFILGGFGQSLAILGIMAIGVSWMFGRASLALVAGVVGGIVIMFG-SAFLGDMITGS-
+UniRef90_UPI001031F16F/41-115         ----NPAFA-QD-AG-A-A---P-D-A-MIKNILTFILGPFGKSLAMLGIVAIGVSWMFGRASLGLVAGVIGGIIIMFG-ASFLANSLIG--
+UniRef90_A0A1S8GSC8/19-94             ------ARA-SG-VT-G-GL-SP-E-T-MINNICSFILGAFGQSLAILGIIAIGLMWMFGRASLMAVSGVVGGIIIMFG-ASSLGKMLTGG-
+UniRef90_A0A149RY15/34-108            ------ADA-QT-VS-G-GA-SP-T-T-MVNNVCTFILGQFGQSIAVLAIAAVGLALMFGRASLMFFACVIGGIIIMFG-SAYLGATLTG--
+UniRef90_A0A401WNV3/34-108            ------AHA-QT-VS-G-GA-AP-T-T-MVNNVCTFILGQFGQSIAVLAIAAVGLALMFGRASLMVFACVIGGIIIMFG-SAYLGATLTG--
+UniRef90_M9MKT3/33-107                ------AHA-QT-VS-G-GS-TP-T-Q-MINNICTFILGDFGKSIAVVVLAAAGLMLAFGRLSLGIFAGMVGGILLMFG-AAYLGSMVTG--
+UniRef90_A0A257UT00/44-119            ------AHA-QV-VS-G-GT-SP-T-T-ILDNIATFILGPFGEVIAVLAIIGIGIAFMIGRAGLGLIGGVIGGLVLIFG-ASYLVTTFVGA-
+UniRef90_UPI0004940C7B/49-123         ------AQA-QV-VT-G-GT-SP-T-T-ILSNIATFILGPFGETIAVLALIGIGVAFMTGRAGIGLIGGVVGGLVLIFG-SSYLVTQFVG--
+UniRef90_UPI0022A80A21/49-124         ------AHA-QA-VT-A-GT-SP-T-Q-IIDSIATFILGPFGEALAVLALVGVGIAFMIGAAGFRLIGGVVIGLIIMFG-ASYLVNTFVGG-
+UniRef90_F0J778/45-120                ------AHA-QV-VS-G-GT-SP-T-T-IIDNIATFILGPFGEGVAVLAVAAVGFMCWTGRMGFHAIGWLAAGLVLVFG-SSYLVTTFVGG-
+UniRef90_A0A066PQD7/46-121            ------AHA-QV-VS-G-GT-SP-T-T-IIDNIATFILGPFGEGVAVLAVAAVGFMCWTGRMGFHAIGWLAAGLVLVFG-SSYLVTTFVGG-
+UniRef90_F0J7S9/45-120                ------AHA-QV-VS-G-GT-SP-T-T-IIDNIATFILGPFGEGVAVLAVAAVGFMCWTGRVGFHAIGWLAAGLVLVFG-SSYLVTTFVGG-
+UniRef90_A0A3S0SVT3/38-113            ----DPAYA-QS-AD-G-IT------S-MAENIKTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_UPI0007A7566B/35-110         ----DPAYA-QA-AD-G-VT------S-MAENIRTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_UPI002358A2E6/35-110         ----DPAHA-QA-AD-G-VT------S-MAENIKTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_A0A1H7C6E3/38-113            ----DPAHA-QS-AD-G-IT------S-MAENIKTWLTGTFAKTVAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_K9CKY0/38-113                ----DPAYA-QA-AD-G-IT------S-MADNIKTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_A0A196MQA0/38-113            ----DPAYA-QA-AD-G-VT------S-MAENIKTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_A0A5E7Z2W6/54-133            --AASPAYA-QS-AG-G-AG-NV-E-T-FLQNIVNVITGNVGKLIAVIAIVGTGIAWMFGAASMRTLGTVIIGVLLIFS-ASWIVGQITGG-
+UniRef90_A0A328AFX9/18-95             ---ATPAAA-Q--AG-G-GA-DL-G-A-FIQNIIDLLNSSVVRGLAILAVILTGIAWMFGHLDLRRAGTVVVGIIVIFG-ASTIVDMITGG-
+UniRef90_A0A0J7XMN3/38-113            ----DPAHA-QA-AD-G-VT------S-MAENIKTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_T0I746/38-113                ----DPAHA-QA-AD-G-VT------S-MAENIKTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_UPI001C20A996/27-105         ---ADPALA-QA-VG-G-GG-SL-E-T-FLSNIVNILTGRVGQLIAVLAIAISGVAWMMGAASPRSFFGTVAGVAIVFS-AAWIVQQITGG-
+UniRef90_A0A918PJ55/37-112            ----DPAHA-QG-AD-G-IT------S-MAENIKTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_A0A0Q8Q8I2/37-112            ----DPAHA-QG-AD-G-IT------S-MAENIKTWLTGTFAKTIAVIAVVIVGFMFFTGRASLGLLVTVIVGIFIVFS-AQWIVDTITGGA
+UniRef90_A0A0Q8UEG4/17-97             -SAASPALA-QT-PG-T-GA-DL-G-A-FIQNIIDLLNSGIVRGLAVLAVILTGIAWMFGHLDLRRAGTVVVGIIVIFG-ATTIVDMITGG-
+UniRef90_A0A1E4YF15/25-100            ---IEPAFA-QS-AG-G-I-----E-T-VLQNIVTLLTGNVAKLLATIAVIIVGIAWMFGYLDLRKAAYVVLGVGILFG-ASQIVSTISGG-
+UniRef90_A0A1G7BU53/28-106            ---ADPAAA-QA-AG-G-NT-DL-T-Q-FVNNISNLLTGRLGQAIAVVAIGVTGVMAALGAASMRAFGGVLLGVGILFS-AGWLVSQLTGG-
+UniRef90_A0A258D207/34-98             ------------------------E-G-VLQNIVTMLTGNVARLLATLAVIIVGIAWMFGYLDLRKAAYVVLGVAIVFG-ASEIVSTLTGGS
+UniRef90_I4EB49/24-96                 -----PAFA-QS-AN-------I-E-G-VLQNIVTMLTGNVARLLATLAVIIVGVAWMFGHLDLRKAAYVVLGVAIVFG-ASEVVSTLTGG-
+UniRef90_UPI00271E647E/28-105         ----DPALA-QG-VG-G-GG-SL-E-T-FLTNIVNIITGRVGQLIAVIAIAISGVAWMMGAASPRSFFGTVAGVAIVFS-AAWIVQQITGG-
+UniRef90_A0A7X6FFA1/26-100            ----EPAFA-QS-TG-G-I-----E-T-VLQNIVTLLTGNVAKLLATIAVIIVGIAWMFGYLDLRKAAYVVLGIGIIFG-ASQIVSTISGG-
+UniRef90_UPI0023512782/49-130         -ASASPAFA-QS-AG-V-GG-NI-G-T-FIQNIIDLLNSNVIRGLAVIAIIITGIAWMFGHLDMRRAGTVVVGIIVIFS-AAAIVDLITGGS
+UniRef90_A0A1E4MCF8/28-102            -----PAWA-QA-A--N-QT-EV-V-T-MANSVLNFLTGPIAKALAAIALVIAGIMFFFGHGNKGLLGSIIIGCFIVFG-AQWIVDTISG--
+UniRef90_A0A4V2QXR0/26-100            ----EPAYA-QA-AG-G-I---E-A-T-L-QNVVTLLTGNVARLLAIIATIIVGIAWMFGYLDLRKAAFVVLGIAIIFG-ATEIVNTISGG-
+UniRef90_A0A0N1F002/21-93             -----PALA-QT-AN-------I-E-G-VLQNIVTMLTGNVARLLATLAVIIVGIAWMFGYLDLRKAAYVVLGVAIVFG-ASEVVSTLTGG-
+UniRef90_UPI001B52E02A/20-98          ---ATPAFA-QA-SG-V-GG-DI-G-A-FIQNIIDLLSSGIVRGLAILAVIATGIAWMFGHLDLRRAGTVIVGIIVIFG-AATIVDMITGG-
+UniRef90_A0A654CT45/25-98             -----PALA-QT-AN-------I-E-G-VLQNIVTMLTGNVARLLATLAVIIVGIAWMFGYLDLRKAAYVVLGVAIVFG-ASEIVSTLTGGT
+UniRef90_A0A259LA11/25-100            ---ADPAFA-QA-TG-G-I-----E-T-VLQNIVTMLTGNVAKLLATIAVIVVGIAWMFGYLDLRKAAYVVLGIGIIFG-ATELVSTISGG-
+UniRef90_A0A1E4GZD8/22-102            -ASASPAFA-QS-AG-V-GG-NI-G-S-FIQNIIDLLNSNVIRGLAVIAIIVTGIAWMFGHLDMRRAGTVVVGIIVIFS-ASAIVDLITGG-
+UniRef90_UPI001BECCC28/22-98          -ASAEPAYA-QA-AD-G-IT------S-MAQNILSWLTGTFAKTISVIAVVIVGFMFFTGRASLPLLVTVIVGIFIVFS-AQWIVETITG--
+UniRef90_A0A519FC62/68-146            ---ADPACA-QP-TG-G-GG-DI-T-T-FLQNIVNIITGTAGKLIAVLAICFVGIGALMGALSLRAAGGVILGVMLIFS-ASWIVNQITGG-
+UniRef90_A0A9W6GZL0/34-96             --------------------------G-VLQNIVNMLTGNVARLLATLAVIIVGIAWMFGHLDLRKAAYVVLGVAIVFG-ASEVVSTLTGG-
+UniRef90_A0A974PN99/25-100            ---AEPAFA-QA-SG-G--I----E-T-VLQNIVTLLTGNVAKLLATIAVIVVGIAWMFGYLDLRKAAYVVLGIGIIFG-AAELVSTISGG-
+UniRef90_A0A1I4ISP4/24-97             ----EPAAA-QS-LG-G-VE------K-VLQNIVDALTGNVAKLLATIAVIVVGMAWMFGYLDLRKAGYVIFGVAILFG-ASEIVSTITG--
+UniRef90_UPI001BAA3DED/25-97          -----PALA-QT-AN-------I-E-G-VLQNIVTMLTGNVARLLATLAVIIVGIAWMFGYLDLRKAAYVVLGVAITFG-ASEVVSTLTGG-
+UniRef90_A0A0Q6D6H8/27-100            -----PAFA-Q--AG-G-GI-E----T-TLQNIVTLLTGNVARLLAIIATIIVGIAWMFGYLDLRKAAFVVLGIGIIFG-ATEIVNTLAGG-
+UniRef90_UPI0020772B6C/24-101         ---ADPALA-QA-AG-G-GG-DI-T-T-FLQNLVNIITGTTGRLLAVLAICIVGVGALLGALSMRTVGGVLLGVMLIFS-SAWLVDQIIG--
+UniRef90_A0A1L4A0B9/36-110            ----DPAYA-QA-AD-G-IT------S-MAQNILSWLTGTFAKTISVIAVVIVGFMFFTGRASLPLLVTIIVGIFIVFS-AEWIVDTITGG-
+UniRef90_B4RFU5/17-97                 --SASPAFA-QS-TS-V-GG-DL-G-G-FIQNIIDLLNSGVIRGLAVLAVIITGIAWMFGHLDLRRAGTVVVGIIVIFG-ATTIVDLITGGA
+UniRef90_UPI001AE97776/14-92          --SAAPALA-QA-TG-G-GG-DI-T-T-FLQNLVNIITGATGRLLAVLAICVVGVGALLGALSMRTVGGVLLGVLLIFS-SAWLVDQIIG--
+UniRef90_A0A1H9X7U7/26-100            ----EPAYA-QA-AG-G-I---E-A-T-L-QNVVTLLTGNVARLLAIIATVVVGIAWMFGYLDLRKAAFVVLGIGIIFG-ATEIVNTIAGG-
+UniRef90_UPI00280E3B2A/25-97          -----PALA-QT-AN-------I-E-G-VLQNIVDMLTGNVARLLATLAVIIVGIAWMFGYLDLRKAAYVVLGVAIVFG-ASEVVSTLTGG-
+UniRef90_UPI00224743D8/54-132         ---AEPAYA-QA-SG-G-GG-DI-T-T-FLQNLVNLVTGTAGKLIAILAIAVTGILKMLGVASMRTLATVIFGVMLVFS-ASWIVSQITGA-
+UniRef90_A0A840ZN11/24-97             ----EPASA-QS-LG-G-V--E----K-VLQNIVDTLTGNVAKLLATLAVIVTGMAWMFGYLDLRKAGYVIFGVAILFG-ASEIVSTITG--
+UniRef90_A0A2U1X3A1/14-90             ---ADPAWA-QA-AG-G-GG-DI-T-T-FLQNLVNIITGTAGRLLAVLAICVVGVGALLGAISMRTVGGVLLGVMLIFS-SAWLIDQII---
+UniRef90_A0A258FVP4/23-104            --AAEPAFA-QS-SG-GVGG-NI-G-T-FIQNIIDVLNSSVIRGLAIIAIILTGIAWMFGHLDMRRAGTVVVGIIVIFS-AAALVDLITGGS
+UniRef90_A0A948N0M1/22-100            ----SPALA-QA-AG-G-GG-DL-T-G-FLQNIVDLMNSGIARLLAVIAVGITGIVWMFGQIDLRRAGTVVIGIIVAFG-ATTIVNMITGGS
+UniRef90_A5EUQ1/25-97                 -----PALA-QT-AN-------I-E-G-VLQNIVNMLTGNVARLLATLAVIIVGIAWMFGYLDLRKAAYVVLGVAITFG-ASEVVSTLTGG-
+UniRef90_UPI0004857842/25-97          -----PAMA-QT-AN-------I-E-G-VLQNIVNMLTGNVARLLATLAVIIVGIAWMFGYLDLRKAAYVVLGVAITFG-ASEVVSTLTGG-
+UniRef90_UPI00190404E5/22-102         -SAAEPAFA-QD-GG-V-GG-NI-G-T-FIQNIINILNSSVIRGLAIIAIILTGIAWMFGHLDMRRAGTVVVGIIVIFS-AAALVDLITGG-
+UniRef90_A0A9W4Q357/28-105            -AGAGPASA-QG-AG-G-I--ES-----ALQNIVNLLTGNVARLLAIIATIIVGIAWMFGYLDLRKAAFVVLGVGIIFG-ATEIVNTIAGG-
+UniRef90_UPI0027D8E07E/58-136         --SAAPALA-QA-TG-G-GG-DI-T-T-FLQNLVNIITGATGRLLAVLAICVVGVGALLGALSMRTVGGVLLGVLLIFS-SAWLVDQIIG--
+UniRef90_A0A0J8A8F3/29-103            -----PAWA-QA-A--N-QT-EV-A-S-MVDSILNLLTGPIAKGLAAIALVIAGIMFFFGAGNKGLLGSIIVGCFIVFG-AGWLVDTISG--
+UniRef90_A0A1Z8Q435/33-94             --------------------------N-FLNALMDLLTNTWARIIAIIAVVALGILWMTGRLAWGIAASVIGGIILVFG-APAIVDSIAG--
+UniRef90_A0A525JJ07/26-104            ----SPALA-QTTAT-A-GG-NL-S-T-FLQNIVNLLNSGVVRLVAVLAIIATGAGWMFGHLDFRRAATVVLGIIVVFG-AATIVDTITGG-
+UniRef90_A0A8I1YDZ9/54-126            -----PALA-QT-AN-------I-E-G-VLQNIVNMLTGNVARLLATLAVIIVGIAWMFGYLDLRKAAYVVLGVAITFG-ASEVVSTLTGG-
+UniRef90_A0A7W9CIZ4/26-100            --------A-QP-AA-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVIVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGS
+UniRef90_UPI00240EE079/64-141         --LSGPAFA-QS-AG-G----DL-G-G-FIQNIIDLLNSDIIRGLAVLAVILTGVAWMFGQIDLRRAGTVVVGIIVIFG-AGTIVDMIVGG-
+UniRef90_UPI0025C5554F/28-103         -------TA-QP-AL-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGS
+UniRef90_UPI0025DFEFC2/22-102         -ASASPAFA-QS-SG-V-GG-NI-G-S-FIQNIIDLLNSNVIRGLAVIAIIITGIAWMFGHLDMRRAGTVVVGIIVIFS-AAGIVDLITGG-
+UniRef90_UPI0028D53B8C/34-103         ----------------A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLGRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_A0A521PNT3/19-96             --AAGPAFA-QD-VG-G----DL-G-G-FIQNIIDLLNSGVVRGLAVLAVIVTGIVWMFGQIDLRRAGTVVVGIIVIFG-ASTIVDLITGG-
+UniRef90_A0A520FSH5/38-114            ---ADPAAA-QA-AG-G-GL-N----S-LATNVLGILQNGFVRTVAVIAVIIVGLGWLTGRVNFTTLIAVVVGIFIIFS-AEWLVDQVTGG-
+UniRef90_A0A0P0DNL5/28-103            -------SA-QP-AM-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_A0A6B8MES1/25-96             -----PAAA-QS-AN-------V-E-K-VLQNIVDALTGNVAKLLATLAIIVTGMSWMFGYLDLRRAGYVILGIAILFG-AAEIVTTLTG--
+UniRef90_UPI0003A352A5/24-96          ----EPAAA-QS-AN-------V-E-K-VLQNIVDALTGNVAKLLATLAIIITGMSWMFGYLDLRRAGYVILGVAILFG-AAEIVSTLTG--
+UniRef90_UPI0025CBA8CD/22-102         -ATASPAFA-QS-AG-V-GG-NI-G-A-FIQNIIDLLNSNVIRGLAVIAIIITGIAWMFGHLDMRRAGTVVVGIIVIFS-AAGIVDLITGG-
+UniRef90_A0A2W6X8H3/28-103            -------SA-QP-AL-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_UPI00026CD837/28-101         -----PA----M-AQ-G-TT-DI-Q-G-FVDNIKSWLTGSIAKSVAVIAVAVCGYRFFSGRASAGPLVAVIGGICLIFG-ASWVLTQITGG-
+UniRef90_A0A1L3LZ25/26-99             ----EPAFA-QA-TG-G-I--E----S-VLQNIVDMLTGNVAKLLATIAVIIVGIAWMFGYLDLRKAAYVVLGIGIIFG-ASEIVSTISG--
+UniRef90_C3KQX1/25-99                 ---VQPAFA-QA-TG-G-I--E----S-VLQNIVDMLTGNVAKLLATIAVIIVGIAWMFGYLDLRKTAYVVLGIGIIFG-ASEIVSTISG--
+UniRef90_A0A4Q7SKD0/40-112            ------AWA-Q-------GT-DG-ITS-MADNILNWLTGTFAKTIATIAVVIVGFMFFTGRASLPLLVTVIVGIFIVFS-AKWIVSTITGG-
+UniRef90_UPI0021510DE0/21-97          ---AGPAVA-QE-VG-G----DL-G-G-FIQNLIDLLNNGIVRGLAVLAVIITGIVWMFGHIDLRRAGTVVIGIIVIFG-ASTIVDLITGG-
+UniRef90_A0A2W5HGY1/36-101            --------------D-S-GT-NF-L-S-ALENLLT---STWARIIAIIAVVVLGFAWMFGRISMQLALSVIGGVILVFG-APAIVDSISG--
+UniRef90_A0A4V1DEA4/71-147            ---ADPAWA-QA-AG-G-GG-DI-T-T-FLQNLVNIITGTAGRLLAVLAICVVGVGALLGAISMRTVGGVLLGVMLIFS-SAWLIDQII---
+UniRef90_UPI0024731A26/25-99          ---IEPAFA-QA-TG-G-I--E----S-VLQNIVDMLTGNIAKLLATIAVIIVGIAWMFGYLDLRKAAYVVLGIGIIFG-ASQIVSTISG--
+UniRef90_UPI001C5F415C/23-98          ------SAA-RP-AS-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGVLWMFGLFDLRRAAIVVLGIIVVFG-ATEIVGLITGG-
+UniRef90_UPI0025F03B64/18-96          --AAGPAHA-QS-VG-G----DI-G-G-FIQNIIDLLNSNVIRGLAIIAIIVTGIAWMFGHLDMRRAGTVIIGIIVIFS-AAAIVDLITGGS
+UniRef90_UPI00289CB4C8/23-98          -------QA-SP-AL-A-AS-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIIVVFG-AAEIVNLITGGA
+UniRef90_UPI001A1C5579/36-111         -------TA-QP-AL-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIIVVFG-AAEIVNLITGGA
+UniRef90_A0A2M8CWC2/33-94             --------------------------N-FLNALMDILTNTWARIIAIIAVVGLGILWMTGRLAWGIAASVIGGIILVFG-APAIVDSIAG--
+UniRef90_UPI0020C86C97/30-107         -----AAAG-TD-TG-G-LG-KL-D-G-VLQNIVTMMTGTTAKLIAIICVVAVGIGWMYGFIDLRKAAYCIIGIGIVFG-ASALVDKLTGGT
+UniRef90_A0A3C0Q667/76-133            -------------------------------ALQDLLTNTWARILAIIAVVFLGFAWMFGRISWQLAASVIGGIILIFG-APAIVDSIAG--
+UniRef90_UPI0028D0702C/25-99          --------A-QP-AL-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAILAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_A0A1L3T0B1/19-89             ----EPALA-QS-SG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_A0A442MJV7/21-91             ----DPAFA-QS-SG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_A0A8J7RQV8/28-98             ----EPAFA-QS-SG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_UPI0025968851/24-99          ------AAA-GP-AF-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVSLITGG-
+UniRef90_UPI001A235A83/20-97          --AAGPAFA-QA-GG-G----DL-T-G-FLQNLVDLLNSGVVRLLAVIAVILTGVVWMFGQIDLRRAGTVVIGIIVVFG-ASTIVDMLTGG-
+UniRef90_A0A328BJ25/21-97             ---ASPAFA-QD-VG-G----DL-G-G-FIQNIIDLLNSGVVRGLAVLAVIITGIVWMFGQIDLRRAGTVVVGIIVIFG-ASTIVDLITGG-
+UniRef90_UPI00261711C1/31-101         ----EPALA-QS-SG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_A0A1R3U9B7/56-133            --TADPAFA-QS-GG-G-QG-DI-T-T-FIQNLVNIVTGTAGKLIAVLAICIVGIGAMMGALSMRAAGGVVLGVMLVFS-SAWIVNQIV---
+UniRef90_A0A494RQM4/19-84             ----------------------V-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIIVVFG-AAEIVNLITGGA
+UniRef90_UPI001ABA9F07/25-102         ----NPSYA-SS-AT-S-GL-GK-I-DFVLENIVTMMTGPTARLIAIICVAAVGIGWMYGFIDLRKAAYCIIGIGIVFG-ASTLVSKLAG--
+UniRef90_A0A0Q8M9K4/29-96             ------------------AQ-NV-E-S-LLQNVVDLLTGNTARLLAIIAVIVVGVLWMFGLFDLRRAATVVLGVIVVFG-AAEIVDMLTGG-
+UniRef90_UPI002489E202/30-100         --------------F-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_A0A8J3DZE0/27-99             -----PSFA-QS----G-GI-E----S-VLQNIVNMLTGNVARLLAIIAVIIVGIAWMFGYLDLRKAAFVVLGIGIIFG-ATEIVNTISGG-
+UniRef90_A0A4P8QB87/28-99             -------------AF-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_UPI0027E03309/31-101         ----EPALA-QS-SG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_A0A1G2VXH4/22-98             ---ASPAFA-QT-VG-G----DL-G-G-FIQNIIDLLNSGVVRGLAVLAVIITGIVWMFGQIDLRRAGTVVVGIIVIFG-ASTIVDLITGG-
+UniRef90_UPI001CD32FAF/29-99          ----APCAA-QN-FN-G-VT------T-FLNTIVKTITGPFGVAVSALAVMAVGFSFMTGRMNWTFAVSVMMGIAIVFGGASFVGS------
+UniRef90_A0A7X5YLR3/28-99             -------------AF-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_A0A7V8B0J0/25-99             ---AEPAMA-QA----G-GI----E-T-VLQNIVNMLQGNVMRLLAVIAVAIVGIAWMYGYLDLRKAAFVVLGIGIIFG-ATELVNTIAGG-
+UniRef90_A0A8E0NE02/26-99             --SAGP-------AL-A-AT-NL-E-G-LLQNVVDMLTGNTARLLAILAVVVVGILWMFGLFDLRRAAIVVLGIIVVFG-AAEIVNLITG--
+UniRef90_UPI002734F6EE/30-96          -------------------Q-DV-E-G-LLQNVVDMLTGNTARLLAVIAVVVVGILWMFGLFDLRRAAIVVLGIIVVFG-AAEIVDMLTGG-
+UniRef90_UPI0028EAFF86/29-97          ----APCAA-QN-FN-G-----P-T-T-FLETIVRTITGPFGVAISALAVMAVGFSFMIGRMDWTFAVSVMMGIAIVFGGASFV--------
+UniRef90_A0A5R8Q9S1/26-97             -----PALA-QS-AN-------V-E-R-VLQNIVDALTGNVAKLLATLAIIITGMSWMFGYLDLRRAGYVILGVAILFG-AAEIVSTLTG--
+UniRef90_A0A1Z3LTC5/24-99             ------AAA-GP-AF-A-AA-NV-E-G-LLQNVVDLLTGNTARLLAVLAVVIVGVLWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGG-
+UniRef90_UPI0023517777/20-98          ---ATPALA-QS-SG-A-AG-NI-G-G-FLQNLIDLLNSSVIRGLAIIAIILTGIAWMFGHLDLRRAGTVIVGIIVIFS-ASTIVDLITGG-
+UniRef90_UPI00235FF084/27-99          -----PSFA-QA----G-GI-E----S-VLQNIVNMLQGNVARLLAVIAVIIVGIAWMFGYLDLRKAAYCVLGIGIIFG-ATEIVNTLAGG-
+UniRef90_A0A2V3TTF6/31-101            ----EPAYA-QS-GG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_UPI001A9CE973/31-100         ----------------A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIIVVFG-AAEIVNLITGGA
+UniRef90_UPI0028A0F437/18-95          --AAGPAYA-QT-VG-G----DI-G-G-FIQNLIDILNSNVIRGLAIIAIIVTGIAWMFGHLDLRRAGTVIVGIIVIFS-AATIVDLITGG-
+UniRef90_A0A1X7EZP6/47-124            --AAAPAFA-QA-AG-G-GG-DL-T-T-FLQNVVNILTGTAGRLIAVIAICIVGIGALMGALSLRTAGGVLLGVMLIFS-SAWIVTQIV---
+UniRef90_A0A7X0KM44/31-101            ----EPAFA-QS-TG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_UPI000FE7A334/26-97          -ASTNPSFA-QN-FG-G-V-----Q-T-FIQAIVTNITGPIGVSVSALGVIAVGFSFMTGRMDWTFAVAVIVGIAVVFGGASFV--------
+UniRef90_A0A2S8VSZ4/34-100            ---------------------NI-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVVLGIIVVFG-AAEIVNLITGGA
+UniRef90_A0A6P1GB41/17-91             --SVQPAEA-QK-SGSG-GS-DVVS-S-VICNIVTQLSGPISQAIATLVIIITGYSFFVGKVSIGMLFIVAAGMMFVFG-AQTI--------
+UniRef90_UPI0026EF7571/24-99          ------AAA-GP-AF-A-SA-NV-E-G-LLQNVVDLLTGNTARLLAVLAVVIVGVLWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGG-
+UniRef90_A0A0L0MGU3/77-151            ---ANPAFA-QS-AG-G-QG-DI-T-T-FLQNLVNIITGTAGKLIAVLAICIVGVGALMGALSMRAAGGVILGVLLIFS-SAWIVNQ-----
+UniRef90_UPI0028A97242/25-99          -------AA-SP-AF-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVVVGVLWMFGLFDLRRAAIVVLGIIVVFG-AAEIVNLITGG-
+UniRef90_UPI000C2876BE/30-99          --------A-QA----G-GI-E----S-VLQNIVNMLQGNVARLLAVIAVIIVGIAWMFGYLDLRKAAYCVLGIGIIFG-ATEIVNTLAGG-
+UniRef90_A0A7W6ZYN8/25-100            ---IEPAFA-QN-AG-G-I-----E-T-VLQNIVNMLTGNVMKLVATIAIIVVGIAWMFGYLDLRKAAYCVLGIGIAYG-APQIVSTLAGG-
+UniRef90_UPI001ADF3E66/33-99          ---------------------NV-E-G-LLQNVVDMLTGNTARLLAVLAVVIVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_A0A840E1L3/29-100            ------AAS-AS-SG-G-SL-GNLD-G-VLGNIVTMMTGPTAKLIAIICVAAVGIGWMYGFIDLRKAAYCVLGIAIVFG-APALVS------
+UniRef90_UPI00157A6956/44-120         ---TAPAFA-QA-AG-G-GG-DL-S-T-FLQNLVNLLTGTPGKLIAVIAICILGIGAVMGALSLRTAGGVLLGIMLIFS-SAWIVTQIV---
+UniRef90_A0A1V8RJH1/31-101            ----EPAFA-QS-GG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_UPI0014202A49/26-101         ---ASPA----I-AA-G-TA-DI-Q-S-FVDSIKDWLTGDLAKSVAVIAIAVTGYRFFTGRASAGPLIAVVGGIFLIFG-SAWLLSKITGN-
+UniRef90_UPI00289BDB97/36-100         ------------------------E-G-LLQNVVDMLTGNTARLLAILAVVVVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGGA
+UniRef90_UPI002034475D/31-103         ------ALA-AD-TS-G-FS-PI-V-N-SLNTVITFLSGSFAQLAGTLAIITVGVSWLVGRLNLAHALQIAIGIAILIG-APTIFNTI----
+UniRef90_UPI0022B6CBED/22-96          ----SPAMA-Q-----S-GA-DL-G-G-FIQNIIDLLNSDIIRGLAVLAVILTGVAWMFGHLDLRRAGTVVVGIIVIFG-AGTIVDMIVGG-
+UniRef90_A0A1G5ZBU8/31-102            ---AGPALA-QT-SG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIGLGFLAFAGRLSWFTAGAVVIGIGLVFG-APAI--------
+UniRef90_UPI002936DF3A/26-99          --------A-FA-AG-G-LA-NV-E-N-FIQQIINFLTGPFGIGIATLAVIFAGLGVMFNRLDIAMFMRIIAGIALVFG-SAWMVNLLVGG-
+UniRef90_A0A354EN87/27-95             ------------------SA-NV-E-G-LLQNVVDMLTGNTARLLAILAVVVVGILWMFGLFDLRRAAIVILGIVVVFG-AAEIVSLITGGA
+UniRef90_A0A8I0CAP8/28-105            ---AGPALA-QS-AP-V-GG-QI-G-G-FIDNIVELLNSSVIRGLAIIAVILTGIAWMFGHLDLRRAGSVIVGIIVIFS-AAAIVDLIVG--
+UniRef90_A0A2U1VYA7/36-113            ---AAPAFA-QA-AG-G-GG-DL-T-T-FLQNVVNILTGTAGRLIAVIAICIVGIGALMGALSMRTAGGVLFGVMLIFS-SAWIVNQIVG--
+UniRef90_A0A2S5N3X9/25-96             -----PALA-QS-AN-------V-E-R-VLQNIVDALTGNVAKLLATLAIIITGMTWMFGYLDLRRAGYVILGVAILFG-AAEIVSTLTG--
+UniRef90_UPI002006BED4/29-99          -------FA-QA----G-GI----E-T-VLQNIVNMLQGNVARLLAIIAVIIVGIGWMFGYLDLRKAAYCVLGIGIFFG-ATEIVNTLAGG-
+UniRef90_A0A5B6U3G5/17-90             -TAAEPAVA-QT-SG-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIGLGFLAFAGRLSWFTAGAVVIGIGLVFG-APAI--------
+UniRef90_E6YNZ9/25-102                ----SPAYA-DATAG-G-MG-NL-D-T-VLRNIVTMMTGTTAKLIATICVAAVGIGWMYGVIDLRKAAYCVLGIGIVFG-ASALVNLLMG--
+UniRef90_UPI00201B61FC/34-98          ----------------------I-E-G-LLQNVVDLLTGNTARLLAVLAVVIVGILWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGG-
+UniRef90_UPI001A1DA690/27-98          -----------P-AF-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAILAVVVVGILWMFGLFDLRRAAIVILGIVVVFG-AAEIVGLITGG-
+UniRef90_UPI000DD3E435/32-107         ---ADPVFA-QG-AT-A-FA-PL-S-S-ALQMIVDFIQGPFGRLLAIIAVTSLGILAFIGRLSVMLAGGVILGIGIVFG-APDIVDQL----
+UniRef90_Q2GD01/17-90                 --SVQPAGA-QA-AS-G-TG-DV-V-SGVICNIVTQLSGPISQAIATLVIIITGYSFFVGKVSIGMLFIVAAGIMFVFG-AQTI--------
+UniRef90_UPI0015669BF3/23-94          ---AEPAFA-QS-SS-A-FA-PL-E-T-AVQMIVDFITGPFGRLLAIIAVIALGFLAFAGRLSWFTAGAVVLGIGLVFG-APAI--------
+UniRef90_UPI001A9FB5FA/27-99          ----------GP-AF-A-SA-NV-E-G-LLQNVVDMLTGNTARLLAVLAVVIVGVLWMFGLFDLRRAAIVVLGIVVVFG-AAEIVNLITGG-
+UniRef90_A0A5E4P4P5/17-92             --TIGEAAA-QS-SG-G-TL-QP-VQS-TLTTLVQALTGPIATALATLAVIACGFFAWSGRLTWGIAGSVIFGIVLVFG-SAQIVQ------
+UniRef90_A0A0Q7UZ54/9-86              --ATSPALA-QS-AG-G----DL-G-G-FIQNLIDLLNSNVIRGLAILAVMITGIMWLFGRLDLQRAGTVVVAIIVTFG-AATIVDLVTGA-
+UniRef90_A0A1I1MPT3/21-94             ---AAPALA-QS-GG-Q-LQ-PV-Q-S-TLQTLVNTLTGPISTSLAVLAVIACGLMAFVGRLTWGFAGSVIFGIVLVFG-SAQIVQ------
+UniRef90_A0A1H7DPQ9/27-102            ----APAWA-QA-V--N-TN-DV-E-T-MVDLVLALLTGPIAKGLAAIALVIAGIMFFFGAGNKGLLGSIIIGCFIVFG-AGWIVDTVSG--
+UniRef90_UPI002362DA38/31-100         ------AAP-VS-DG-G-GF-GNLD-G-VLGNIVTMMTGPTAKLIAIICVAAVGIGWMYGFIDLRKAAYCVLGIAIVFG-APTL--------
+UniRef90_UPI0027DD81CE/19-90          ----DVALA-QS-AG-G-AF-GP-LQT-AVQMIVDFITGPFGRLLAIIAVIGLGFLAFAGRLSWFTAGAVVMGIGLVFG-APAI--------
+UniRef90_E6YJV0/25-103                ----TPAYA-NS-AA-A-GMGNL-D-T-VLRNIVTMMTGTTAKLIATICVAAVGIGWMYGVIDLRKAAYCVLGIGIVFG-ASALVALLMGS-
+UniRef90_UPI001AD9CFAA/37-99          --------------------------G-LLQNVVDMLTGNTARLLAVLAVVVVGILWMFGLFDLRRAAIVILGIIVVFG-AAEIVNLITGG-
+UniRef90_Q11MQ1/27-99                 -----PSFA-QA----G-GI-E----S-VLQNIVNMLTGNVARLLAIIAVIIVGIAWMFGYLDLRKAAFVVLGIGIIFG-ATEIVNMISGG-
+UniRef90_UPI001AE69A07/27-101         --SSNPSAA-QE-FS-G-VT------T-FLEAIVKAITGPIGVAISALAVIAIGFSFMTGRMDWTFAVSIILGIAIVFG-AASFVQGIT---
+UniRef90_C6V5P6/20-91                 -----PAEARKS-SS-G-SS-DVVS-S-VICNIVTQLSGPISQAIATLVIIITGYSFFVGKVSIGMLFIVAAGIMFVFG-AQTI--------
+UniRef90_A0A1M3CBV0/20-93             ----TKAAA-QS-SG-G-TL-QP-VQS-TLTQLVSALTGPIATALATLAVIACGFFAWSGRLTWGIAGSVIFGIVLVFG-SAQIVQ------
+UniRef90_UPI0020B2B88D/29-99          ----APCSA-QN-FN-G-VT------T-FLTTIVKTVTGPFGVAVSALAVMAVGFSFMTGRMDWTFAVSVIMGIAIVFGGASFVGS------
+UniRef90_A0A3M9X170/32-104            ----TPSAA-QD-FN-G-VT------T-FLQAIVEAITGPIGVSISALAVIAVGFSFMTGRMDWTFAVSIVMGIAIVFG-GASFVQGLT---
+UniRef90_UPI000846FFDE/32-107         ---ADPAYA-QS-AN-G-IT------S-MAQNILSWLTGGFAKTIAVIAIAIVGYRFLTGHVSLQSLIIVIIGIFIVFS-AQWIVDTISGG-
+UniRef90_A0A2W6RSJ9/33-98             ---------------------NV-E-G-LLQNVVDMLTGNTARLLAILAVVIVGILWMFGLFDLRRAAIVILGIVVVFG-AAEIVGLITGG-
+UniRef90_A0A7W9F2Y1/37-110            -----PAFA-QG-TG------NI-Q-S-FADSIKEFVTGTFAKSVAIIAIAVTGYRFFTGRASAGPLIAVVGGCFLIFG-ASWFLDQIVGG-
+UniRef90_UPI0009E7D19A/30-94          ---------------------EF-S-G-VLQNIVDMLTGDTARLLAVLGVIITGFLWIFGYLDLRRCAIVVAGIVILFS-AEEIVGMITG--
+UniRef90_A0A151A004/17-90             --SIQPAEA-KKKSG-E-GD-VV-S-S-VICNIVTQLSGPISQAIATLVIIITGYSFFVGKVSIGMLFIVAAGMMFVFG-AQTI--------
+UniRef90_UPI001FCEDB52/29-97          ----APCAA-QD-FQ-G-VT------T-FLDTIVKTITGPFGTAISALAVMAVGFSFMIGRMDWTFAVSVMMGIAIVFGGASFV--------
+UniRef90_A0A2T3CY49/30-101            -----PSYA-QN-FS-G-----I-Q-T-FLTNIVDAITGPIGIAISCIAVMAVGFSFMTGRMDWTFAVSIVLGIAIVFG-AATFTSTLT---
+UniRef90_A0A2M6UVC7/30-105            ------AAS-AS-DG-G-GFGNL-D-G-VLGNIVSAMTGPTAKLIAIICVAAVGIGWMYGFIDLRKAAYCVLGIAIVFG-APALVNKLAG--
+UniRef90_A0A437LY49/37-108            --------------A-Q-GT-DG-I-TSMAQNILDWLQGSFAKTVATIAVIIVGFMFFTGRASLNLFVTVIIGIFIVFS-AGWIVDQITGGA
+UniRef90_UPI00178B35AB/28-102         -----PAWA-QA-A--N-QT-EV-E-T-MANAILNFLTGPIAKAIAAVAFVIAGYMFFVGNGNKGTLVSIIIGCFIIFG-AGWLVDTISG--
+UniRef90_A0A1H1KNV6/19-94             --SVAEAAA-QS-TG-G-TL-QP-VQS-TLTQLVSALTGPIATALATLAVIACGFFAWAGRLTWGVAGSVIFGIVLVFG-SAQIVQ------
+#=GC RF                               xxxxxxxxx.xx.xx.x.xx.xx.x.x.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxx
+//
