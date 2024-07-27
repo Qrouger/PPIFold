@@ -14,9 +14,7 @@ import glob
 import pickle
 import logging
 from scipy.special import softmax
-
-
-
+from File_proteins import *
 	
 
 def create_fasta_file (self) :
