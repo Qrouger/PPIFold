@@ -17,16 +17,16 @@ from scipy.special import softmax
 
 
 
-class Utils() :
+class File_Proteins() :
     """
-    Creates and manipulates object of type Interactome.
+    Manipulate all of Proteins.
     """
     def __init__(self, args) :
         """
         Constructor :method for Interactome:
 
         Parameters:
-	    -----------
+	-----------
         filename : string
         file of proteins of interest
         """
@@ -152,6 +152,10 @@ mpDockQ/pDockQ        filename = string
         """
         return self.lenght_prot
 
+
+
+
+	
 ### Generating of features and pre-file to run multimer
 
     def set_all_att(self, filename) :
