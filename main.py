@@ -1,4 +1,5 @@
 from utils import *
+from File_proteins import *
 import argparse
 
 
