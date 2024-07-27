@@ -12,7 +12,7 @@ def add_arguments(parser) :
     parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2500, type = int)
     parser.add_argument("--use_signalP" , help = "Don't use SignalP", required = False, default = True)
 
-class EZFold (pre_APD):
+class EZFold (utils):
 
     def __init__(self) :
         parser = argparse.ArgumentParser()
