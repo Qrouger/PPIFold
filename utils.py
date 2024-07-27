@@ -19,8 +19,7 @@ from scipy.special import softmax
 
 	
 
-    
-    def create_fasta_file (self) :
+def create_fasta_file (self) :
         """
         Generate a fasta file with a txt file.
 
@@ -43,7 +42,7 @@ from scipy.special import softmax
         self.set_fasta_file(file_out)
 
 
-    def remove_SP (self) :
+def remove_SP (self) :
         """
         Creating a new fasta file without signal peptide.
 
@@ -81,7 +80,7 @@ from scipy.special import softmax
         with open(fasta_file, "w") as new_file2 :
            new_file2.write(final_file)
 
-    def create_feature (self, env_feature, data_dir) :
+def create_feature (self, env_feature, data_dir) :
         """
         Launch command to generate features.
 
@@ -103,7 +102,7 @@ from scipy.special import softmax
         else :
             os.system(cmd2)
 
-    def Make_all_MSA_coverage (self) :
+def Make_all_MSA_coverage (self) :
         """
         Creating a new fasta file without signal peptide.
 
@@ -138,7 +137,7 @@ from scipy.special import softmax
             plt.ylabel("Sequences")
             plt.savefig(f"feature/{prot+('_' if prot else '')}coverage.pdf")
 
-    def generate_APD_script (self, max_aa) :
+def generate_APD_script (self, max_aa) :
         """
         Write two scripts in local to use AlphaPulldown, this scripts are build in function of maximum amino acid.
 
@@ -169,7 +168,7 @@ from scipy.special import softmax
 
 ### Generating Multimers
 
-    def Make_all_vs_all (self, env_multimers, data_dir) :
+def Make_all_vs_all (self, env_multimers, data_dir) :
         """
         Launch command to generate all_vs_all result.
 
@@ -190,7 +189,7 @@ from scipy.special import softmax
         else :
             os.system(cmd2)
 
-    def add_iQ_score_and_make_cyt (self, dir_alpha) :
+def add_iQ_score_and_make_cyt (self, dir_alpha) :
         #cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
         #os.system(cmd4)
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
@@ -213,7 +212,7 @@ from scipy.special import softmax
             for inter, score in interactions :
                 file3.write(f'{inter[0]},{inter[1]},pp,{score}\n')
 
-    def create_out_fig (self) :
+def create_out_fig (self) :
         with open("./result_all_vs_all/new_filtered_predictions.csv", "r") as file :
             reader = csv.DictReader(file)
             for row in reader :
@@ -223,7 +222,7 @@ from scipy.special import softmax
                     self.plot_Distogram(job)
                     self.make_table_res_int("./result_all_vs_all/" + job)
 
-    def make_table_res_int (self, int) :
+def make_table_res_int (self, int) :
         """
         Generate a table of residue in interactions.
 
@@ -295,7 +294,7 @@ from scipy.special import softmax
             mywriter.writerows(table_out)
         print("Write table")
 
-    def plot_Distogram (self,job) :
+def plot_Distogram (self,job) :
         pickle_list = glob.glob(f"result_all_vs_all/{job}/result_*.pkl")
         for i, pickle_output in enumerate(pickle_list):
             logging.warning(
@@ -325,7 +324,7 @@ from scipy.special import softmax
             plt.savefig(f"{pickle_output}.dmap.png", dpi=600)
             plt.close()
 
-    def Make_homo_oligo (self, env_multimers, data_dir) :
+def Make_homo_oligo (self, env_multimers, data_dir) :
         cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
         cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
@@ -335,7 +334,7 @@ from scipy.special import softmax
         else :
             os.system(cmd2)
 
-    def add_hiQ_score (self, dir_alpha) :
+def add_hiQ_score (self, dir_alpha) :
         #cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
         #os.system(cmd4)
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
