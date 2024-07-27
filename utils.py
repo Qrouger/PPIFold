@@ -16,7 +16,7 @@ import logging
 from scipy.special import softmax
 from File_proteins import *
 	
-def remove_SP (self) :
+def remove_SP (File_proteins) :
         """
         Creating a new fasta file without signal peptide.
 
@@ -30,7 +30,7 @@ def remove_SP (self) :
         final_file = str()
         SP_signal = 0
         prot_SP = dict()
-        fasta_file = self.get_fasta_file()
+        fasta_file = super.get_fasta_file()
         cmd = "signalp -fasta " + fasta_file + " -org gram-"
         os.system(cmd)
         file_signalp = fasta_file.replace(".fasta","_summary.signalp5")
