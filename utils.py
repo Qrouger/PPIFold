@@ -16,30 +16,6 @@ import logging
 from scipy.special import softmax
 from File_proteins import *
 	
-
-def create_fasta_file (self) :
-        """
-        Generate a fasta file with a txt file.
-
-        Parameters:
-        ----------
-
-        Returns:
-        ----------
-
-        """
-        line = str()
-        proteins = self.get_proteins()
-        sequences = self.get_proteins_sequence()
-        for protein in range(0,len(proteins)) :
-            line = line + ">" + proteins[protein] + "\n" + sequences[protein] + "\n"        
-        file_name = self.get_file_name()
-        file_out = file_name.replace("txt","fasta")
-        with open(file_out,"w") as fh :
-            fh.write(line)
-        self.set_fasta_file(file_out)
-
-
 def remove_SP (self) :
         """
         Creating a new fasta file without signal peptide.
