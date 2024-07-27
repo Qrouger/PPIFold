@@ -17,7 +17,7 @@ from scipy.special import softmax
 
 
 
-class pre_APD() :
+class Utils() :
     """
     Creates and manipulates object of type Interactome.
     """
