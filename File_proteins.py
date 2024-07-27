@@ -1,19 +1,5 @@
-import os
-import numpy as np
 import urllib.request
 import re
-import pickle
-import csv
-import matplotlib.pyplot as plt
-from Bio import PDB
-import numpy as np
-from tabulate import tabulate
-import pandas as pd
-import copy
-import glob
-import pickle
-import logging
-from scipy.special import softmax
 
 
 
@@ -26,7 +12,7 @@ class File_proteins() :
         Constructor :method for Interactome:
 
         Parameters:
-	-----------
+    	-----------
         filename : string
         file of proteins of interest
         """
