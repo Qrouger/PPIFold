@@ -218,3 +218,5 @@ mpDockQ/pDockQ        filename = string
         for nbr_prot in range(len(proteins)) :
             lenght_prot[proteins[nbr_prot]] = len(sequences[nbr_prot])
         self.set_lenght_prot(lenght_prot)
+
+    
