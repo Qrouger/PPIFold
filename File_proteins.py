@@ -219,4 +219,25 @@ mpDockQ/pDockQ        filename = string
             lenght_prot[proteins[nbr_prot]] = len(sequences[nbr_prot])
         self.set_lenght_prot(lenght_prot)
 
+    def create_fasta_file (self) :
+        """
+        Generate a fasta file with a txt file.
+
+        Parameters:
+        ----------
+
+        Returns:
+        ----------
+
+        """
+        line = str()
+        proteins = self.get_proteins()
+        sequences = self.get_proteins_sequence()
+        for protein in range(0,len(proteins)) :
+            line = line + ">" + proteins[protein] + "\n" + sequences[protein] + "\n"        
+        file_name = self.get_file_name()
+        file_out = file_name.replace("txt","fasta")
+        with open(file_out,"w") as fh :
+            fh.write(line)
+        self.set_fasta_file(file_out)
     
