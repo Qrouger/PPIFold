@@ -10,9 +10,9 @@ import pickle
 import logging
 from scipy.special import softmax
 from File_proteins import *
-import subprocess
+import os
 
-def remove_SP (file_proteins) :
+def remove_SP (file) :
         """
         Creating a new fasta file without signal peptide.
 
@@ -26,9 +26,9 @@ def remove_SP (file_proteins) :
         final_file = str()
         SP_signal = 0
         prot_SP = dict()
-        fasta_file = file_proteins.get_fasta_file()
+        fasta_file = file.get_fasta_file()
         cmd = "signalp -fasta " + fasta_file + " -org gram-"
-        subprocess.run(cmd)
+        os.system(cmd)
         file_signalp = fasta_file.replace(".fasta","_summary.signalp5")
         with open(file_signalp,"r") as fh :
             for line in fh :
@@ -46,11 +46,11 @@ def remove_SP (file_proteins) :
                     SP_signal = prot_SP[line2[1:len(line2)-1]]
               final_file = final_file + new_line2
         cmd2 = "rm " + fasta_file
-        subprocess.run(cmd2)
+        os.system(cmd2)
         with open(fasta_file, "w") as new_file2 :
            new_file2.write(final_file)
 
-def create_feature (env_feature, data_dir) :
+def create_feature (env_feature, data_dir, file) :
         """
         Launch command to generate features.
 
@@ -62,17 +62,17 @@ def create_feature (env_feature, data_dir) :
         ----------
 
         """
-        fasta_file = File_proteins.get_fasta_file()
+        fasta_file = file.get_fasta_file()
         cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_feature}\n create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir=./feature \--max_template_date=2024-05-02 \--skip_existing=False"
         cmd2 = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir=./feature \--max_template_date=2024-05-02 \--skip_existing=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_feature != None :
-            subprocess.run(cmd)
-            subprocess.run(cmd3)
+            os.system(cmd)
+            os.system(cmd3)
         else :
-            subprocess.run(cmd2)
+            os.system(cmd2)
 
-def Make_all_MSA_coverage () :
+def Make_all_MSA_coverage (file) :
         """
         Creating a new fasta file without signal peptide.
 
@@ -83,7 +83,7 @@ def Make_all_MSA_coverage () :
         ----------
 
         """
-        proteins = File_proteins.get_proteins()
+        proteins = file.get_proteins()
         for prot in proteins :
             pre_feature_dict = pickle.load(open(f'feature/{prot}.pkl','rb'))
             feature_dict = pre_feature_dict.feature_dict
@@ -107,7 +107,7 @@ def Make_all_MSA_coverage () :
             plt.ylabel("Sequences")
             plt.savefig(f"feature/{prot+('_' if prot else '')}coverage.pdf")
 
-def generate_APD_script (max_aa) :
+def generate_APD_script (max_aa, file) :
         """
         Write two scripts in local to use AlphaPulldown, this scripts are build in function of maximum amino acid.
 
@@ -121,8 +121,8 @@ def generate_APD_script (max_aa) :
         """
         all_vs_all_script = str()
         homo_oligo_script = str()
-        proteins = File_proteins.get_proteins()
-        lenght_prot = File_proteins.get_lenght_prot()
+        proteins = file.get_proteins()
+        lenght_prot = file.get_lenght_prot()
         for index_protein in range(len(proteins)) :
             lenght = lenght_prot[proteins[index_protein]]
             for index2_protein in range(index_protein+1,len(proteins)) :
@@ -154,10 +154,10 @@ def Make_all_vs_all (env_multimers, data_dir) :
         cmd2 = "run_multimer_jobs.py --mode=all_vs_all \--num_cycle=3 \--num_predictions_per_model=1 \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir=./feature"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
-            subprocess.run(cmd)
-            subprocess.run(cmd3)
+            os.system(cmd)
+            os.system(cmd3)
         else :
-            subprocess.run(cmd2)
+            os.system(cmd2)
 
 def add_iQ_score_and_make_cyt (dir_alpha) :
         """
@@ -171,8 +171,8 @@ def add_iQ_score_and_make_cyt (dir_alpha) :
         ----------
 
         """
-        #cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-        #os.system(cmd4)
+        cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha}/alpha_analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+        os.system(cmd4)
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
             all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,iQ_score\n"
@@ -331,10 +331,10 @@ def Make_homo_oligo (env_multimers, data_dir) :
         cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
-            subprocess.run(cmd)
-            subprocess.run(cmd3)
+            os.system(cmd)
+            os.system(cmd3)
         else :
-            subprocess.run(cmd2)
+            os.system(cmd2)
 
 def add_hiQ_score (dir_alpha) :
         """
@@ -347,8 +347,8 @@ def add_hiQ_score (dir_alpha) :
         ----------
 
         """
-        #cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-        #subprocess.run(cmd4)
+        cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+        os.system(cmd4)
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
             all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,hiQ_score\n"
