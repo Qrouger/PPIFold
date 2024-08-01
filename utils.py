@@ -347,7 +347,7 @@ def add_hiQ_score (dir_alpha) :
         ----------
 
         """
-        cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+        cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha_analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
         os.system(cmd4)
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
