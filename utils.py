@@ -18,7 +18,7 @@ def remove_SP (file) :
 
         Parameters:
         ----------
-
+        file : object of class File_proteins
         Returns:
         ----------
 
@@ -58,6 +58,8 @@ def create_feature (env_feature, data_dir, file) :
         ----------
         env_feature : string
         data_dir : string
+        file : object of class File_proteins
+
         Returns:
         ----------
 
@@ -78,6 +80,7 @@ def Make_all_MSA_coverage (file) :
 
         Parameters:
         ----------
+        file : object of class File_proteins
 
         Returns:
         ----------
@@ -114,6 +117,7 @@ def generate_APD_script (max_aa, file) :
         Parameters:
         ----------
         max_aa : integer
+        file : object of class File_proteins
 
         Returns:
         ----------
