@@ -132,8 +132,8 @@ def generate_APD_script (max_aa, file) :
             for index2_protein in range(index_protein+1,len(proteins)) :
                 all_vs_all_script = all_vs_all_script + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
             for nbr_homo in range(2,20) :
+                lenght += lenght_prot[proteins[index_protein]]
                 if int(lenght) <= max_aa :
-                    lenght += lenght_prot[proteins[index_protein]]
                     homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
         with open("homo_oligo.txt", "w") as homo_file:
             homo_file.write(homo_oligo_script)
