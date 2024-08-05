@@ -1,4 +1,4 @@
-# EZFold
+# PPIFold
 
 ### Requirements
 
