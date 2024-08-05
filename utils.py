@@ -198,6 +198,15 @@ def add_iQ_score_and_make_cyt (dir_alpha) :
                 file3.write(f'{inter[0]},{inter[1]},pp,{score}\n')
 
 def create_out_fig () :
+        """
+        Generate result figure for validate interaction.
+
+        Parameters:
+        ----------
+        Returns:
+        ----------
+
+        """
         with open("./result_all_vs_all/new_filtered_predictions.csv", "r") as file :
             reader = csv.DictReader(file)
             for row in reader :
