@@ -1,5 +1,5 @@
 # PPIFold
-
+Automatised pipeline for massive PPI prediction and figure creation.
 ### Requirements
 
 - Python >3.9
