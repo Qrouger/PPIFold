@@ -26,7 +26,7 @@ Obligatory
 
 Optionnal
 
---make_multimers This argument is True by default, if you just want to make feature you have to set it on False <br>
+--make_multimers This argument is True by default, if you just want make feature you have to set it on False <br>
 --env_feature The name of the conda environment need to make feature with AlphaPulldown, set by default on None <br>
 --env_multimer The name of the conda environment need to make multimer with AlphaPulldown, set by default on None <br>
 --max_aa The maximum lenght of a model generable by your GPU (in function of Vram), set by default on 2500 (24 Go) <br>
