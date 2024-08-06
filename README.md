@@ -19,9 +19,9 @@ This python package is use to generate PPI prediction on lot of system, without 
 ### Arguments
 
 Obligatory
- --txt_name Name of the file who contains all Uniprot ID
- --data_dir Path to the directory with all alphafold database
- --dir_alpha_analysis Path to singularity image
+ --txt_name Name of the file who contains all Uniprot ID <br>
+ --data_dir Path to the directory with all alphafold database <br>
+ --dir_alpha_analysis Path to singularity image <br>
 
 Optionnal
 --make_multimers This argument is True by default, if you just want to make feature you have to set it on False
