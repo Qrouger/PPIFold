@@ -315,6 +315,7 @@ def plot_Distogram (job) :
                 result = pickle.load(handle)
                 for seq in result["seqs"] :
                     lenght_list.append(len(seq))
+            print(lenght_list)
             print("make png")
             initial_lenght = 0
             fig, ax = plt.subplots()
