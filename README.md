@@ -19,13 +19,15 @@ This python package is use to generate PPI prediction on lot of system, without 
 ### Arguments
 
 Obligatory
+
  --txt_name Name of the file who contains all Uniprot ID <br>
  --data_dir Path to the directory with all alphafold database <br>
  --dir_alpha_analysis Path to singularity image <br>
 
 Optionnal
---make_multimers This argument is True by default, if you just want to make feature you have to set it on False
---env_feature The name of the conda environment need to make feature with AlphaPulldown, set by default on None
---env_multimer The name of the conda environment need to make multimer with AlphaPulldown, set by default on None
---max_aa The maximum lenght of a model generable by your GPU (in function of Vram), set by default on 2500 (24 Go)
---use_signalP Use SignalP if your protéins can be periplasmic, set by default on True
+
+--make_multimers This argument is True by default, if you just want to make feature you have to set it on False <br>
+--env_feature The name of the conda environment need to make feature with AlphaPulldown, set by default on None <br>
+--env_multimer The name of the conda environment need to make multimer with AlphaPulldown, set by default on None <br>
+--max_aa The maximum lenght of a model generable by your GPU (in function of Vram), set by default on 2500 (24 Go) <br>
+--use_signalP Use SignalP if your protéins can be periplasmic, set by default on True <br>
