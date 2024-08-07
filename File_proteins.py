@@ -57,7 +57,7 @@ class File_proteins() :
         Sets new filename for the fasta file. 
         Parameters:
         ----------
-mpDockQ/pDockQ        filename = string
+        filename = string
         
         Returns:
         ----------
