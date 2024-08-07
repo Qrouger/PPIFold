@@ -137,9 +137,9 @@ def generate_APD_script (max_aa, file) :
                 lenght += lenght_prot[proteins[index_protein]]
                 if int(lenght) <= max_aa :
                     homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
-        with open("homo_oligo.txt", "w") as homo_file:
+        with open("result_homo_oligo/homo_oligo.txt", "w") as homo_file:
             homo_file.write(homo_oligo_script)
-        with open("all_vs_all.txt", "w") as all_file:
+        with open("result_all_vs_all/all_vs_all.txt", "w") as all_file:
             all_file.write(all_vs_all_script)
 
 ### Generating Multimers
@@ -156,8 +156,8 @@ def Make_all_vs_all (env_multimers, data_dir) :
         ----------
 
         """
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--output_path=result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir=./feature"
-        cmd2 = "run_multimer_jobs.py --mode=all_vs_all \--num_cycle=3 \--num_predictions_per_model=1 \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir=./feature"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--output_path=result_all_vs_all \--data_dir={data_dir} \--protein_lists=result_all_vs_all/all_vs_all.txt \--monomer_objects_dir=./feature"
+        cmd2 = "run_multimer_jobs.py --mode=all_vs_all \--num_cycle=3 \--num_predictions_per_model=1 \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=result_all_vs_all/all_vs_all.txt \--monomer_objects_dir=./feature"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
             os.system(cmd)
@@ -165,7 +165,7 @@ def Make_all_vs_all (env_multimers, data_dir) :
         else :
             os.system(cmd2)
 
-def add_iQ_score_and_make_network (dir_alpha) :
+def add_iQ_score (dir_alpha) :
         """
         Launch command to generate all_vs_all result.
 
@@ -190,27 +190,9 @@ def add_iQ_score_and_make_network (dir_alpha) :
                     names = job.split('_and_')
                     line = row['jobs']+","+row['interface']+","+row['Num_intf_residues']+","+row['Polar']+","+row['Hydrophobhic']+","+row['Charged']+","+row['contact_pairs']+","+row[' sc']+","+row[' hb']+","+row[' sb']+","+row[' int_solv_en']+","+row[' int_area']+","+row['pi_score']+","+row['iptm_ptm']+","+row['iptm']+","+row['mpDockQ/pDockQ']+","+str(iQ_score)+"\n"
                     all_lines = all_lines + line
-                    if names not in [x[0] for x in interactions] and iQ_score >= 35 :
-                        interactions.append([names, iQ_score])
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
-        int_graph = nx.Graph()
-        list_inter_score = list()
-        prots = set()
-        for inter, score in interactions :
-            prots.add(inter[0])
-            prots.add(inter[1])
-            list_inter_score.append((inter[0],inter[1],float(round(score,2))))
-        prots = list(prots)
-        int_graph.add_nodes_from(prots)
-        int_graph.add_weighted_edges_from(list_inter_score)
-        pos = nx.spring_layout(int_graph, seed=7)
-        nx.draw_networkx_nodes(int_graph,pos)
-        nx.draw_networkx_edges(int_graph,pos, edgelist=int_graph.edges, width=6)
-        nx.draw_networkx_labels(int_graph, pos, font_size=15, font_family="sans-serif")
-        edge_labels = nx.get_edge_attributes(int_graph, "weight")
-        nx.draw_networkx_edge_labels(int_graph, pos, edge_labels)
-        plt.savefig("network.png")
+        
 
 
 def create_out_fig () :
@@ -357,8 +339,8 @@ def Make_homo_oligo (env_multimers, data_dir) :
         ----------
 
         """
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
-        cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=result_homo_oligo/homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
+        cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=result_homo_oligo/homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
             os.system(cmd)
@@ -383,7 +365,6 @@ def add_hiQ_score (dir_alpha) :
             reader = csv.DictReader(file1)
             all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,hiQ_score\n"
             all_homo = dict()
-            best_homo = dict()
             for row in reader :
                 job = row['jobs']
                 if 'homo' in job and row['pi_score'] != 'No interface detected' :
@@ -398,18 +379,41 @@ def add_hiQ_score (dir_alpha) :
                 hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40
                 line = key+","+row['interface']+","+row['Num_intf_residues']+","+row['Polar']+","+row['Hydrophobhic']+","+row['Charged']+","+row['contact_pairs']+","+row[' sc']+","+row[' hb']+","+row[' sb']+","+row[' int_solv_en']+","+row[' int_area']+","+row['pi_score']+","+row['iptm_ptm']+","+row['iptm']+","+row['mpDockQ/pDockQ']+","+str(hiQ_score)+"\n"
                 all_lines = all_lines + line
-                split_name = key.split("_")
-                prot_name = split_name[0]
-                if hiQ_score >= 50 :
-                   if prot_name not in best_homo.keys() or hiQ_score >= best_homo[prot_name][0] :
-                      best_homo[prot_name] = (hiQ_score,split_name[2])
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
-        #with open("table_for_network.cyt","r") as file3 :
-        #    netw_lines = str()
-        #    for line in file3 :
-        #        netw_lines = netw_lines + line
-        #with open("table_for_network.cyt","w") as file4 :
-        #    for homo_oligo in best_homo.keys() :
-        #        netw_lines = netw_lines + homo_oligo + "," + homo_oligo + ",pp," + best_homo[homo_oligo][1] + "\n"
-        #    file4.write(netw_lines)
+
+def generate_interaction_network() :
+    interactions = list()
+    with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+        reader1 = csv.DictReader(file1)
+        for row in reader1 :
+            names = row['jobs'].split('_and_')
+            if names not in [x[0] for x in interactions] and float(row['iQ_score']) >= 35 :
+                interactions.append([names, float(row['iQ_score'])])
+    best_homo = dict()
+    with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
+        reader2 = csv.DictReader(file2)
+        for row in reader2 :
+            if float(row["hiQ_score"]) >= 50 :
+                prot_name = row['jobs'].split("_")[0]
+                if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
+                    best_homo[prot_name] = (float(row['hiQ_score']),float(row['jobs'].split("_")[2][0])) #to take the number of homo-oligomerisation of the protein and this score
+    for key in best_homo :
+        interactions.append([[key,key], best_homo[key][1]])
+    int_graph = nx.Graph()
+    list_inter_score = list()
+    prots = set()
+    for inter, score in interactions :
+        prots.add(inter[0])
+        prots.add(inter[1])
+        list_inter_score.append((inter[0],inter[1],float(round(score,2))))
+    prots = list(prots)
+    int_graph.add_nodes_from(prots)
+    int_graph.add_weighted_edges_from(list_inter_score)
+    pos = nx.spring_layout(int_graph, seed=7)
+    nx.draw_networkx_nodes(int_graph,pos)
+    nx.draw_networkx_edges(int_graph,pos, edgelist=int_graph.edges, width=2, style="dashed")
+    nx.draw_networkx_labels(int_graph, pos, font_size=15, font_family="sans-serif")
+    edge_labels = nx.get_edge_attributes(int_graph, "weight")
+    nx.draw_networkx_edge_labels(int_graph, pos, edge_labels)
+    plt.savefig("network.png")

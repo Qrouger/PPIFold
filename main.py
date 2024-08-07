@@ -10,7 +10,7 @@ def add_arguments(parser) :
     parser.add_argument("--make_multimers", help = "If you just want make feature set False", required = False, default = True)
     parser.add_argument("--env_feature" , help = "Conda environemment to make feature", required = False, default = None)
     parser.add_argument("--env_multimer" , help = "Conda environemment to make multimers", required = False, default = None)
-    parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2400, type = int)
+    parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2500, type = int)
     parser.add_argument("--use_signalP" , help = "Don't use SignalP", required = False, default = True)
 
 class EZFold (File_proteins) :
@@ -31,16 +31,16 @@ class EZFold (File_proteins) :
         super().create_fasta_file()
         if self.args.use_signalP == True :
            remove_SP(self)
-        create_feature(self.args.env_feature,self.args.data_dir,self)
-        Make_all_MSA_coverage(self)
+        #create_feature(self.args.env_feature,self.args.data_dir,self)
+        #Make_all_MSA_coverage(self)
         generate_APD_script(self.args.max_aa, self)
         if self.args.make_multimers == True :
-            Make_all_vs_all(self.args.env_multimer,self.args.data_dir)
-            add_iQ_score_and_make_cyt(self.args.dir_alpha_analysis)
+            #Make_all_vs_all(self.args.env_multimer,self.args.data_dir)
+            add_iQ_score(self.args.dir_alpha_analysis)
             create_out_fig()
-            Make_homo_oligo(self.args.env_multimer,self.args.data_dir)
+            #Make_homo_oligo(self.args.env_multimer,self.args.data_dir)
             add_hiQ_score(self.args.dir_alpha_analysis)
-
+            generate_interaction_network()
 
 if __name__ == "__main__" :
     A4 = EZFold()
