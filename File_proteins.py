@@ -69,12 +69,24 @@ class File_proteins() :
         Sets lenght of all proteins.
         Parameters:
         ----------
-        filename = string
+        lenght_prot = integer
         
         Returns:
         ----------
         """
         self.lenght_prot = lenght_prot
+
+    def set_name(self, name) :
+        """
+        Sets names of all proteins.
+        Parameters:
+        ----------
+        name = string
+        
+        Returns:
+        ----------
+        """
+        self.name = name
 
     def get_proteins_sequence(self) :
         """
@@ -135,6 +147,19 @@ class File_proteins() :
         lenght_prot : dict
         """
         return self.lenght_prot
+    
+    def get_name(self) :
+        """
+        Return names of proteins. 
+        Parameters:
+        ----------
+        
+        Returns:
+        ----------
+        name : list of string
+        """
+        return self.name
+
 
 ### Generating of features and pre-file to run multimer
 
@@ -170,20 +195,26 @@ class File_proteins() :
         """
         new_sequences = list()
         sequences = list()
-        pattern =r"SQ   SEQUENCE   .*  .*\n([\s\S]*)"
+        names = list()
+        pattern = r"SQ   SEQUENCE   .*  .*\n([\s\S]*)"
+        pattern2 = r"GN   Name=([\w]*)"
         print(self.get_proteins())
         for proteins in self.get_proteins() :
             print("Search sequence for " + proteins)
             urllib.request.urlretrieve("https://rest.uniprot.org/uniprotkb/"+proteins+".txt","temp_file.txt")
             with open("temp_file.txt","r") as in_file:
-                for m in re.finditer(pattern, in_file.read()):
-                    sequences.append(m.group(1))
+                for seq in re.finditer(pattern, in_file.read()):
+                    sequences.append(seq.group(1))
+            with open("temp_file.txt","r") as in_file:
+                for name in re.finditer(pattern2, in_file.read()) :
+                    names.append(name.group(1))
         for sequence in sequences :
             del_car = ["\n"," ","//"]
             for car in del_car :
                 sequence = sequence.replace(car,"")
             new_sequences.append(sequence)
         self.set_proteins_sequence(new_sequences)
+        self.set_names(names)
 
     def find_prot_lenght(self) :
         """
