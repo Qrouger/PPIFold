@@ -10,7 +10,7 @@ def add_arguments(parser) :
     parser.add_argument("--make_multimers", help = "If you just want make feature set False", required = False, default = True)
     parser.add_argument("--env_feature" , help = "Conda environemment to make feature", required = False, default = None)
     parser.add_argument("--env_multimer" , help = "Conda environemment to make multimers", required = False, default = None)
-    parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2500, type = int)
+    parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2400, type = int)
     parser.add_argument("--use_signalP" , help = "Don't use SignalP", required = False, default = True)
 
 class EZFold (File_proteins) :
