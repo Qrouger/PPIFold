@@ -69,19 +69,19 @@ class File_proteins() :
         Sets lenght of all proteins.
         Parameters:
         ----------
-        lenght_prot = integer
+        lenght_prot = dict
         
         Returns:
         ----------
         """
         self.lenght_prot = lenght_prot
 
-    def set_name(self, name) :
+    def set_names(self, name) :
         """
         Sets names of all proteins.
         Parameters:
         ----------
-        name = string
+        name = dict
         
         Returns:
         ----------
@@ -148,7 +148,7 @@ class File_proteins() :
         """
         return self.lenght_prot
     
-    def get_name(self) :
+    def get_names(self) :
         """
         Return names of proteins. 
         Parameters:
@@ -156,7 +156,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        name : list of string
+        name : dict
         """
         return self.name
 
@@ -195,7 +195,7 @@ class File_proteins() :
         """
         new_sequences = list()
         sequences = list()
-        names = list()
+        names = dict()
         pattern = r"SQ   SEQUENCE   .*  .*\n([\s\S]*)"
         pattern2 = r"GN   Name=([\w]*)"
         print(self.get_proteins())
@@ -207,7 +207,8 @@ class File_proteins() :
                     sequences.append(seq.group(1))
             with open("temp_file.txt","r") as in_file:
                 for name in re.finditer(pattern2, in_file.read()) :
-                    names.append(name.group(1))
+                    names[proteins] = name.group(1)
+        print (names)
         for sequence in sequences :
             del_car = ["\n"," ","//"]
             for car in del_car :

@@ -382,7 +382,7 @@ def add_hiQ_score (dir_alpha) :
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
 
-def generate_interaction_network() :
+def generate_interaction_network(file) :
     interactions = list()
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader1 = csv.DictReader(file1)
@@ -403,10 +403,13 @@ def generate_interaction_network() :
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
+    dict_name = file.get_names()
     for inter, score in interactions :
-        prots.add(inter[0])
-        prots.add(inter[1])
-        list_inter_score.append((inter[0],inter[1],float(round(score,2))))
+        inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
+        inter1 = inter[1]+f"({dict_name[inter[1]]})"
+        prots.add(inter0)
+        prots.add(inter1)
+        list_inter_score.append((inter0,inter1,float(round(score,2))))
     prots = list(prots)
     int_graph.add_nodes_from(prots)
     int_graph.add_weighted_edges_from(list_inter_score)

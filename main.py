@@ -40,7 +40,7 @@ class EZFold (File_proteins) :
             create_out_fig()
             #Make_homo_oligo(self.args.env_multimer,self.args.data_dir)
             add_hiQ_score(self.args.dir_alpha_analysis)
-            generate_interaction_network()
+            generate_interaction_network(self)
 
 if __name__ == "__main__" :
     A4 = EZFold()
