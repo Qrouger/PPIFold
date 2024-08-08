@@ -67,8 +67,8 @@ def create_feature (env_feature, data_dir, file) :
 
         """
         fasta_file = file.get_fasta_file()
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_feature}\n create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--compress_result_pickles=True \--output_dir=./feature \--max_template_date=2024-05-02 \--skip_existing=False"
-        cmd2 = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--compress_result_pickles=True \--output_dir=./feature \--max_template_date=2024-05-02 \--skip_existing=False"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_feature}\n create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir=./feature \--max_template_date=2024-05-02 \--skip_existing=False"
+        cmd2 = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir=./feature \--max_template_date=2024-05-02 \--skip_existing=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_feature != None :
             os.system(cmd)
@@ -339,8 +339,8 @@ def Make_homo_oligo (env_multimers, data_dir) :
         ----------
 
         """
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
-        cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
+        cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
             os.system(cmd)
