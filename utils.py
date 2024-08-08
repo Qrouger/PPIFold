@@ -137,9 +137,9 @@ def generate_APD_script (max_aa, file) :
                 lenght += lenght_prot[proteins[index_protein]]
                 if int(lenght) <= max_aa :
                     homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
-        with open("result_homo_oligo/homo_oligo.txt", "w") as homo_file:
+        with open("homo_oligo.txt", "w") as homo_file:
             homo_file.write(homo_oligo_script)
-        with open("result_all_vs_all/all_vs_all.txt", "w") as all_file:
+        with open("all_vs_all.txt", "w") as all_file:
             all_file.write(all_vs_all_script)
 
 ### Generating Multimers
