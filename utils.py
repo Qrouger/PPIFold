@@ -182,12 +182,10 @@ def add_iQ_score (dir_alpha) :
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
             all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,iQ_score\n"
-            interactions = []
             for row in reader :
                 job = row['jobs']
                 if '_and_' in job and row['pi_score'] != 'No interface detected' :
                     iQ_score = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
-                    names = job.split('_and_')
                     line = row['jobs']+","+row['interface']+","+row['Num_intf_residues']+","+row['Polar']+","+row['Hydrophobhic']+","+row['Charged']+","+row['contact_pairs']+","+row[' sc']+","+row[' hb']+","+row[' sb']+","+row[' int_solv_en']+","+row[' int_area']+","+row['pi_score']+","+row['iptm_ptm']+","+row['iptm']+","+row['mpDockQ/pDockQ']+","+str(iQ_score)+"\n"
                     all_lines = all_lines + line
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "w") as file2 :
