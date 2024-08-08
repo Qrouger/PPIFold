@@ -31,14 +31,14 @@ class EZFold (File_proteins) :
         super().create_fasta_file()
         if self.args.use_signalP == True :
            remove_SP(self)
-        #create_feature(self.args.env_feature,self.args.data_dir,self)
-        #Make_all_MSA_coverage(self)
+        create_feature(self.args.env_feature,self.args.data_dir,self)
+        Make_all_MSA_coverage(self)
         generate_APD_script(self.args.max_aa, self)
         if self.args.make_multimers == True :
-            #Make_all_vs_all(self.args.env_multimer,self.args.data_dir)
+            Make_all_vs_all(self.args.env_multimer,self.args.data_dir)
             add_iQ_score(self.args.dir_alpha_analysis)
             create_out_fig()
-            #Make_homo_oligo(self.args.env_multimer,self.args.data_dir)
+            Make_homo_oligo(self.args.env_multimer,self.args.data_dir)
             add_hiQ_score(self.args.dir_alpha_analysis)
             generate_interaction_network(self)
 
