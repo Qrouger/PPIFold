@@ -2,7 +2,7 @@
 Automatised pipeline for massive PPI prediction and figure creation.
 
 This python package is use to generate PPI prediction on lot of system, without lost time in generate initial file and sort result.
-This pipeline have a cutoff on PAE, iQ-score and hiQ-score. An alert is set for proteins with MSA depth lower than 100 sequences.
+
 ### Requirements
 
 - Python >3.9
@@ -33,10 +33,13 @@ Obligatory
 
 Optionnal
 
-### Result
-
 --make_multimers This argument is True by default, if you just want make feature you have to set it on False <br>
 --env_feature The name of the conda environment need to make feature with AlphaPulldown, set by default on None <br>
 --env_multimer The name of the conda environment need to make multimer with AlphaPulldown, set by default on None <br>
 --max_aa The maximum lenght of a model generable by your GPU (in function of Vram), set by default on 2400 (24 Go) <br>
 --use_signalP Use SignalP if your protéins can be periplasmic, set by default on True <br>
+
+### Result
+
+This pipeline have a cutoff on PAE, iQ-score and hiQ-score. An alert is set for proteins with MSA depth lower than 100 sequences.<br>
+Result for proteins with less than 100 sequences in MSA is not accurate for validate and invalidate predict PPI.
