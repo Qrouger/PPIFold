@@ -1,7 +1,8 @@
 # PPIFold
 Automatised pipeline for massive PPI prediction and figure creation.
 
-This python package is use to generate PPI prediction on lot of system, without lost time in generate initial file and sort result. 
+This python package is use to generate PPI prediction on lot of system, without lost time in generate initial file and sort result.
+This pipeline have a cutoff on PAE, iQ-score and hiQ-score. An alert is set for proteins with MSA depth lower than 100 sequences.
 ### Requirements
 
 - Python >3.9
@@ -18,7 +19,7 @@ This python package is use to generate PPI prediction on lot of system, without 
 
 ### Initial File
 
-The initial file need to be Uniprot ID, separate by a comma and in a .txt file.
+The initial file need to be Uniprot ID, separate by a comma and in a ".txt" file.
 
 UniprotID1,UniprotID2,UniprotID3...
 
