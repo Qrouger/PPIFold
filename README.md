@@ -20,6 +20,8 @@ This python package is use to generate PPI prediction on lot of system, without 
 
 The initial file need to be Uniprot ID, separate by a comma and in a .txt file.
 
+UniprotID1,UniprotID2,UniprotID3...
+
 ### Arguments
 
 Obligatory
