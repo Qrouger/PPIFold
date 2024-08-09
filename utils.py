@@ -203,7 +203,7 @@ def create_out_fig () :
         ----------
 
         """
-        with open("./result_all_vs_all/new_filtered_predictions.csv", "r") as file :
+        with open("./result_all_vs_all/predictions_with_good_interpae.csv", "r") as file :
             reader = csv.DictReader(file)
             for row in reader :
                 iQ_score = row['iQ_score']
