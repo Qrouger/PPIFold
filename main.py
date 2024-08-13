@@ -17,7 +17,6 @@ def add_arguments(parser) :
         super().__init__(args)
 
 def main(A4, args) :
-    super().main(args)
     if args.use_signalP == True :
         A4.remove_SP()
     A4.create_feature(args.env_feature,args.data_dir)
@@ -35,5 +34,8 @@ if __name__ == "__main__" :
     parser = argparse.ArgumentParser()
     add_arguments(parser)
     args = parser.parse_args()
+    self.find_proteins_sequence()
+    self.find_prot_lenght()
+    self.create_fasta_file()
     A4 = EZFold(args)
     main(A4, args)
