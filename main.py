@@ -15,7 +15,7 @@ def add_arguments(parser) :
 
 class EZFold (File_proteins) :
 
-    def __init__(self) :
+    def __init__(self,args) :
         parser = argparse.ArgumentParser()
         add_arguments(parser)
         self.args = parser.parse_args()
@@ -43,5 +43,8 @@ class EZFold (File_proteins) :
             generate_interaction_network(self)
 
 if __name__ == "__main__" :
-    A4 = EZFold()
+    parser = argparse.ArgumentParser()
+    add_arguments(parser)
+    args = parser.parse_args()
+    A4 = EZFold(args)
     A4.main()
