@@ -3,7 +3,7 @@ import re
 
 class File_proteins() :
     """
-    Manipulate all of Proteins.
+    Manipulate and save file who contains all proteins
     """
     def __init__(self, args) :
         """
