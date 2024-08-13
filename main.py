@@ -31,7 +31,7 @@ if __name__ == "__main__" :
     parser = argparse.ArgumentParser()
     add_arguments(parser)
     args = parser.parse_args()
-    A4 = EZFold(args)
+    A4 = File_proteins(args)
     A4.find_proteins_sequence()
     A4.find_prot_lenght()
     A4.create_fasta_file()
