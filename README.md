@@ -25,13 +25,13 @@ UniprotID1,UniprotID2,UniprotID3...
 
 ### Arguments
 
-Obligatory
+Mandatory
 
  --txt_name Name of the file who contains all Uniprot ID <br>
  --data_dir Path to the directory with all alphafold database <br>
  --dir_alpha_analysis Path to singularity image <br>
 
-Optionnal
+Optional
 
 --make_multimers This argument is True by default, if you just want make feature you have to set it on False <br>
 --env_feature The name of the conda environment need to make feature with AlphaPulldown, set by default on None <br>
