@@ -15,31 +15,22 @@ def add_arguments(parser) :
 
 class EZFold (File_proteins) :
 
-    def __init__(self,args) :
-        parser = argparse.ArgumentParser()
-        add_arguments(parser)
-        self.args = parser.parse_args()
-        super().__init__(self.args)
+    def __init__(self, args) :
+        super().__init__(args)
 
-    def main(self) :
-        parser = argparse.ArgumentParser()
-        add_arguments(parser)
-        self.args = parser.parse_args()
-        super().__init__(self.args)
-        super().find_proteins_sequence()
-        super().find_prot_lenght()
-        super().create_fasta_file()
+    def main(self, args) :
+        super().main(args)
         if self.args.use_signalP == True :
            remove_SP(self)
-        create_feature(self.args.env_feature,self.args.data_dir,self)
+        create_feature(args.env_feature,args.data_dir,self)
         Make_all_MSA_coverage(self)
-        generate_APD_script(self.args.max_aa, self)
-        if self.args.make_multimers == True :
-            Make_all_vs_all(self.args.env_multimer,self.args.data_dir)
-            add_iQ_score(self.args.dir_alpha_analysis)
+        generate_APD_script(args.max_aa, self)
+        if args.make_multimers == True :
+            Make_all_vs_all(args.env_multimer,args.data_dir)
+            add_iQ_score(args.dir_alpha_analysis)
             create_out_fig()
-            Make_homo_oligo(self.args.env_multimer,self.args.data_dir)
-            add_hiQ_score(self.args.dir_alpha_analysis)
+            Make_homo_oligo(args.env_multimer,args.data_dir)
+            add_hiQ_score(args.dir_alpha_analysis)
             generate_interaction_network(self)
 
 if __name__ == "__main__" :
@@ -47,4 +38,4 @@ if __name__ == "__main__" :
     add_arguments(parser)
     args = parser.parse_args()
     A4 = EZFold(args)
-    A4.main()
+    A4.main(args)
