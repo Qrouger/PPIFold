@@ -15,17 +15,17 @@ def add_arguments(parser) :
 
 def main(A4) :
     if args.use_signalP == True :
-        A4.remove_SP()
-    A4.create_feature(args.env_feature,args.data_dir)
-    A4.Make_all_MSA_coverage()
-    A4.generate_APD_script(args.max_aa)
+        remove_SP(A4)
+    create_feature(args.env_feature,args.data_dir,A4)
+    Make_all_MSA_coverage(A4)
+    generate_APD_script(args.max_aa,A4)
     if args.make_multimers == True :
         Make_all_vs_all(args.env_multimer,args.data_dir)
         add_iQ_score(args.dir_alpha_analysis)
         create_out_fig()
         Make_homo_oligo(args.env_multimer,args.data_dir)
         add_hiQ_score(args.dir_alpha_analysis)
-        A4.generate_interaction_network()
+        generate_interaction_network(A4)
 
 if __name__ == "__main__" :
     parser = argparse.ArgumentParser()
