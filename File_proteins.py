@@ -7,7 +7,8 @@ class File_proteins() :
     """
     def __init__(self, args) :
         """
-        Constructor :method for Interactome:
+        Constructor : 
+        Set attribute for one entry file.
 
         Parameters:
     	-----------
