@@ -257,4 +257,9 @@ class File_proteins() :
         with open(file_out,"w") as fh :
             fh.write(line)
         self.set_fasta_file(file_out)
-    
+
+    def Main (self,args) :
+        self.__init__(args)
+        self.find_proteins_sequence()
+        self.find_prot_lenght()
+        self.create_fasta_file()
