@@ -111,6 +111,7 @@ def Make_all_MSA_coverage (file) :
             plt.xlabel("Positions")
             plt.ylabel("Sequences")
             plt.savefig(f"feature/{prot+('_' if prot else '')}coverage.pdf")
+            plt.close()
 
 def generate_APD_script (max_aa, file) :
         """
@@ -418,3 +419,4 @@ def generate_interaction_network(file) :
     edge_labels = nx.get_edge_attributes(int_graph, "weight")
     nx.draw_networkx_edge_labels(int_graph, pos, edge_labels)
     plt.savefig("network.png")
+    plt.close()
