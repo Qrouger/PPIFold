@@ -20,7 +20,7 @@ class EZFold (File_proteins) :
 
     def main(self, args) :
         super().main(args)
-        if self.args.use_signalP == True :
+        if args.use_signalP == True :
            remove_SP(self)
         create_feature(args.env_feature,args.data_dir,self)
         Make_all_MSA_coverage(self)
