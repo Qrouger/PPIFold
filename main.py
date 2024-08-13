@@ -13,10 +13,7 @@ def add_arguments(parser) :
     parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2500, type = int)
     parser.add_argument("--use_signalP" , help = "Don't use SignalP", required = False, default = True)
 
-    def __init__(self, args) :
-        super().__init__(args)
-
-def main(A4, args) :
+def main(A4) :
     if args.use_signalP == True :
         A4.remove_SP()
     A4.create_feature(args.env_feature,args.data_dir)
@@ -38,4 +35,4 @@ if __name__ == "__main__" :
     self.find_prot_lenght()
     self.create_fasta_file()
     A4 = EZFold(args)
-    main(A4, args)
+    main(A4)
