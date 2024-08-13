@@ -1,5 +1,6 @@
 import urllib.request
 import re
+from utils import *
 
 class File_proteins() :
     """
