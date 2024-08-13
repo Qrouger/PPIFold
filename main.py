@@ -13,29 +13,27 @@ def add_arguments(parser) :
     parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2500, type = int)
     parser.add_argument("--use_signalP" , help = "Don't use SignalP", required = False, default = True)
 
-class EZFold (File_proteins) :
-
     def __init__(self, args) :
         super().__init__(args)
 
-    def main(self, args) :
-        super().main(args)
-        if args.use_signalP == True :
-           remove_SP(self)
-        create_feature(args.env_feature,args.data_dir,self)
-        Make_all_MSA_coverage(self)
-        generate_APD_script(args.max_aa, self)
-        if args.make_multimers == True :
-            Make_all_vs_all(args.env_multimer,args.data_dir)
-            add_iQ_score(args.dir_alpha_analysis)
-            create_out_fig()
-            Make_homo_oligo(args.env_multimer,args.data_dir)
-            add_hiQ_score(args.dir_alpha_analysis)
-            generate_interaction_network(self)
+def main(A4, args) :
+    super().main(args)
+    if args.use_signalP == True :
+        A4.remove_SP()
+    A4.create_feature(args.env_feature,args.data_dir)
+    A4.Make_all_MSA_coverage()
+    A4.generate_APD_script(args.max_aa)
+    if args.make_multimers == True :
+        Make_all_vs_all(args.env_multimer,args.data_dir)
+        add_iQ_score(args.dir_alpha_analysis)
+        create_out_fig()
+        Make_homo_oligo(args.env_multimer,args.data_dir)
+        add_hiQ_score(args.dir_alpha_analysis)
+        A4.generate_interaction_network()
 
 if __name__ == "__main__" :
     parser = argparse.ArgumentParser()
     add_arguments(parser)
     args = parser.parse_args()
     A4 = EZFold(args)
-    A4.main(args)
+    main(A4, args)
