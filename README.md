@@ -2,17 +2,18 @@
 Automatised pipeline for massive PPI prediction and figure creation.
 
 This python package is use to generate PPI prediction on lot of system, without lost time in generate initial file and sort result.
-It predict the better homo-oligomer for protein and better interface for interact with specific proteins.
+It predict the better homo-oligomer for protein and better interface to interact with specific proteins.<br>
+This allow to build massive multimer complexe with lot of PPI.
 
 ### Requirements
 
-- Python >3.9
+- Python >3.10
 - AlphaPulldown 1.0.4 https://github.com/KosinskiLab/AlphaPulldown with singularity image (v0.4)
 - SignalP5 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
 
 ### Installation
 
-You need to install AlphaPulldown 1.0.4 with his database, SignalpP5 and python 3.9.
+You need to install AlphaPulldown 1.0.4 with his database, SignalpP5 and python 3.10.
 
 ### Pipeline
  
@@ -22,7 +23,7 @@ You need to install AlphaPulldown 1.0.4 with his database, SignalpP5 and python 
 
 The initial file need to be Uniprot ID, separate by a comma and in a ".txt" file.
 
-UniprotID1,UniprotID2,UniprotID3...
+ UniprotID1,UniprotID2,UniprotID3...
 
 ### Arguments
 
@@ -43,4 +44,9 @@ Optional
 ### Result
 
 This pipeline have a cutoff on PAE, iQ-score and hiQ-score. An alert is set for proteins with MSA depth lower than 100 sequences.<br>
-Result for proteins with less than 100 sequences in MSA is not accurate for validate and invalidate predict PPI.
+Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.
+
+
+Residue in interaction
+Distogram
+Interaction network
