@@ -3,7 +3,7 @@ Automatised pipeline for massive PPI prediction and figure creation.
 
 This python package is use to generate PPI prediction on lot of system, without lost time in generate initial file and sort result.
 It predict the better homo-oligomer for protein and better interface to interact with specific proteins.<br>
-This allow to build massive multimer complexe with lot of PPI.
+This allow to predict massive multimer complexe with lot of PPI.
 
 ### Requirements
 
