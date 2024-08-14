@@ -2,6 +2,7 @@
 Automatised pipeline for massive PPI prediction and figure creation.
 
 This python package is use to generate PPI prediction on lot of system, without lost time in generate initial file and sort result.
+It predict the better homo-oligomer for protein and better interface for interact with specific proteins.
 
 ### Requirements
 
@@ -11,7 +12,7 @@ This python package is use to generate PPI prediction on lot of system, without 
 
 ### Installation
 
-*Installation steps*
+You need to install AlphaPulldown 1.0.4 with his database, SignalpP5 and python 3.9.
 
 ### Pipeline
  
