@@ -46,7 +46,7 @@ Optional
 This pipeline have a cutoff on PAE, iQ-score and hiQ-score. An alert is set for proteins with MSA depth lower than 100 sequences.<br>
 /!\Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
 
->MSA depth<br>
->Residue interaction table<br>
->Distogram<br>
->Interaction network<br>
+*MSA depth<br>
+*Residue interaction table<br>
+*Distogram<br>
+*Interaction network<br>
