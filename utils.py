@@ -188,8 +188,8 @@ def add_iQ_score (dir_alpha) :
         ----------
 
         """
-        cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-        os.system(cmd4)
+        #cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+        #os.system(cmd4)
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
             all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,iQ_score\n"
@@ -201,7 +201,6 @@ def add_iQ_score (dir_alpha) :
                     all_lines = all_lines + line
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
-        
 
 
 def create_out_fig () :
@@ -231,7 +230,9 @@ def create_out_fig () :
                     if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
                         best_homo[prot_name] = (float(row['hiQ_score']),float(row['jobs'].split("_")[2][0])) 
         for oligo in best_homo.keys() :
-            job2 = oligo + "_homo_" + str(best_homo[oligo][1]) + "er"
+            number_homo =  (str(best_homo[oligo][1]).split("."))[0]
+            print(number_homo)
+            job2 = oligo + "_homo_" + number_homo + "er"
             plot_Distogram("./result_homo_oligo/" + job2)
             make_table_res_int("./result_homo_oligo/" + job2)
 
@@ -274,6 +275,7 @@ def make_table_res_int (int) :
                                             dict_information[chain1.get_id()+chain2.get_id()].append([residue1.get_resname()+str(residue1.get_id()[1]),atom1.get_id(),residue2.get_resname()+str(residue2.get_id()[1]),atom2.get_id(),str(distance)])
                                     else :
                                         pass
+
         int_list = list()
         save_dict = copy.deepcopy(dict_int)
         for chains in dict_int.keys() :
@@ -299,13 +301,12 @@ def make_table_res_int (int) :
                                 dict_int[chains2].pop(index-1)
                     else :
                         pass
-        fileout = chains2+"_res_int.csv"
-        np_table = np.array(dict_int[chains2])
-        table_out = np_table
-        with open(f"{int}/"+fileout, "w", newline="") as file :
-            mywriter = csv.writer(file, delimiter=",")
-            mywriter.writerows(table_out)
-        print("Write table")
+            fileout = chains2+"_res_int.csv"
+            np_table = np.array(dict_int[chains2])
+            with open(f"{int}/"+fileout, "w", newline="") as file :
+                mywriter = csv.writer(file, delimiter=",")
+                mywriter.writerows(np_table)
+            print("Write table")
 
 def plot_Distogram (job) :
         """
