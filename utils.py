@@ -128,20 +128,30 @@ def generate_APD_script (max_aa, file) :
         """
         all_vs_all_script = str()
         homo_oligo_script = str()
+        OOM_int = str()
         proteins = file.get_proteins()
         lenght_prot = file.get_lenght_prot()
         for index_protein in range(len(proteins)) :
             lenght = lenght_prot[proteins[index_protein]]
             for index2_protein in range(index_protein+1,len(proteins)) :
-                all_vs_all_script = all_vs_all_script + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
+                int_lenght = lenght + lenght_prot[proteins[index2_protein]]
+                if int(int_lenght) <= max_aa :
+                    all_vs_all_script = all_vs_all_script + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
+                else :
+                    OOM_int = OOM_int + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
+            lenght_homo = lenght
             for nbr_homo in range(2,20) :
-                lenght += lenght_prot[proteins[index_protein]]
+                lenght_homo += lenght
                 if int(lenght) <= max_aa :
                     homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
-        with open("homo_oligo.txt", "w") as homo_file:
+                else :
+                    OOM_int = OOM_int + proteins[index_protein] + "," + str(nbr_homo) + "\n"
+        with open("./result_homo_oligo/homo_oligo.txt", "w") as homo_file:
             homo_file.write(homo_oligo_script)
-        with open("all_vs_all.txt", "w") as all_file:
+        with open("./result_all_vs_all/all_vs_all.txt", "w") as all_file:
             all_file.write(all_vs_all_script)
+        with open("OOM_int.txt", "W") as OOM_file :
+            OOM_file.write(OOM_int)
 
 ### Generating Multimers
 
@@ -157,8 +167,8 @@ def Make_all_vs_all (env_multimers, data_dir) :
         ----------
 
         """
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir=./feature"
-        cmd2 = "run_multimer_jobs.py --mode=all_vs_all \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir=./feature"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=result_all_vs_all \--data_dir={data_dir} \--protein_lists=./result_all_vs_all/all_vs_all.txt \--monomer_objects_dir=./feature"
+        cmd2 = "run_multimer_jobs.py --mode=all_vs_all \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=./result_all_vs_all/all_vs_all.txt \--monomer_objects_dir=./feature"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
             os.system(cmd)
@@ -204,14 +214,26 @@ def create_out_fig () :
         ----------
 
         """
-        with open("./result_all_vs_all/predictions_with_good_interpae.csv", "r") as file :
-            reader = csv.DictReader(file)
+        with open("./result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+            reader = csv.DictReader(file1)
             for row in reader :
                 iQ_score = row['iQ_score']
-                job = row['jobs']
+                job1 = row['jobs']
                 if float(iQ_score) >= 35 : #Plot figure of interest just for interesting interactions
-                    plot_Distogram(job)
-                    make_table_res_int("./result_all_vs_all/" + job)
+                    plot_Distogram("./result_all_vs_all/" + job1)
+                    make_table_res_int("./result_all_vs_all/" + job1)
+        best_homo = dict()
+        with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
+            reader2 = csv.DictReader(file2)
+            for row in reader2 :
+                if float(row["hiQ_score"]) >= 50 :
+                    prot_name = row['jobs'].split("_")[0]
+                    if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
+                        best_homo[prot_name] = (float(row['hiQ_score']),float(row['jobs'].split("_")[2][0])) 
+        for oligo in best_homo.keys() :
+            job2 = oligo + "_homo_" + str(best_homo[oligo][1]) + "er"
+            plot_Distogram("./result_homo_oligo/" + job2)
+            make_table_res_int("./result_homo_oligo/" + job2)
 
 def make_table_res_int (int) :
         """
@@ -296,7 +318,7 @@ def plot_Distogram (job) :
         ----------
 
         """
-        pickle_list = glob.glob(f"result_all_vs_all/{job}/result_*.pkl")
+        pickle_list = glob.glob(job + "/result_*.pkl")
         for i, pickle_output in enumerate(pickle_list):
             logging.warning(
                 f"Processing pickle file {i+1}/{len(pickle_list)}: {pickle_output}")
@@ -338,8 +360,8 @@ def Make_homo_oligo (env_multimers, data_dir) :
         ----------
 
         """
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
-        cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=./result_homo_oligo/homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
+        cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=./result_homo_oligo/homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
             os.system(cmd)
