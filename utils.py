@@ -150,7 +150,7 @@ def generate_APD_script (max_aa, file) :
             homo_file.write(homo_oligo_script)
         with open("./result_all_vs_all/all_vs_all.txt", "w") as all_file:
             all_file.write(all_vs_all_script)
-        with open("OOM_int.txt", "W") as OOM_file :
+        with open("OOM_int.txt", "w") as OOM_file :
             OOM_file.write(OOM_int)
 
 ### Generating Multimers
