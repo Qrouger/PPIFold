@@ -17,7 +17,8 @@ You need to install AlphaPulldown 1.0.4 with his database, SignalpP5 and python 
 
 ### Pipeline
  
-![Pipeline](Pipeline.PNG)
+![pipeline](https://github.com/user-attachments/assets/b8b0f130-470e-47c1-9e02-fbfd31b89f3a)
+
 
 ### Initial File
 
