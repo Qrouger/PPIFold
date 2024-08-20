@@ -98,6 +98,7 @@ def Make_all_MSA_coverage (file) :
             non_gaps = (msa != 21).astype(float)
             non_gaps[non_gaps == 0] = np.nan
             final = non_gaps[seqid_sort] * seqid[seqid_sort, None]
+            print(msa)
             plt.figure(figsize=(14, 4), dpi=100)
             plt.subplot(1, 2, 1)
             plt.title(f"Sequence coverage ({prot})")
@@ -231,7 +232,6 @@ def create_out_fig () :
                         best_homo[prot_name] = (float(row['hiQ_score']),float(row['jobs'].split("_")[2][0])) 
         for oligo in best_homo.keys() :
             number_homo =  (str(best_homo[oligo][1]).split("."))[0]
-            print(number_homo)
             job2 = oligo + "_homo_" + number_homo + "er"
             plot_Distogram("./result_homo_oligo/" + job2)
             make_table_res_int("./result_homo_oligo/" + job2)
@@ -335,7 +335,6 @@ def plot_Distogram (job) :
                 result = pickle.load(handle)
                 for seq in result["seqs"] :
                     lenght_list.append(len(seq))
-            print(lenght_list)
             print("make png")
             initial_lenght = 0
             fig, ax = plt.subplots()
@@ -381,11 +380,11 @@ def add_hiQ_score (dir_alpha) :
         ----------
 
         """
-        cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-        os.system(cmd4)
+        #cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+        #os.system(cmd4)
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
-            all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,hiQ_score\n"
+            all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
             all_homo = dict()
             for row in reader :
                 job = row['jobs']
@@ -399,7 +398,7 @@ def add_hiQ_score (dir_alpha) :
             for key in all_homo.keys() :
                 row = all_homo[key][2]
                 hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40
-                line = key+","+row['interface']+","+row['Num_intf_residues']+","+row['Polar']+","+row['Hydrophobhic']+","+row['Charged']+","+row['contact_pairs']+","+row[' sc']+","+row[' hb']+","+row[' sb']+","+row[' int_solv_en']+","+row[' int_area']+","+row['pi_score']+","+row['iptm_ptm']+","+row['iptm']+","+row['mpDockQ/pDockQ']+","+str(hiQ_score)+"\n"
+                line = key+","+str(all_homo[key][0])+","+row['iptm_ptm']+","+str(hiQ_score)+"\n"
                 all_lines = all_lines + line
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
