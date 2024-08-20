@@ -23,7 +23,7 @@ You need to install AlphaPulldown 1.0.4 with his database, SignalpP5 and python 
 
 The initial file need to be Uniprot ID, separate by a comma and in a ".txt" file.
 
- UniprotID1,UniprotID2,UniprotID3...
+Ex : UniprotID1,UniprotID2,UniprotID3...
 
 ### Arguments
 
