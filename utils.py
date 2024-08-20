@@ -136,14 +136,14 @@ def generate_APD_script (max_aa, file) :
             lenght = lenght_prot[proteins[index_protein]]
             for index2_protein in range(index_protein+1,len(proteins)) :
                 int_lenght = lenght + lenght_prot[proteins[index2_protein]]
-                if int(int_lenght) <= max_aa :
+                if int_lenght <= max_aa :
                     all_vs_all_script = all_vs_all_script + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
                 else :
                     OOM_int = OOM_int + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
             lenght_homo = lenght
             for nbr_homo in range(2,20) :
                 lenght_homo += lenght
-                if int(lenght) <= max_aa :
+                if lenght_homo <= max_aa :
                     homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
                 else :
                     OOM_int = OOM_int + proteins[index_protein] + "," + str(nbr_homo) + "\n"
@@ -189,8 +189,8 @@ def add_iQ_score (dir_alpha) :
         ----------
 
         """
-        cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-        os.system(cmd4)
+        #cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+        #os.system(cmd4)
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
             all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,iQ_score\n"
@@ -380,8 +380,8 @@ def add_hiQ_score (dir_alpha) :
         ----------
 
         """
-        cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-        os.system(cmd4)
+        #cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+        #os.system(cmd4)
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
             all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
