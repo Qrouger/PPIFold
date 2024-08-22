@@ -437,7 +437,7 @@ def generate_interaction_network(file) :
     pos = nx.spring_layout(int_graph, seed=7)
     nx.draw_networkx_nodes(int_graph,pos)
     nx.draw_networkx_edges(int_graph,pos, edgelist=int_graph.edges, width=2, style="dashed")
-    nx.draw_networkx_labels(int_graph, pos, font_size=15, font_family="sans-serif")
+    nx.draw_networkx_labels(int_graph, pos, font_size=9, font_family="sans-serif")
     edge_labels = nx.get_edge_attributes(int_graph, "weight")
     nx.draw_networkx_edge_labels(int_graph, pos, edge_labels)
     plt.savefig("network.png")
