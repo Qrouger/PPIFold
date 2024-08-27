@@ -416,7 +416,7 @@ def generate_interaction_network(file) :
         reader2 = csv.DictReader(file2)
         for row in reader2 :
             if float(row["hiQ_score"]) >= 50 :
-                prot_name = row['jobs'].split("_")[0]
+                prot_name = row['jobs'].split("_homo_")[0]
                 if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
                     number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
                     best_homo[prot_name] = (float(row['hiQ_score']),number_homo) #to take the number of homo-oligomerisation of the protein and this score
