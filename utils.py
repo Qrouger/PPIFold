@@ -418,7 +418,8 @@ def generate_interaction_network(file) :
             if float(row["hiQ_score"]) >= 50 :
                 prot_name = row['jobs'].split("_")[0]
                 if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
-                    best_homo[prot_name] = (float(row['hiQ_score']),str(row['jobs'].split("homo_")[1])) #to take the number of homo-oligomerisation of the protein and this score
+                    number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
+                    best_homo[prot_name] = (float(row['hiQ_score']),number_homo) #to take the number of homo-oligomerisation of the protein and this score
     for key in best_homo :
         interactions.append([[key,key], best_homo[key][1]])
     int_graph = nx.Graph()
@@ -430,7 +431,7 @@ def generate_interaction_network(file) :
         inter1 = inter[1]+f"({dict_name[inter[1]]})"
         prots.add(inter0)
         prots.add(inter1)
-        list_inter_score.append((inter0,inter1,float(round(score,2))))
+        list_inter_score.append((inter0,inter1,round(score,2)))
     prots = list(prots)
     int_graph.add_nodes_from(prots)
     int_graph.add_weighted_edges_from(list_inter_score)
