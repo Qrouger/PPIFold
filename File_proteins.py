@@ -17,8 +17,7 @@ class File_proteins() :
 
         Parameters:
     	-----------
-        filename : string
-        file of proteins of interest
+        args : ?
         """
         self.set_all_att(args.txt_name)
 
