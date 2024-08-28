@@ -23,10 +23,11 @@ class File_proteins() :
 
     def set_proteins_sequence(self, new_protein_sequence) :
         """
-        Sets a list of all sequence. 
+        Sets a list of all sequence.
+        
         Parameters:
         ----------
-        new_sequence = list
+        new_protein_sequence = list
         
         Returns:
         ----------
@@ -35,10 +36,11 @@ class File_proteins() :
 
     def set_proteins(self, new_protein) :
         """
-        Sets a list of all proteins names. 
+        Sets a list of all proteins names.
+        
         Parameters:
         ----------
-        new_sequence = list
+        new_protein = list
         
         Returns:
         ----------
@@ -47,7 +49,8 @@ class File_proteins() :
 
     def set_file_name(self, filename) :
         """
-        Sets new filename for the use file. 
+        Sets new filename for the txt file.
+        
         Parameters:
         ----------
         filename = string
@@ -59,7 +62,8 @@ class File_proteins() :
 
     def set_fasta_file(self, filename) :
         """
-        Sets new filename for the fasta file. 
+        Sets new filename for the fasta file.
+        
         Parameters:
         ----------
         filename = string
@@ -72,6 +76,7 @@ class File_proteins() :
     def set_lenght_prot(self, lenght_prot) :
         """
         Sets lenght of all proteins.
+        
         Parameters:
         ----------
         lenght_prot = dict
@@ -84,6 +89,7 @@ class File_proteins() :
     def set_names(self, name) :
         """
         Sets names of all proteins.
+        
         Parameters:
         ----------
         name = dict
@@ -95,7 +101,8 @@ class File_proteins() :
 
     def get_proteins_sequence(self) :
         """
-        Return the new aa sequence list. 
+        Return the new aa sequence list.
+        
         Parameters:
         ----------
         
@@ -103,23 +110,25 @@ class File_proteins() :
         ----------
         proteins_sequence : list
         """
-        return self.protein_sequence
+        return self.proteins_sequence
     
     def get_proteins (self) :
         """
-        Return the new proteins name list. 
+        Return the new proteins name list.
+        
         Parameters:
         ----------
         
         Returns:
         ----------
-        proteins_sequence : list
+        protein : list
         """
         return self.protein
     
     def get_file_name(self) :
         """
-        Return the name of the file. 
+        Return the name of the file.
+        
         Parameters:
         ----------
         
@@ -131,7 +140,8 @@ class File_proteins() :
     
     def get_fasta_file(self) :
         """
-        Return the name of the fasta file. 
+        Return the name of the fasta file.
+        
         Parameters:
         ----------
         
@@ -143,7 +153,8 @@ class File_proteins() :
     
     def get_lenght_prot(self) :
         """
-        Return the lenght of proteins. 
+        Return the lenght of proteins.
+        
         Parameters:
         ----------
         
@@ -155,7 +166,8 @@ class File_proteins() :
     
     def get_names(self) :
         """
-        Return names of proteins. 
+        Return names of proteins.
+        
         Parameters:
         ----------
         
@@ -171,6 +183,7 @@ class File_proteins() :
     def set_all_att(self, filename) :
         """
         Set all values for all attribut for one txt file.
+        
         Parameters:
         ----------
         filename : string
