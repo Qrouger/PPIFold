@@ -1,3 +1,7 @@
+""" Create File_proteins object
+
+    Author: Quentin Rouger
+"""
 import urllib.request
 import re
 from utils import *
