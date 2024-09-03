@@ -22,9 +22,9 @@ def main(A4) :
     if args.make_multimers == True :
         Make_all_vs_all(args.env_multimer,args.data_dir)
         add_iQ_score(args.dir_alpha_analysis)
-        create_out_fig()
         Make_homo_oligo(args.env_multimer,args.data_dir)
         add_hiQ_score(args.dir_alpha_analysis)
+        create_out_fig()
         generate_interaction_network(A4)
 
 if __name__ == "__main__" :
