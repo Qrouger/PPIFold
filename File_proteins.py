@@ -110,7 +110,7 @@ class File_proteins() :
         ----------
         proteins_sequence : list
         """
-        return self.proteins_sequence
+        return self.protein_sequence
     
     def get_proteins (self) :
         """
