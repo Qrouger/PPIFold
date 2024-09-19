@@ -55,7 +55,8 @@ This pipeline have a cutoff on PAE (10), iQ-score (25) and hiQ-score (50).
 
 ### Other Files
 **OOM file<br>**
-A txt file who contains too large interaction in function of --max_aa<br>
+A txt file who contains too large interaction in function of --max_aa.<br>
+
 **Detph error<br>**
 A txt file who contains proteins with MSA depth lower than 100 sequences.<br>
 /!\Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
