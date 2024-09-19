@@ -5,28 +5,28 @@ This python package is use to generate PPI prediction on lot of system, without 
 It predict the better homo-oligomer for protein and better interface to interact with specific proteins.<br>
 This allow to predict massive multimer complexe with lot of PPI.
 
-### Requirements
+## Requirements
 
 - Python >3.10
 - AlphaPulldown 1.0.4 https://github.com/KosinskiLab/AlphaPulldown with singularity image (v0.4)
 - SignalP5 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
 
-### Installation
+## Installation
 
 You need to install AlphaPulldown 1.0.4 with his database, SignalpP5 and python 3.10.
 
-### Pipeline
+## Pipeline
 
 ![pipeline](https://github.com/user-attachments/assets/21dc8eab-5322-4f00-942f-bdac4d723b72)
 
 
-### Initial File
+## Initial File
 
 The initial file need to be Uniprot ID, separate by a comma and in a ".txt" file.
 
 Ex : UniprotID1,UniprotID2,UniprotID3...
 
-### Arguments
+## Arguments
 
 Mandatory
 
@@ -42,20 +42,20 @@ Optional
 --max_aa The maximum lenght of a model generable by your GPU (in function of Vram), set by default on 2400 (24 Go) <br>
 --use_signalP Use SignalP if your protéins can be periplasmic, set by default on True <br>
 
-### Result
+## Result
 
 This pipeline have a cutoff on PAE (10), iQ-score (25) and hiQ-score (50).
 
 
-## Figures
-*MSA depth<br>
-*Residue interaction table<br>
-*Distogram<br>
-*Interaction network<br>
+### Figures
+**MSA depth<br>**
+**Residue interaction table<br>**
+**Distogram<br>**
+**Interaction network<br>**
 
-## Other Files
-# OOM file
+### Other Files
+**OOM file**
 A txt file who contains too large interaction in function of --max_aa<br>
-# Detph error
+**Detph error**
 A txt file who contains proteins with MSA depth lower than 100 sequences.<br>
 /!\Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
