@@ -88,17 +88,19 @@ def Make_all_MSA_coverage (file) :
         ----------
 
         """
+        bad_MSA = str()
         proteins = file.get_proteins()
         for prot in proteins :
             pre_feature_dict = pickle.load(open(f'feature/{prot}.pkl','rb'))
             feature_dict = pre_feature_dict.feature_dict
             msa = feature_dict['msa']
+            if len(msa) <= 100 :
+               bad_MSA += prot + " : " + str(len(msa)) + " sequences\n"
             seqid = (np.array(msa[0] == msa).mean(-1))
             seqid_sort = seqid.argsort()
             non_gaps = (msa != 21).astype(float)
             non_gaps[non_gaps == 0] = np.nan
             final = non_gaps[seqid_sort] * seqid[seqid_sort, None]
-            print(msa)
             plt.figure(figsize=(14, 4), dpi=100)
             plt.subplot(1, 2, 1)
             plt.title(f"Sequence coverage ({prot})")
@@ -113,6 +115,8 @@ def Make_all_MSA_coverage (file) :
             plt.ylabel("Sequences")
             plt.savefig(f"feature/{prot+('_' if prot else '')}coverage.pdf")
             plt.close()
+        with open("bad_MSA.txt", "w") as MSA_file :
+            MSA_file.write(bad_MSA)
 
 def generate_APD_script (max_aa, file) :
         """
