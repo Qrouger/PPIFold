@@ -360,6 +360,7 @@ def Make_homo_oligo (env_multimers, data_dir) :
         ----------
         env_multimers : string
         data_dir : string
+        
         Returns:
         ----------
 
@@ -380,6 +381,7 @@ def add_hiQ_score (dir_alpha) :
         Parameters:
         ----------
         dir_alpha : string
+        
         Returns:
         ----------
 
@@ -407,7 +409,17 @@ def add_hiQ_score (dir_alpha) :
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
 
-def generate_interaction_network(file) :
+def generate_interaction_network (file) :
+   """
+   Generate interaction network.
+   
+   Parameters:
+   ----------
+   file : object of File_proteins class
+
+   Returns:
+   ----------
+   """
     interactions = list()
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader1 = csv.DictReader(file1)
