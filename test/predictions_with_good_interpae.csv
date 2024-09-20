@@ -1,0 +1,2 @@
+jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,iQ_score
+O50331_and_O50333,C_B,29,0.345,0.414,0.103,34,0.664,13,6,-9.15,996.27,1.84,0.44864386639037224,0.43034068,0.25338791008510286,55.05334873152661
