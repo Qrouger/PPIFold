@@ -60,3 +60,19 @@ A text file who contains too large interaction in function of --max_aa.<br>
 **Detph error<br>**
 A text file who contains proteins with MSA depth lower than 100 sequences.<br>
 /!\Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
+
+Package versions :<br>
+numpy<br>
+pickle<br>
+csv<br>
+matplotlib<br>
+Bio<br>
+copy<br>
+glob<br>
+logging<br>
+scipy.special<br>
+File_proteins<br>
+os<br>
+networkx<br>
+math<br>
+
