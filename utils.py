@@ -3,10 +3,8 @@ import pickle
 import csv
 import matplotlib.pyplot as plt
 from Bio import PDB
-import numpy as np
 import copy
 import glob
-import pickle
 import logging
 from scipy.special import softmax
 from File_proteins import *
