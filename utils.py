@@ -408,16 +408,16 @@ def add_hiQ_score (dir_alpha) :
             file2.write(all_lines)
 
 def generate_interaction_network (file) :
-   """
-   Generate interaction network.
+    """
+    Generate interaction network.
    
-   Parameters:
-   ----------
-   file : object of File_proteins class
+    Parameters:
+    ----------
+    file : object of File_proteins class
 
-   Returns:
-   ----------
-   """
+    Returns:
+    ----------
+    """
     interactions = list()
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader1 = csv.DictReader(file1)
