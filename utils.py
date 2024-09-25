@@ -401,7 +401,7 @@ def add_hiQ_score (dir_alpha) :
                         all_homo[job] = (sum_pi_score,sum_int,row)
             for key in all_homo.keys() :
                 row = all_homo[key][2]
-                hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40
+                hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
                 line = key+","+str(all_homo[key][0])+","+row['iptm_ptm']+","+str(hiQ_score)+"\n"
                 all_lines = all_lines + line
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
