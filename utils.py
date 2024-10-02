@@ -143,7 +143,7 @@ def generate_APD_script (max_aa, file) :
                 else :
                     OOM_int = OOM_int + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
             lenght_homo = lenght
-            for nbr_homo in range(2,20) :
+            for nbr_homo in range(2,21) :
                 lenght_homo += lenght
                 if lenght_homo <= max_aa :
                     homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
