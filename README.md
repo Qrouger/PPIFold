@@ -26,7 +26,9 @@ The initial file need to be Uniprot ID, separate by a comma and in a ".txt" file
 
 Ex : UniprotID1,UniprotID2,UniprotID3...
 
-## Arguments
+## Arguments<br>
+python main.py --txt_name string --data_dir Path --dir_alpha_analysis Path --make_multimers Boolean --env_multimer string --env_feature string --max_aa integer --use_signalP Boolean
+
 
 Mandatory
 
