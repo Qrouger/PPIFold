@@ -12,10 +12,11 @@ def add_arguments(parser) :
     parser.add_argument("--env_multimer" , help = "Conda environemment to make multimers", required = False, default = None)
     parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2500, type = int)
     parser.add_argument("--use_signalP" , help = "Don't use SignalP", required = False, default = True)
+    parser.add_argument("--org" , help = "Organism of interest : arch, gram+, gram- or euk", required = False, default = "gram-", type = str)
 
 def main(A4) :
     if args.use_signalP == True :
-        remove_SP(A4)
+        remove_SP(A4,args.org)
     create_feature(args.env_feature,args.data_dir,A4)
     Make_all_MSA_coverage(A4)
     generate_APD_script(args.max_aa,A4)
