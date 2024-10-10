@@ -12,13 +12,15 @@ import os
 import networkx as nx
 from math import *
 
-def remove_SP (file) :
+def remove_SP (file, org) :
         """
         Creating a new fasta file without signal peptide.
 
         Parameters:
         ----------
         file : object of class File_proteins
+        org : type of organism
+        
         Returns:
         ----------
 
@@ -27,7 +29,7 @@ def remove_SP (file) :
         SP_signal = 0
         prot_SP = dict()
         fasta_file = file.get_fasta_file()
-        cmd = "signalp -fasta " + fasta_file + " -org gram-"
+        cmd = "signalp -fasta " + fasta_file + " -org " + org
         os.system(cmd)
         file_signalp = fasta_file.replace(".fasta","_summary.signalp5")
         with open(file_signalp,"r") as fh :
