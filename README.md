@@ -65,8 +65,8 @@ A text file who contains proteins with MSA depth lower than 100 sequences.<br>
 /!\Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
 
 Packages versions :<br>
-numpy: 2.0.1<br>
-matplotlib: 3.9.1<br>
-Bio: 1.7.1<br>
-networkx: 3.3<br>
+numpy: v2.0.1<br>
+matplotlib: v3.9.1<br>
+Bio: v1.7.1<br>
+networkx: v3.3<br>
 
