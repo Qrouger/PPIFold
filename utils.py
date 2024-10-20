@@ -447,45 +447,6 @@ def generate_interaction_network (file) :
     plt.savefig("network.png")
     plt.close()
 
-
-#def generate_interaction_network2 (file) :
- #   interactions = list()
-  #  with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
-   #     reader1 = csv.DictReader(file1)
-    #    for row in reader1 :
-     #       names = row['jobs'].split('_and_')
-      #      if names not in [x[0] for x in interactions] and float(row['iQ_score']) >= 35 :
-       #         interactions.append([names, float(row['iQ_score'])])
-#    best_homo = dict()
- #   with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
-  #      reader2 = csv.DictReader(file2)
-   #     for row in reader2 :
-    #        if float(row["hiQ_score"]) >= 50 :
-     #           prot_name = row['jobs'].split("_homo_")[0]
-      #          if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
-       #             number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
-        #            best_homo[prot_name] = (float(row['hiQ_score']),number_homo) #to take the number of homo-oligomerisation of the protein and this score
-#    for key in best_homo :
- #       interactions.append([[key,key], best_homo[key][1]])
-  #  H = xgi.Hypergraph()
-   # list_inter = list()
-    #prots = set()
-#    dict_name = file.get_names()
- #   for inter, score in interactions :
-  #      inter0 = inter[0]#+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
-   #     inter1 = inter[1]#+f"({dict_name[inter[1]]})"
-    #    prots.add(inter0)
-     #   prots.add(inter1)
-      #  list_inter.append([inter0,inter1])
-#    prots = list(prots)
- #   H.add_nodes_from(prots)
-  #  H.add_edges_from(list_inter)
-   # pos = xgi.barycenter_spring_layout(H, seed=1)
-    #print(H.edge_id())
-#    xgi.draw(H, node_labels=True,hyperedge_labels=True, pos=pos)
- #   plt.savefig("network.png")
-  #  plt.close()
-
 def generate_heatmap (file):
     """
     Generate heatmap of interactions scores.
