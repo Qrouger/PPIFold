@@ -5,6 +5,7 @@
 import urllib.request
 import re
 from utils import *
+import csv
 
 class File_proteins() :
     """
@@ -23,7 +24,7 @@ class File_proteins() :
 
     def set_proteins_sequence(self, new_protein_sequence) :
         """
-        Sets a list of all sequence.
+        Sets a list of all sequences.
         
         Parameters:
         ----------
@@ -99,9 +100,15 @@ class File_proteins() :
         """
         self.name = name
 
+    def set_iQ_score_dict(self, iQ_score_dict) :
+        self.iQ_score_dict = iQ_score_dict
+
+    def set_hiQ_score_dict(self, hiQ_score_dict) :
+        self.hiQ_score_dict = hiQ_score_dict
+
     def get_proteins_sequence(self) :
         """
-        Return the new aa sequence list.
+        Return the new amino acid sequence list.
         
         Parameters:
         ----------
@@ -177,7 +184,32 @@ class File_proteins() :
         """
         return self.name
 
+    def get_iQ_score_dict(self) :
+        """
+        Return iQ_score for all interactions.
+        
+        Parameters:
+        ----------
+        
+        Returns:
+        ----------
+        iQ_score_dict : dict
+        """
+        return self.iQ_score_dict
 
+    def get_hiQ_score_dict(self) :
+        """
+        Return hiQ_score for all homo-oligomer.
+        
+        Parameters:
+        ----------
+        
+        Returns:
+        ----------
+        hiQ_score_dict : dict
+        """
+        return self.hiQ_score_dict
+    
 ### Generating of features and pre-file to run multimer
 
     def set_all_att(self, filename) :
@@ -274,3 +306,31 @@ class File_proteins() :
         with open(file_out,"w") as fh :
             fh.write(line)
         self.set_fasta_file(file_out)
+
+    def update_iQ_hiQ_score(self) :
+        """
+        Generate two dictionary, first where the key is a tuple of interaction proteins(Uniprot) and the value is the iQ_score, a second where the key is the protein (Uniprot) and the value is a tuple of the better hiQ_score and this homo-oligomerisation.
+
+        Parameters:
+        ----------
+
+        Returns:
+        ----------
+
+        """
+        iQ_score_dic = dict()
+        with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+            reader1 = csv.DictReader(file1)
+            for row in reader1 :
+                names = row['jobs'].split('_and_')
+                iQ_score_dic[(names[0],names[1])] = row['iQ_score']
+        self.set_iQ_score_dict(iQ_score_dic)
+        hiQ_score_dic = dict()
+        with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
+            reader2 = csv.DictReader(file2)
+            for row in reader2 :
+                prot_name = row['jobs'].split("_homo_")[0]
+                if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
+                    number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
+                    hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
+        self.set_hiQ_score_dict(hiQ_score_dic)

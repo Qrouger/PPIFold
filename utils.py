@@ -11,6 +11,8 @@ from File_proteins import *
 import os
 import networkx as nx
 from math import *
+import seaborn
+import pandas as pd
 
 def remove_SP (file, org) :
         """
@@ -52,7 +54,7 @@ def remove_SP (file, org) :
         with open(fasta_file, "w") as new_file2 :
            new_file2.write(final_file)
 
-def create_feature (env_feature, data_dir, file) :
+def create_feature (file, env_feature, data_dir) :
         """
         Launch command to generate features.
 
@@ -118,7 +120,7 @@ def Make_all_MSA_coverage (file) :
         with open("bad_MSA.txt", "w") as MSA_file :
             MSA_file.write(bad_MSA)
 
-def generate_APD_script (max_aa, file) :
+def generate_APD_script (file, max_aa) :
         """
         Write two scripts in local to use AlphaPulldown, this scripts are build in function of maximum amino acid.
 
@@ -206,9 +208,10 @@ def add_iQ_score (dir_alpha) :
                     all_lines = all_lines + line
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
+        
 
 
-def create_out_fig () :
+def create_out_fig (file) :
         """
         Generate result figure for validate interaction.
 
@@ -218,27 +221,18 @@ def create_out_fig () :
         ----------
 
         """
-        with open("./result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
-            reader = csv.DictReader(file1)
-            for row in reader :
-                iQ_score = row['iQ_score']
-                job1 = row['jobs']
-                if float(iQ_score) >= 35 : #Plot figure of interest just for interesting interactions
-                    plot_Distogram("./result_all_vs_all/" + job1)
-                    make_table_res_int("./result_all_vs_all/" + job1)
-        best_homo = dict()
-        with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
-            reader2 = csv.DictReader(file2)
-            for row in reader2 :
-                if float(row["hiQ_score"]) >= 50 :
-                    prot_name = row['jobs'].split("_")[0]
-                    if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
-                        best_homo[prot_name] = (float(row['hiQ_score']),float(row['jobs'].split("_")[2][0])) 
-        for oligo in best_homo.keys() :
-            number_homo =  (str(best_homo[oligo][1]).split("."))[0]
-            job2 = oligo + "_homo_" + number_homo + "er"
-            plot_Distogram("./result_homo_oligo/" + job2)
-            make_table_res_int("./result_homo_oligo/" + job2)
+        iQ_score_dict = file.get_iQ_score_dict()
+        for interaction in iQ_score_dict.keys() :
+            if float(iQ_score_dict[interaction]) >= 35 : #Plot figure of interest just for interesting interactions
+                job1 = interaction[0] + "_and_" + interaction[1]
+                plot_Distogram("./result_all_vs_all/" + job1)
+                make_table_res_int("./result_all_vs_all/" + job1)
+        hiQ_score_dict = file.get_hiQ_score_dict()
+        for homo_oligo in hiQ_score_dict.keys() :
+            if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
+                job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
+                plot_Distogram("./result_homo_oligo/" + job2)
+                make_table_res_int("./result_homo_oligo/" + job2)
 
 def make_table_res_int (int) :
         """
@@ -408,6 +402,7 @@ def add_hiQ_score (dir_alpha) :
                 all_lines = all_lines + line
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
+            
 
 def generate_interaction_network (file) :
     """
@@ -420,29 +415,21 @@ def generate_interaction_network (file) :
     Returns:
     ----------
     """
-    interactions = list()
-    with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
-        reader1 = csv.DictReader(file1)
-        for row in reader1 :
-            names = row['jobs'].split('_and_')
-            if names not in [x[0] for x in interactions] and float(row['iQ_score']) >= 35 :
-                interactions.append([names, float(row['iQ_score'])])
-    best_homo = dict()
-    with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
-        reader2 = csv.DictReader(file2)
-        for row in reader2 :
-            if float(row["hiQ_score"]) >= 50 :
-                prot_name = row['jobs'].split("_homo_")[0]
-                if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
-                    number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
-                    best_homo[prot_name] = (float(row['hiQ_score']),number_homo) #to take the number of homo-oligomerisation of the protein and this score
-    for key in best_homo :
-        interactions.append([[key,key], best_homo[key][1]])
+    valid_interactions = list()
+    iQ_score_dict = file.get_iQ_score_dict()
+    for interactions in iQ_score_dict.keys() :
+        names = [interactions[0], interactions[1]]
+        if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 35 :
+            valid_interactions.append([names, float(iQ_score_dict[interactions])])
+    hiQ_score_dict = file.get_hiQ_score_dict()
+    for homo_oligomer in hiQ_score_dict.keys() :
+        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
+            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
     dict_name = file.get_names()
-    for inter, score in interactions :
+    for inter, score in valid_interactions :
         inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
         inter1 = inter[1]+f"({dict_name[inter[1]]})"
         prots.add(inter0)
@@ -458,4 +445,75 @@ def generate_interaction_network (file) :
     edge_labels = nx.get_edge_attributes(int_graph, "weight")
     nx.draw_networkx_edge_labels(int_graph, pos, edge_labels)
     plt.savefig("network.png")
+    plt.close()
+
+
+#def generate_interaction_network2 (file) :
+ #   interactions = list()
+  #  with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+   #     reader1 = csv.DictReader(file1)
+    #    for row in reader1 :
+     #       names = row['jobs'].split('_and_')
+      #      if names not in [x[0] for x in interactions] and float(row['iQ_score']) >= 35 :
+       #         interactions.append([names, float(row['iQ_score'])])
+#    best_homo = dict()
+ #   with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
+  #      reader2 = csv.DictReader(file2)
+   #     for row in reader2 :
+    #        if float(row["hiQ_score"]) >= 50 :
+     #           prot_name = row['jobs'].split("_homo_")[0]
+      #          if prot_name not in best_homo.keys() or float(row['hiQ_score']) >= best_homo[prot_name][0] :
+       #             number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
+        #            best_homo[prot_name] = (float(row['hiQ_score']),number_homo) #to take the number of homo-oligomerisation of the protein and this score
+#    for key in best_homo :
+ #       interactions.append([[key,key], best_homo[key][1]])
+  #  H = xgi.Hypergraph()
+   # list_inter = list()
+    #prots = set()
+#    dict_name = file.get_names()
+ #   for inter, score in interactions :
+  #      inter0 = inter[0]#+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
+   #     inter1 = inter[1]#+f"({dict_name[inter[1]]})"
+    #    prots.add(inter0)
+     #   prots.add(inter1)
+      #  list_inter.append([inter0,inter1])
+#    prots = list(prots)
+ #   H.add_nodes_from(prots)
+  #  H.add_edges_from(list_inter)
+   # pos = xgi.barycenter_spring_layout(H, seed=1)
+    #print(H.edge_id())
+#    xgi.draw(H, node_labels=True,hyperedge_labels=True, pos=pos)
+ #   plt.savefig("network.png")
+  #  plt.close()
+
+def generate_heatmap (file):
+    """
+    Generate heatmap of interactions scores.
+   
+    Parameters:
+    ----------
+    file : object of File_proteins class
+
+    Returns:
+    ----------
+    """
+    data_matrix = list()
+    iQ_score_dict = file.get_iQ_score_dict()
+    proteins_list = file.get_proteins()
+    for protein1 in proteins_list :
+        line = [] 
+        for protein2 in proteins_list :
+            if protein1 == protein2 :
+                line.append(0)
+            else :
+                if (protein1,protein2) in iQ_score_dict.keys() :
+                    line.append(float(iQ_score_dict[(protein1,protein2)]))
+                elif (protein2,protein1) in iQ_score_dict.keys() :
+                    line.append(float(iQ_score_dict[(protein2,protein1)]))
+                else :
+                    print (protein1 + " and " + protein2 + " are not in score table")
+        data_matrix.append(line)
+    complet_matrix = pd.DataFrame(data_matrix,index = proteins_list, columns = proteins_list )
+    seaborn.heatmap(complet_matrix, cbar_kws = {'label' : 'iQ_score'})
+    plt.savefig("heatmap.png")
     plt.close()
