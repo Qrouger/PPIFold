@@ -500,6 +500,10 @@ def generate_heatmap (file):
     data_matrix = list()
     iQ_score_dict = file.get_iQ_score_dict()
     proteins_list = file.get_proteins()
+    proteins_name = file.get_names()
+    index_prot = list()
+    for protein in proteins_list :
+        index_prot.append(protein+"_"+proteins_name[protein])
     save_line = dict()
     for protein1 in proteins_list :
         line = [] 
@@ -513,11 +517,12 @@ def generate_heatmap (file):
                     line.append(float(iQ_score_dict[(protein2,protein1)]))
                 else :
                     line.append(float(0))
-                    print (protein1 + " and " + protein2 + " are not in score table")
+                    print (protein1 + " and " + protein2 + " are not in score table or have bad PAE")
         save_line[protein1] = line
         data_matrix.append(line)
-    complet_matrix = pd.DataFrame(data_matrix,index = proteins_list, columns = proteins_list )
-    seaborn.heatmap(complet_matrix, cbar_kws = {'label' : 'iQ_score'})
+    complet_matrix = pd.DataFrame(data_matrix,index = index_prot, columns = index_prot )
+    ax2 = seaborn.heatmap(complet_matrix, cbar_kws = {'label' : 'iQ_score'})
+    ax2.figure.tight_layout()
     plt.savefig("heatmap.png")
     plt.close()
     norm_data_matrix = list()
@@ -531,9 +536,12 @@ def generate_heatmap (file):
                 max_iQ = iQ_score
         ave_iQ = sum_iQ / len(save_line)
         for iQ_score in save_line[protein] :
-            new_line.append(((((iQ_score - ave_iQ) / max_iQ)+1)*0.5)*100)
+            new_line.append(((((iQ_score - ave_iQ) / max_iQ)+1)*0.5)*100) #all values are normalized to the mean and redistribute between 0 and 100.
         norm_data_matrix.append(new_line)
-    complet_matrix2 = pd.DataFrame(norm_data_matrix, index = proteins_list, columns = proteins_list )
-    seaborn.heatmap(complet_matrix2, cbar_kws = {'label' : 'iQ_score*'})
-    plt.savefig("Normalizd_heatmap.png")
+    complet_matrix2 = pd.DataFrame(norm_data_matrix, index = index_prot, columns = index_prot )
+    print(complet_matrix)
+    print(complet_matrix2)
+    ax2 = seaborn.heatmap(complet_matrix2, cbar_kws = {'label' : 'iQ_score*'})
+    ax2.figure.tight_layout()
+    plt.savefig("Normalized_heatmap.png")
     plt.close()
