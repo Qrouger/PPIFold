@@ -248,7 +248,6 @@ class File_proteins() :
         names = dict()
         pattern = r"SQ   SEQUENCE   .*  .*\n([\s\S]*)"
         pattern2 = r"GN   Name=([\w]*)"
-        print(self.get_proteins())
         for proteins in self.get_proteins() :
             print("Search sequence for " + proteins)
             urllib.request.urlretrieve("https://rest.uniprot.org/uniprotkb/"+proteins+".txt","temp_file.txt")
@@ -258,7 +257,6 @@ class File_proteins() :
             with open("temp_file.txt","r") as in_file:
                 for name in re.finditer(pattern2, in_file.read()) :
                     names[proteins] = name.group(1)
-        print (names)
         for sequence in sequences :
             del_car = ["\n"," ","//"]
             for car in del_car :
@@ -281,8 +279,8 @@ class File_proteins() :
         proteins = self.get_proteins()
         sequences = self.get_proteins_sequence()
         lenght_prot = dict()
-        for nbr_prot in range(len(proteins)) :
-            lenght_prot[proteins[nbr_prot]] = len(sequences[nbr_prot])
+        for index_prot in range(len(proteins)) :
+            lenght_prot[proteins[index_prot]] = len(sequences[index_prot])
         self.set_lenght_prot(lenght_prot)
 
     def create_fasta_file (self) :
