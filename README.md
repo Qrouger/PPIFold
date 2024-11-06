@@ -15,6 +15,8 @@ This allow to predict massive multimer complexe with lot of PPI.
 
 You need to install AlphaPulldown 1.0.4 with his database, SignalpP5 and python 3.10.
 
+git clone https://github.com/Qrouger/PPIFold.git
+
 ## Pipeline
 
 ![pipeline](https://github.com/user-attachments/assets/21dc8eab-5322-4f00-942f-bdac4d723b72)
