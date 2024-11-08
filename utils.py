@@ -429,7 +429,7 @@ def generate_interaction_network (file) :
     list_inter_score = list()
     prots = set()
     dict_name = file.get_names()
-    with open('table.csv', 'w') as f :
+    with open('table.cyt', 'w') as f :
         f.write(('source,targer,interaction,score\n'))
         for inter, score in valid_interactions :
             f.write(f'{inter[0]},{inter[1]},pp,{score}\n')
