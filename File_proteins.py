@@ -24,11 +24,11 @@ class File_proteins() :
 
     def set_proteins_sequence(self, new_protein_sequence) :
         """
-        Sets a list of all sequences.
+        Sets a dict of all sequences.
         
         Parameters:
         ----------
-        new_protein_sequence = list
+        new_protein_sequence = dict
         
         Returns:
         ----------
@@ -37,7 +37,7 @@ class File_proteins() :
 
     def set_proteins(self, new_protein) :
         """
-        Sets a list of all proteins names.
+        Sets a list of all proteins UniprotID.
         
         Parameters:
         ----------
@@ -100,10 +100,30 @@ class File_proteins() :
         """
         self.name = name
 
-    def set_iQ_score_dict(self, iQ_score_dict) :
+    def set_iQ_score_dict(self, iQ_score_dict) : 
+        """
+        Sets iQ_score for all proteins.
+        
+        Parameters:
+        ----------
+        iQ_score_dict = dict
+        
+        Returns:
+        ----------
+        """
         self.iQ_score_dict = iQ_score_dict
 
     def set_hiQ_score_dict(self, hiQ_score_dict) :
+        """
+        Sets hiQ_score for all proteins.
+        
+        Parameters:
+        ----------
+        hiQ_score_dict = dict
+        
+        Returns:
+        ----------
+        """
         self.hiQ_score_dict = hiQ_score_dict
 
     def get_proteins_sequence(self) :
@@ -115,7 +135,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        proteins_sequence : list
+        proteins_sequence : dict
         """
         return self.protein_sequence
     
@@ -243,26 +263,23 @@ class File_proteins() :
         ----------
     
         """
-        new_sequences = list()
-        sequences = list()
+        sequences = dict()
         names = dict()
         pattern = r"SQ   SEQUENCE   .*  .*\n([\s\S]*)"
         pattern2 = r"GN   Name=([\w]*)"
+        del_car = ["\n"," ","//"]
         for proteins in self.get_proteins() :
             print("Search sequence for " + proteins)
             urllib.request.urlretrieve("https://rest.uniprot.org/uniprotkb/"+proteins+".txt","temp_file.txt")
             with open("temp_file.txt","r") as in_file:
                 for seq in re.finditer(pattern, in_file.read()):
-                    sequences.append(seq.group(1))
+                    sequences[proteins] = seq.group(1)
             with open("temp_file.txt","r") as in_file:
                 for name in re.finditer(pattern2, in_file.read()) :
                     names[proteins] = name.group(1)
-        for sequence in sequences :
-            del_car = ["\n"," ","//"]
             for car in del_car :
-                sequence = sequence.replace(car,"")
-            new_sequences.append(sequence)
-        self.set_proteins_sequence(new_sequences)
+                sequences[proteins] = sequences[proteins].replace(car,"")
+        self.set_proteins_sequence(sequences)
         self.set_names(names)
 
     def find_prot_lenght(self) :
@@ -279,8 +296,8 @@ class File_proteins() :
         proteins = self.get_proteins()
         sequences = self.get_proteins_sequence()
         lenght_prot = dict()
-        for index_prot in range(len(proteins)) :
-            lenght_prot[proteins[index_prot]] = len(sequences[index_prot])
+        for protein in proteins :
+            lenght_prot[protein] = len(sequences[protein])
         self.set_lenght_prot(lenght_prot)
 
     def create_fasta_file (self) :
@@ -297,8 +314,8 @@ class File_proteins() :
         line = str()
         proteins = self.get_proteins()
         sequences = self.get_proteins_sequence()
-        for protein in range(0,len(proteins)) :
-            line = line + ">" + proteins[protein] + "\n" + sequences[protein] + "\n"        
+        for protein in proteins :
+            line = line + ">" + protein + "\n" + sequences[protein] + "\n"        
         file_name = self.get_file_name()
         file_out = file_name.replace("txt","fasta")
         with open(file_out,"w") as fh :
@@ -323,12 +340,12 @@ class File_proteins() :
                 names = row['jobs'].split('_and_')
                 iQ_score_dic[(names[0],names[1])] = row['iQ_score']
         self.set_iQ_score_dict(iQ_score_dic)
-        hiQ_score_dic = dict()
-        with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
-            reader2 = csv.DictReader(file2)
-            for row in reader2 :
-                prot_name = row['jobs'].split("_homo_")[0]
-                if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
-                    number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
-                    hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
-        self.set_hiQ_score_dict(hiQ_score_dic)
+        #hiQ_score_dic = dict()
+        #with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
+        #    reader2 = csv.DictReader(file2)
+        #    for row in reader2 :
+        #        prot_name = row['jobs'].split("_homo_")[0]
+        #        if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
+        #            number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
+        #            hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
+        #self.set_hiQ_score_dict(hiQ_score_dic)
