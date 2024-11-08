@@ -429,12 +429,15 @@ def generate_interaction_network (file) :
     list_inter_score = list()
     prots = set()
     dict_name = file.get_names()
-    for inter, score in valid_interactions :
-        inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
-        inter1 = inter[1]+f"({dict_name[inter[1]]})"
-        prots.add(inter0)
-        prots.add(inter1)
-        list_inter_score.append((inter0,inter1,round(score,2)))
+    with open('table.csv', 'w') as f :
+        f.write(('source,targer,interaction,score\n'))
+        for inter, score in valid_interactions :
+            f.write(f'{inter[0]},{inter[1]},pp,{score}\n')
+            inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
+            inter1 = inter[1]+f"({dict_name[inter[1]]})"
+            prots.add(inter0)
+            prots.add(inter1)
+            list_inter_score.append((inter0,inter1,round(score,2)))
     prots = list(prots)
     int_graph.add_nodes_from(prots)
     int_graph.add_weighted_edges_from(list_inter_score)
