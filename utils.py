@@ -421,7 +421,7 @@ def generate_interaction_network (file) :
         names = [interactions[0], interactions[1]]
         if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 35 :
             valid_interactions.append([names, float(iQ_score_dict[interactions])])
-    hiQ_score_dict = file.get_hiQ_score_dict()
+    #hiQ_score_dict = file.get_hiQ_score_dict()
     #for homo_oligomer in hiQ_score_dict.keys() :
     #    if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
     #        valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
@@ -500,51 +500,64 @@ def generate_heatmap (file):
     Returns:
     ----------
     """
-    data_matrix = list()
+    iQ_data_matrix = list()
+    iptm_ptm_data_matrix = list()
     iQ_score_dict = file.get_iQ_score_dict()
     proteins_list = file.get_proteins()
     proteins_name = file.get_names()
     index_prot = list()
+    iptm_ptm_dict = dict()
+    with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+        reader = csv.DictReader(file1)
+        for row in reader :
+            iptm_ptm_dict[row['jobs']] = row["iptm_ptm"]
     for protein in proteins_list :
         index_prot.append(protein+"_"+proteins_name[protein])
-    save_line = dict()
     for protein1 in proteins_list :
-        line = [] 
+        iQ_line = list()
+        iptm_ptm_line = list()
         for protein2 in proteins_list :
             if protein1 == protein2 :
-                line.append(0)
+                iQ_line.append(0)
+                iptm_ptm_line.append(0)
             else :
                 if (protein1,protein2) in iQ_score_dict.keys() :
-                    line.append(float(iQ_score_dict[(protein1,protein2)]))
+                    iQ_line.append(float(iQ_score_dict[(protein1,protein2)]))
+                    iptm_ptm_line.append(float(iptm_ptm_dict[protein1+"_and_"+protein2]))
                 elif (protein2,protein1) in iQ_score_dict.keys() :
-                    line.append(float(iQ_score_dict[(protein2,protein1)]))
+                    iQ_line.append(float(iQ_score_dict[(protein2,protein1)]))
+                    iptm_ptm_line.append(float(iptm_ptm_dict[protein2+"_and_"+protein1]))
                 else :
-                    line.append(float(0))
+                    iQ_line.append(0)
+                    iptm_ptm_line.append(0)
                     print (protein1 + " and " + protein2 + " are not in score table or have bad PAE")
-        save_line[protein1] = line
-        data_matrix.append(line)
-    complet_matrix = pd.DataFrame(data_matrix,index = index_prot, columns = index_prot )
-    ax2 = seaborn.heatmap(complet_matrix, cbar_kws = {'label' : 'iQ_score'}, xticklabels=True, yticklabels=True)
+        iQ_data_matrix.append(iQ_line)
+        iptm_ptm_data_matrix.append(iptm_ptm_line)
+    iQ_complet_matrix = pd.DataFrame(iQ_data_matrix,index = index_prot, columns = index_prot)
+    iptm_ptm_complet_matrix = pd.DataFrame(iptm_ptm_data_matrix,index = index_prot, columns = index_prot)
+    ax2 = seaborn.heatmap(iQ_complet_matrix, cbar_kws = {'label' : 'iQ_score'}, xticklabels=True, yticklabels=True)
     ax2.figure.tight_layout()
-    plt.savefig("heatmap.png")
+    plt.savefig("iQ_score_heatmap.png")
     plt.close()
-    norm_data_matrix = list()
-    for protein in proteins_list :
-        new_line = list()
-        sum_iQ = 0
-        max_iQ = 0
-        for iQ_score in save_line[protein] :
-            sum_iQ += iQ_score
-            if iQ_score > max_iQ :
-                max_iQ = iQ_score
-        ave_iQ = sum_iQ / len(save_line)
-        for iQ_score in save_line[protein] :
-            print(protein)
-            print(max_iQ)
-            new_line.append(((((iQ_score - ave_iQ) / max_iQ)+1)*0.5)*100) #all values are normalized to the mean and redistribute between 0 and 100.
-        norm_data_matrix.append(new_line)
-    complet_matrix2 = pd.DataFrame(norm_data_matrix, index = index_prot, columns = index_prot)
-    ax2 = seaborn.heatmap(complet_matrix2, cbar_kws = {'label' : 'iQ_score*'}, xticklabels=True, yticklabels=True)
+    ax2 = seaborn.heatmap(iptm_ptm_complet_matrix, cbar_kws = {'label' : 'iptm_ptm'}, xticklabels=True, yticklabels=True)
     ax2.figure.tight_layout()
-    plt.savefig("Normalized_heatmap.png")
+    plt.savefig("iptm_ptm_heatmap.png")
     plt.close()
+    #norm_data_matrix = list()
+    #for protein in proteins_list :
+    #    new_line = list()
+    #    sum_iQ = 0
+    #    max_iQ = 0
+    #    for iQ_score in save_line[protein] :
+    #        sum_iQ += iQ_score
+    #        if iQ_score > max_iQ :
+    #            max_iQ = iQ_score
+    #    ave_iQ = sum_iQ / len(save_line)
+    #    for iQ_score in save_line[protein] :
+    #        new_line.append(((((iQ_score - ave_iQ) / max_iQ)+1)*0.5)*100) #all values are normalized to the mean and redistribute between 0 and 100.
+    #    norm_data_matrix.append(new_line)
+    #complet_matrix2 = pd.DataFrame(norm_data_matrix, index = index_prot, columns = index_prot)
+    #ax2 = seaborn.heatmap(complet_matrix2, cbar_kws = {'label' : 'iQ_score*'}, xticklabels=True, yticklabels=True)
+    #ax2.figure.tight_layout()
+    #plt.savefig("Normalized_heatmap.png")
+    #plt.close()

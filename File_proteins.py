@@ -6,6 +6,7 @@ import urllib.request
 import re
 from utils import *
 import csv
+import os
 
 class File_proteins() :
     """
@@ -300,7 +301,7 @@ class File_proteins() :
             lenght_prot[protein] = len(sequences[protein])
         self.set_lenght_prot(lenght_prot)
 
-    def create_fasta_file (self) :
+    def create_fasta_file (self, pkl_path) :
         """
         Generate a fasta file with a txt file.
 
@@ -312,7 +313,7 @@ class File_proteins() :
 
         """
         line = str()
-        proteins = self.get_proteins()
+        proteins = self.already_pickle(pkl_path)
         sequences = self.get_proteins_sequence()
         for protein in proteins :
             line = line + ">" + protein + "\n" + sequences[protein] + "\n"        
@@ -349,3 +350,13 @@ class File_proteins() :
         #            number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
         #            hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
         #self.set_hiQ_score_dict(hiQ_score_dic)
+
+    @staticmethod
+    def already_pickle (self, pkl_path) :
+        prot_need_pkl = list()
+        for uniprotID in self.get_proteins() :
+            if os.path.isfile(pkl_path + "/" + uniprotID + ".pkl") :
+                pass
+            else :
+                prot_need_pkl.append(uniprotID)
+        return prot_need_pkl
