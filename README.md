@@ -28,17 +28,17 @@ The initial file need to be Uniprot ID, separate by a comma and in a ".txt" file
 
 Ex : UniprotID1,UniprotID2,UniprotID3...
 
+The file conf.txt need to be filed with all Path.
+
+Path_Uniprot_ID : Path and name of the UniprotID file.<br>
+Path_AlphaFold_Data : Path of the AlphaFold data base (default on ./alphadata).<br>
+Path_Singularity_Image : Path of the singularity image.<br>
+Path_Pickle_Feature : Path of your feature folder (default on ./faeture).<br>
+
 ## Arguments<br>
-python main.py --txt_name string --data_dir Path --dir_alpha_analysis Path --make_multimers Boolean --env_multimer string --env_feature string --max_aa integer --use_signalP Boolean
+python main.py --make_multimers Boolean --env_multimer String --env_feature String --max_aa Integer --use_signalP Boolean --org String
 
-
-Mandatory
-
- --txt_name Name of the file who contains all Uniprot ID <br>
- --data_dir Path to the directory with all alphafold database <br>
- --dir_alpha_analysis Path to singularity image <br>
-
-Optional
+Optional arguments
 
 --make_multimers This argument is True by default, if you just want make feature you have to set it on False <br>
 --env_feature The name of the conda environment need to make feature with AlphaPulldown, set by default on None <br>
