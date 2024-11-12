@@ -14,6 +14,55 @@ from math import *
 import seaborn
 import pandas as pd
 
+def define_path(conf_file) :
+    path_dict = dict()
+    with open(conf_file, "r") as file :
+        while True:
+            lines = file.readline()
+            if not lines:
+                break
+            else :
+                if lines[0:17] == "Path_Uniprot_ID :" :
+                    if len(lines[17:len(lines)]) < 4 :
+                        print("Path to Uniprot file is empty")
+                        exit()
+                    else :
+                        path = lines[17:len(lines)].strip().strip('\n')
+                        path_dict["Path_Uniprot_ID"] = path
+
+                elif lines[0:21] == "Path_AlphaFold_Data :" :
+                    if len(lines[21:len(lines)]) < 4 :
+                        print("Path to AlphaFold data is empty, set by default on ./alphadata")
+                        path_dict["Path_AlphaFold_data"] = "./alphadata"
+                    else :
+                        path = lines[21:len(lines)].strip().strip('\n')
+                        if path[len(path)-1] == "/" :
+                            path = path[0:len(path)-1]
+                        else :
+                            pass
+                        path_dict["Path_AlphaFold_data"] = path
+
+                elif lines[0:24] == "Path_Singularity_Image :" :
+                    if len(lines[24:len(lines)]) < 4 :
+                        print("Path to Singularity image is empty")
+                        exit()
+                    else :
+                        path = lines[24:len(lines)].strip().strip('\n')
+                        path_dict["Path_Singularity_Image"] = path
+
+                elif lines[0:21] == "Path_Pickle_Feature :" :
+                    if len(lines[21:len(lines)]) < 4 :
+                        print("Path to Feature data is empty, set by default on ./feature")
+                        path_dict["Path_Pickle_Feature"] = "./feature"
+                    else :
+                        path = lines[21:len(lines)].strip().strip('\n')
+                        if path[len(path)-1] == "/" :
+                            path = path[0:len(path)-1]
+                        else :
+                            pass
+                        path_dict["Path_Pickle_Feature"] = path
+    return(path_dict)
+
 def remove_SP (file, org) :
         """
         Creating a new fasta file without signal peptide.
@@ -54,7 +103,7 @@ def remove_SP (file, org) :
         with open(fasta_file, "w") as new_file2 :
            new_file2.write(final_file)
 
-def create_feature (file, env_feature, data_dir) :
+def create_feature (file, env_feature, data_dir, Path_Pickle_Feature) :
         """
         Launch command to generate features.
 
@@ -69,8 +118,8 @@ def create_feature (file, env_feature, data_dir) :
 
         """
         fasta_file = file.get_fasta_file()
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_feature}\n create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir=./feature \--max_template_date=2024-05-02 \--skip_existing=False"
-        cmd2 = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir=./feature \--max_template_date=2024-05-02 \--skip_existing=False"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_feature}\n create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=False"
+        cmd2 = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_feature != None :
             os.system(cmd)
@@ -78,7 +127,7 @@ def create_feature (file, env_feature, data_dir) :
         else :
             os.system(cmd2)
 
-def Make_all_MSA_coverage (file) :
+def Make_all_MSA_coverage (file,Path_Pickle_Feature) :
         """
         Creating a new fasta file without signal peptide.
 
@@ -93,7 +142,7 @@ def Make_all_MSA_coverage (file) :
         bad_MSA = str()
         proteins = file.get_proteins()
         for prot in proteins :
-            pre_feature_dict = pickle.load(open(f'feature/{prot}.pkl','rb'))
+            pre_feature_dict = pickle.load(open(f'{Path_Pickle_Feature}/{prot}.pkl','rb'))
             feature_dict = pre_feature_dict.feature_dict
             msa = feature_dict['msa']
             if len(msa) <= 100 :
@@ -115,7 +164,7 @@ def Make_all_MSA_coverage (file) :
             plt.colorbar(label="Sequence identity to query", )
             plt.xlabel("Positions")
             plt.ylabel("Sequences")
-            plt.savefig(f"feature/{prot+('_' if prot else '')}coverage.pdf")
+            plt.savefig(f"{Path_Pickle_Feature}/{prot+('_' if prot else '')}coverage.pdf")
             plt.close()
         with open("bad_MSA.txt", "w") as MSA_file :
             MSA_file.write(bad_MSA)
@@ -162,7 +211,7 @@ def generate_APD_script (file, max_aa) :
 
 ### Generating Multimers
 
-def Make_all_vs_all (env_multimers, data_dir) :
+def Make_all_vs_all (env_multimers, data_dir, Path_Pickle_Feature) :
         """
         Use Alphapulldown script to generate all versus all interactions.
 
@@ -174,8 +223,8 @@ def Make_all_vs_all (env_multimers, data_dir) :
         ----------
 
         """
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir=./feature"
-        cmd2 = "run_multimer_jobs.py --mode=all_vs_all \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir=./feature"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature}"
+        cmd2 =f"run_multimer_jobs.py --mode=all_vs_all \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature}"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
             os.system(cmd)
@@ -346,7 +395,7 @@ def plot_Distogram (job) :
             plt.savefig(f"{pickle_output}.dmap.png", dpi=600)
             plt.close()
 
-def Make_homo_oligo (env_multimers, data_dir) :
+def Make_homo_oligo (env_multimers, data_dir, Path_Pickle_Feature) :
         """
         Use Alphapulldown script to generate all homo oligomer.
 
@@ -359,8 +408,8 @@ def Make_homo_oligo (env_multimers, data_dir) :
         ----------
 
         """
-        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
-        cmd2 = "run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir=feature \--data_dir={data_dir} \--remove_result_pickles=False"
+        cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--data_dir={data_dir} \--remove_result_pickles=False"
+        cmd2 =f"run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--data_dir={data_dir} \--remove_result_pickles=False"
         cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
         if env_multimers != None :
             os.system(cmd)

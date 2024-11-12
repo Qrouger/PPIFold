@@ -12,7 +12,7 @@ class File_proteins() :
     """
     Manipulate and save file who contains all proteins
     """
-    def __init__(self, args) :
+    def __init__(self, path_txt_file) :
         """
         Constructor : 
         Set attribute for one entry file.
@@ -21,7 +21,7 @@ class File_proteins() :
     	-----------
         args : ?
         """
-        self.set_all_att(args.txt_name)
+        self.set_all_att(path_txt_file)
 
     def set_proteins_sequence(self, new_protein_sequence) :
         """
@@ -233,7 +233,7 @@ class File_proteins() :
     
 ### Generating of features and pre-file to run multimer
 
-    def set_all_att(self, filename) :
+    def set_all_att(self, path_txt) :
         """
         Set all values for all attribut for one txt file.
         
@@ -245,12 +245,12 @@ class File_proteins() :
         ----------
         """
         new_proteins = []
-        with open(filename,"r") as in_file :
+        with open(path_txt,"r") as in_file :
             for line in in_file :
                 new_line = (line.split(","))
                 for prot in new_line :
                     new_proteins.append(prot.upper().strip())
-        self.set_file_name(filename)
+        self.set_file_name(path_txt)
         self.set_proteins(new_proteins)
  
     def find_proteins_sequence (self) :
@@ -301,7 +301,7 @@ class File_proteins() :
             lenght_prot[protein] = len(sequences[protein])
         self.set_lenght_prot(lenght_prot)
 
-    def create_fasta_file (self, pkl_path) :
+    def create_fasta_file (self, pickle_path) :
         """
         Generate a fasta file with a txt file.
 
@@ -313,7 +313,7 @@ class File_proteins() :
 
         """
         line = str()
-        proteins = self.already_pickle(pkl_path)
+        proteins = self.already_pickle(pickle_path)
         sequences = self.get_proteins_sequence()
         for protein in proteins :
             line = line + ">" + protein + "\n" + sequences[protein] + "\n"        
@@ -351,11 +351,10 @@ class File_proteins() :
         #            hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
         #self.set_hiQ_score_dict(hiQ_score_dic)
 
-    @staticmethod
-    def already_pickle (self, pkl_path) :
+    def already_pickle (self, pickle_path) :
         prot_need_pkl = list()
         for uniprotID in self.get_proteins() :
-            if os.path.isfile(pkl_path + "/" + uniprotID + ".pkl") :
+            if os.path.isfile(pickle_path + "/" + uniprotID + ".pkl") :
                 pass
             else :
                 prot_need_pkl.append(uniprotID)
