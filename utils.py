@@ -14,9 +14,19 @@ from math import *
 import seaborn
 import pandas as pd
 
-def define_path(conf_file) :
+def define_path() :
+    """
+    Take all path from conf.txt, and set up on dictionnary.
+    
+    Parameters:
+    ----------
+
+    Returns:
+    ----------
+    path_dict : dict
+    """
     path_dict = dict()
-    with open(conf_file, "r") as file :
+    with open("conf_file.txt", "r") as file :
         while True:
             lines = file.readline()
             if not lines:
@@ -470,10 +480,10 @@ def generate_interaction_network (file) :
         names = [interactions[0], interactions[1]]
         if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 35 :
             valid_interactions.append([names, float(iQ_score_dict[interactions])])
-    hiQ_score_dict = file.get_hiQ_score_dict()
-    for homo_oligomer in hiQ_score_dict.keys() :
-        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
-            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
+    #hiQ_score_dict = file.get_hiQ_score_dict()
+    #for homo_oligomer in hiQ_score_dict.keys() :
+    #    if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
+    #        valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
