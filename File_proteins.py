@@ -350,22 +350,3 @@ class File_proteins() :
         #            number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
         #            hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
         #self.set_hiQ_score_dict(hiQ_score_dic)
-
-    def already_pickle (self, pickle_path) :
-        """
-        Check if protein have already a feature pickle file, and return a list of proteins who doesn't.
-
-        Parameters:
-        ----------
-        pickle_path : string
-        Returns:
-        ----------
-        prot_need_pkl : list
-        """
-        prot_need_pkl = list()
-        for uniprotID in self.get_proteins() :
-            if os.path.isfile(pickle_path + "/" + uniprotID + ".pkl") :
-                pass
-            else :
-                prot_need_pkl.append(uniprotID)
-        return prot_need_pkl
