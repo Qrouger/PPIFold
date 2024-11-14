@@ -63,19 +63,19 @@ All aligned homologous sequences.<br>
 
 **Residue interaction table<br>**
 Table of distance into two atoms of two chains.<br>
-![residue_interaction_table](https://github.com/user-attachments/assets/345ed6c0-daa3-4be8-8eb7-52a7d2ec3784 =250x250)
+<img src="https://github.com/user-attachments/assets/345ed6c0-daa3-4be8-8eb7-52a7d2ec3784" alt="residue_interaction_table" width="400"/>
 
 **Distogram<br>**
 Distance map between each atoms of each chains.<br>
-![Distogram](https://github.com/user-attachments/assets/96e65860-ae32-4eca-a1bb-c5aa1e565752)
+<img src="https://github.com/user-attachments/assets/96e65860-ae32-4eca-a1bb-c5aa1e565752" alt="Distogram" width="400"/>
 
 **Interaction network<br>**
 PPI network with iQ-score and homo-oligomers predicitons.<br>
-<img width="706" alt="interaction_network" src="https://github.com/user-attachments/assets/51d1f095-f595-441c-ac6b-ae516e8baa82">
+<img src="https://github.com/user-attachments/assets/51d1f095-f595-441c-ac6b-ae516e8baa82" alt="interaction_network" width="400"/>
 
 **iQ-Score heatmap<br>**
 Heatmap of iQ-score between each PPI.<br>
-![iQ_score_heatmap](https://github.com/user-attachments/assets/f846af8e-2b90-4e01-9f46-aa9ec2ee5024)
+<img src="https://github.com/user-attachments/assets/f846af8e-2b90-4e01-9f46-aa9ec2ee5024" alt="iQ_score_heatmap" width="400"/>
 
 ### Other Files
 **OOM_int.txt<br>**
