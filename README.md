@@ -28,7 +28,7 @@ The initial file need to be Uniprot ID, separate by a comma and in a ".txt" file
 
 Ex : UniprotID1,UniprotID2,UniprotID3...
 
-The file conf.txt need to be filed with all Path.
+The file conf.txt need to be filed with all Paths.
 
 Path_Uniprot_ID : Path and name of the UniprotID file.<br>
 Path_AlphaFold_Data : Path of the AlphaFold data base (default on ./alphadata).<br>
@@ -63,12 +63,15 @@ This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
 **iQ-Score heatmap<br>**
 
 ### Other Files
-**OOM file<br>**
+**OOM_int.txt<br>**
 A text file who contains too large interaction in function of --max_aa.<br>
 
-**Bad MSA<br>**
+**Bad_MSA.txt<br>**
 A text file who contains proteins with MSA depth lower than 100 sequences.<br>
 /!\Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
+
+**table.cyt<br>**
+A file to make network manualy on Cytoscape.
 
 Packages versions :<br>
 numpy: v2.0.1<br>
