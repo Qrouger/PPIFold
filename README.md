@@ -59,7 +59,7 @@ This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
 ### Figures
 **MSA depth<br>**
 All aligned homologous sequences.
-![MSA_Depth](https://github.com/user-attachments/assets/63b27117-0bb4-4c95-8d35-79c369938da2 =250x250)
+![MSA_Depth](https://github.com/user-attachments/assets/63b27117-0bb4-4c95-8d35-79c369938da2 width="200" height="400")
 
 **Residue interaction table<br>**
 Table of distance into two atoms of two chains.
