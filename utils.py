@@ -26,7 +26,7 @@ def define_path() :
     path_dict : dict
     """
     path_dict = dict()
-    with open("conf_file.txt", "r") as file :
+    with open("conf.txt", "r") as file :
         while True:
             lines = file.readline()
             if not lines:
@@ -176,7 +176,7 @@ def Make_all_MSA_coverage (file,Path_Pickle_Feature) :
             plt.ylabel("Sequences")
             plt.savefig(f"{Path_Pickle_Feature}/{prot+('_' if prot else '')}coverage.pdf")
             plt.close()
-        with open("bad_MSA.txt", "w") as MSA_file :
+        with open("Bad_MSA.txt", "w") as MSA_file :
             MSA_file.write(bad_MSA)
 
 def generate_APD_script (file, max_aa) :
@@ -267,8 +267,6 @@ def add_iQ_score (dir_alpha) :
                     all_lines = all_lines + line
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "w") as file2 :
             file2.write(all_lines)
-        
-
 
 def create_out_fig (file) :
         """
@@ -491,9 +489,9 @@ def generate_interaction_network (file) :
     with open('table.cyt', 'w') as f :
         f.write(('source,targer,interaction,score\n'))
         for inter, score in valid_interactions :
-            f.write(f'{inter[0]},{inter[1]},pp,{score}\n')
             inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
             inter1 = inter[1]+f"({dict_name[inter[1]]})"
+            f.write(f'{inter0},{inter1},pp,{score}\n')
             prots.add(inter0)
             prots.add(inter1)
             list_inter_score.append((inter0,inter1,round(score,2)))
