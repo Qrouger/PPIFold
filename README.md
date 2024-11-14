@@ -83,6 +83,9 @@ A text file who contains proteins with MSA depth lower than 100 sequences.<br>
 **table.cyt<br>**
 A file to make network manualy on Cytoscape.
 
+**.pdb file<br>**
+Model structure.
+
 Packages versions :<br>
 numpy: v2.0.1<br>
 matplotlib: v3.9.1<br>
