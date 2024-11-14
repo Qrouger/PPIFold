@@ -52,7 +52,7 @@ Save all your pickles files on the same directory.
 
 ## Result
 
-This pipeline have a cutoff on PAE (10), iQ-score (25) and hiQ-score (50).
+This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
 
 
 ### Figures
@@ -60,6 +60,7 @@ This pipeline have a cutoff on PAE (10), iQ-score (25) and hiQ-score (50).
 **Residue interaction table<br>**
 **Distogram<br>**
 **Interaction network<br>**
+**iQ-Score heatmap<br>**
 
 ### Other Files
 **OOM file<br>**
