@@ -66,7 +66,10 @@ Table of distance into two atoms of two chains.
 Distance map between each atoms of each chains.
 
 **Interaction network<br>**
+PPI network with iQ-score and homo-oligomers predicitons.
+
 **iQ-Score heatmap<br>**
+Heatmap of iQ-score between each PPI.
 
 ### Other Files
 **OOM_int.txt<br>**
