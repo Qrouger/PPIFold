@@ -59,18 +59,23 @@ This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
 ### Figures
 **MSA depth<br>**
 All aligned homologous sequences.
+![MSA_Depth](https://github.com/user-attachments/assets/63b27117-0bb4-4c95-8d35-79c369938da2)
 
 **Residue interaction table<br>**
 Table of distance into two atoms of two chains.
+![residue_interaction_table](https://github.com/user-attachments/assets/345ed6c0-daa3-4be8-8eb7-52a7d2ec3784)
 
 **Distogram<br>**
 Distance map between each atoms of each chains.
+![Distogram](https://github.com/user-attachments/assets/96e65860-ae32-4eca-a1bb-c5aa1e565752)
 
 **Interaction network<br>**
 PPI network with iQ-score and homo-oligomers predicitons.
+<img width="706" alt="interaction_network" src="https://github.com/user-attachments/assets/51d1f095-f595-441c-ac6b-ae516e8baa82">
 
 **iQ-Score heatmap<br>**
 Heatmap of iQ-score between each PPI.
+![iQ_score_heatmap](https://github.com/user-attachments/assets/f846af8e-2b90-4e01-9f46-aa9ec2ee5024)
 
 ### Other Files
 **OOM_int.txt<br>**
