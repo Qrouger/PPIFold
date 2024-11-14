@@ -70,7 +70,7 @@ Distance map between each atoms of each chains.<br>
 <img src="https://github.com/user-attachments/assets/96e65860-ae32-4eca-a1bb-c5aa1e565752" alt="Distogram" width="400"/>
 
 **Interaction network<br>**
-PPI network with iQ-score and homo-oligomers predicitons.<br>
+PPI network with iQ-score and homo-oligomers predictions.<br>
 <img src="https://github.com/user-attachments/assets/51d1f095-f595-441c-ac6b-ae516e8baa82" alt="interaction_network" width="400"/>
 
 **iQ-Score heatmap<br>**
