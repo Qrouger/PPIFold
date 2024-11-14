@@ -9,7 +9,7 @@ This allow to predict massive multimer complexe with lot of PPI.
 ## Requirements
 
 - Python >=3.10
-- AlphaPulldown 1.0.4 https://github.com/KosinskiLab/AlphaPulldown with singularity image (v0.4)
+- AlphaPulldown 1.0.4 command line interface https://github.com/KosinskiLab/AlphaPulldown with singularity image (v0.4)
 - SignalP5 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
 
 ## Installation
