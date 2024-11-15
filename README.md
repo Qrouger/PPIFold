@@ -59,27 +59,27 @@ This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
 ### Figures
 **MSA depth<br>**
 All aligned homologous sequences.<br>
-<img src="https://github.com/user-attachments/assets/63b27117-0bb4-4c95-8d35-79c369938da2" alt="MSA_Depth" width="400"/>
+<img src="https://github.com/user-attachments/assets/63b27117-0bb4-4c95-8d35-79c369938da2" alt="MSA_Depth" width="400"/><br>
 Axe y is the number of homologous sequence, axe x is the posistions on the sequence. Colour represent the sequence identity.
 
 **Residue interaction table<br>**
 Table of distance into two atoms of two chains.<br>
-<img src="https://github.com/user-attachments/assets/345ed6c0-daa3-4be8-8eb7-52a7d2ec3784" alt="residue_interaction_table" width="400"/>
+<img src="https://github.com/user-attachments/assets/345ed6c0-daa3-4be8-8eb7-52a7d2ec3784" alt="residue_interaction_table" width="400"/><br>
 Chains are differents proteins, two residue in contact are specified as well as their distances.
 
 **Distogram<br>**
 Distance map between each atoms of each chains.<br>
-<img src="https://github.com/user-attachments/assets/96e65860-ae32-4eca-a1bb-c5aa1e565752" alt="Distogram" width="400"/>
+<img src="https://github.com/user-attachments/assets/96e65860-ae32-4eca-a1bb-c5aa1e565752" alt="Distogram" width="400"/><br>
 Axes x and y are proteins in interaction, pixels into black square represent intra residue distances and pixels outside inter residue distances.
 Colour represent distance in ångström, blue color represent a short distance between two residue and yellow a big distance.
 
 **Interaction network<br>**
 PPI network with iQ-score and homo-oligomers predictions.<br>
-<img src="https://github.com/user-attachments/assets/51d1f095-f595-441c-ac6b-ae516e8baa82" alt="interaction_network" width="400"/>
+<img src="https://github.com/user-attachments/assets/51d1f095-f595-441c-ac6b-ae516e8baa82" alt="interaction_network" width="400"/><br>
 
 **iQ-Score heatmap<br>**
 Heatmap of iQ-score between each PPI.<br>
-<img src="https://github.com/user-attachments/assets/f846af8e-2b90-4e01-9f46-aa9ec2ee5024" alt="iQ_score_heatmap" width="400"/>
+<img src="https://github.com/user-attachments/assets/f846af8e-2b90-4e01-9f46-aa9ec2ee5024" alt="iQ_score_heatmap" width="400"/><br>
 Colour represent iQ-score, better iQ-score is represent by a lighter color. 
 The black boxes represent either bad PAE, homo-oligomer or too large total proteins lenght.
 
