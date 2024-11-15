@@ -1,7 +1,7 @@
-from utils import *
-from File_proteins import *
 import argparse
 
+from utils import *
+from File_proteins import *
 
 def add_arguments(parser) :
     parser.add_argument("--make_multimers", help = "If you just want make feature set on False", required = False, default = True)
@@ -21,7 +21,7 @@ def main(A4) :
         #Make_all_vs_all(args.env_multimer,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
         add_iQ_score(path_dict["Path_Singularity_Image"])
     #    Make_homo_oligo(args.env_multimer,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
-    #    add_hiQ_score(path_dict["Path_Singularity_Image"])
+        add_hiQ_score(path_dict["Path_Singularity_Image"])
         A4.update_iQ_hiQ_score()
         generate_heatmap(A4)
         #create_out_fig(A4)

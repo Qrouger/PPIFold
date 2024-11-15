@@ -2,17 +2,21 @@ import numpy as np
 import pickle
 import csv
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 from Bio import PDB
 import copy
 import glob
 import logging
 from scipy.special import softmax
-from File_proteins import *
 import os
 import networkx as nx
 from math import *
 import seaborn
 import pandas as pd
+from adjustText import adjust_text
+
+
+from File_proteins import *
 
 def define_path() :
     """
@@ -437,8 +441,8 @@ def add_hiQ_score (dir_alpha) :
         ----------
 
         """
-        cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-        os.system(cmd4)
+        #cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+        #os.system(cmd4)
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
             reader = csv.DictReader(file1)
             all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
@@ -478,10 +482,10 @@ def generate_interaction_network (file) :
         names = [interactions[0], interactions[1]]
         if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 35 :
             valid_interactions.append([names, float(iQ_score_dict[interactions])])
-    #hiQ_score_dict = file.get_hiQ_score_dict()
-    #for homo_oligomer in hiQ_score_dict.keys() :
-    #    if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
-    #        valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
+    hiQ_score_dict = file.get_hiQ_score_dict()
+    for homo_oligomer in hiQ_score_dict.keys() :
+        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
+            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
@@ -491,19 +495,41 @@ def generate_interaction_network (file) :
         for inter, score in valid_interactions :
             inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
             inter1 = inter[1]+f"({dict_name[inter[1]]})"
-            f.write(f'{inter0},{inter1},pp,{score}\n')
+            f.write(f'{inter0},{inter1},pp,{round(score,2)}\n')
             prots.add(inter0)
             prots.add(inter1)
             list_inter_score.append((inter0,inter1,round(score,2)))
     prots = list(prots)
     int_graph.add_nodes_from(prots)
     int_graph.add_weighted_edges_from(list_inter_score)
-    pos = nx.spring_layout(int_graph, k = len(prots)+5, scale = 3, seed=7)
+    fig, ax = plt.subplots(figsize=(8, 6))
+    pos = nx.spring_layout(int_graph, k = len(prots)+50, scale = 3, seed=8)
     nx.draw_networkx_nodes(int_graph,pos)
     nx.draw_networkx_edges(int_graph,pos, node_size=100, edgelist=int_graph.edges, width=1, style="dashed")
     nx.draw_networkx_labels(int_graph, pos, font_size=10, font_family="sans-serif", hide_ticks = 'True')
     edge_labels = nx.get_edge_attributes(int_graph, "weight")
-    nx.draw_networkx_edge_labels(int_graph, pos, edge_labels)
+    homo_label_dict = dict()
+    color_label = dict()
+    for prot_int in edge_labels.keys() :
+        if len(str(edge_labels[prot_int])) < 3 :
+            homo_label_dict[prot_int] = edge_labels[prot_int]
+        else :
+            color_label[prot_int] = edge_labels[prot_int]
+    selected_weights = {edge: edge_labels[edge] for edge in color_label.keys()}
+    norm = mcolors.Normalize(vmin=min(selected_weights.values()), vmax=max(selected_weights.values()))
+    cmap = plt.cm.coolwarm
+    edge_colors = {}
+    for edge in int_graph.edges():
+        if edge in color_label.keys() or (edge[1], edge[0]) in color_label.keys():
+            edge_colors[edge] = cmap(norm(edge_labels[edge]))
+        else:
+            edge_colors[edge] = 'gray'
+    edge_colors_list = [edge_colors[edge] for edge in int_graph.edges()]
+    nx.draw_networkx_edge_labels(int_graph, pos, homo_label_dict, verticalalignment = 'bottom')
+    nx.draw(int_graph, pos, edge_color=edge_colors_list, node_color='lightblue', node_size=500, ax=ax)
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+    sm.set_array([])
+    cbar = plt.colorbar(sm, ax=ax, label="iQ-score")
     plt.savefig("network.png")
     plt.close()
 
