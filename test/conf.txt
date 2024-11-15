@@ -1,4 +1,0 @@
-Path_Uniprot_ID : 
-Path_AlphaFold_Data : 
-Path_Singularity_Image : 
-Path_Pickle_Feature : 
