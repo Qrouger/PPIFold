@@ -25,11 +25,11 @@ git clone https://github.com/Qrouger/PPIFold.git
 
 ## Initial File
 
-The initial file need to be Uniprot ID, separate by a comma and in a ".txt" file.
+The initial file need to contains Uniprot ID, separate by a comma and in a ".txt" file.
 
 Ex : UniprotID1,UniprotID2,UniprotID3...
 
-The file conf.txt need to be filed with all Paths.
+The file conf.txt need to contains all Paths.
 
 Path_Uniprot_ID : Path and name of the UniprotID file.<br>
 Path_AlphaFold_Data : Path of the AlphaFold data base (default on ./alphadata).<br>
