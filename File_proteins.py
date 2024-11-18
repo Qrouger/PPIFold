@@ -230,7 +230,7 @@ class File_proteins() :
         hiQ_score_dict : dict
         """
         return self.hiQ_score_dict
-    
+
 ### Generating of features and pre-file to run multimer
 
     def set_all_att(self, path_txt) :
@@ -280,6 +280,7 @@ class File_proteins() :
                     names[proteins] = name.group(1)
             for car in del_car :
                 sequences[proteins] = sequences[proteins].replace(car,"")
+        os.remove("temp_file.txt")
         self.set_proteins_sequence(sequences)
         self.set_names(names)
 
