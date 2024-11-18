@@ -15,7 +15,6 @@ import seaborn
 import pandas as pd
 from adjustText import adjust_text
 
-
 from File_proteins import *
 
 def define_path() :
@@ -233,6 +232,7 @@ def Make_all_vs_all (env_multimers, data_dir, Path_Pickle_Feature) :
         ----------
         env_multimers : string
         data_dir : string
+
         Returns:
         ----------
 
@@ -254,6 +254,7 @@ def add_iQ_score (dir_alpha) :
         ----------
         env_multimers : string
         data_dir : string
+
         Returns:
         ----------
 
@@ -278,22 +279,24 @@ def create_out_fig (file) :
 
         Parameters:
         ----------
+
         Returns:
         ----------
 
         """
         iQ_score_dict = file.get_iQ_score_dict()
+        print(iQ_score_dict)
         for interaction in iQ_score_dict.keys() :
             if float(iQ_score_dict[interaction]) >= 35 : #Plot figure of interest just for interesting interactions
                 job1 = interaction[0] + "_and_" + interaction[1]
-                plot_Distogram("./result_all_vs_all/" + job1)
+                #plot_Distogram("./result_all_vs_all/" + job1)
                 make_table_res_int("./result_all_vs_all/" + job1)
         hiQ_score_dict = file.get_hiQ_score_dict()
-        for homo_oligo in hiQ_score_dict.keys() :
-            if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
-                job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
-                plot_Distogram("./result_homo_oligo/" + job2)
-                make_table_res_int("./result_homo_oligo/" + job2)
+        #for homo_oligo in hiQ_score_dict.keys() :
+         #   if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
+          #      job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
+           #     plot_Distogram("./result_homo_oligo/" + job2)
+            #    make_table_res_int("./result_homo_oligo/" + job2)
 
 def make_table_res_int (int) :
         """
@@ -302,6 +305,7 @@ def make_table_res_int (int) :
         Parameters:
         ----------
         int : string
+
         Returns:
         ----------
 
@@ -313,7 +317,6 @@ def make_table_res_int (int) :
         atom_possible_contact = ["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"]
         for model in structure:
             list_chain = model.get_list()
-            print(str(len(list_chain))+" chains detected")
             for i in range(0,len(list_chain)) :
                 chain1 = list_chain[i] #B and C
                 for residue1 in chain1 : #number of residue (len of the chain)
@@ -334,7 +337,6 @@ def make_table_res_int (int) :
                                             dict_information[chain1.get_id()+chain2.get_id()].append([residue1.get_resname()+str(residue1.get_id()[1]),atom1.get_id(),residue2.get_resname()+str(residue2.get_id()[1]),atom2.get_id(),str(distance)])
                                     else :
                                         pass
-
         int_list = list()
         save_dict = copy.deepcopy(dict_int)
         for chains in dict_int.keys() :
@@ -374,6 +376,7 @@ def plot_Distogram (job) :
         Parameters:
         ----------
         job : string
+        
         Returns:
         ----------
 
