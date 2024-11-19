@@ -20,7 +20,7 @@ git clone https://github.com/Qrouger/PPIFold.git
 
 ## Pipeline
 
-![pipeline](https://github.com/user-attachments/assets/21dc8eab-5322-4f00-942f-bdac4d723b72)
+![Rouger_2024_Figure-1](https://github.com/user-attachments/assets/09bacfc4-103c-4910-aeea-2753e0ccca33)
 
 
 ## Initial File
