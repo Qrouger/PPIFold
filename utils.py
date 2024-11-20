@@ -328,12 +328,12 @@ def make_table_res_int (int) :
                                     distance = atom1 - atom2
                                     if distance <= 3.64 :
                                         if chain1.get_id()+chain2.get_id() in dict_int.keys() : #to make different table for different interaction  
-                                            dict_int[chain1.get_id()+chain2.get_id()].append([chain1.get_id()+":"+residue1.get_resname()+"  "+str(residue1.get_id()[1]),chain2.get_id()+":"+residue2.get_resname()+"   "+str(residue2.get_id()[1]),str(distance)])
+                                            dict_int[chain1.get_id()+chain2.get_id()].append([chain1.get_id()+":"+residue1.get_resname()+" "+str(residue1.get_id()[1])," "+chain2.get_id()+":"+residue2.get_resname()+" "+str(residue2.get_id()[1])," "+str(distance)])
                                             dict_information[chain1.get_id()+chain2.get_id()].append([residue1.get_resname()+str(residue1.get_id()[1]),atom1.get_id(),residue2.get_resname()+str(residue2.get_id()[1]),atom2.get_id(),str(distance)])
                                         else :
-                                            dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id(),"Chain "+chain2.get_id(),"Distance Ä"]]
+                                            dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id()," Chain "+chain2.get_id()," Distance Ä"]]
                                             dict_information[chain1.get_id()+chain2.get_id()] = [[" "," ","Chain "+chain1.get_id(),"Chain "+chain2.get_id(),"Distance Ä"]]
-                                            dict_int[chain1.get_id()+chain2.get_id()].append([chain1.get_id()+":"+residue1.get_resname()+"   "+str(residue1.get_id()[1]),chain2.get_id()+":"+residue2.get_resname()+"   "+str(residue2.get_id()[1]),str(distance)])
+                                            dict_int[chain1.get_id()+chain2.get_id()].append([chain1.get_id()+":"+residue1.get_resname()+" "+str(residue1.get_id()[1])," "+chain2.get_id()+":"+residue2.get_resname()+" "+str(residue2.get_id()[1])," "+str(distance)])
                                             dict_information[chain1.get_id()+chain2.get_id()].append([residue1.get_resname()+str(residue1.get_id()[1]),atom1.get_id(),residue2.get_resname()+str(residue2.get_id()[1]),atom2.get_id(),str(distance)])
                                     else :
                                         pass
@@ -341,7 +341,9 @@ def make_table_res_int (int) :
         save_dict = copy.deepcopy(dict_int)
         for chains in dict_int.keys() :
             for line in range(len(save_dict[chains])) :
-                if dict_information[chains][line][1] not in atom_possible_contact or dict_information[chains][line][3] not in atom_possible_contact and dict_information[chains][line][0] != " " : #sort in function of atom id
+                if line == 0 :
+                    pass
+                elif dict_information[chains][line][1] not in atom_possible_contact or dict_information[chains][line][3] not in atom_possible_contact and dict_information[chains][line][0] != " " : #sort in function of atom id
                     for index in range(len(dict_int[chains])) :
                         if dict_int[chains][index-1] == save_dict[chains][line] :
                             dict_int[chains].pop(index-1)
@@ -352,7 +354,9 @@ def make_table_res_int (int) :
         for chains2 in save_dict2.keys() : #sort in function of the distance
             for line2 in range(len(save_dict2[chains2])) :
                 for interaction in range(len(int_list)) :
-                    if int_list[interaction][0] == save_dict2[chains2][line2][0] and int_list[interaction][1] == save_dict2[chains2][line2][1] and float(save_dict2[chains2][line2][2]) > float(int_list[interaction][2]) :
+                    if line2 == 0 :
+                        pass
+                    elif int_list[interaction][0] == save_dict2[chains2][line2][0] and int_list[interaction][1] == save_dict2[chains2][line2][1] and float(save_dict2[chains2][line2][2]) > float(int_list[interaction][2]) :
                         for index in range(len(dict_int[chains2])) :
                             if dict_int[chains2][index-1] == save_dict2[chains2][line2] :
                                 dict_int[chains2].pop(index-1)
