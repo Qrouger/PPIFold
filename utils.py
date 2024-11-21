@@ -298,23 +298,24 @@ def create_out_fig (file) :
            #     plot_Distogram("./result_homo_oligo/" + job2)
             #    make_table_res_int("./result_homo_oligo/" + job2)
 
-def make_table_res_int (int) :
+def make_table_res_int (path_int) :
         """
         Generate a table of residue in interactions.
 
         Parameters:
         ----------
-        int : string
+        path_int : string
 
         Returns:
         ----------
 
         """
         parser = PDB.PDBParser(QUIET=True)
-        structure = parser.get_structure('protein', int + "/ranked_0.pdb")
+        structure = parser.get_structure('protein', path_int + "/ranked_0.pdb")
         dict_int = dict()
         dict_information = dict()
         int_already_know = dict()
+        proteins = path_int.split('/')[2].split('_and_')
         atom_possible_contact = ["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
         for model in structure:
             list_chain = model.get_list()
@@ -340,7 +341,7 @@ def make_table_res_int (int) :
                                                     elif res_int in int_already_know.keys() and int_already_know[res_int] < str(distance) : #skip double interaction with differents atoms
                                                         pass
                                                     else :
-                                                        dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0],res_int[1]," "+str(distance)])
+                                                        dict_int[chain1.get_id()+chain2.get_id()].append([proteins[0]," "+proteins[1],," "+str(distance)])
                                                         int_already_know[res_int] = str(distance)
                                                 else :
                                                     dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id()," Chain "+chain2.get_id()," Distance Ä"]]
@@ -352,7 +353,7 @@ def make_table_res_int (int) :
         for chains in dict_int.keys() :
             fileout = chains+"_res_int.csv"
             np_table = np.array(dict_int[chains])
-            with open(f"{int}/"+fileout, "w", newline="") as file :
+            with open(f"{path_int}/"+fileout, "w", newline="") as file :
                 mywriter = csv.writer(file, delimiter=",")
                 mywriter.writerows(np_table)
             print("Write table")
