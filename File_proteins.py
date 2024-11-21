@@ -127,6 +127,19 @@ class File_proteins() :
         """
         self.hiQ_score_dict = hiQ_score_dict
 
+    def set_interface_dict(self, interface_dict) :
+        """
+        Sets interface_dict for new interactions.
+        
+        Parameters:
+        ----------
+        interface_dict = dict
+        
+        Returns:
+        ----------
+        """
+        self.interface_dict = interface_dict
+        
     def get_proteins_sequence(self) :
         """
         Return the new amino acid sequence list.
@@ -230,7 +243,19 @@ class File_proteins() :
         hiQ_score_dict : dict
         """
         return self.hiQ_score_dict
-
+        
+    def get_interface_dict(self) :
+        """
+        Return all interfaces for all protéins.
+        
+        Parameters:
+        ----------
+        
+        Returns:
+        ----------
+        interface_dict : dict
+        """
+        return self.interface_dict
 ### Generating of features and pre-file to run multimer
 
     def set_all_att(self, path_txt) :
@@ -244,7 +269,8 @@ class File_proteins() :
         Returns:
         ----------
         """
-        new_proteins = []
+        new_proteins = list()
+        interface_dict = dict()
         with open(path_txt,"r") as in_file :
             for line in in_file :
                 new_line = (line.split(","))
@@ -252,6 +278,8 @@ class File_proteins() :
                     new_proteins.append(prot.upper().strip())
         self.set_file_name(path_txt)
         self.set_proteins(new_proteins)
+        self.set_interface_dict(interface_dict)
+
  
     def find_proteins_sequence (self) :
         """
@@ -369,3 +397,35 @@ class File_proteins() :
             else :
                 prot_need_pkl.append(uniprotID)
         return prot_need_pkl
+
+    def define_interface(self, list_of_list_int, int) :
+        """
+        Set a dictionnary with all residues in interaction, with UniprotID.
+        Parameters:
+        ----------
+        dict_int : dict
+        int : string
+
+        Returns:
+        ----------
+        """
+        old_interface_dict = self.get_interface_dict()
+        protein1 = int[0]
+        protein2 = int[1]
+        list_int_protein1 = list()
+        list_int_protein2 = list()
+        if protein1 not in old_interface_dict.keys() :
+            old_interface_dict[protein1] = []
+        if protein2 not in old_interface_dict.keys() :
+            old_interface_dict[protein2] = []
+        for line in list_of_list_int :
+            if line[0] != int[0] :
+                if line[0][2:len(line[0])] not in list_int_protein1 :
+                    list_int_protein1.append(line[0][2:len(line[0])])
+                if line[1][3:len(line[1])] not in list_int_protein2 :
+                    list_int_protein2.append(line[1][3:len(line[1])])
+        list_int_protein1.append(protein2) #last values of each list is the second proteins
+        list_int_protein2.append(protein1)
+        old_interface_dict[protein1].append(list_int_protein1)
+        old_interface_dict[protein2].append(list_int_protein2)
+        self.set_interface_dict(old_interface_dict)
