@@ -636,3 +636,22 @@ def generate_heatmap (file):
     #ax2.figure.tight_layout()
     #plt.savefig("Normalized_heatmap.png")
     #plt.close()
+
+###Probably add to generate_interaction_network ???
+
+    def redef_interface (file):
+        alphabet = string.ascii_lowercase
+        interface_dict = file.get_interface_dict()
+        for proteins in interface_dict.keys() :
+            interface_dict[proteins] = sorted(interface_dict[proteins]) #sorted all interface in function of number of resiudes
+            for interface1 in range(len(interface_dict[proteins])) :
+                if interface1 == 0 :
+                    interface_dict[proteins][interface1].insert(0,alphabet[0])
+                for interface2 in range(interface1+1,len(interface_dict[proteins])) :
+                    list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
+                    simi_inter = len(list_inter*100)/len(interface_dict[proteins][interface1])
+                    if simi_inter < 50 :
+                        interface_dict[proteins][interface2].insert(0,alphabet[interface2])
+                    else :
+                        interface_dict[proteins][interface2].insert( interface_dict[proteins][interface1][0])
+        print(interface_dict)
