@@ -351,8 +351,6 @@ def make_table_res_int (int) :
         for chains2 in save_dict2.keys() : #sort in function of the distance
             for line2 in range(len(save_dict2[chains2])) :
                 int_list.append(save_dict2[chains2][line2])
-        for chains2 in save_dict2.keys() : #sort in function of the distance
-            for line2 in range(len(save_dict2[chains2])) :
                 for interaction in range(len(int_list)) :
                     if line2 == 0 :
                         pass
