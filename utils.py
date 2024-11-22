@@ -313,7 +313,6 @@ def make_table_res_int (path_int) :
         parser = PDB.PDBParser(QUIET=True)
         structure = parser.get_structure('protein', path_int + "/ranked_0.pdb")
         dict_int = dict()
-        dict_information = dict()
         int_already_know = dict()
         proteins = path_int.split('/')[2].split('_and_')
         atom_possible_contact = ["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
@@ -349,7 +348,6 @@ def make_table_res_int (path_int) :
                                                     int_already_know[res_int] = str(distance)
                                             else :
                                                 pass
-        int_list = list()
         for chains in dict_int.keys() :
             fileout = chains+"_res_int.csv"
             np_table = np.array(dict_int[chains])
