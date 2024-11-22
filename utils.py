@@ -637,19 +637,21 @@ def generate_heatmap (file):
 
 ###Probably add to generate_interaction_network ???
 
-    def redef_interface (file):
-        alphabet = string.ascii_lowercase
-        interface_dict = file.get_interface_dict()
-        for proteins in interface_dict.keys() :
-            interface_dict[proteins] = sorted(interface_dict[proteins]) #sorted all interface in function of number of resiudes
-            for interface1 in range(len(interface_dict[proteins])) :
-                if interface1 == 0 :
-                    interface_dict[proteins][interface1].insert(0,alphabet[0])
-                for interface2 in range(interface1+1,len(interface_dict[proteins])) :
-                    list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
-                    simi_inter = len(list_inter*100)/len(interface_dict[proteins][interface1])
-                    if simi_inter < 50 :
-                        interface_dict[proteins][interface2].insert(0,alphabet[interface2])
-                    else :
-                        interface_dict[proteins][interface2].insert( interface_dict[proteins][interface1][0])
-        print(interface_dict)
+    ###Probably add to generate_interaction_network ???
+
+def redef_interface (file):
+    alphabet = string.ascii_lowercase
+    interface_dict = file.get_interface_dict()
+    for proteins in interface_dict.keys() :
+        interface_dict[proteins] = sorted(interface_dict[proteins]) #sorted all interface in function of number of resiudes
+        for interface1 in range(len(interface_dict[proteins])) :
+            if interface1 == 0 :
+                interface_dict[proteins][interface1].insert(0,alphabet[0])
+            for interface2 in range(interface1+1,len(interface_dict[proteins])) :
+                list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
+                simi_inter = len(list_inter)/(len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface1])))-2) #indice jaccard *100 #-2 just to remove interface 'a' and uniprotID from .union()
+                if simi_inter < 0.15 : #if interfaces got more than 0.15 of same residues, it's the same interface
+                    interface_dict[proteins][interface2].insert(0,alphabet[interface2])
+                else :
+                    interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
+
