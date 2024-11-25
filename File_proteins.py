@@ -419,11 +419,12 @@ class File_proteins() :
         if protein2 not in old_interface_dict.keys() :
             old_interface_dict[protein2] = []
         for line in list_of_list_int :
+            line[1] = line[1].strip() #remove readability spaces
             if line[0] != int[0] :
-                if line[0][2:len(line[0])] not in list_int_protein1 :
-                    list_int_protein1.append(line[0][2:len(line[0])])
-                if line[1][3:len(line[1])] not in list_int_protein2 :
-                    list_int_protein2.append(line[1][3:len(line[1])])
+                if line[0] not in list_int_protein1 :
+                    list_int_protein1.append(line[0])
+                if line[1] not in list_int_protein2 :
+                    list_int_protein2.append(line[1])
         list_int_protein1.append(protein2) #last values of each list is the second proteins
         list_int_protein2.append(protein1)
         old_interface_dict[protein1].append(list_int_protein1)
