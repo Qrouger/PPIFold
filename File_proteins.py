@@ -409,6 +409,7 @@ class File_proteins() :
         Returns:
         ----------
         """
+        all_residues_int = copy.deepcopy(list_of_list_int)
         old_interface_dict = self.get_interface_dict()
         protein1 = int[0]
         protein2 = int[1]
@@ -418,7 +419,7 @@ class File_proteins() :
             old_interface_dict[protein1] = []
         if protein2 not in old_interface_dict.keys() :
             old_interface_dict[protein2] = []
-        for line in list_of_list_int :
+        for line in all_residues_int :
             line[1] = line[1].strip() #remove readability spaces
             if line[0] != int[0] :
                 if line[0] not in list_int_protein1 :
