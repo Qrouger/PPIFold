@@ -15,6 +15,7 @@ import seaborn
 import pandas as pd
 from adjustText import adjust_text
 import json
+import gzip
 
 from File_proteins import *
 
@@ -290,8 +291,8 @@ def create_out_fig (file) :
         for interaction in iQ_score_dict.keys() :
             if float(iQ_score_dict[interaction]) >= 35 : #Plot figure of interest just for interesting interactions
                 job1 = interaction[0] + "_and_" + interaction[1]
-                #plot_Distogram("./result_all_vs_all/" + job1)
-                make_table_res_int("./result_all_vs_all/" + job1)
+                plot_Distogram("./result_all_vs_all/" + job1)
+                make_table_res_int(file,"./result_all_vs_all/" + job1)
         hiQ_score_dict = file.get_hiQ_score_dict()
         #for homo_oligo in hiQ_score_dict.keys() :
          #   if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
