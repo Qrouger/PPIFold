@@ -357,7 +357,7 @@ def make_table_res_int (path_int) :
 
 def plot_Distogram (job) :
         """
-        Generate distogram for interactions of interest.
+        Generate distogram for interactions of interest, only for best model.
 
         Parameters:
         ----------
@@ -367,22 +367,18 @@ def plot_Distogram (job) :
         ----------
 
         """
-        pickle_list = glob.glob(job + "/result_*.pkl")
-        for i, pickle_output in enumerate(pickle_list):
-            logging.warning(
-                f"Processing pickle file {i+1}/{len(pickle_list)}: {pickle_output}")
-            with open(pickle_output, "rb") as p:
-                results = pickle.load(p)
-                bin_edges = results["distogram"]["bin_edges"]
-                bin_edges = np.insert(bin_edges, 0, 0)
-                distogram_softmax = softmax(results["distogram"]["logits"], axis=2)
-                dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2)
-                np.savetxt(f"{pickle_output}.dmap", dist)
-                lenght_list = []
-            with open(pickle_output,'rb') as handle :
-                result = pickle.load(handle)
-                for seq in result["seqs"] :
-                    lenght_list.append(len(seq))
+        ranking_results = json.load(open(os.path.join(f'{job}/ranking_debug.json')))
+        best_model = ranking_results["order"][0]
+        with open(os.path.join(f'{job}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
+            results = pickle.load(gzip.open(gz_file))
+            bin_edges = results["distogram"]["bin_edges"]
+            bin_edges = np.insert(bin_edges, 0, 0)
+            distogram_softmax = softmax(results["distogram"]["logits"], axis=2)
+            dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2)
+            np.savetxt(f"{job}/result_{best_model}.pkl.dmap", dist)
+            lenght_list = []
+            for seq in results["seqs"] :
+                lenght_list.append(len(seq))
             print("make png")
             initial_lenght = 0
             fig, ax = plt.subplots()
@@ -393,7 +389,7 @@ def plot_Distogram (job) :
                 initial_lenght += lenght_list[index]
                 ax.axhline(initial_lenght, color="black", linewidth=1.5)
                 ax.axvline(initial_lenght, color="black", linewidth=1.5)
-            plt.savefig(f"{pickle_output}.dmap.png", dpi=600)
+            plt.savefig(f"{job}/result_{best_model}.dmap.png", dpi=600)
             plt.close()
 
 def Make_homo_oligo (env_multimers, data_dir, Path_Pickle_Feature) :
@@ -633,11 +629,19 @@ def generate_heatmap (file):
     #plt.savefig("Normalized_heatmap.png")
     #plt.close()
 
+
 ###Probably add to generate_interaction_network ???
+def redef_interface (file) :
+    """
+    Redefine interface in function of smaller interface.
+   
+    Parameters:
+    ----------
+    file : object of File_proteins class
 
-    ###Probably add to generate_interaction_network ???
-
-def redef_interface (file):
+    Returns:
+    ----------
+    """
     alphabet = string.ascii_lowercase
     interface_dict = file.get_interface_dict()
     for proteins in interface_dict.keys() :
