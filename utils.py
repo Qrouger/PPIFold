@@ -487,7 +487,7 @@ def generate_interaction_network (file) :
     prots = list(prots)
     int_graph.add_nodes_from(prots)
     int_graph.add_weighted_edges_from(list_inter_score)
-    fig, ax = plt.subplots(figsize=(8, 6))
+    fig, ax = plt.subplots(figsize=(10, 6))
     pos = nx.spring_layout(int_graph, k = len(prots)+50, scale = 3, seed=8)
     nx.draw_networkx_nodes(int_graph,pos)
     nx.draw_networkx_edges(int_graph,pos, node_size=100, edgelist=int_graph.edges, width=1, style="dashed")
