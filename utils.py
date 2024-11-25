@@ -4,9 +4,6 @@ import csv
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from Bio import PDB
-import copy
-import glob
-import logging
 from scipy.special import softmax
 import os
 import networkx as nx
@@ -16,6 +13,7 @@ import pandas as pd
 from adjustText import adjust_text
 import json
 import gzip
+import string
 
 from File_proteins import *
 
