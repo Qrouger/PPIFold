@@ -7,6 +7,7 @@ import re
 from utils import *
 import csv
 import os
+import copy
 
 class File_proteins() :
     """
