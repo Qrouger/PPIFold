@@ -503,6 +503,7 @@ def generate_interaction_network (file) :
     nx.draw(int_graph, pos, edge_color=edge_colors_list, node_color='lightblue', node_size=500, ax=ax)
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
+    plt.colorbar(sm, ax=ax, label="iQ-score")
     plt.savefig("network.png")
     plt.close()
 
