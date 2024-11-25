@@ -332,8 +332,8 @@ def make_table_res_int (path_int) :
         dict_interface = dict()
         with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
             pickle_dict = pickle.load(gzip.open(gz_file))
-            pae_mtx = pickle_dict['predicted_aligned_error']
-            bin_edges = pickle_dict["distogram"]["bin_edges"]
+            pae_mtx = pickle_dict['predicted_aligned_error']#take PAE
+            bin_edges = pickle_dict["distogram"]["bin_edges"]#take distogram for distance
             bin_edges = np.insert(bin_edges, 0, 0)
             distogram_softmax = softmax(pickle_dict["distogram"]["logits"], axis=2)
             dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2) #center of the residue
@@ -342,9 +342,9 @@ def make_table_res_int (path_int) :
                 hori_index = 0
                 for distance in dist[line] :
                     hori_index += 1
-                    if hori_index <= lenght_prot[names[1]] :
-                        if distance <= 7 :
-                            if pae_mtx[line][hori_index] < 10 :
+                    if hori_index < lenght_prot[names[1]] :
+                        if distance <= 8 :
+                            if pae_mtx[line][hori_index] < 15 :
                                 residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
                                 residue2 = seq_prot[names[1]][hori_index]
                                 dict_interface[chains].append([residue1+" "+str(line-lenght_prot[names[1]]+1)," "+residue2+" "+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
