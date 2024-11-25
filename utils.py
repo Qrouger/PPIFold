@@ -14,6 +14,7 @@ from math import *
 import seaborn
 import pandas as pd
 from adjustText import adjust_text
+import json
 
 from File_proteins import *
 
@@ -304,19 +305,6 @@ def make_table_res_int (path_int) :
 
         Parameters:
         ----------
-        path_int : string
-
-        Returns:
-        ----------
-
-        """
-        def make_table_res_int (file, path_int) :
-        """
-        Generate a table of residue in interactions with distance and PAE.
-
-        Parameters:
-        ----------
-        file : object of class File_proteins
         path_int : string
 
         Returns:
