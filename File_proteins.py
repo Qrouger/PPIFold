@@ -334,7 +334,6 @@ class File_proteins() :
             lenght_prot[protein] = len(sequences[protein])
         self.set_lenght_prot(lenght_prot)
 
-
     def create_fasta_file (self, pickle_path) :
         """
         Generate a fasta file with a txt file.
@@ -388,9 +387,11 @@ class File_proteins() :
     def already_pickle (self, pickle_path) :
         """
         Check if protein have already a feature pickle file, and return a list of proteins who doesn't.
+
         Parameters:
         ----------
         pickle_path : string
+
         Returns:
         ----------
         prot_need_pkl : list
@@ -406,6 +407,7 @@ class File_proteins() :
     def define_interface(self, list_of_list_int, int) :
         """
         Set a dictionnary with all residues in interaction, with UniprotID.
+        
         Parameters:
         ----------
         dict_int : dict
