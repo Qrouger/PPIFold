@@ -330,7 +330,7 @@ def make_table_res_int (file, path_int) :
                 hori_index += 1
                 if hori_index < lenght_prot[names[1]] :
                     if distance <= 8 :
-                        if pae_mtx[line][hori_index] < 15 :
+                        if pae_mtx[line][hori_index] < 10 :
                             residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
                             residue2 = seq_prot[names[1]][hori_index]
                             dict_interface[chains].append([residue1+" "+str(line-lenght_prot[names[1]]+1)," "+residue2+" "+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
@@ -630,15 +630,21 @@ def redef_interface (file) :
     alphabet = string.ascii_lowercase
     interface_dict = file.get_interface_dict()
     for proteins in interface_dict.keys() :
+        already_inter = list()
         interface_dict[proteins] = sorted(interface_dict[proteins]) #sorted all interface in function of number of resiudes
         for interface1 in range(len(interface_dict[proteins])) :
-            if interface1 == 0 :
+            if interface1 == 0 : #if it's the first interface define a
                 interface_dict[proteins][interface1].insert(0,alphabet[0])
+                already_inter.append(alphabet[0])
             for interface2 in range(interface1+1,len(interface_dict[proteins])) :
                 list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
-                simi_inter = len(list_inter)/(len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2])))-2) #indice jaccard #-2 just to remove interface 'a' and uniprotID from .union()
-                if simi_inter < 0.15 : #if interfaces got more than 0.15 of same residues, it's the same interface
-                    interface_dict[proteins][interface2].insert(0,alphabet[interface2])
-                else :
+                simi_inter = len(list_inter)/(len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2])))-3) #indice jaccard # -3 just to remove interface 'a' and uniprotID from .union()
+                if simi_inter < 0.15 : #create a new interface
+                    if interface_dict[proteins][interface2][0] in already_inter : #Don't create new interface if it already has one
+                        pass
+                    else :
+                        interface_dict[proteins][interface2].insert(0,alphabet[interface2])
+                        already_inter.append(alphabet[interface2])
+                else : #if interfaces got more than 0.15 of same residues, it's the same interface
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
     print(interface_dict)
