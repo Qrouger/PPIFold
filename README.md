@@ -32,9 +32,9 @@ Ex : UniprotID1,UniprotID2,UniprotID3...
 The file conf.txt need to contains all Paths.
 
 Path_Uniprot_ID : Path and name of the UniprotID file.<br>
-Path_AlphaFold_Data : Path of the AlphaFold data base (default on ./alphadata).<br>
-Path_Singularity_Image : Path of the singularity image.<br>
-Path_Pickle_Feature : Path of your feature folder (default on ./feature).<br>
+Path_AlphaFold_Data : Path to the AlphaFold data base folder (default on ./alphadata).<br>
+Path_Singularity_Image : Path to the singularity image.<br>
+Path_Pickle_Feature : Path to your feature folder (default on ./feature).<br>
 
 ## Arguments<br>
 python main.py --make_multimers Boolean --env_multimer String --env_feature String --max_aa Integer --use_signalP Boolean --org String
