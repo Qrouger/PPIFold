@@ -140,6 +140,19 @@ class File_proteins() :
         ----------
         """
         self.interface_dict = interface_dict
+
+    def set_interface_dict(self, new_pickle) :
+        """
+        Sets list of new pickle feature.
+        
+        Parameters:
+        ----------
+        new_pickle = lsit
+        
+        Returns:
+        ----------
+        """
+        self.new_pickle = new_pickle
         
     def get_proteins_sequence(self) :
         """
@@ -257,6 +270,19 @@ class File_proteins() :
         interface_dict : dict
         """
         return self.interface_dict
+    
+    def get_new_pickle(self) :
+        """
+        Return new UniprotID list who did not have pickle feature.
+        
+        Parameters:
+        ----------
+        
+        Returns:
+        ----------
+        new_pickle : list
+        """
+        return self.new_pickle
 ### Generating of features and pre-file to run multimer
 
     def set_all_att(self, path_txt) :
@@ -394,7 +420,6 @@ class File_proteins() :
 
         Returns:
         ----------
-        prot_need_pkl : list
         """
         prot_need_pkl = list()
         for uniprotID in self.get_proteins() :
@@ -402,12 +427,12 @@ class File_proteins() :
                 pass
             else :
                 prot_need_pkl.append(uniprotID)
-        return prot_need_pkl
+        self.set_new_pickle(prot_need_pkl)
 
     def define_interface(self, list_of_list_int, int) :
         """
         Set a dictionnary with all residues in interaction, with UniprotID.
-        
+
         Parameters:
         ----------
         dict_int : dict

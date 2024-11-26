@@ -132,6 +132,7 @@ def create_feature (file, env_feature, data_dir, Path_Pickle_Feature) :
     ----------
 
     """
+    file.already_pickle(Path_Pickle_Feature)
     fasta_file = file.get_fasta_file()
     cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_feature}\n create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=False"
     cmd2 = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=False"
@@ -154,8 +155,8 @@ def Make_all_MSA_coverage (file,Path_Pickle_Feature) :
     Returns:
     ----------
     """
+    proteins = file.get_new_pickle(Path_Pickle_Feature)
     bad_MSA = str()
-    proteins = file.get_proteins()
     for prot in proteins :
         pre_feature_dict = pickle.load(open(f'{Path_Pickle_Feature}/{prot}.pkl','rb'))
         feature_dict = pre_feature_dict.feature_dict
@@ -329,7 +330,7 @@ def make_table_res_int (file, path_int) :
             for distance in dist[line] :
                 hori_index += 1
                 if hori_index < lenght_prot[names[1]] :
-                    if distance <= 8 :
+                    if distance <= 10 :
                         if pae_mtx[line][hori_index] < 10 :
                             residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
                             residue2 = seq_prot[names[1]][hori_index]
