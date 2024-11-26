@@ -11,7 +11,7 @@ import copy
 
 class File_proteins() :
     """
-    Manipulate and save file who contains all proteins
+    Manipulate and save file who contains all proteins.
     """
     def __init__(self, path_txt_file) :
         """
@@ -313,7 +313,7 @@ class File_proteins() :
         self.set_proteins_sequence(sequences)
         self.set_names(names)
 
-    def find_prot_lenght(self) :
+    def find_prot_lenght(self, prot_dict = None) :
         """
         Set the lenght for all proteins.
 
@@ -324,12 +324,16 @@ class File_proteins() :
         ----------
 
         """
-        proteins = self.get_proteins()
+        if prot_dict == None :
+            proteins = self.get_proteins()
+        else :
+            proteins = prot_dict
         sequences = self.get_proteins_sequence()
         lenght_prot = dict()
         for protein in proteins :
             lenght_prot[protein] = len(sequences[protein])
         self.set_lenght_prot(lenght_prot)
+
 
     def create_fasta_file (self, pickle_path) :
         """
@@ -372,14 +376,14 @@ class File_proteins() :
                 iQ_score_dic[(names[0],names[1])] = row['iQ_score']
         self.set_iQ_score_dict(iQ_score_dic)
         hiQ_score_dic = dict()
-        with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
-            reader2 = csv.DictReader(file2)
-            for row in reader2 :
-                prot_name = row['jobs'].split("_homo_")[0]
-                if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
-                    number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
-                    hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
-        self.set_hiQ_score_dict(hiQ_score_dic)
+        #with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
+        #    reader2 = csv.DictReader(file2)
+        #    for row in reader2 :
+        #        prot_name = row['jobs'].split("_homo_")[0]
+        #        if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
+        #            number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
+        #            hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
+        #self.set_hiQ_score_dict(hiQ_score_dic)
 
     def already_pickle (self, pickle_path) :
         """

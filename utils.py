@@ -111,6 +111,7 @@ def remove_SP (file, org) :
                  if str(line2[1:len(line2)-1]) in prot_SP.keys() :
                     SP_signal = prot_SP[line2[1:len(line2)-1]]
               final_file = final_file + new_line2
+        print(final_file)
         cmd2 = "rm " + fasta_file
         os.system(cmd2)
         with open(fasta_file, "w") as new_file2 :
@@ -290,15 +291,15 @@ def create_out_fig (file) :
             if float(iQ_score_dict[interaction]) >= 35 : #Plot figure of interest just for interesting interactions
                 job1 = interaction[0] + "_and_" + interaction[1]
                 plot_Distogram("./result_all_vs_all/" + job1)
-                make_table_res_int(file,"./result_all_vs_all/" + job1)
-        hiQ_score_dict = file.get_hiQ_score_dict()
+                make_table_res_int(file, "./result_all_vs_all/" + job1)
+        #hiQ_score_dict = file.get_hiQ_score_dict()
         #for homo_oligo in hiQ_score_dict.keys() :
          #   if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
           #      job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
            #     plot_Distogram("./result_homo_oligo/" + job2)
             #    make_table_res_int("./result_homo_oligo/" + job2)
 
-def make_table_res_int (path_int) :
+def make_table_res_int (file, path_int) :
         """
         Generate a table of residue in interactions.
 
@@ -354,6 +355,7 @@ def plot_Distogram (job) :
         ----------
 
         """
+        print(f'{job}/ranking_debug.json')
         ranking_results = json.load(open(os.path.join(f'{job}/ranking_debug.json')))
         best_model = ranking_results["order"][0]
         with open(os.path.join(f'{job}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
@@ -454,10 +456,10 @@ def generate_interaction_network (file) :
         names = [interactions[0], interactions[1]]
         if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 35 :
             valid_interactions.append([names, float(iQ_score_dict[interactions])])
-    hiQ_score_dict = file.get_hiQ_score_dict()
-    for homo_oligomer in hiQ_score_dict.keys() :
-        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
-            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
+    #hiQ_score_dict = file.get_hiQ_score_dict()
+    #for homo_oligomer in hiQ_score_dict.keys() :
+    #    if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
+    #        valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
@@ -644,4 +646,4 @@ def redef_interface (file) :
                     interface_dict[proteins][interface2].insert(0,alphabet[interface2])
                 else :
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
-
+    print(interface_dict)
