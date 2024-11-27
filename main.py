@@ -2,7 +2,9 @@ import argparse
 
 from utils import *
 from File_proteins import *
-from alphapulldown.scripts import create_individual_features
+from alphapulldown.alphapulldown.scripts import create_individual_features
+import sys
+sys.path.append("alphapulldown")
 
 def add_arguments(parser) :
     parser.add_argument("--make_multimers", help = "If you just want make feature set on False", required = False, default = True)
@@ -17,7 +19,8 @@ def main(A4) :
     #    remove_SP(A4,args.org)
     #create_feature(A4,args.env_feature,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
     #Make_all_MSA_coverage(A4,path_dict["Path_Pickle_Feature"])
-        create_individual_features(A4.get_fasta_file(),path_dict["Path_AlphaFold_data"],True,path_dict["Path_Pickle_Feature"],"2024-05-02",False)
+        txt_name = A4.get_fasta_file()
+        create_individual_features.main(txt_name,path_dict["Path_AlphaFold_data"],True,path_dict["Path_Pickle_Feature"],"2024-05-02",False)
         generate_APD_script(A4, args.max_aa)
     #if args.make_multimers == True :
         #Make_all_vs_all(args.env_multimer,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
