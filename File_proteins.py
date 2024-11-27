@@ -141,7 +141,7 @@ class File_proteins() :
         """
         self.interface_dict = interface_dict
 
-    def set_interface_dict(self, new_pickle) :
+    def set_new_pickle(self, new_pickle) :
         """
         Sets list of new pickle feature.
         
@@ -306,6 +306,7 @@ class File_proteins() :
         self.set_file_name(path_txt)
         self.set_proteins(new_proteins)
         self.set_interface_dict(interface_dict)
+        
 
  
     def find_proteins_sequence (self) :
@@ -372,7 +373,7 @@ class File_proteins() :
 
         """
         line = str()
-        proteins = self.already_pickle(pickle_path)
+        proteins = self.get_new_pickle()
         sequences = self.get_proteins_sequence()
         for protein in proteins :
             line = line + ">" + protein + "\n" + sequences[protein] + "\n"        
@@ -400,7 +401,7 @@ class File_proteins() :
                 names = row['jobs'].split('_and_')
                 iQ_score_dic[(names[0],names[1])] = row['iQ_score']
         self.set_iQ_score_dict(iQ_score_dic)
-        hiQ_score_dic = dict()
+        #hiQ_score_dic = dict()
         #with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
         #    reader2 = csv.DictReader(file2)
         #    for row in reader2 :
@@ -422,7 +423,8 @@ class File_proteins() :
         ----------
         """
         prot_need_pkl = list()
-        for uniprotID in self.get_proteins() :
+        proteins = self.get_proteins()
+        for uniprotID in proteins :
             if os.path.isfile(pickle_path + "/" + uniprotID + ".pkl") :
                 pass
             else :
