@@ -1,0 +1,3 @@
+[submodule "alphapulldown"]
+	path = alphapulldown
+	url = https://github.com/KosinskiLab/AlphaPulldown.git
