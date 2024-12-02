@@ -2,13 +2,13 @@
 Automatised pipeline for massive PPI prediction and figure creation.
 
 PPIFold it's a tool for analysis Protein-Protein Interaction from AlphaPullDown, with an automatised pre and post-processing.
-It's use to generate PPI prediction on lot of system, without lost time in generate initial file and sort result.
-It predict the better homo-oligomer for protein and better interface to interact with specific proteins.
-This allow to predict massive multimer complexe with lot of PPI.
+It's uses to generate PPI prediction on lot of systems, without losing time in generating initial file and sort results.
+It predicts the better homo-oligomer for protein and better interface to interact with specific proteins.
+This allows to predict massive multimer complex with lot of PPI.
 
 ## Requirements
 
-- Python >=3.10
+- Python >= 3.10
 - AlphaPulldown 1.0.4 command line interface https://github.com/KosinskiLab/AlphaPulldown with singularity image (v0.4)
 - SignalP5 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
 
