@@ -14,16 +14,16 @@ def add_arguments(parser) :
     parser.add_argument("--org" , help = "Organism of interest : arch, gram+, gram- or euk", required = False, default = "gram-", type = str)
 
 def main(A4) :
-    if args.use_signalP == True :
-        remove_SP(A4,args.org)
-    create_feature(A4,args.env_feature,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
-    Make_all_MSA_coverage(A4,path_dict["Path_Pickle_Feature"])
+    #if args.use_signalP == True :
+    #    remove_SP(A4,args.org)
+    #create_feature(A4,args.env_feature,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
+    #Make_all_MSA_coverage(A4,path_dict["Path_Pickle_Feature"])
     generate_APD_script(A4, args.max_aa)
     if args.make_multimers == True :
-        Make_all_vs_all(args.env_multimer,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
+        #Make_all_vs_all(args.env_multimer,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
         add_iQ_score(path_dict["Path_Singularity_Image"])
-        Make_homo_oligo(args.env_multimer,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
-        add_hiQ_score(path_dict["Path_Singularity_Image"])
+        #Make_homo_oligo(args.env_multimer,path_dict["Path_AlphaFold_data"],path_dict["Path_Pickle_Feature"])
+        #add_hiQ_score(path_dict["Path_Singularity_Image"])
         A4.update_iQ_hiQ_score()
         generate_heatmap(A4)
         create_out_fig(A4)

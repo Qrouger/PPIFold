@@ -400,15 +400,15 @@ class File_proteins() :
                 names = row['jobs'].split('_and_')
                 iQ_score_dic[(names[0],names[1])] = row['iQ_score']
         self.set_iQ_score_dict(iQ_score_dic)
-        hiQ_score_dic = dict()
-        with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
-            reader2 = csv.DictReader(file2)
-            for row in reader2 :
-                prot_name = row['jobs'].split("_homo_")[0]
-                if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
-                    number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
-                    hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
-        self.set_hiQ_score_dict(hiQ_score_dic)
+        #hiQ_score_dic = dict()
+        #with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
+        #    reader2 = csv.DictReader(file2)
+        #    for row in reader2 :
+        #        prot_name = row['jobs'].split("_homo_")[0]
+        #        if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
+        #            number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
+        #            hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
+        #self.set_hiQ_score_dict(hiQ_score_dic)
 
     def already_pickle (self, pickle_path) :
         """

@@ -260,8 +260,8 @@ def add_iQ_score (dir_alpha) :
     Returns:
     ----------
     """
-    cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-    os.system(cmd4)
+    #cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+    #os.system(cmd4)
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
         all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,iQ_score\n"
@@ -291,12 +291,12 @@ def create_out_fig (file) :
             job1 = interaction[0] + "_and_" + interaction[1]
             plot_Distogram("./result_all_vs_all/" + job1)
             make_table_res_int(file, "./result_all_vs_all/" + job1)
-    hiQ_score_dict = file.get_hiQ_score_dict()
-    for homo_oligo in hiQ_score_dict.keys() :
-       if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
-          job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
-          plot_Distogram("./result_homo_oligo/" + job2)
-          make_table_res_int("./result_homo_oligo/" + job2)
+    #hiQ_score_dict = file.get_hiQ_score_dict()
+    #for homo_oligo in hiQ_score_dict.keys() :
+    #   if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
+    #      job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
+    #      plot_Distogram("./result_homo_oligo/" + job2)
+    #      make_table_res_int("./result_homo_oligo/" + job2)
 
 def make_table_res_int (file, path_int) :
     """
@@ -451,10 +451,10 @@ def generate_interaction_network (file) :
         names = [interactions[0], interactions[1]]
         if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 35 :
             valid_interactions.append([names, float(iQ_score_dict[interactions])])
-    hiQ_score_dict = file.get_hiQ_score_dict()
-    for homo_oligomer in hiQ_score_dict.keys() :
-        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
-            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
+    #hiQ_score_dict = file.get_hiQ_score_dict()
+    #for homo_oligomer in hiQ_score_dict.keys() :
+    #    if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
+    #        valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
