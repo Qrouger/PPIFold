@@ -17,7 +17,7 @@ from File_proteins import *
 
 def define_path() :
     """
-    Take all path from conf.txt, and set up on dictionnary.
+    Take all path from conf.txt, and set up on a dictionnary.
     
     Parameters:
     ----------
@@ -123,9 +123,9 @@ def create_feature (file, env_feature, data_dir, Path_Pickle_Feature) :
 
     Parameters:
     ----------
+    file : object of class File_proteins
     env_feature : string
     data_dir : string
-    file : object of class File_proteins
     Path_Pickle_Feature : string
 
     Returns:
@@ -187,12 +187,12 @@ def Make_all_MSA_coverage (file,Path_Pickle_Feature) :
 
 def generate_APD_script (file, max_aa) :
         """
-        Write two scripts in local to use AlphaPulldown, this scripts are build in function of maximum amino acid.
+        Write two scripts in local to use AlphaPulldown, this scripts are write in function of maximum amino acid.
 
         Parameters:
         ----------
-        max_aa : integer
         file : object of class File_proteins
+        max_aa : integer
 
         Returns:
         ----------
@@ -291,12 +291,12 @@ def create_out_fig (file) :
             job1 = interaction[0] + "_and_" + interaction[1]
             plot_Distogram("./result_all_vs_all/" + job1)
             make_table_res_int(file, "./result_all_vs_all/" + job1)
-    #hiQ_score_dict = file.get_hiQ_score_dict()
-    #for homo_oligo in hiQ_score_dict.keys() :
-    #   if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
-    #      job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
-    #      plot_Distogram("./result_homo_oligo/" + job2)
-    #      make_table_res_int("./result_homo_oligo/" + job2)
+    hiQ_score_dict = file.get_hiQ_score_dict()
+    for homo_oligo in hiQ_score_dict.keys() :
+       if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
+          job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
+          plot_Distogram("./result_homo_oligo/" + job2)
+          make_table_res_int("./result_homo_oligo/" + job2)
 
 def make_table_res_int (file, path_int) :
     """
@@ -344,7 +344,7 @@ def make_table_res_int (file, path_int) :
 
 def plot_Distogram (job) :
     """
-    Generate distogram for interactions of interest, only for best model.
+    Generate distogram for interactions of interest, only for best models.
 
     Parameters:
     ----------
@@ -380,7 +380,7 @@ def plot_Distogram (job) :
 
 def Make_homo_oligo (env_multimers, data_dir, Path_Pickle_Feature) :
     """
-    Use Alphapulldown script to generate all homo oligomer.
+    Use Alphapulldown script to generate all homo-oligomer.
 
     Parameters:
     ----------
@@ -402,7 +402,7 @@ def Make_homo_oligo (env_multimers, data_dir, Path_Pickle_Feature) :
 
 def add_hiQ_score (dir_alpha) :
     """
-    Generate a score table for all homo oligomer.
+    Generate a score table for all homo-oligomer.
 
     Parameters:
     ----------
@@ -411,8 +411,8 @@ def add_hiQ_score (dir_alpha) :
     Returns:
     ----------
     """
-    #cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-    #os.system(cmd4)
+    cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha}/alpha-analysis_jax_0.4.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+    os.system(cmd4)
     with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
         all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
@@ -433,7 +433,6 @@ def add_hiQ_score (dir_alpha) :
             all_lines = all_lines + line
     with open("result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
-            
 
 def generate_interaction_network (file) :
     """
@@ -452,10 +451,10 @@ def generate_interaction_network (file) :
         names = [interactions[0], interactions[1]]
         if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 35 :
             valid_interactions.append([names, float(iQ_score_dict[interactions])])
-    #hiQ_score_dict = file.get_hiQ_score_dict()
-    #for homo_oligomer in hiQ_score_dict.keys() :
-    #    if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
-    #        valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
+    hiQ_score_dict = file.get_hiQ_score_dict()
+    for homo_oligomer in hiQ_score_dict.keys() :
+        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
+            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
@@ -544,7 +543,7 @@ def generate_interaction_network (file) :
 
 def generate_heatmap (file) :
     """
-    Generate heatmap of interactions scores between proteins.
+    Generate heatmap of interactions scores between all proteins.
    
     Parameters:
     ----------
@@ -596,25 +595,6 @@ def generate_heatmap (file) :
     ax2.figure.tight_layout()
     plt.savefig("iptm_ptm_heatmap.png")
     plt.close()
-    #norm_data_matrix = list()
-    #for protein in proteins_list :
-    #    new_line = list()
-    #    sum_iQ = 0
-    #    max_iQ = 0
-    #    for iQ_score in save_line[protein] :
-    #        sum_iQ += iQ_score
-    #        if iQ_score > max_iQ :
-    #            max_iQ = iQ_score
-    #    ave_iQ = sum_iQ / len(save_line)
-    #    for iQ_score in save_line[protein] :
-    #        new_line.append(((((iQ_score - ave_iQ) / max_iQ)+1)*0.5)*100) #all values are normalized to the mean and redistribute between 0 and 100.
-    #    norm_data_matrix.append(new_line)
-    #complet_matrix2 = pd.DataFrame(norm_data_matrix, index = index_prot, columns = index_prot)
-    #ax2 = seaborn.heatmap(complet_matrix2, cbar_kws = {'label' : 'iQ_score*'}, xticklabels=True, yticklabels=True)
-    #ax2.figure.tight_layout()
-    #plt.savefig("Normalized_heatmap.png")
-    #plt.close()
-
 
 ###Probably add to generate_interaction_network ???
 def redef_interface (file) :
