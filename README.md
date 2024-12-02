@@ -37,7 +37,7 @@ Path_Singularity_Image : Path of the singularity image.<br>
 Path_Pickle_Feature : Path of your feature folder (default on ./feature).<br>
 
 ## Arguments<br>
-python main.py --make_multimers Boolean --env_multimer String --env_feature String --max_aa Integer --use_signalP Boolean --org String
+python PPIFold.py --make_multimers Boolean --env_multimer String --env_feature String --max_aa Integer --use_signalP Boolean --org String
 
 Optional arguments
 
