@@ -155,7 +155,7 @@ def Make_all_MSA_coverage (file,Path_Pickle_Feature) :
     Returns:
     ----------
     """
-    proteins = file.get_new_pickle(Path_Pickle_Feature)
+    proteins = file.get_new_pickle()
     bad_MSA = str()
     for prot in proteins :
         pre_feature_dict = pickle.load(open(f'{Path_Pickle_Feature}/{prot}.pkl','rb'))
