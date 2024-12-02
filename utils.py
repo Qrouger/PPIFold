@@ -365,7 +365,7 @@ def plot_Distogram (job) :
         lenght_list = []
         for seq in results["seqs"] :
             lenght_list.append(len(seq))
-        print("make png")
+        print("make Distogram")
         initial_lenght = 0
         fig, ax = plt.subplots()
         d = ax.imshow(dist)
@@ -629,3 +629,4 @@ def redef_interface (file) :
                 else : #if interfaces got more than 0.15 of same residues, it's the same interface
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
     print(interface_dict)
+    return(interface_dict)
