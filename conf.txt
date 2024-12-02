@@ -1,0 +1,4 @@
+Path_Uniprot_ID : test.txt
+Path_AlphaFold_Data : alphadata
+Path_Singularity_Image : alpha
+Path_Pickle_Feature :
