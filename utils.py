@@ -317,6 +317,9 @@ def make_table_res_int (file, path_int) :
     names = path_int.split("/")[2].split("_and_")
     chains = path_int.split("/")[2]
     dict_interface = dict()
+    color_res = dict()
+    color_res[names[0]] = set()
+    color_res[names[1]] = set()
     with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
         pickle_dict = pickle.load(gzip.open(gz_file))
         pae_mtx = pickle_dict['predicted_aligned_error']#take PAE
@@ -335,7 +338,10 @@ def make_table_res_int (file, path_int) :
                             residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
                             residue2 = seq_prot[names[1]][hori_index]
                             dict_interface[chains].append([residue1+" "+str(line-lenght_prot[names[1]]+1)," "+residue2+" "+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
-    file.define_interface(dict_interface[chains],names)
+                            color_res[names[0]].add(line-lenght_prot[names[1]]+1)
+                            color_res[names[1]].add(hori_index+1)
+    file.define_interface(dict_interface[chains],names) #update interaction interface
+    color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
     fileout = chains+"_res_int.csv"
     np_table = np.array(dict_interface[chains])
     with open(f"{path_int}/"+fileout, "w", newline="") as file :
@@ -629,3 +635,47 @@ def redef_interface (file) :
                 else : #if interfaces got more than 0.15 of same residues, it's the same interface
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
     print(interface_dict)
+    #return(interface_dict)
+
+
+def color_int_residues(pdb_path, residues_to_color, names): # nul
+    """
+    Color residue in interaction on a pdb file.
+   
+    Parameters:
+    ----------
+    pdb_path : string
+    residues_to_color : dict
+    names : string
+    Returns:
+    ----------
+    """
+
+    name_prot = names[0]
+    save_line = str()
+    chain1 = "B"
+    residues_to_color 
+    print(residues_to_color)
+    with open(f'{pdb_path}/ranked_0.pdb', 'r+') as file :
+        for line in file:
+            if line.startswith("ATOM") :
+                chain2 = line[21]
+                if chain1 == chain2 :
+                    res_num = int(line[22:26].strip())
+                    if res_num in residues_to_color[name_prot] : #change B-factor in color interaction residue
+                        line = line[:60] + "100" + line[66:]
+                    else :
+                        line = line[:60] + "0" + line[66:]
+                else :
+                    name_prot = names[1]
+                    res_num = int(line[22:26].strip())
+                    if res_num in residues_to_color[name_prot] :
+                        line = line[:60] + "100" + line[66:]
+                    else :
+                        line = line[:60] + "0" + line[66:]
+                chain1 = line[21]
+            save_line += line
+        file.write(save_line)
+        print(f"Résidus {residues_to_color[names[0]]} colorés ")
+
+
