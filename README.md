@@ -74,7 +74,7 @@ Axes x and y are proteins in interaction, pixels into black square represent int
 Colour represent distance in ångström, blue color represent a short distance between two residue and yellow a big distance.
 
 **Interaction network<br>**
-PPI network with iQ-score and homo-oligomers predictions.<br>
+PPI network with iQ-score and homo-oligomers (hiQ-score) predictions.<br>
 <img src="https://github.com/user-attachments/assets/51d1f095-f595-441c-ac6b-ae516e8baa82" alt="interaction_network" width="400"/><br>
 
 **iQ-Score heatmap<br>**
