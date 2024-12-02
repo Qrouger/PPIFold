@@ -38,5 +38,5 @@ if __name__ == "__main__" :
     A4.find_proteins_sequence()
     A4.find_prot_lenght()
     A4.already_pickle(path_dict["Path_Pickle_Feature"])
-    A4.create_fasta_file(path_dict["Path_Pickle_Feature"])
+    A4.create_fasta_file()
     main(A4)
