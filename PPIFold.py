@@ -8,6 +8,7 @@ from utils import *
 from File_proteins import *
 import sys
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'AlphaPulldown')))
 
 def add_arguments(parser) :
     parser.add_argument("--make_multimers", help = "If you just want make feature set on False", required = False, default = True)
