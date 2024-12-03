@@ -24,7 +24,7 @@ def define_path() :
 
     Returns:
     ----------
-    path_dict : dict
+    path_dict : dictionary
     """
     path_dict = dict()
     with open("conf.txt", "r") as file :
@@ -76,12 +76,12 @@ def define_path() :
 
 def remove_SP (file, org) :
     """
-    Creating a new fasta file without signal peptide.
+    Creating a new fasta file without signal peptide using SignalP.
 
     Parameters:
     ----------
     file : object of class File_proteins
-    org : type of organism
+    org : string
 
     Returns:
     ----------
@@ -143,7 +143,7 @@ def create_feature (file, env_feature, data_dir, Path_Pickle_Feature) :
     else :
         os.system(cmd2)
 
-def Make_all_MSA_coverage (file,Path_Pickle_Feature) :
+def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
     """
     Generating MSA coverage for all proteins.
 
