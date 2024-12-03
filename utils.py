@@ -675,6 +675,5 @@ def color_int_residues(pdb_path, residues_to_color, names) :
             save_line += line
     with open(f'{pdb_path}/ranked_0.pdb', 'w') as writer:
         writer.write(save_line)
-        print(f"Résidus {residues_to_color[names[0]]} colorés")
 
 
