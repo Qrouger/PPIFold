@@ -1,3 +1,7 @@
+""" Main file of PPIFold
+
+    Author: Quentin Rouger
+"""
 import argparse
 
 from utils import *
