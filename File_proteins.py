@@ -30,7 +30,7 @@ class File_proteins() :
         
         Parameters:
         ----------
-        new_protein_sequence = dict
+        new_protein_sequence = dictionary
         
         Returns:
         ----------
@@ -82,7 +82,7 @@ class File_proteins() :
         
         Parameters:
         ----------
-        lenght_prot = dict
+        lenght_prot = dictionary
         
         Returns:
         ----------
@@ -95,7 +95,7 @@ class File_proteins() :
         
         Parameters:
         ----------
-        name = dict
+        name = dictionary
         
         Returns:
         ----------
@@ -108,7 +108,7 @@ class File_proteins() :
         
         Parameters:
         ----------
-        iQ_score_dict = dict
+        iQ_score_dict = dictionary
         
         Returns:
         ----------
@@ -121,7 +121,7 @@ class File_proteins() :
         
         Parameters:
         ----------
-        hiQ_score_dict = dict
+        hiQ_score_dict = dictionary
         
         Returns:
         ----------
@@ -134,7 +134,7 @@ class File_proteins() :
         
         Parameters:
         ----------
-        interface_dict = dict
+        interface_dict = dictionary
         
         Returns:
         ----------
@@ -147,7 +147,7 @@ class File_proteins() :
         
         Parameters:
         ----------
-        new_pickle = lsit
+        new_pickle = list
         
         Returns:
         ----------
@@ -163,7 +163,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        proteins_sequence : dict
+        proteins_sequence : dictionary
         """
         return self.protein_sequence
     
@@ -189,7 +189,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        file_name : str
+        file_name : string
         """
         return self.file_name
     
@@ -202,7 +202,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        fasta_file : str
+        fasta_file : string
         """
         return self.fasta_file
     
@@ -215,7 +215,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        lenght_prot : dict
+        lenght_prot : dictionary
         """
         return self.lenght_prot
     
@@ -228,7 +228,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        name : dict
+        name : dictionary
         """
         return self.name
 
@@ -241,7 +241,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        iQ_score_dict : dict
+        iQ_score_dict : dictionary
         """
         return self.iQ_score_dict
 
@@ -254,7 +254,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        hiQ_score_dict : dict
+        hiQ_score_dict : dictionary
         """
         return self.hiQ_score_dict
         
@@ -267,7 +267,7 @@ class File_proteins() :
         
         Returns:
         ----------
-        interface_dict : dict
+        interface_dict : dictionary
         """
         return self.interface_dict
     
@@ -310,14 +310,13 @@ class File_proteins() :
  
     def find_proteins_sequence (self) :
         """
-        Search in the site uniprot the aa sequence and clean it.
+        Search in the site uniprot the amino acid sequence and clean it.
         
         Parameters:
         ----------
 
         Returns:
         ----------
-    
         """
         sequences = dict()
         names = dict()
@@ -345,10 +344,10 @@ class File_proteins() :
 
         Parameters:
         ----------
-
+        prot_dict = dictionary
+        
         Returns:
         ----------
-
         """
         if prot_dict == None :
             proteins = self.get_proteins()
@@ -362,14 +361,13 @@ class File_proteins() :
 
     def create_fasta_file (self) :
         """
-        Generate a fasta file with a txt file.
+        Generate a fasta file with the initial txt file.
 
         Parameters:
         ----------
 
         Returns:
         ----------
-
         """
         line = str()
         proteins = self.get_new_pickle()
@@ -384,14 +382,13 @@ class File_proteins() :
 
     def update_iQ_hiQ_score(self) :
         """
-        Generate two dictionary, first where the key is a tuple of interaction proteins(Uniprot) and the value is the iQ_score, a second where the key is the protein (Uniprot) and the value is a tuple of the better hiQ_score and this homo-oligomerisation.
+        Generate two dictionaries, first where the key is a tuple of interaction proteins(Uniprot) and the value is the iQ_score, a second where the key is the protein (Uniprot) and the value is a tuple of the better hiQ_score and this homo-oligomerisation.
 
         Parameters:
         ----------
 
         Returns:
         ----------
-
         """
         iQ_score_dic = dict()
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
