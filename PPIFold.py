@@ -3,7 +3,7 @@ import argparse
 from utils import *
 from File_proteins import *
 import sys
-sys.path.append("alphapulldown")
+
 
 def add_arguments(parser) :
     parser.add_argument("--make_multimers", help = "If you just want make feature set on False", required = False, default = True)
