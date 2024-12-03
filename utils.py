@@ -1,3 +1,7 @@
+""" All utils function for PPIFold
+
+    Author: Quentin Rouger
+"""
 import numpy as np
 import pickle
 import csv
