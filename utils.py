@@ -638,7 +638,7 @@ def redef_interface (file) :
     #return(interface_dict)
 
 
-def color_int_residues(pdb_path, residues_to_color, names): # nul
+def color_int_residues(pdb_path, residues_to_color, names) :
     """
     Color residue in interaction on a pdb file.
    
@@ -650,32 +650,31 @@ def color_int_residues(pdb_path, residues_to_color, names): # nul
     Returns:
     ----------
     """
-
-    name_prot = names[0]
+    name_prot = names[1]
     save_line = str()
     chain1 = "B"
-    residues_to_color 
-    print(residues_to_color)
-    with open(f'{pdb_path}/ranked_0.pdb', 'r+') as file :
+    residues_to_color
+    with open(f'{pdb_path}/ranked_0.pdb', 'r') as file :
         for line in file:
             if line.startswith("ATOM") :
                 chain2 = line[21]
                 if chain1 == chain2 :
                     res_num = int(line[22:26].strip())
                     if res_num in residues_to_color[name_prot] : #change B-factor in color interaction residue
-                        line = line[:60] + "100" + line[66:]
+                        line = line[:60] + " 100  " + line[66:]
                     else :
-                        line = line[:60] + "0" + line[66:]
+                        line = line[:60] + " 0    " + line[66:]
                 else :
-                    name_prot = names[1]
+                    name_prot = names[0] #use new dict to color atoms
                     res_num = int(line[22:26].strip())
                     if res_num in residues_to_color[name_prot] :
-                        line = line[:60] + "100" + line[66:]
+                        line = line[:60] + " 100  " + line[66:]
                     else :
-                        line = line[:60] + "0" + line[66:]
+                        line = line[:60] + " 0    " + line[66:]
                 chain1 = line[21]
             save_line += line
-        file.write(save_line)
-        print(f"Résidus {residues_to_color[names[0]]} colorés ")
+    with open(f'{pdb_path}/ranked_0.pdb', 'w') as writer:
+        writer.write(save_line)
+        print(f"Résidus {residues_to_color[names[0]]} colorés")
 
 
