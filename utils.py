@@ -28,54 +28,25 @@ def define_path() :
 
     Returns:
     ----------
-    path_dict : dictionary
+    path_dict : dict
     """
     path_dict = dict()
     with open("conf.txt", "r") as file :
-        while True:
-            lines = file.readline()
-            if not lines:
-                break
-            else :
-                if lines[0:17] == "Path_Uniprot_ID :" :
-                    if len(lines[17:len(lines)]) < 4 :
-                        print("Path to Uniprot file is empty")
-                        exit()
-                    else :
-                        path = lines[17:len(lines)].strip().strip('\n')
-                        path_dict["Path_Uniprot_ID"] = path
-
-                elif lines[0:21] == "Path_AlphaFold_Data :" :
-                    if len(lines[21:len(lines)]) < 4 :
-                        print("Path to AlphaFold data is empty, set by default on ./alphadata")
-                        path_dict["Path_AlphaFold_data"] = "./alphadata"
-                    else :
-                        path = lines[21:len(lines)].strip().strip('\n')
-                        if path[len(path)-1] == "/" :
-                            path = path[0:len(path)-1]
-                        else :
-                            pass
-                        path_dict["Path_AlphaFold_data"] = path
-
-                elif lines[0:24] == "Path_Singularity_Image :" :
-                    if len(lines[24:len(lines)]) < 4 :
-                        print("Path to Singularity image is empty")
-                        exit()
-                    else :
-                        path = lines[24:len(lines)].strip().strip('\n')
-                        path_dict["Path_Singularity_Image"] = path
-
-                elif lines[0:21] == "Path_Pickle_Feature :" :
-                    if len(lines[21:len(lines)]) < 4 :
-                        print("Path to Feature data is empty, set by default on ./feature")
-                        path_dict["Path_Pickle_Feature"] = "./feature"
-                    else :
-                        path = lines[21:len(lines)].strip().strip('\n')
-                        if path[len(path)-1] == "/" :
-                            path = path[0:len(path)-1]
-                        else :
-                            pass
-                        path_dict["Path_Pickle_Feature"] = path
+        for lines in file :
+            path_name = lines.split(":")[0].strip().strip("\n")
+            path_dir = lines.split(":")[1].strip().strip("\n")
+            path_dict[path_name] = path_dir
+    for path_key in path_dict.keys() :
+        if len(path_dict[path_key]) == 0 :
+            print (f'Path to {path_key} file is empty')
+            if path_key == "Path_Uniprot_ID" or path_key == "Path_Singularity_Image" :
+                exit()
+            elif path_key == "Path_AlphaFold_Data" :
+                print("set by default on ./alphadata")
+                path_dict[path_key] = "./alphadata"
+            elif path_key == "Path_Pickle_Feature" :
+                print("set by default on ./feature")
+                path_dict[path_key] = "./feature"
     return(path_dict)
 
 def remove_SP (file, org) :
