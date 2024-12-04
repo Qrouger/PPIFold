@@ -561,10 +561,10 @@ def redef_interface (file) :
             for interface2 in range(interface1+1,len(interface_dict[proteins])) :
                 list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
                 simi_inter = len(list_inter)/(len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2])))-3) #indice jaccard # -3 just to remove interface 'a' and uniprotID from .union()
-                if simi_inter < 0.15 : #create a new interface
+                if simi_inter < 0.20 : #create a new interface, take into account residues can be shared in two interface
                     if interface_dict[proteins][interface2][0] in already_inter : #Don't create new interface if it already has one
                         pass
-                    else :
+                    else : 
                         interface_dict[proteins][interface2].insert(0,alphabet[interface2])
                         already_inter.append(alphabet[interface2])
                 else : #if interfaces got more than 0.15 of same residues, it's the same interface
