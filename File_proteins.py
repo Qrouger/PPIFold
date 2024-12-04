@@ -13,7 +13,7 @@ class File_proteins() :
     """
     Manipulate and save file who contains all proteins.
     """
-    def __init__(self, path_txt_file) :
+    def __init__ (self, path_txt_file) :
         """
         Constructor : 
         Set attribute for one entry file.
@@ -24,7 +24,7 @@ class File_proteins() :
         """
         self.set_all_att(path_txt_file)
 
-    def set_proteins_sequence(self, new_protein_sequence) :
+    def set_proteins_sequence (self, new_protein_sequence) :
         """
         Sets a dict of all sequences.
         
@@ -37,7 +37,7 @@ class File_proteins() :
         """
         self.protein_sequence = new_protein_sequence
 
-    def set_proteins(self, new_protein) :
+    def set_proteins (self, new_protein) :
         """
         Sets a list of all proteins UniprotID.
         
@@ -50,7 +50,7 @@ class File_proteins() :
         """
         self.protein = new_protein
 
-    def set_file_name(self, filename) :
+    def set_file_name (self, filename) :
         """
         Sets new filename for the txt file.
         
@@ -63,7 +63,7 @@ class File_proteins() :
         """
         self.file_name = filename
 
-    def set_fasta_file(self, filename) :
+    def set_fasta_file (self, filename) :
         """
         Sets new filename for the fasta file.
         
@@ -76,7 +76,7 @@ class File_proteins() :
         """
         self.fasta_file = filename
 
-    def set_lenght_prot(self, lenght_prot) :
+    def set_lenght_prot (self, lenght_prot) :
         """
         Sets lenght of all proteins.
         
@@ -89,7 +89,7 @@ class File_proteins() :
         """
         self.lenght_prot = lenght_prot
 
-    def set_names(self, name) :
+    def set_names (self, name) :
         """
         Sets names of all proteins.
         
@@ -102,7 +102,7 @@ class File_proteins() :
         """
         self.name = name
 
-    def set_iQ_score_dict(self, iQ_score_dict) : 
+    def set_iQ_score_dict (self, iQ_score_dict) : 
         """
         Sets iQ_score for all proteins.
         
@@ -115,7 +115,7 @@ class File_proteins() :
         """
         self.iQ_score_dict = iQ_score_dict
 
-    def set_hiQ_score_dict(self, hiQ_score_dict) :
+    def set_hiQ_score_dict (self, hiQ_score_dict) :
         """
         Sets hiQ_score for all proteins.
         
@@ -128,7 +128,7 @@ class File_proteins() :
         """
         self.hiQ_score_dict = hiQ_score_dict
 
-    def set_interface_dict(self, interface_dict) :
+    def set_interface_dict (self, interface_dict) :
         """
         Sets interface_dict for new interactions.
         
@@ -141,7 +141,7 @@ class File_proteins() :
         """
         self.interface_dict = interface_dict
 
-    def set_new_pickle(self, new_pickle) :
+    def set_new_pickle (self, new_pickle) :
         """
         Sets list of new pickle feature.
         
@@ -154,7 +154,7 @@ class File_proteins() :
         """
         self.new_pickle = new_pickle
         
-    def get_proteins_sequence(self) :
+    def get_proteins_sequence (self) :
         """
         Return the new amino acid sequence list.
         
@@ -180,7 +180,7 @@ class File_proteins() :
         """
         return self.protein
     
-    def get_file_name(self) :
+    def get_file_name (self) :
         """
         Return the name of the file.
         
@@ -193,7 +193,7 @@ class File_proteins() :
         """
         return self.file_name
     
-    def get_fasta_file(self) :
+    def get_fasta_file (self) :
         """
         Return the name of the fasta file.
         
@@ -206,7 +206,7 @@ class File_proteins() :
         """
         return self.fasta_file
     
-    def get_lenght_prot(self) :
+    def get_lenght_prot (self) :
         """
         Return the lenght of proteins.
         
@@ -219,7 +219,7 @@ class File_proteins() :
         """
         return self.lenght_prot
     
-    def get_names(self) :
+    def get_names (self) :
         """
         Return names of proteins.
         
@@ -232,7 +232,7 @@ class File_proteins() :
         """
         return self.name
 
-    def get_iQ_score_dict(self) :
+    def get_iQ_score_dict (self) :
         """
         Return iQ_score for all interactions.
         
@@ -245,7 +245,7 @@ class File_proteins() :
         """
         return self.iQ_score_dict
 
-    def get_hiQ_score_dict(self) :
+    def get_hiQ_score_dict (self) :
         """
         Return hiQ_score for all homo-oligomer.
         
@@ -258,7 +258,7 @@ class File_proteins() :
         """
         return self.hiQ_score_dict
         
-    def get_interface_dict(self) :
+    def get_interface_dict (self) :
         """
         Return all interfaces for all proteins.
         
@@ -271,7 +271,7 @@ class File_proteins() :
         """
         return self.interface_dict
     
-    def get_new_pickle(self) :
+    def get_new_pickle (self) :
         """
         Return new UniprotID list who did not have pickle feature.
         
@@ -286,7 +286,7 @@ class File_proteins() :
     
 ### Generating of features and pre-file to run multimer
 
-    def set_all_att(self, path_txt) :
+    def set_all_att (self, path_txt) :
         """
         Set all values for all attribut for one txt file.
         
@@ -338,7 +338,7 @@ class File_proteins() :
         self.set_proteins_sequence(sequences)
         self.set_names(names)
 
-    def find_prot_lenght(self, prot_dict = None) :
+    def find_prot_lenght (self, prot_dict = None) :
         """
         Set the lenght for all proteins.
 
@@ -380,7 +380,7 @@ class File_proteins() :
             fh.write(line)
         self.set_fasta_file(file_out)
 
-    def update_iQ_hiQ_score(self) :
+    def update_iQ_hiQ_score (self) :
         """
         Generate two dictionaries, first where the key is a tuple of interaction proteins(Uniprot) and the value is the iQ_score, a second where the key is the protein (Uniprot) and the value is a tuple of the better hiQ_score and this homo-oligomerisation.
 
@@ -427,7 +427,7 @@ class File_proteins() :
                 prot_need_pkl.append(uniprotID)
         self.set_new_pickle(prot_need_pkl)
 
-    def define_interface(self, list_of_list_int, int) :
+    def define_interface (self, list_of_list_int, int) :
         """
         Set a dictionnary with all residues in interaction, with the UniprotID.
 
