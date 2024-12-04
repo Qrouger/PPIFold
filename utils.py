@@ -16,6 +16,7 @@ import json
 import gzip
 import string
 import seaborn
+import create_individual_features
 
 from File_proteins import *
 
@@ -109,15 +110,20 @@ def create_feature (file, env_feature, data_dir, Path_Pickle_Feature) :
     """
     file.already_pickle(Path_Pickle_Feature)
     fasta_file = file.get_fasta_file()
-    cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_feature}\n create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=True"
-    cmd2 = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=True"
+    cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_feature}"
     cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
+    use_mmseqs2 = True
+    max_template_date = "2024-12-14"
+    use_hhsearch = False
+    compress_features = True
+    skip_existing = True
     if env_feature != None :
         os.system(cmd)
+        create_individual_features.main(Path_Pickle_Feature,use_mmseqs2,data_dir,max_template_date,fasta_file,use_hhsearch,compress_features,skip_existing)
         os.system(cmd3)
     else :
-        os.system(cmd2)
-
+        create_individual_features.main(Path_Pickle_Feature,use_mmseqs2,data_dir,max_template_date,fasta_file,use_hhsearch,compress_features,skip_existing)
+        
 def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
     """
     Generating MSA coverage for all proteins.
