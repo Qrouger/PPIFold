@@ -1,4 +1,0 @@
-[submodule "AlphaPulldown"]
-	path = AlphaPulldown
-	url = git@github.com:Qrouger/AlphaPulldown.git
-	fetchRecurse = true
