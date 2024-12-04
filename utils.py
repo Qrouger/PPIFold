@@ -115,7 +115,8 @@ def remove_SP (file, org) :
                     SP_signal = prot_SP[line2[1:len(line2)-1]]
                     save_key = line2[1:len(line2)-1]
             final_file = final_file + new_line2
-    file.find_prot_lenght(new_fasta_dict)
+    if len(new_fasta_dict) > 0 :
+        file.find_prot_lenght(new_fasta_dict)
     cmd2 = "rm " + fasta_file
     os.system(cmd2)
     with open(fasta_file, "w") as new_file2 :
