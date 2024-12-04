@@ -268,7 +268,7 @@ def create_out_fig (file) :
     hiQ_score_dict = file.get_hiQ_score_dict()
     for homo_oligo in hiQ_score_dict.keys() :
        if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
-          job2 = homo_oligo + "_homo_" + hiQ_score_dict[homo_oligo][1] + "er"
+          job2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er"
           plot_Distogram("./result_homo_oligo/" + job2)
           make_table_res_int("./result_homo_oligo/" + job2)
 
