@@ -270,7 +270,7 @@ def create_out_fig (file) :
        if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
           job2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er"
           plot_Distogram("./result_homo_oligo/" + job2)
-          make_table_res_int("./result_homo_oligo/" + job2)
+          make_table_res_int(file, "./result_homo_oligo/" + job2)
 
 def make_table_res_int (file, path_int) :
     """
