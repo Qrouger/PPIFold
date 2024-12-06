@@ -16,7 +16,7 @@ import json
 import gzip
 import string
 import seaborn
-import create_individual_features
+import create_individual_features_modif
 
 from File_proteins import *
 
@@ -119,10 +119,10 @@ def create_feature (file, env_feature, data_dir, Path_Pickle_Feature) :
     skip_existing = True
     if env_feature != None :
         os.system(cmd)
-        create_individual_features.main(Path_Pickle_Feature,use_mmseqs2,data_dir,max_template_date,fasta_file,use_hhsearch,compress_features,skip_existing)
+        create_individual_features_modif.main(Path_Pickle_Feature,use_mmseqs2,data_dir,max_template_date,fasta_file,use_hhsearch,compress_features,skip_existing)
         os.system(cmd3)
     else :
-        create_individual_features.main(Path_Pickle_Feature,use_mmseqs2,data_dir,max_template_date,fasta_file,use_hhsearch,compress_features,skip_existing)
+        create_individual_features_modif.main(Path_Pickle_Feature,use_mmseqs2,data_dir,max_template_date,fasta_file,use_hhsearch,compress_features,skip_existing)
         
 def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
     """
