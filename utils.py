@@ -293,7 +293,7 @@ def make_table_res_int (file, path_int) :
         names = [homo,homo]
     else : 
         names = path_int.split("/")[2].split("_and_")
-        chains = path_int.split("/")[2]
+    chains = path_int.split("/")[2]
     dict_interface = dict()
     with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
         pickle_dict = pickle.load(gzip.open(gz_file))
