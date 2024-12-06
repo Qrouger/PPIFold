@@ -288,8 +288,11 @@ def make_table_res_int (file, path_int) :
     best_model = ranking_results["order"][0]
     lenght_prot = file.get_lenght_prot()
     seq_prot = file.get_proteins_sequence()
-    names = path_int.split("/")[2].split("_and_")
-    chains = path_int.split("/")[2]
+    if "result_homo_oligo" in path_int.split("/") :
+        names = [path_int.split("/")[2],path_int.split("/")[2]]
+    else : 
+        names = path_int.split("/")[2].split("_and_")
+        chains = path_int.split("/")[2]
     dict_interface = dict()
     with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
         pickle_dict = pickle.load(gzip.open(gz_file))
