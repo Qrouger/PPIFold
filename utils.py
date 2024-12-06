@@ -289,7 +289,8 @@ def make_table_res_int (file, path_int) :
     lenght_prot = file.get_lenght_prot()
     seq_prot = file.get_proteins_sequence()
     if "result_homo_oligo" in path_int.split("/") :
-        names = [path_int.split("/")[2],path_int.split("/")[2]]
+        homo = path_int.split("/")[2].split("_")[0]
+        names = [homo,homo]
     else : 
         names = path_int.split("/")[2].split("_and_")
         chains = path_int.split("/")[2]
