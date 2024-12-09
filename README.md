@@ -18,7 +18,7 @@ You need to install AlphaPulldown 1.0.4 with AlphaFold database, SignalpP5 and a
 
 git clone https://github.com/Qrouger/PPIFold.git
 
->Install SignalP5
+Install SignalP5<br>
 https://services.healthtech.dtu.dk/cgi-bin/sw_request?software=signalp&version=5.0&packageversion=5.0b&platform=Linux
 
 /!\ If you don't want to use Signal use --use_SignalP False
