@@ -425,27 +425,37 @@ def process_multimeric_features(feat, idx ,use_mmseqs2, use_hhsearch, output_dir
         create_and_save_monomer_objects(monomer, pipeline ,output_dir ,compress_features, skip_existing)
 
 
-def main(output_dir,use_mmseqs2,data_dir,max_template_date,fasta_paths,use_hhsearch,compress_features,skip_existing):
+def main(output_dir,use_mmseqs2,data_dir,max_template_date,fasta_paths,compress_features,skip_existing):
     """
     output_dir = string
     use_mmseqs2 = boolean
     data_dir = string
     max_template_date = string
     fasta_paths = string
-    use_hhsearch = boolean
     compress_features = boolean
     skip_existing = boolean
     """
+    FLAGS.output_dir = output_dir
+    FLAGS.use_mmseqs2 = use_mmseqs2
+    FLAGS.data_dir = data_dir
+    FLAGS.max_template_date = max_template_date
+    FLAGS.fasta_paths = fasta_paths
+    FLAGS.compress_features = compress_features
+    if FLAGS.use_mmseqs2 and FLAGS.path_to_mmt is not None:
+        raise ValueError("Multimeric templates and MMseqs2 can't be used together.")
     try:
-        Path(output_dir).mkdir(parents=True, exist_ok=True)
+        Path(FLAGS.output_dir).mkdir(parents=True, exist_ok=True)
     except FileExistsError:
         logging.error(
             "Multiple processes are trying to create the same folder now.")
         pass
-    if use_mmseqs2 == False:
-        check_template_date_and_uniprot(max_template_date,data_dir)
+    if not FLAGS.use_mmseqs2:
+        check_template_date_and_uniprot()
+
+    if not FLAGS.path_to_mmt:
+        process_sequences_individual_mode()
     else:
-        process_sequences_multimeric_mode(fasta_paths, use_mmseqs2, use_hhsearch, output_dir ,compress_features, skip_existing)
+        process_sequences_multimeric_mode()
 
 
 if __name__ == "__main__":
