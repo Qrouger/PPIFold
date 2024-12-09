@@ -21,7 +21,7 @@ git clone https://github.com/Qrouger/PPIFold.git
 Install SignalP5<br>
 https://services.healthtech.dtu.dk/cgi-bin/sw_request?software=signalp&version=5.0&packageversion=5.0b&platform=Linux
 
-/!\ If you don't want to use Signal use --use_SignalP False
+/!\ If you don't want to use Signal use --use_signalP False
 
 ## Pipeline
 
