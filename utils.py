@@ -537,7 +537,7 @@ def generate_heatmap (file) :
 ###Probably add to generate_interaction_network ???
 def redef_interface (file) :
     """
-    Compare interface in function of smaller interface.
+    Compare interface in function of smaller interface and class it with a letter that represent interface.
    
     Parameters:
     ----------
@@ -552,19 +552,22 @@ def redef_interface (file) :
         already_inter = list()
         interface_dict[proteins] = sorted(interface_dict[proteins]) #sorted all interface in function of number of resiudes
         for interface1 in range(len(interface_dict[proteins])) :
-            if interface1 == 0 : #if it's the first interface define a
+            if interface1 == 0 : #if it's the first interface, define a
                 interface_dict[proteins][interface1].insert(0,alphabet[0])
                 already_inter.append(alphabet[0])
             for interface2 in range(interface1+1,len(interface_dict[proteins])) :
                 list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
                 simi_inter = len(list_inter)/(len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2])))-3) #indice jaccard # -3 just to remove interface 'a' and uniprotID from .union()
-                if simi_inter < 0.20 : #create a new interface
+                print(simi_inter, interface1, interface2)
+                if simi_inter < 0.50 : #create a new interface
                     if interface_dict[proteins][interface2][0] in already_inter : #Don't create new interface if it already has one
                         pass
                     else :
                         interface_dict[proteins][interface2].insert(0,alphabet[interface2])
                         already_inter.append(alphabet[interface2])
-                else : #if interfaces got more than 0.20 of same residues, it's the same interface
+                        print(already_inter)
+                else : #if interfaces got more than 0.50 of same residues, it's the same interface
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
     print(interface_dict)
     return(interface_dict)
+
