@@ -1,4 +1,4 @@
-""" All utils function for PPIFold
+""" All useful functions for PPIFold
 
     Author: Quentin Rouger
 """
