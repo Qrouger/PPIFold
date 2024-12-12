@@ -114,7 +114,7 @@ A text file who contains proteins with MSA depth lower than 100 sequences.<br>
 A file to make network manualy on Cytoscape.
 
 **.pdb file<br>**
-Model structure.
+Model structure, colore residue in interaction with the B-factor.
 
 
 Packages versions :<br>
