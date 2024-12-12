@@ -33,7 +33,8 @@ https://services.healthtech.dtu.dk/cgi-bin/sw_request?software=signalp&version=5
 
 Inital file can be set with Uniprot ID, sequence fasta or bot.<br>
 UniprotID need to be in same line separate by comma<br>
-Ex : UniprotID1,UniprotID2,UniprotID3...<br>
+Ex : <br>
+UniprotID1,UniprotID2,UniprotID3...<br>
 
 Fasta sequence need to start with ">" follow by the protein name.<br>
 Ex : <br>
