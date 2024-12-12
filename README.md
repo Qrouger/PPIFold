@@ -21,7 +21,8 @@ git clone https://github.com/Qrouger/PPIFold.git
 Install SignalP5<br>
 https://services.healthtech.dtu.dk/cgi-bin/sw_request?software=signalp&version=5.0&packageversion=5.0b&platform=Linux
 
-/!\ If you don't want to use Signal use --use_signalP False
+> [!NOTE]
+> If you don't want to use Signal use --use_signalP False
 
 ## Pipeline
 
@@ -94,7 +95,8 @@ A text file who contains too large interaction in function of --max_aa.<br>
 
 **Bad_MSA.txt<br>**
 A text file who contains proteins with MSA depth lower than 100 sequences.<br>
-/!\Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
+> [!WARNING]
+> Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
 
 **table.cyt<br>**
 A file to make network manualy on Cytoscape.
