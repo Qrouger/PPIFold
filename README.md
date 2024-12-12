@@ -31,9 +31,20 @@ https://services.healthtech.dtu.dk/cgi-bin/sw_request?software=signalp&version=5
 
 ## Initial File
 
-The initial file need to contains Uniprot ID, separate by a comma and in a ".txt" file.
+Inital file can be set with Uniprot ID, sequence fasta or bot.<br>
+UniprotID need to be in same line separate by comma<br>
+Ex : UniprotID1,UniprotID2,UniprotID3...<br>
 
-Ex : UniprotID1,UniprotID2,UniprotID3...
+Fasta sequence need to start with ">" follow by the protein name.<br>
+Ex : <br>
+>Name<br>
+MFKRSGSLSLALMSSFCSSSLATPLSSAEFDHVARKCAPSVATSTLAAIAK<br>
+VESRFDPLAIHDNTTGETLHWQDHTQATQVVRHRLDARHSLDVGLMQINSR<br>
+NFSMLGLTPDGALKACPSLSAAANMLKSRYAGGETIDEKQIALRRAISAYN<br>
+TGNFIRGFANGYVRKVETAAQSLVPALIEPPQDDHKALKSEDTWDVWGSYQ<br>
+RRSQEDGVGGSIAPQPPDQDNGKSADDNQVLFDLY<br>
+
+This file need to be a ".txt" file.<br>
 
 The file conf.txt need to contains all Paths.
 
