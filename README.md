@@ -53,8 +53,8 @@ Optional arguments
 --use_signalP Use SignalP if your proteins can be periplasmic, set by default on True <br>
 --org If you use SignalP, you can select the organism (gram-, gram+, arch or euch), set by default on gram- <br>
 
-Good use :<br>
-Save all your pickles files on the same directory. 
+> [!TIP] Good use :<br>
+> Save all your pickles files on the same directory. 
 
 ## Result
 
