@@ -299,13 +299,23 @@ class File_proteins() :
         """
         new_proteins = list()
         interface_dict = dict()
+        already_fasta = dict()
         with open(path_txt,"r") as in_file :
             for line in in_file :
-                new_line = (line.split(","))
-                for prot in new_line :
-                    new_proteins.append(prot.upper().strip())
+                if "," in str(line) :
+                    save_prot = ""
+                    new_line = (line.split(","))
+                    for prot in new_line :
+                        new_proteins.append(prot.upper().strip())
+                elif line[0] == ">" :
+                    save_prot = line[1:len(line)].strip("\n")
+                    new_proteins.append(save_prot)
+                    already_fasta[save_prot] = str()
+                elif len(line) > 2 and save_prot != "" :
+                    already_fasta[save_prot] = already_fasta[save_prot] + line.strip("\n")
         self.set_file_name(path_txt)
         self.set_proteins(new_proteins)
+        self.set_proteins_sequence(already_fasta)
         self.set_interface_dict(interface_dict)
  
     def find_proteins_sequence (self) :
@@ -318,22 +328,23 @@ class File_proteins() :
         Returns:
         ----------
         """
-        sequences = dict()
+        sequences = self.get_proteins_sequence()
         names = dict()
         pattern = r"SQ   SEQUENCE   .*  .*\n([\s\S]*)"
         pattern2 = r"GN   Name=([\w]*)"
         del_car = ["\n"," ","//"]
         for proteins in self.get_proteins() :
-            print("Search sequence for " + proteins)
-            urllib.request.urlretrieve("https://rest.uniprot.org/uniprotkb/"+proteins+".txt","temp_file.txt")
-            with open("temp_file.txt","r") as in_file:
-                for seq in re.finditer(pattern, in_file.read()):
-                    sequences[proteins] = seq.group(1)
-            with open("temp_file.txt","r") as in_file:
-                for name in re.finditer(pattern2, in_file.read()) :
-                    names[proteins] = name.group(1)
-            for car in del_car :
-                sequences[proteins] = sequences[proteins].replace(car,"")
+            if proteins not in sequences.keys() :
+                print("Search sequence for " + proteins)
+                urllib.request.urlretrieve("https://rest.uniprot.org/uniprotkb/"+proteins+".txt","temp_file.txt")
+                with open("temp_file.txt","r") as in_file:
+                    for seq in re.finditer(pattern, in_file.read()):
+                        sequences[proteins] = seq.group(1)
+                with open("temp_file.txt","r") as in_file:
+                    for name in re.finditer(pattern2, in_file.read()) :
+                        names[proteins] = name.group(1)
+                for car in del_car :
+                    sequences[proteins] = sequences[proteins].replace(car,"")
         os.remove("temp_file.txt")
         self.set_proteins_sequence(sequences)
         self.set_names(names)
