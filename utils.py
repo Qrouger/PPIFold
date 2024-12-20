@@ -77,6 +77,8 @@ def remove_SP (file, org) :
     with open(fasta_file, "r") as fa_file :
         for line2 in fa_file :
             new_line2 = line2
+            if SP_signal == 0 and line2[0] != ">" :
+                new_line2 = line2
             if int(SP_signal) > 0 :
                 new_line2 = line2[int(SP_signal)+1:len(line2)]
                 new_fasta_dict[save_key] = line2[int(SP_signal)+1:len(line2)]
