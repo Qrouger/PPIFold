@@ -55,13 +55,11 @@ Path_Singularity_Image : Path of the singularity image.<br>
 Path_Pickle_Feature : Path of your feature folder (default on ./feature).<br>
 
 ## Arguments<br>
-python PPIFold.py --make_multimers Boolean --env_multimer String --env_feature String --max_aa Integer --use_signalP Boolean --org String
+python PPIFold.py --make_multimers Boolean --max_aa Integer --use_signalP Boolean --org String
 
 Optional arguments
 
 --make_multimers This argument is True by default, if you just want make feature and MSA generation you have to set it on False <br>
---env_feature The name of the conda environment need to make feature with AlphaPulldown, set by default on None <br>
---env_multimer The name of the conda environment need to make multimer with AlphaPulldown, set by default on None <br>
 --max_aa The maximum lenght of a model generable by your GPU (in function of Vram), set by default on 2000 (24 Go) <br>
 --use_signalP Use SignalP if your proteins can be periplasmic, set by default on True <br>
 --org If you use SignalP, you can select the organism (gram-, gram+, arch or euch), set by default on gram- <br>
