@@ -362,6 +362,9 @@ def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     Returns:
     ----------
     """
+    os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
+    os.environ["TF_FORCE_UNIFIED_MEMORY"] = "true"
+    os.environ["XLA_CLIENT_MEM_FRACTION"] = "3.2"
     cmd =f"run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--data_dir={data_dir} \--remove_result_pickles=False"
     os.system(cmd)
 
