@@ -122,4 +122,4 @@ Bio: v1.7.1<br>
 networkx: v3.3<br>
 
 > [!WARNING]
-> Two piepelins cannot be launched simultaneously on the same PC.
+> Two pipelines cannot be launched simultaneously on the same PC.
