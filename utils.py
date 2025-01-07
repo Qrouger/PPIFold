@@ -95,14 +95,13 @@ def remove_SP (file, org) :
     with open(fasta_file, "w") as new_file2 :
         new_file2.write(final_file)
 
-def create_feature (file, env_feature, data_dir, Path_Pickle_Feature) :
+def create_feature (file, data_dir, Path_Pickle_Feature) :
     """
     Launch command to generate features.
 
     Parameters:
     ----------
     file : object of class File_proteins
-    env_feature : string
     data_dir : string
     Path_Pickle_Feature : string
 
@@ -197,27 +196,24 @@ def generate_APD_script (file, max_aa) :
 
 ### Generating Multimers
 
-def Make_all_vs_all (env_multimers, data_dir, Path_Pickle_Feature) :
+def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     """
     Use Alphapulldown script to generate all versus all interactions.
 
     Parameters:
     ----------
-    env_multimers : string
     data_dir : string
     Path_Pickle_Feature : string
 
     Returns:
     ----------
     """
-    cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature}"
-    cmd2 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature}"
-    cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
-    if env_multimers != None :
-        os.system(cmd)
-        os.system(cmd3)
-    else :
-        os.system(cmd2)
+    os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
+    os.environ["TF_FORCE_UNIFIED_MEMORY"] = "true"
+    os.environ["XLA_CLIENT_MEM_FRACTION"] = "3.2"
+    os.environ["XLA_FLAGS"] = "--xla_gpu_enable_triton_gemm=false"
+    cmd =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature}"
+    os.system(cmd)
 
 def add_iQ_score (dir_alpha) :
     """
@@ -354,27 +350,20 @@ def plot_Distogram (job) :
         plt.savefig(f"{job}/result_{best_model}.dmap.png", dpi=600)
         plt.close()
 
-def Make_homo_oligo (env_multimers, data_dir, Path_Pickle_Feature) :
+def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     """
     Use Alphapulldown script to generate all homo-oligomer.
 
     Parameters:
     ----------
-    env_multimers : string
     data_dir : string
     Path_Pickle_Feature : string
         
     Returns:
     ----------
     """
-    cmd = f"#!/bin/bash --login \n source ~/.bashrc \n conda activate {env_multimers}\n run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--data_dir={data_dir} \--remove_result_pickles=False"
-    cmd2 =f"run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--data_dir={data_dir} \--remove_result_pickles=False"
-    cmd3 = "#!/bin/bash --login \n source ~/.bashrc \n conda deactivate"
-    if env_multimers != None :
-        os.system(cmd)
-        os.system(cmd3)
-    else :
-        os.system(cmd2)
+    cmd =f"run_multimer_jobs.py --mode=homo-oligomer \--output_path=result_homo_oligo \--num_cycle=3 \--compress_result_pickles=True \--oligomer_state_file=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--data_dir={data_dir} \--remove_result_pickles=False"
+    os.system(cmd)
 
 def add_hiQ_score (dir_alpha) :
     """
