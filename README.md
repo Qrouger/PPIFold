@@ -95,8 +95,7 @@ Colour represent distance in ångström, blue color represent a short distance b
 **Interaction network<br>**
 PPI network with iQ-score and homo-oligomers (hiQ-score) predictions.<br>
 
-
-<img src="https://github.com/user-attachments/assets/4b1ef93c-ca11-4578-9db1-51ba3f8ef40d" alt="interaction_network" width="400"/><br>
+<img src="https://github.com/user-attachments/assets/8af56e6d-3548-452a-b720-4c4d6c2dac68" alt="interaction_network" width="400"/><br>
 
 **iQ-Score heatmap<br>**
 Heatmap of iQ-score between each PPI.<br>
