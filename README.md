@@ -74,27 +74,29 @@ This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
 
 ### Figures
 **MSA depth<br>**
-All aligned homologous sequences.<br>
+All aligned homologous sequences for O50333.<br>
 <img alt="MSA Depth" src="https://github.com/user-attachments/assets/d31c276a-ac54-4b22-a305-531d30e8c270" width="400"/><br>
 
 Axe y is the number of homologous sequence, axe x is the posistions on the sequence. Colour represent the sequence identity.
 
 **Residue interaction table<br>**
-Table of distance into two atoms of two chains.<br>
+Table of distance into two atoms of O50331 and O5333.<br>
 <img width="400" alt="residue_interaction_table" src="https://github.com/user-attachments/assets/ffdddb90-db4b-42ab-bdfe-41f09eae98f4" /><br>
 
 Chains are differents proteins, two residue in contact are specified as well as their distances. Distances are calculated from center of mass the residues. Distance has a threshold of 10 and PAE of 5.
 
 **Distogram<br>**
-Distance map between each atoms of each chains.<br>
+Distance map between each atoms of O50331 and O5333.<br>
 <img width="400" alt="Distogram" src="https://github.com/user-attachments/assets/42476dbd-7c90-4a3c-b95f-84ee6c495b34" /><br>
 
-Distogram into Axes x and y are proteins in interaction, pixels into black square represent intra residue distances and pixels outside inter residue distances.
+Axes x and y are proteins in interaction, pixels into black square represent intra residue distances and pixels outside inter residue distances.
 Colour represent distance in ångström, blue color represent a short distance between two residue and yellow a big distance.
 
 **Interaction network<br>**
 PPI network with iQ-score and homo-oligomers (hiQ-score) predictions.<br>
-<img src="https://github.com/user-attachments/assets/51d1f095-f595-441c-ac6b-ae516e8baa82" alt="interaction_network" width="400"/><br>
+
+
+<img src="https://github.com/user-attachments/assets/4b1ef93c-ca11-4578-9db1-51ba3f8ef40d" alt="interaction_network" width="400"/><br>
 
 **iQ-Score heatmap<br>**
 Heatmap of iQ-score between each PPI.<br>
