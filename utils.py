@@ -401,6 +401,39 @@ def add_hiQ_score (dir_alpha) :
             all_lines = all_lines + line
     with open("result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
+   #with open("predictions_with_good_interpae.csv", "r") as file1 :
+    #reader = csv.DictReader(file1)
+    #all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
+    #all_homo = dict()
+    #save_pi_score = dict()
+    #for row in reader :
+    #    job = row['jobs']
+    #    if 'homo' in job and row['pi_score'] != 'No interface detected' :
+    #        if job not in all_homo.keys() :
+    #               all_homo[job] = (row['pi_score'],1,row)
+    #               save_pi_score[job] = [float(row['pi_score'])]
+    #        else :
+    #               save_pi_score[job].append(float(row['pi_score']))
+    #               sum_pi_score = float(all_homo[job][0]) + float(row['pi_score'])
+    #               sum_int = all_homo[job][1] + 1
+    #               all_homo[job] = (sum_pi_score,sum_int,row)
+    #for key in all_homo.keys() :
+    #       row = all_homo[key][2]
+    #       number_oligo = row["jobs"].split("_")[2].replace("er","")
+    #       if len(save_pi_score[key]) > int(number_oligo) : #if model have more interface than number of homo-oligomerization
+    #          new_sum_pi_score = 0
+    #          save_pi_score[key].sort(reverse=True)
+    #          for index in range(0,int(number_oligo)) :
+    #             new_sum_pi_score += save_pi_score[key][index]
+    #             hiQ_score = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
+    #          line = key+","+str(all_homo[key][0])+","+row['iptm_ptm']+","+str(hiQ_score)+"\n"
+    #          all_lines += line
+    #       else :
+    #          hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
+    #          line = key+","+str(all_homo[key][0])+","+row['iptm_ptm']+","+str(hiQ_score)+"\n"
+    #          all_lines += line
+   #with open("new_predictions_with_good_interpae.csv", "w") as file2 :
+    #file2.write(all_lines)
 
 def generate_interaction_network (file) :
     """
