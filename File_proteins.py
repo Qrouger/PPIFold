@@ -431,10 +431,10 @@ class File_proteins() :
         """
         prot_need_pkl = list()
         proteins = self.get_proteins()
-           if os.path.isfile(pickle_path + "/" + uniprotID + ".pkl") :
-                pass
-            else :
-                prot_need_pkl.append(uniprotID)
+        if os.path.isfile(pickle_path + "/" + uniprotID + ".pkl") :
+            pass
+        else :
+            prot_need_pkl.append(uniprotID)
         self.set_new_pickle(prot_need_pkl)
 
     def define_interface (self, list_of_list_int, int) :
