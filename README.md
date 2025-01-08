@@ -81,14 +81,15 @@ Axe y is the number of homologous sequence, axe x is the posistions on the seque
 
 **Residue interaction table<br>**
 Table of distance into two atoms of two chains.<br>
-<img width="400" alt="residue_interaction_table" src="https://github.com/user-attachments/assets/02c9ba11-5c1f-495f-9246-66d2ed78d59e" /><br>
+<img width="400" alt="residue_interaction_table" src="https://github.com/user-attachments/assets/ffdddb90-db4b-42ab-bdfe-41f09eae98f4" /><br>
 
 Chains are differents proteins, two residue in contact are specified as well as their distances. Distances are calculated from center of mass the residues. Distance has a threshold of 10 and PAE of 5.
 
 **Distogram<br>**
 Distance map between each atoms of each chains.<br>
-<img src="https://github.com/user-attachments/assets/96e65860-ae32-4eca-a1bb-c5aa1e565752" alt="Distogram" width="400"/><br>
-Axes x and y are proteins in interaction, pixels into black square represent intra residue distances and pixels outside inter residue distances.
+<img width="400" alt="Distogram" src="https://github.com/user-attachments/assets/42476dbd-7c90-4a3c-b95f-84ee6c495b34" /><br>
+
+Distogram into Axes x and y are proteins in interaction, pixels into black square represent intra residue distances and pixels outside inter residue distances.
 Colour represent distance in ångström, blue color represent a short distance between two residue and yellow a big distance.
 
 **Interaction network<br>**
