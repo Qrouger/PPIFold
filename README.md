@@ -99,7 +99,7 @@ PPI network with iQ-score and homo-oligomers (hiQ-score) predictions.<br>
 
 **iQ-Score heatmap<br>**
 Heatmap of iQ-score between each PPI.<br>
-<img src="https://github.com/user-attachments/assets/f846af8e-2b90-4e01-9f46-aa9ec2ee5024" alt="iQ_score_heatmap" width="400"/><br>
+<img src="https://github.com/user-attachments/assets/cf1b8d62-45e8-41a7-a149-e4e466ba251c" alt="iQ_score_heatmap" width="400"/><br>
 Colour represent iQ-score, better iQ-score is represent by a lighter color. 
 The black boxes represent either bad PAE, homo-oligomer or too large total proteins lenght.
 
