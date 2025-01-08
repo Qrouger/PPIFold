@@ -431,7 +431,7 @@ class File_proteins() :
         """
         prot_need_pkl = list()
         proteins = self.get_proteins()
-        for UniprotID in proteins :
+        for uniprotID in proteins :
             if os.path.isfile(pickle_path + "/" + uniprotID + ".pkl") :
                 pass
             else :
