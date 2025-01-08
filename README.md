@@ -75,7 +75,7 @@ This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
 ### Figures
 **MSA depth<br>**
 All aligned homologous sequences.<br>
-<img width="614" alt="Capture d’écran 2025-01-08 à 14 08 30" src="https://github.com/user-attachments/assets/d31c276a-ac54-4b22-a305-531d30e8c270" width="400"/><br>
+<img alt="MSA Depth" src="https://github.com/user-attachments/assets/d31c276a-ac54-4b22-a305-531d30e8c270" width="400"/><br>
 
 Axe y is the number of homologous sequence, axe x is the posistions on the sequence. Colour represent the sequence identity.
 
