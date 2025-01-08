@@ -96,6 +96,7 @@ Colour represent distance in ångström, blue color represent a short distance b
 PPI network with iQ-score and homo-oligomers (hiQ-score) predictions.<br>
 
 <img src="https://github.com/user-attachments/assets/8af56e6d-3548-452a-b720-4c4d6c2dac68" alt="interaction_network" width="400"/><br>
+This network represent interaction into R388 proteins. Each interaction is represented by a line connecting two proteins, colored with the corresponding iQ-score. A loop on a protein indicates the better homo-oligomers with the higher hiQ-score.
 
 **iQ-Score heatmap<br>**
 Heatmap of iQ-score between each PPI.<br>
