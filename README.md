@@ -81,7 +81,8 @@ Axe y is the number of homologous sequence, axe x is the posistions on the seque
 
 **Residue interaction table<br>**
 Table of distance into two atoms of two chains.<br>
-<img src="https://github.com/user-attachments/assets/345ed6c0-daa3-4be8-8eb7-52a7d2ec3784" alt="residue_interaction_table" width="400"/><br>
+<img width="400" alt="residue_interaction_table" src="https://github.com/user-attachments/assets/02c9ba11-5c1f-495f-9246-66d2ed78d59e" /><br>
+
 Chains are differents proteins, two residue in contact are specified as well as their distances. Distances are calculated from center of mass the residues. Distance has a threshold of 10 and PAE of 5.
 
 **Distogram<br>**
