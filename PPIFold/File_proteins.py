@@ -308,7 +308,7 @@ class File_proteins() :
                     for prot in new_line :
                         new_proteins.append(prot.upper().strip())
                 elif line[0] == ">" :
-                    save_prot = line[1:len(line)].strip("\n")
+                    save_prot = line[1:len(line)].strip("\n").strip(" ")
                     new_proteins.append(save_prot)
                     already_fasta[save_prot] = str()
                 elif len(line) > 2 and save_prot != "" :
@@ -345,7 +345,7 @@ class File_proteins() :
                         names[proteins] = name.group(1)
                 for car in del_car :
                     sequences[proteins] = sequences[proteins].replace(car,"")
-        os.remove("temp_file.txt")
+                os.remove("temp_file.txt")
         self.set_proteins_sequence(sequences)
         self.set_names(names)
 
