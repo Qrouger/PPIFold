@@ -4,7 +4,7 @@
 """
 import argparse
 
-from utils import *
+from Utils import *
 from File_proteins import *
 import sys
 
