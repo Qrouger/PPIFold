@@ -41,7 +41,7 @@ https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-
 
 ## Initial File
 
-Inital file can be set with Uniprot ID, sequence fasta or bot.<br>
+Inital file can be set with Uniprot ID, sequence fasta or both.<br>
 UniprotID need to be in same line separate by comma<br>
 Ex : <br>
 UniprotID1,UniprotID2,UniprotID3...<br>
