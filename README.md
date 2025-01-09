@@ -116,7 +116,7 @@ Heatmap of iQ-score between each PPI.<br>
 Colour represent iQ-score, better iQ-score is represent by a lighter color. 
 The black boxes represent either bad PAE, homo-oligomer or too large total proteins lenght.
 
-### Other Files
+### Generated Files
 **OOM_int.txt<br>**
 A text file who contains too large interaction in function of --max_aa.<br>
 
@@ -129,7 +129,7 @@ A text file who contains proteins with MSA depth lower than 100 sequences.<br>
 A file to make network manualy on Cytoscape.
 
 **.pdb file<br>**
-Model structure, colore residue in interaction with the B-factor.
+Model structure, color residue in interaction with the B-factor.
 
 > [!WARNING]
 > Two pipelines cannot be launched simultaneously on the same PC.
