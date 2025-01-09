@@ -7,22 +7,30 @@ It predicts the better homo-oligomer for protein and better interface to interac
 This allows to predict massive multimer complex with lot of PPI.
 
 ## Requirements
-
-- Python >= 3.10
-- AlphaPulldown 1.0.4 command line interface https://github.com/KosinskiLab/AlphaPulldown with singularity image (v0.4)
+- AlphaFold data base
+- Anaconda
 - SignalP5 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
+- Singularity and Singularity Image
 
 ## Installation
+Installation AlphaFold database :<br>
+- sudo apt install aria2
+- git clone https://github.com/deepmind/alphafold.git<br>
+- cd alphafold
+- scripts/download_all_data.sh /Directory > download.log 2> download_all.log<br>
 
-You need to install AlphaPulldown 1.0.4 with AlphaFold database, SignalpP5 and at least python 3.10.
-
-git clone https://github.com/Qrouger/PPIFold.git
-
-Install SignalP5<br>
+Install SignalP5 (optional) :<br>
 https://services.healthtech.dtu.dk/cgi-bin/sw_request?software=signalp&version=5.0&packageversion=5.0b&platform=Linux
 
 > [!NOTE]
 > If you don't want to use Signal use --use_signalP False
+
+Installation Singularity :<br>
+https://docs.sylabs.io/guides/3.0/user-guide/installation.html#install-on-linux
+
+Download Singularity image (score generation) :<br>
+https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-for-the-downstream-analysis-tools
+
 
 ## Pipeline
 
@@ -55,7 +63,7 @@ Path_Singularity_Image : Path of the singularity image.<br>
 Path_Pickle_Feature : Path of your feature folder (default on ./feature).<br>
 
 ## Arguments<br>
-python PPIFold.py --make_multimers Boolean --max_aa Integer --use_signalP Boolean --org String
+PPIFold --make_multimers Boolean --max_aa Integer --use_signalP Boolean --org String
 
 Optional arguments
 
@@ -118,13 +126,6 @@ A file to make network manualy on Cytoscape.
 
 **.pdb file<br>**
 Model structure, colore residue in interaction with the B-factor.
-
-
-Packages versions :<br>
-numpy: v2.0.1<br>
-matplotlib: v3.9.1<br>
-Bio: v1.7.1<br>
-networkx: v3.3<br>
 
 > [!WARNING]
 > Two pipelines cannot be launched simultaneously on the same PC.
