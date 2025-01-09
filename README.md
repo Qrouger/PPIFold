@@ -9,7 +9,7 @@ This allows to predict massive multimer complex with lot of PPI.
 ## Requirements
 - AlphaFold data base
 - Anaconda
-- SignalP5 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
+- SignalP5
 - Singularity and Singularity Image
 
 ## Installation
@@ -20,8 +20,7 @@ Installation AlphaFold database :<br>
 - scripts/download_all_data.sh /Directory > download.log 2> download_all.log<br>
 
 Install SignalP5 (optional) :<br>
-https://services.healthtech.dtu.dk/cgi-bin/sw_request?software=signalp&version=5.0&packageversion=5.0b&platform=Linux
-
+https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
 > [!NOTE]
 > If you don't want to use Signal use --use_signalP False
 
