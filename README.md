@@ -25,10 +25,10 @@ Install SignalP5 (optional) :<br>
 
 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php<br>
 ```bash
-- tar -xvzf signalp-5.0b.Linux.tar.gz
-- cd signalp-5.0b/
-- cp bin/signalp /usr/local/bin
-- sudo cp -r lib/* /usr/local/lib
+tar -xvzf signalp-5.0b.Linux.tar.gz
+cd signalp-5.0b/
+cp bin/signalp /usr/local/bin
+sudo cp -r lib/* /usr/local/lib
 ```
 
 > [!NOTE]
