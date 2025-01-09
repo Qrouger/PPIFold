@@ -20,14 +20,17 @@ Installation AlphaFold database :<br>
 - scripts/download_all_data.sh /Directory > download.log 2> download_all.log<br>
 
 Install SignalP5 (optional) :<br>
+
 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
 > [!NOTE]
 > If you don't want to use Signal use --use_signalP False
 
 Installation Singularity :<br>
+
 https://docs.sylabs.io/guides/3.0/user-guide/installation.html#install-on-linux
 
 Download Singularity image (score generation) :<br>
+
 https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-for-the-downstream-analysis-tools
 
 
