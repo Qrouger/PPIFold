@@ -43,10 +43,12 @@ Download Singularity image (score generation) :<br>
 https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-for-the-downstream-analysis-tools
 
 Installation PPIFold :<br>
-- conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 hhsuite hmmer modelcif networkx <br>
-- conda activate PPIFold <br>
-- pip install PPIFold <br>
-- pip install -U "jax[cuda12]" <br>
+```bash
+conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 hhsuite hmmer modelcif networkx
+conda activate PPIFold
+pip install PPIFold
+pip install -U "jax[cuda12]"
+```
 ## Pipeline
 
 ![Rouger_2024_Figure-1](https://github.com/user-attachments/assets/09bacfc4-103c-4910-aeea-2753e0ccca33)
