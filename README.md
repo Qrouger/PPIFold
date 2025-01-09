@@ -14,18 +14,23 @@ This allows to predict massive multimer complex with lot of PPI.
 
 ## Installation
 Installation AlphaFold database :<br>
-- sudo apt install aria2
-- git clone https://github.com/deepmind/alphafold.git<br>
-- cd alphafold
-- scripts/download_all_data.sh /<Directory></Directory> > download.log 2> download_all.log<br>
+```bash
+sudo apt install aria2
+git clone https://github.com/deepmind/alphafold.git
+cd alphafold
+scripts/download_all_data.sh /<Directory></Directory> > download.log 2> download_all.log
+```
 
 Install SignalP5 (optional) :<br>
 
 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php<br>
-- tar -xvzf signalp-5.0b.Linux.tar.gz<br>
-- cd signalp-5.0b/<br>
-- cp bin/signalp /usr/local/bin<br>
-- sudo cp -r lib/* /usr/local/lib<br>
+```bash
+- tar -xvzf signalp-5.0b.Linux.tar.gz
+- cd signalp-5.0b/
+- cp bin/signalp /usr/local/bin
+- sudo cp -r lib/* /usr/local/lib
+```
+
 > [!NOTE]
 > If you don't want to use SignalP use --use_signalP False
 
