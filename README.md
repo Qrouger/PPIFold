@@ -23,7 +23,7 @@ Install SignalP5 (optional) :<br>
 
 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php
 > [!NOTE]
-> If you don't want to use Signal use --use_signalP False
+> If you don't want to use SignalP use --use_signalP False
 
 Installation Singularity :<br>
 
