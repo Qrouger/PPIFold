@@ -43,10 +43,12 @@ https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-
 
 Inital file can be set with Uniprot ID, sequence fasta or both.<br>
 UniprotID need to be in same line separate by comma<br>
+
 Ex : <br>
 UniprotID1,UniprotID2,UniprotID3...<br>
 
 Fasta sequence need to start with ">" follow by the protein name.<br>
+
 Ex : <br>
 \>Name<br>
 MFKRSGSLSLALMSSFCSSSLATPLSSAEFDHVARKCAPSVATSTLAAIAK<br>
