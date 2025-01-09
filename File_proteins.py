@@ -4,7 +4,7 @@
 """
 import urllib.request
 import re
-from utils import *
+from Utils import *
 import csv
 import os
 import copy
