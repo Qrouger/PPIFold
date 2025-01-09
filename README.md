@@ -22,10 +22,10 @@ Installation AlphaFold database :<br>
 Install SignalP5 (optional) :<br>
 
 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php<br>
-tar -xvzf signalp-5.0b.Linux.tar.gz<br>
-cd signalp-5.0b/<br>
-cp bin/signalp /usr/local/bin<br>
-sudo cp -r lib/* /usr/local/lib<br>
+- tar -xvzf signalp-5.0b.Linux.tar.gz<br>
+- cd signalp-5.0b/<br>
+- cp bin/signalp /usr/local/bin<br>
+- sudo cp -r lib/* /usr/local/lib<br>
 > [!NOTE]
 > If you don't want to use SignalP use --use_signalP False
 
