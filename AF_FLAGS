@@ -1,0 +1,14 @@
+"""AlphaFold3 doc"""
+Unified Memory
+If you would like to run AlphaFold 3 on inputs larger than 5,120 tokens, or on a GPU with less memory (an A100 with 40 GB of memory, for instance), we recommend enabling unified memory. Enabling unified memory allows the program to spill GPU memory to host memory if there isn't enough space. This prevents an OOM, at the cost of making the program slower by accessing host memory instead of device memory. To learn more, check out the NVIDIA blog post.
+
+You can enable unified memory by setting the following environment variables in your Dockerfile:
+
+ENV XLA_PYTHON_CLIENT_PREALLOCATE=false
+ENV TF_FORCE_UNIFIED_MEMORY=true
+ENV XLA_CLIENT_MEM_FRACTION=3.2
+
+Compilation Time Workaround with XLA Flags
+To work around a known XLA issue causing the compilation time to greatly increase, the following environment variable must be set (it is set by default in the provided Dockerfile).
+
+ENV XLA_FLAGS="--xla_gpu_enable_triton_gemm=false"
