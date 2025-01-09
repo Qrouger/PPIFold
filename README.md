@@ -82,8 +82,9 @@ Path_Singularity_Image : Path of the singularity image.<br>
 Path_Pickle_Feature : Path of your feature folder (default on ./feature).<br>
 
 ## Arguments<br>
+```bash
 PPIFold --make_multimers Boolean --max_aa Integer --use_signalP Boolean --org String
-
+```
 Optional arguments
 
 --make_multimers This argument is True by default, if you just want make feature and MSA generation you have to set it on False <br>
