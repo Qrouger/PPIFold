@@ -17,7 +17,7 @@ Installation AlphaFold database :<br>
 - sudo apt install aria2
 - git clone https://github.com/deepmind/alphafold.git<br>
 - cd alphafold
-- scripts/download_all_data.sh /Directory > download.log 2> download_all.log<br>
+- scripts/download_all_data.sh /<Directory></Directory> > download.log 2> download_all.log<br>
 
 Install SignalP5 (optional) :<br>
 
@@ -35,10 +35,10 @@ https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-
 
 Installation PPIFold :<br>
 
-conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 hhsuite hmmer modelcif networkx <br>
-conda activate PPIFold <br>
-pip install PPIFold <br>
-pip install -U "jax[cuda12]" <br>
+-conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 hhsuite hmmer modelcif networkx <br>
+-conda activate PPIFold <br>
+-pip install PPIFold <br>
+-pip install -U "jax[cuda12]" <br>
 ## Pipeline
 
 ![Rouger_2024_Figure-1](https://github.com/user-attachments/assets/09bacfc4-103c-4910-aeea-2753e0ccca33)
