@@ -256,64 +256,121 @@ def create_out_fig (file) :
     for interaction in iQ_score_dict.keys() :
         if float(iQ_score_dict[interaction]) >= 35 : #Plot figure of interest just for interesting interactions
             job1 = interaction[0] + "_and_" + interaction[1]
-            plot_Distogram("./result_all_vs_all/" + job1)
+            #plot_Distogram("./result_all_vs_all/" + job1) #need distogram key in pickle file
             make_table_res_int(file, "./result_all_vs_all/" + job1)
     hiQ_score_dict = file.get_hiQ_score_dict()
     for homo_oligo in hiQ_score_dict.keys() :
        if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
           job2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er"
-          plot_Distogram("./result_homo_oligo/" + job2)
+          #plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
           make_table_res_int(file, "./result_homo_oligo/" + job2)
 
-def make_table_res_int (file, path_int) :
-    """
-    Generate a table of residue in interactions.
+def make_table_res_int (path_int) :
+        """
+        Generate a table of residue in interactions.
 
-    Parameters:
-    ----------
-    file : object of class File_proteins
-    path_int : string
+        Parameters:
+        ----------
+        path_int : string
 
-    Returns:
-    ----------
-    """
-    ranking_results = json.load(open(os.path.join(f'{path_int}/ranking_debug.json')))
-    best_model = ranking_results["order"][0]
-    lenght_prot = file.get_lenght_prot()
-    seq_prot = file.get_proteins_sequence()
-    names = path_int.split("/")[2].split("_and_")
-    chains = path_int.split("/")[2]
-    dict_interface = dict()
-    color_res = dict()
-    color_res[names[0]] = set()
-    color_res[names[1]] = set()
-    with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
-        pickle_dict = pickle.load(gzip.open(gz_file))
-        pae_mtx = pickle_dict['predicted_aligned_error']#take PAE
-        bin_edges = pickle_dict["distogram"]["bin_edges"]#take distogram for distance
-        bin_edges = np.insert(bin_edges, 0, 0)
-        distogram_softmax = softmax(pickle_dict["distogram"]["logits"], axis=2)
-        dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2) #center of the residue
-        dict_interface[chains] = [[names[0]," "+names[1]," Distance Ä"," PAE score"]]
-        for line in range(lenght_prot[names[1]],len(dist)) :
-            hori_index = 0
-            for distance in dist[line] :
-                hori_index += 1
-                if hori_index < lenght_prot[names[1]] :
-                    if distance <= 10 :
-                        if pae_mtx[line][hori_index] < 5 :
-                            residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
-                            residue2 = seq_prot[names[1]][hori_index]
-                            dict_interface[chains].append([residue1+" "+str(line-lenght_prot[names[1]]+1)," "+residue2+" "+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
-                            color_res[names[0]].add(line-lenght_prot[names[1]]+1)
-                            color_res[names[1]].add(hori_index+1)
-    file.define_interface(dict_interface[chains],names) #update interaction interface
-    color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
-    fileout = chains+"_res_int.csv"
-    np_table = np.array(dict_interface[chains])
-    with open(f"{path_int}/"+fileout, "w", newline="") as file :
-        mywriter = csv.writer(file, delimiter=",")
-        mywriter.writerows(np_table)
+        Returns:
+        ----------
+
+        """
+        parser = PDB.PDBParser(QUIET=True)
+        structure = parser.get_structure('protein', path_int + "/ranked_0.pdb")
+        dict_int = dict()
+        int_already_know = dict()
+        proteins = path_int.split('/')[2].split('_and_')
+        atom_possible_contact = ["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
+        for model in structure:
+            list_chain = model.get_list()
+            for index1 in range(0,len(list_chain)) :
+                chain1 = list_chain[index1] #B and C
+                for residue1 in chain1 : #number of residue (len of the chain)
+                    for atom1 in residue1 : #type of the atom
+                        if atom1.get_id() in atom_possible_contact :
+                            for index2 in range(index1+1,len(list_chain)) :
+                                chain2 = list_chain[index2]
+                                for residue2 in chain2 :
+                                    for atom2 in residue2 :
+                                        if atom2.get_id() in atom_possible_contact :
+                                            distance = atom1 - atom2
+                                            if distance <= 3.64 and atom1.bfactor >=70 and atom2.bfactor >= 70 : #filtered on pLDDT and distance, be stringent to avoid false residue interaction (or maybe use PAE ?)
+                                                res_int = chain1.get_id()+":"+residue1.get_resname()+" "+str(residue1.get_id()[1])," "+chain2.get_id()+":"+residue2.get_resname()+" "+str(residue2.get_id()[1])
+                                                print(res_int)
+                                                if chain1.get_id()+chain2.get_id() in dict_int.keys() : #to make different table for different interaction
+                                                    if res_int in int_already_know.keys() and int_already_know[res_int] > str(distance) :
+                                                        dict_int[chain1.get_id()+chain2.get_id()].remove([res_int[0],res_int[1]," "+str(int_already_know[res_int])])
+                                                        dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0],res_int[1]," "+str(distance)])
+                                                        int_already_know[res_int] = str(distance)
+                                                    elif res_int in int_already_know.keys() and int_already_know[res_int] < str(distance) : #skip double interaction with differents atoms
+                                                        pass
+                                                    else :
+                                                        dict_int[chain1.get_id()+chain2.get_id()].append([proteins[0]," "+proteins[1],," "+str(distance)])
+                                                        int_already_know[res_int] = str(distance)
+                                                else :
+                                                    dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id()," Chain "+chain2.get_id()," Distance Ä"]]
+                                                    dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0],res_int[1]," "+str(distance)])
+                                                    int_already_know[res_int] = str(distance)
+                                            else :
+                                                pass
+        for chains in dict_int.keys() :
+            fileout = chains+"_res_int.csv"
+            np_table = np.array(dict_int[chains])
+            with open(f"{path_int}/"+fileout, "w", newline="") as file :
+                mywriter = csv.writer(file, delimiter=",")
+                mywriter.writerows(np_table)
+            
+#def make_table_res_int (file, path_int) : #need key distogram in pickle file
+#    """
+#    Generate a table of residue in interactions.
+#
+#    Parameters:
+#    ----------
+#    file : object of class File_proteins
+#    path_int : string
+#
+#    Returns:
+#    ----------
+#    """
+#    ranking_results = json.load(open(os.path.join(f'{path_int}/ranking_debug.json')))
+#    best_model = ranking_results["order"][0]
+#    lenght_prot = file.get_lenght_prot()
+#    seq_prot = file.get_proteins_sequence()
+#    names = path_int.split("/")[2].split("_and_")
+#    chains = path_int.split("/")[2]
+#    dict_interface = dict()
+#    color_res = dict()
+#    color_res[names[0]] = set()
+#    color_res[names[1]] = set()
+#    with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
+#        pickle_dict = pickle.load(gzip.open(gz_file))
+#        pae_mtx = pickle_dict['predicted_aligned_error']#take PAE
+#        bin_edges = pickle_dict["distogram"]["bin_edges"]#take distogram for distance
+#        bin_edges = np.insert(bin_edges, 0, 0)
+#        distogram_softmax = softmax(pickle_dict["distogram"]["logits"], axis=2)
+#        dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2) #center of the residue
+#        dict_interface[chains] = [[names[0]," "+names[1]," Distance Ä"," PAE score"]]
+#        for line in range(lenght_prot[names[1]],len(dist)) :
+#            hori_index = 0
+#            for distance in dist[line] :
+#                hori_index += 1
+#                if hori_index < lenght_prot[names[1]] :
+#                    if distance <= 10 :
+#                        if pae_mtx[line][hori_index] < 5 :
+#                            residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
+#                            residue2 = seq_prot[names[1]][hori_index]
+#                            dict_interface[chains].append([residue1+" "+str(line-lenght_prot[names[1]]+1)," "+residue2+" "+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
+#                            color_res[names[0]].add(line-lenght_prot[names[1]]+1)
+#                            color_res[names[1]].add(hori_index+1)
+#    file.define_interface(dict_interface[chains],names) #update interaction interface
+#    color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
+#    fileout = chains+"_res_int.csv"
+#    np_table = np.array(dict_interface[chains])
+#    with open(f"{path_int}/"+fileout, "w", newline="") as file :
+#        mywriter = csv.writer(file, delimiter=",")
+#        mywriter.writerows(np_table)
 
 def plot_Distogram (job) :
     """
