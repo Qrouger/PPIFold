@@ -176,14 +176,18 @@ def generate_APD_script (file, max_aa) :
             lenght = lenght_prot[proteins[index_protein]]
             for index2_protein in range(index_protein+1,len(proteins)) :
                 int_lenght = lenght + lenght_prot[proteins[index2_protein]]
-                if int_lenght <= max_aa :
+                if int_lenght <= max_aa and os.path.exists(f"./result_all_vs_all/{proteins[index_protein]}_and_{proteins[index2_protein]}/ranked_0.pdb") == False : #make interaction if doesn't exist and is not too long
                     all_vs_all_script = all_vs_all_script + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
-                else :
+                elif int_lenght >= max_aa :
                     OOM_int = OOM_int + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
+                else :
+                    pass
             lenght_homo = lenght
+            homo_dir = proteins[index_protein]
             for nbr_homo in range(2,21) :
                 lenght_homo += lenght
-                if lenght_homo <= max_aa :
+                homo_dir += "_and_" + proteins[index_protein]
+                if lenght_homo <= max_aa and os.path.exists(f"./result_homo_oligo/{homo_dir}/ranked_0.pdb") == False :
                     homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
                 else :
                     OOM_int = OOM_int + proteins[index_protein] + "," + str(nbr_homo) + "\n"
