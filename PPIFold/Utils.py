@@ -307,7 +307,7 @@ def make_table_res_int (path_int) :
                                                     elif res_int in int_already_know.keys() and int_already_know[res_int] < str(distance) : #skip double interaction with differents atoms
                                                         pass
                                                     else :
-                                                        dict_int[chain1.get_id()+chain2.get_id()].append([proteins[0]," "+proteins[1],," "+str(distance)])
+                                                        dict_int[chain1.get_id()+chain2.get_id()].append([proteins[0]," "+proteins[1]," "+str(distance)])
                                                         int_already_know[res_int] = str(distance)
                                                 else :
                                                     dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id()," Chain "+chain2.get_id()," Distance Ä"]]
