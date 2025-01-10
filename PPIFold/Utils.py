@@ -65,6 +65,7 @@ def remove_SP (file, org) :
     final_file = str()
     SP_signal = 0
     prot_SP = dict()
+    Prot_Signal_string = str()
     fasta_file = file.get_fasta_file()
     cmd = "signalp -fasta " + fasta_file + " -org " + org
     os.system(cmd)
@@ -74,6 +75,7 @@ def remove_SP (file, org) :
             new_line = line.split("\t")
             if new_line[1] != "OTHER" and new_line[0][0] != "#" :
                 prot_SP[new_line[0]] = new_line[len(new_line])-1[11:13]
+                Prot_Signal_string += new_line[0] + "\n"
     new_fasta_dict = dict()
     with open(fasta_file, "r") as fa_file :
         for line2 in fa_file :
@@ -93,6 +95,8 @@ def remove_SP (file, org) :
         file.find_prot_lenght(new_fasta_dict)
     cmd2 = "rm " + fasta_file
     os.system(cmd2)
+    with open("Prot_Signal.txt", "w") as Prot_Signal :
+        Prot_Signal.write(Prot_Signal_string)
     with open(fasta_file, "w") as new_file2 :
         new_file2.write(final_file)
 
