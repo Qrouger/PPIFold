@@ -302,17 +302,17 @@ def make_table_res_int (path_int) :
                                                 print(res_int)
                                                 if chain1.get_id()+chain2.get_id() in dict_int.keys() : #to make different table for different interaction
                                                     if res_int in int_already_know.keys() and int_already_know[res_int] > str(distance) :
-                                                        dict_int[chain1.get_id()+chain2.get_id()].remove([res_int[0],res_int[1]," "+str(int_already_know[res_int])])
-                                                        dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0],res_int[1]," "+str(distance)])
+                                                        dict_int[chain1.get_id()+chain2.get_id()].remove([res_int[0]," "+res_int[1]," "+str(int_already_know[res_int])])
+                                                        dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                         int_already_know[res_int] = str(distance)
                                                     elif res_int in int_already_know.keys() and int_already_know[res_int] < str(distance) : #skip double interaction with differents atoms
                                                         pass
                                                     else :
-                                                        dict_int[chain1.get_id()+chain2.get_id()].append([proteins[0]," "+proteins[1]," "+str(distance)])
+                                                        dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                         int_already_know[res_int] = str(distance)
                                                 else :
                                                     dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id()," Chain "+chain2.get_id()," Distance Ä"]]
-                                                    dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0],res_int[1]," "+str(distance)])
+                                                    dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                     int_already_know[res_int] = str(distance)
                                             else :
                                                 pass
