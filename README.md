@@ -90,7 +90,7 @@ Optional arguments
 --make_multimers This argument is True by default, if you just want make feature and MSA generation you have to set it on False <br>
 --max_aa The maximum lenght of a model generable by your GPU (in function of Vram), set by default on 2000 (24 Go) <br>
 --use_signalP Use SignalP if your proteins can be periplasmic, set by default on True <br>
---org If you use SignalP, you can select the organism (gram-, gram+, arch or euch), set by default on gram- <br>
+--org If you use SignalP, you can select the organism (gram-, gram+, arch or euk), set by default on gram- <br>
 
 >[!TIP]
 > Save all your pickles files on the same directory. 
