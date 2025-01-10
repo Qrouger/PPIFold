@@ -136,9 +136,6 @@ The black boxes represent either bad PAE, homo-oligomer or too large total prote
 **OOM_int.txt<br>**
 A text file who contains too large interaction in function of --max_aa.<br>
 
-**Prot_Signal.txt<br>**
-A text file of all proteins with peptide.<br>
-
 **Bad_MSA.txt<br>**
 A text file who contains proteins with MSA depth lower than 100 sequences.<br>
 > [!WARNING]
