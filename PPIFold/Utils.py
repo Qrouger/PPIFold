@@ -16,7 +16,7 @@ import json
 import gzip
 import string
 import seaborn
-import PDB
+from Bio import PDB
 
 from .File_proteins import *
 
