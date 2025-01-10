@@ -16,6 +16,7 @@ import json
 import gzip
 import string
 import seaborn
+import PDB
 
 from .File_proteins import *
 
@@ -257,13 +258,13 @@ def create_out_fig (file) :
         if float(iQ_score_dict[interaction]) >= 35 : #Plot figure of interest just for interesting interactions
             job1 = interaction[0] + "_and_" + interaction[1]
             #plot_Distogram("./result_all_vs_all/" + job1) #need distogram key in pickle file
-            make_table_res_int(file, "./result_all_vs_all/" + job1)
+            make_table_res_int("./result_all_vs_all/" + job1)
     hiQ_score_dict = file.get_hiQ_score_dict()
     for homo_oligo in hiQ_score_dict.keys() :
         if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
             job2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er"
             #plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
-            make_table_res_int(file, "./result_homo_oligo/" + job2)
+            make_table_res_int("./result_homo_oligo/" + job2)
 
 def make_table_res_int (path_int) :
         """
