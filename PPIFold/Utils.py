@@ -270,7 +270,7 @@ def create_out_fig (file) :
     for homo_oligo in hiQ_score_dict.keys() :
         if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
             job2 = homo_oligo #job2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er" # wait AFPD homo release
-            for count in range(1,hiQ_score_dict[homo_oligo][1]-1) :
+            for count in range(1,hiQ_score_dict[homo_oligo][1]) :
                 job2 += "_and_" + homo_oligo
             #plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
             make_table_res_int("./result_homo_oligo/" + job2)
