@@ -133,7 +133,7 @@ The black boxes represent either bad PAE, homo-oligomer or too large total prote
 **OOM_int.txt<br>**
 A text file who contains too large interaction in function of --max_aa.<br>
 
-**Bad_MSA.txt<br>**
+**Shallow_MSA.txt<br>**
 A text file who contains proteins with MSA depth lower than 100 sequences.<br>
 > [!WARNING]
 > Result for proteins with less than 100 sequences in MSA is not accurate for validate or invalidate predict PPI.<br>
