@@ -597,7 +597,7 @@ def generate_heatmap (file) :
                 else :
                     iQ_line.append(0)
                     iptm_ptm_line.append(0)
-                    print (protein1 + " and " + protein2 + " are not in score table or have bad PAE")
+                    print (protein1 + " and " + protein2 + " are not in score table or have bad inter PAE")
         iQ_data_matrix.append(iQ_line)
         iptm_ptm_data_matrix.append(iptm_ptm_line)
     iQ_complet_matrix = pd.DataFrame(iQ_data_matrix,index = index_prot, columns = index_prot)
