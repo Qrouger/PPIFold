@@ -127,13 +127,13 @@ def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
     ----------
     """
     proteins = file.get_new_pickle() #allow to don't generate image twice.
-    bad_MSA = str()
+    shallow_MSA = str()
     for prot in proteins :
         pre_feature_dict = pickle.load(open(f'{Path_Pickle_Feature}/{prot}.pkl','rb'))
         feature_dict = pre_feature_dict.feature_dict
         msa = feature_dict['msa']
         if len(msa) <= 100 :
-            bad_MSA += prot + " : " + str(len(msa)) + " sequences\n"
+            shallow_MSA += prot + " : " + str(len(msa)) + " sequences\n"
         seqid = (np.array(msa[0] == msa).mean(-1))
         seqid_sort = seqid.argsort()
         non_gaps = (msa != 21).astype(float)
@@ -153,8 +153,8 @@ def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
         plt.ylabel("Sequences")
         plt.savefig(f"{Path_Pickle_Feature}/{prot+('_' if prot else '')}coverage.pdf")
         plt.close()
-    with open("Bad_MSA.txt", "w") as MSA_file :
-        MSA_file.write(bad_MSA)
+    with open("shallow_MSA.txt", "w") as MSA_file :
+        MSA_file.write(shallow_MSA)
 
 def generate_APD_script (file, max_aa) :
         """
