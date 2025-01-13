@@ -92,7 +92,7 @@ Optional arguments
 >[!TIP]
 > Save all your pickles files in the same directory. 
 
-## Result
+## Results
 
 This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
 
