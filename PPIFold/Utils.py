@@ -188,7 +188,7 @@ def generate_APD_script (file, max_aa) :
             for nbr_homo in range(2,21) :
                 lenght_homo += lenght
                 homo_dir += "_and_" + proteins[index_protein]
-                if lenght_homo <= max_aa and os.path.exists(f"./result_homo_oligo/{homo_dir}/ranked_0.pdb") == False :
+                if lenght_homo <= max_aa and os.path.exists(f"./result_homo_oligo/{homo_dir}/ranked_0.pdb") == False and len(homo_dir) < 100 : #homo_oligo is too long to create a directory
                     homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
                 else :
                     OOM_int = OOM_int + proteins[index_protein] + "," + str(nbr_homo) + "\n"
