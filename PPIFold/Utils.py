@@ -251,7 +251,7 @@ def add_iQ_score (dir_alpha) :
 
 def create_out_fig (file) :
     """
-    Generate result figure for validate interaction.
+    Generate result figure for validate interaction (iQ-score) and better interaction (hiQ-score).
 
     Parameters:
     ----------
