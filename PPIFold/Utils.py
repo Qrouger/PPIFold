@@ -74,7 +74,7 @@ def remove_SP (file, org) :
         for line in fh :
             new_line = line.split("\t")
             if new_line[1] != "OTHER" and new_line[0][0] != "#" :
-                prot_SP[new_line[0]] = new_line[len(new_line)]-1[11:13]
+                prot_SP[new_line[0]] = new_line[len(new_line)-1][11:13]
     new_fasta_dict = dict()
     with open(fasta_file, "r") as fa_file :
         for line2 in fa_file :
