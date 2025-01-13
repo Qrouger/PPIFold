@@ -1,10 +1,7 @@
 # PPIFold
-Automatised pipeline for massive PPI prediction and figure creation.
+Automated pipeline for massive PPI prediction and figure creation.
 
-PPIFold it's a tool for analysis Protein-Protein Interaction from AlphaPullDown, with an automatised pre and post-processing.
-It's uses to generate PPI prediction on lot of systems, without losing time in generating initial file and sort results.
-It predicts the better homo-oligomer for protein and better interface to interact with specific proteins.
-This allows to predict massive multimer complex with lot of PPI.
+PPIFold is a tool for analyzing Protein-Protein Interactions from AlphaPullDown, with automated pre- and post-processing. It is used to generate PPI predictions for multiple systems without wasting time on generating initial files and sorting results. It predicts the best homo-oligomer for a protein and the best interface for interacting with specific proteins. This allows the prediction of massive multimeric complexes with numerous PPIs.
 
 ## Requirements
 - AlphaFold data base
@@ -13,7 +10,7 @@ This allows to predict massive multimer complex with lot of PPI.
 - Singularity and Singularity Image
 
 ## Installation
-Installation AlphaFold database :<br>
+Installation of AlphaFold database :<br>
 ```bash
 sudo apt install aria2
 git clone https://github.com/deepmind/alphafold.git
@@ -21,7 +18,7 @@ cd alphafold
 scripts/download_all_data.sh /<Directory></Directory> > download.log 2> download_all.log
 ```
 
-Install SignalP5 (optional) :<br>
+Installation of SignalP5 (optional) :<br>
 
 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php<br>
 ```bash
@@ -32,9 +29,9 @@ sudo cp -r lib/* /usr/local/lib
 ```
 
 > [!NOTE]
-> If you don't want to use SignalP use --use_signalP False
+> If you do not want to use SignalP, set --use_signalP to False.
 
-Installation Singularity :<br>
+Installation of Singularity :<br>
 
 https://docs.sylabs.io/guides/3.0/user-guide/installation.html#install-on-linux
 
@@ -56,13 +53,13 @@ pip install -U "jax[cuda12]"
 
 ## Initial File
 
-Inital file can be set with Uniprot ID, sequence fasta or both.<br>
-UniprotID need to be in same line separate by comma.<br>
+The initial file can be set using a UniProt ID, a FASTA sequence, or both.<br>
+UniProt IDs need to be on the same line, separated by commas.<br>
 
 Ex : <br>
 UniprotID1,UniprotID2,UniprotID3...<br>
 
-Fasta sequence need to start with ">" follow by the protein name.<br>
+The FASTA sequence needs to start with ">", followed by the protein name. <br>
 
 Ex : <br>
 \>Name<br>
@@ -72,14 +69,14 @@ NFSMLGLTPDGALKACPSLSAAANMLKSRYAGGETIDEKQIALRRAISAYN<br>
 TGNFIRGFANGYVRKVETAAQSLVPALIEPPQDDHKALKSEDTWDVWGSYQ<br>
 RRSQEDGVGGSIAPQPPDQDNGKSADDNQVLFDLY<br>
 
-This file need to be a ".txt" file.<br>
+This file needs to be a ".txt" file.<br>
 
-The file conf.txt need to contains all Paths.
+The conf.txt file needs to contains all path.
 
 Path_Uniprot_ID : Path and name of the UniprotID file.<br>
-Path_AlphaFold_Data : Path of the AlphaFold data base (default on ./alphadata).<br>
-Path_Singularity_Image : Path of the singularity image.<br>
-Path_Pickle_Feature : Path of your feature folder (default on ./feature).<br>
+Path_AlphaFold_Data : Path to the AlphaFold database (default on ./alphadata).<br>
+Path_Singularity_Image : Path to the singularity image.<br>
+Path_Pickle_Feature : Path to the feature folder (default on ./feature).<br>
 
 ## Arguments<br>
 ```bash
@@ -87,7 +84,7 @@ PPIFold --make_multimers Boolean --max_aa Integer --use_signalP Boolean --org St
 ```
 Optional arguments
 
---make_multimers This argument is True by default, if you just want make feature and MSA generation you have to set it on False <br>
+--make_multimers This argument is set on True by default, if you just want to make feature and MSA generation you have to set it on False <br>
 --max_aa The maximum lenght of a model generable by your GPU (in function of Vram), set by default on 2000 (24 Go) <br>
 --use_signalP Use SignalP if your proteins can be periplasmic, set by default on True <br>
 --org If you use SignalP, you can select the organism (gram-, gram+, arch or euk), set by default on gram- <br>
