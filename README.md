@@ -18,7 +18,7 @@ cd alphafold
 scripts/download_all_data.sh /<Directory></Directory> > download.log 2> download_all.log
 ```
 
-Installation of SignalP5 (optional) :<br>
+SignalP5 installation (optional) :<br>
 
 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php<br>
 ```bash
@@ -31,7 +31,7 @@ sudo cp -r lib/* /usr/local/lib
 > [!NOTE]
 > If you do not want to use SignalP, set --use_signalP to False.
 
-Installation of Singularity :<br>
+Singularity installation :<br>
 
 https://docs.sylabs.io/guides/3.0/user-guide/installation.html#install-on-linux
 
@@ -39,7 +39,7 @@ Download Singularity image (score generation) :<br>
 
 https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-for-the-downstream-analysis-tools
 
-Installation PPIFold :<br>
+PPIFold installation :<br>
 ```bash
 conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 hhsuite hmmer modelcif networkx
 conda activate PPIFold
