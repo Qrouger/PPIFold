@@ -245,7 +245,7 @@ def add_iQ_score (dir_alpha) :
     os.system(cmd4)
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobsr,pi_score,iptm_ptm,pDockQ,iQ_score\n"
+        all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
         for row in reader :
             job = row['jobs']
             if '_and_' in job and row['pi_score'] != 'No interface detected' :
