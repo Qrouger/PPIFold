@@ -79,6 +79,7 @@ Path_Singularity_Image : Path to the singularity image.<br>
 Path_Pickle_Feature : Path to your feature folder (default on ./feature).<br>
 
 ## Arguments<br>
+To use PPIFold, simply run the PPIFold command in the folder that contains conf.txt and test.txt.<br>
 ```bash
 PPIFold --make_multimers Boolean --max_aa Integer --use_signalP Boolean --org String
 ```
