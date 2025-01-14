@@ -22,7 +22,7 @@ from .File_proteins import *
 
 def define_path() :
     """
-    Take all path from conf.txt, and set up on a dictionnary.
+    Extract all paths from conf.txt and store them in a dictionary.
     
     Parameters:
     ----------
@@ -52,7 +52,7 @@ def define_path() :
 
 def remove_SP (file, org) :
     """
-    Creating a new fasta file without signal peptide using SignalP.
+    Create a new FASTA file without the signal peptide using SignalP.
 
     Parameters:
     ----------
@@ -153,7 +153,7 @@ def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
             plt.ylabel("Sequences")
             plt.savefig(f"{Path_Pickle_Feature}/{prot+('_' if prot else '')}coverage.pdf")
             plt.close()
-    for prot in old_proteins : #just make shallow_MSA
+    for prot in old_proteins : #just write shallow_MSA.txt
         pre_feature_dict = pickle.load(open(f'{Path_Pickle_Feature}/{prot}.pkl','rb'))
         feature_dict = pre_feature_dict.feature_dict
         msa = feature_dict['msa']
@@ -164,7 +164,7 @@ def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
 
 def generate_APD_script (file, max_aa) :
         """
-        Write two scripts in local to use AlphaPulldown, this scripts are write in function of maximum amino acid.
+        Write two local scripts to use AlphaPullDown. These scripts should be written based on the maximum number of amino acids.
 
         Parameters:
         ----------
@@ -232,7 +232,7 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
 
 def add_indice_Q (dir_alpha) :
     """
-    Generate scores for all interactions.
+    Generate indice_Q for all interactions.
 
     Parameters:
     ----------
@@ -257,7 +257,7 @@ def add_indice_Q (dir_alpha) :
 
 def create_out_fig (file) :
     """
-    Generate result figure for validate interaction (iQ-score) and better interaction (hiQ-score).
+    Generate result figure for validate interaction (indice_Q) and better interaction (indice_hQ).
 
     Parameters:
     ----------
@@ -558,7 +558,7 @@ def generate_interaction_network (file) :
     nx.draw(int_graph, pos, edge_color=edge_colors_list, node_color='lightblue', node_size=500, ax=ax)
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
-    plt.colorbar(sm, ax=ax, label="iQ-score")
+    plt.colorbar(sm, ax=ax, label="indice_Q")
     plt.savefig("network.png")
     plt.close()
 
@@ -573,7 +573,7 @@ def generate_heatmap (file) :
     Returns:
     ----------
     """
-    iQ_data_matrix = list()
+    indice_Q_data_matrix = list()
     iptm_ptm_data_matrix = list()
     indice_Q_dict = file.get_indice_Q_dict()
     proteins_list = file.get_proteins()
@@ -587,28 +587,28 @@ def generate_heatmap (file) :
     for protein in proteins_list :
         index_prot.append(protein+"_"+proteins_name[protein])
     for protein1 in proteins_list :
-        iQ_line = list()
+        indice_Q_line = list()
         iptm_ptm_line = list()
         for protein2 in proteins_list :
             if protein1 == protein2 :
-                iQ_line.append(0)
+                indice_Q_line.append(0)
                 iptm_ptm_line.append(0)
             else :
                 if (protein1,protein2) in indice_Q_dict.keys() :
-                    iQ_line.append(float(indice_Q_dict[(protein1,protein2)]))
+                    indice_Q_line.append(float(indice_Q_dict[(protein1,protein2)]))
                     iptm_ptm_line.append(float(iptm_ptm_dict[protein1+"_and_"+protein2]))
                 elif (protein2,protein1) in indice_Q_dict.keys() :
-                    iQ_line.append(float(indice_Q_dict[(protein2,protein1)]))
+                    indice_Q_line.append(float(indice_Q_dict[(protein2,protein1)]))
                     iptm_ptm_line.append(float(iptm_ptm_dict[protein2+"_and_"+protein1]))
                 else :
-                    iQ_line.append(0)
+                    indice_Q_line.append(0)
                     iptm_ptm_line.append(0)
                     print (protein1 + " and " + protein2 + " are not in score table or have bad inter PAE")
-        iQ_data_matrix.append(iQ_line)
+        indice_Q_data_matrix.append(indice_Q_line)
         iptm_ptm_data_matrix.append(iptm_ptm_line)
-    iQ_complet_matrix = pd.DataFrame(iQ_data_matrix,index = index_prot, columns = index_prot)
+    indice_Q_complet_matrix = pd.DataFrame(indice_Q_data_matrix,index = index_prot, columns = index_prot)
     iptm_ptm_complet_matrix = pd.DataFrame(iptm_ptm_data_matrix,index = index_prot, columns = index_prot)
-    ax2 = seaborn.heatmap(iQ_complet_matrix, cbar_kws = {'label' : 'indice_Q'}, xticklabels=True, yticklabels=True)
+    ax2 = seaborn.heatmap(indice_Q_complet_matrix, cbar_kws = {'label' : 'indice_Q'}, xticklabels=True, yticklabels=True)
     ax2.figure.tight_layout()
     plt.savefig("indice_Q_heatmap.png")
     plt.close()
