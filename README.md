@@ -9,7 +9,7 @@ PPIFold is a tool for analyzing Protein-Protein Interactions from AlphaPullDown,
 - SignalP5
 - Singularity and Singularity Image
 
-## Installation
+## Installations
 Installation of AlphaFold database :<br>
 ```bash
 sudo apt install aria2
