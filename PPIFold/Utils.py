@@ -230,7 +230,7 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     os.system(cmd3)
     os.system(cmd4)
 
-def add_iQ_score (dir_alpha) :
+def add_indice_Q (dir_alpha) :
     """
     Generate scores for all interactions.
 
@@ -245,12 +245,12 @@ def add_iQ_score (dir_alpha) :
     os.system(cmd4)
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
+        all_lines = "jobs,pi_score,iptm_ptm,pDockQ,indice_Q\n"
         for row in reader :
             job = row['jobs']
             if '_and_' in job and row['pi_score'] != 'No interface detected' :
-                iQ_score = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
-                line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["iptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
+                indice_Q = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
+                line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["iptm"]},{row["mpDockQ/pDockQ"]},{str(indice_Q)}\n'
                 all_lines = all_lines + line
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
@@ -266,17 +266,17 @@ def create_out_fig (file) :
     Returns:
     ----------
     """
-    iQ_score_dict = file.get_iQ_score_dict()
-    for interaction in iQ_score_dict.keys() :
-        if float(iQ_score_dict[interaction]) >= 35 : #Plot figure of interest just for interesting interactions
+    indice_Q_dict = file.get_indice_Q_dict()
+    for interaction in indice_Q_dict.keys() :
+        if float(indice_Q_dict[interaction]) >= 35 : #Plot figure of interest just for interesting interactions
             job1 = interaction[0] + "_and_" + interaction[1]
             #plot_Distogram("./result_all_vs_all/" + job1) #need distogram key in pickle file
             make_table_res_int("./result_all_vs_all/" + job1)
-    hiQ_score_dict = file.get_hiQ_score_dict()
-    for homo_oligo in hiQ_score_dict.keys() :
-        if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
-            job2 = homo_oligo #job2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er" # wait AFPD homo release
-            for count in range(1,hiQ_score_dict[homo_oligo][1]) :
+    indice_hQ_dict = file.get_indice_hQ_dict()
+    for homo_oligo in indice_hQ_dict.keys() :
+        if float(indice_hQ_dict[homo_oligo][0]) >= 50 :
+            job2 = homo_oligo #job2 = homo_oligo + "_homo_" + str(indice_hQ_dict[homo_oligo][1]) + "er" # wait AFPD homo release
+            for count in range(1,indice_hQ_dict[homo_oligo][1]) :
                 job2 += "_and_" + homo_oligo
             #plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
             make_table_res_int("./result_homo_oligo/" + job2)
@@ -445,7 +445,7 @@ def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     os.system(cmd3)
     os.system(cmd4)
 
-def add_hiQ_score (dir_alpha) :
+def add_indice_hQ (dir_alpha) :
     """
     Generate a score table for all homo-oligomer.
 
@@ -460,7 +460,7 @@ def add_hiQ_score (dir_alpha) :
     os.system(cmd4)
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,mpDockQ,hiQ_score\n"
+        all_lines = "jobs,pi_score,iptm_ptm,mpDockQ,indice_hQ\n"
         all_homo = dict()
         save_pi_score = dict()
         for row in reader :
@@ -484,19 +484,19 @@ def add_hiQ_score (dir_alpha) :
             save_pi_score[key].sort(reverse=True)
             for index in range(0,int(number_oligo)) :
                 new_sum_pi_score += save_pi_score[key][index]
-                hiQ_score = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
-            line =f'{key},{str(all_homo[key][0])},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(hiQ_score)}\n'
+                indice_hQ = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
+            line =f'{key},{str(all_homo[key][0])},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(indice_hQ)}\n'
             all_lines += line
         else :
-            hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
-            line =f'{key},{str(all_homo[key][0])},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(hiQ_score)}\n'
+            indice_hQ = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
+            line =f'{key},{str(all_homo[key][0])},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(indice_hQ)}\n'
             all_lines += line
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
 
 def generate_interaction_network (file) :
     """
-    Generate interaction network, colored by iQ scores.
+    Generate interaction network, colored by indice_Q.
    
     Parameters:
     ----------
@@ -506,15 +506,15 @@ def generate_interaction_network (file) :
     ----------
     """
     valid_interactions = list()
-    iQ_score_dict = file.get_iQ_score_dict()
-    for interactions in iQ_score_dict.keys() :
+    indice_Q_dict = file.get_indice_Q_dict()
+    for interactions in indice_Q_dict.keys() :
         names = [interactions[0], interactions[1]]
-        if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 35 :
-            valid_interactions.append([names, float(iQ_score_dict[interactions])])
-    hiQ_score_dict = file.get_hiQ_score_dict()
-    for homo_oligomer in hiQ_score_dict.keys() :
-        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
-            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
+        if names not in [x[0] for x in valid_interactions] and float(indice_Q_dict[interactions]) >= 35 :
+            valid_interactions.append([names, float(indice_Q_dict[interactions])])
+    indice_hQ_dict = file.get_indice_hQ_dict()
+    for homo_oligomer in indice_hQ_dict.keys() :
+        if float(indice_hQ_dict[homo_oligomer][0]) >= 50 :
+            valid_interactions.append([[homo_oligomer,homo_oligomer], indice_hQ_dict[homo_oligomer][1]])
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
@@ -575,7 +575,7 @@ def generate_heatmap (file) :
     """
     iQ_data_matrix = list()
     iptm_ptm_data_matrix = list()
-    iQ_score_dict = file.get_iQ_score_dict()
+    indice_Q_dict = file.get_indice_Q_dict()
     proteins_list = file.get_proteins()
     proteins_name = file.get_names()
     index_prot = list()
@@ -594,11 +594,11 @@ def generate_heatmap (file) :
                 iQ_line.append(0)
                 iptm_ptm_line.append(0)
             else :
-                if (protein1,protein2) in iQ_score_dict.keys() :
-                    iQ_line.append(float(iQ_score_dict[(protein1,protein2)]))
+                if (protein1,protein2) in indice_Q_dict.keys() :
+                    iQ_line.append(float(indice_Q_dict[(protein1,protein2)]))
                     iptm_ptm_line.append(float(iptm_ptm_dict[protein1+"_and_"+protein2]))
-                elif (protein2,protein1) in iQ_score_dict.keys() :
-                    iQ_line.append(float(iQ_score_dict[(protein2,protein1)]))
+                elif (protein2,protein1) in indice_Q_dict.keys() :
+                    iQ_line.append(float(indice_Q_dict[(protein2,protein1)]))
                     iptm_ptm_line.append(float(iptm_ptm_dict[protein2+"_and_"+protein1]))
                 else :
                     iQ_line.append(0)
@@ -608,9 +608,9 @@ def generate_heatmap (file) :
         iptm_ptm_data_matrix.append(iptm_ptm_line)
     iQ_complet_matrix = pd.DataFrame(iQ_data_matrix,index = index_prot, columns = index_prot)
     iptm_ptm_complet_matrix = pd.DataFrame(iptm_ptm_data_matrix,index = index_prot, columns = index_prot)
-    ax2 = seaborn.heatmap(iQ_complet_matrix, cbar_kws = {'label' : 'iQ_score'}, xticklabels=True, yticklabels=True)
+    ax2 = seaborn.heatmap(iQ_complet_matrix, cbar_kws = {'label' : 'indice_Q'}, xticklabels=True, yticklabels=True)
     ax2.figure.tight_layout()
-    plt.savefig("iQ_score_heatmap.png")
+    plt.savefig("indice_Q_heatmap.png")
     plt.close()
     ax2 = seaborn.heatmap(iptm_ptm_complet_matrix, cbar_kws = {'label' : 'iptm_ptm'}, xticklabels=True, yticklabels=True)
     ax2.figure.tight_layout()
