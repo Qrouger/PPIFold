@@ -114,7 +114,7 @@ Chains represent different proteins. Two residues in contact are specified, alon
 Distance map between each atom of O50331 and O5333.<br>
 <img width="400" alt="Distogram" src="https://github.com/user-attachments/assets/42476dbd-7c90-4a3c-b95f-84ee6c495b34" /><br>
 
-The x and y axes represent interacting proteins. Pixels inside the black squares represent intra-residue distances, while pixels outside represent inter-residue distances. The color represents the distance in angstroms: blue indicates a short distance between two residues, and yellow indicates a large distance.
+The x and y axes represent interacting proteins. Pixels inside the black squares represent intra-protein residue distances, while pixels outside represent inter-protein residue distances. The color represents the distance in angstroms: blue indicates a short distance between two residues, and yellow indicates a large distance.
 
 **Interaction network<br>**
 Protein-protein interaction network with iQ-score and homo-oligomers (hiQ-score) predictions.<br>
