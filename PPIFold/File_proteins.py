@@ -11,12 +11,12 @@ import copy
 
 class File_proteins() :
     """
-    Manipulate and save file who contains all proteins.
+    Manipulate and save the file that contains all proteins.
     """
     def __init__ (self, path_txt_file) :
         """
         Constructor : 
-        Set attribute for one entry file.
+        Set attributes for a single entry file.
 
         Parameters:
     	-----------
@@ -320,7 +320,7 @@ class File_proteins() :
  
     def find_proteins_sequence (self) :
         """
-        Search in the site uniprot the amino acid sequence and clean it.
+        Search for the amino acid sequence on the UniProt website and clean it.
         
         Parameters:
         ----------
@@ -372,7 +372,7 @@ class File_proteins() :
 
     def create_fasta_file (self) :
         """
-        Generate a fasta file with the initial txt file.
+        Generate a FASTA file from the initial TXT file.
 
         Parameters:
         ----------
@@ -393,8 +393,9 @@ class File_proteins() :
 
     def update_indice_Q_indice_hQ (self) :
         """
-        Generate two dictionaries, first where the key is a tuple of interaction proteins(Uniprot) and the value is the indice_Q, a second where the key is the protein (Uniprot) and the value is a tuple of the better indice_hQ and this homo-oligomerisation.
-
+        Generate two dictionaries: the first with a tuple of interacting proteins (UniProt) as the key and indice_Q as the value; 
+        the second with the protein (UniProt) as the key and a tuple containing the best indice_hQ and its homo-oligomerization as the value.
+        
         Parameters:
         ----------
 
@@ -421,13 +422,14 @@ class File_proteins() :
 
     def already_pickle (self, pickle_path) :
         """
-        Check if protein have already a feature pickle file, return adn set a list of proteins who doesn't.
-
+        Check if a protein already has a feature pickle file. Return and set a list of proteins that do not.
+        
         Parameters:
         ----------
         pickle_path : string
 
         Returns:
+        prot_need_pkl : list
         ----------
         """
         prot_need_pkl = list()
@@ -442,7 +444,7 @@ class File_proteins() :
 
     def define_interface (self, list_of_list_int, int) :
         """
-        Set a dictionnary with all residues in interaction, with the UniprotID.
+        Create a dictionary of all interacting residues, including their UniProt IDs.
 
         Parameters:
         ----------
