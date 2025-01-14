@@ -29,7 +29,7 @@ def main() :
         if args.use_signalP == True :
             remove_SP(A4,args.org)
         create_feature(A4,path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
-        Make_all_MSA_coverage(A4,path_dict["Path_Pickle_Feature"])
+    Make_all_MSA_coverage(A4,path_dict["Path_Pickle_Feature"])
     generate_APD_script(A4, args.max_aa)
     if args.make_multimers == True :
         Make_all_vs_all(path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
