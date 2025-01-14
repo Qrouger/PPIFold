@@ -102,31 +102,31 @@ class File_proteins() :
         """
         self.name = name
 
-    def set_iQ_score_dict (self, iQ_score_dict) : 
+    def set_indice_Q_dict (self, indice_Q_dict) : 
         """
-        Sets iQ_score for all proteins.
+        Sets indice_Q for all proteins.
         
         Parameters:
         ----------
-        iQ_score_dict = dictionary
+        indice_Q_dict = dictionary
         
         Returns:
         ----------
         """
-        self.iQ_score_dict = iQ_score_dict
+        self.indice_Q_dict = indice_Q_dict
 
-    def set_hiQ_score_dict (self, hiQ_score_dict) :
+    def set_indice_hQ_dict (self, indice_hQ_dict) :
         """
-        Sets hiQ_score for all proteins.
+        Sets indice_hQ for all proteins.
         
         Parameters:
         ----------
-        hiQ_score_dict = dictionary
+        indice_hQ_dict = dictionary
         
         Returns:
         ----------
         """
-        self.hiQ_score_dict = hiQ_score_dict
+        self.indice_hQ_dict = indice_hQ_dict
 
     def set_interface_dict (self, interface_dict) :
         """
@@ -232,31 +232,31 @@ class File_proteins() :
         """
         return self.name
 
-    def get_iQ_score_dict (self) :
+    def get_indice_Q_dict (self) :
         """
-        Return iQ_score for all interactions.
+        Return indice_Q for all interactions.
         
         Parameters:
         ----------
         
         Returns:
         ----------
-        iQ_score_dict : dictionary
+        indice_Q_dict : dictionary
         """
-        return self.iQ_score_dict
+        return self.indice_Q_dict
 
-    def get_hiQ_score_dict (self) :
+    def get_indice_hQ_dict (self) :
         """
-        Return hiQ_score for all homo-oligomer.
+        Return indice_hQ for all homo-oligomer.
         
         Parameters:
         ----------
         
         Returns:
         ----------
-        hiQ_score_dict : dictionary
+        indice_hQ_dict : dictionary
         """
-        return self.hiQ_score_dict
+        return self.indice_hQ_dict
         
     def get_interface_dict (self) :
         """
@@ -391,9 +391,9 @@ class File_proteins() :
             fh.write(line)
         self.set_fasta_file(file_out)
 
-    def update_iQ_hiQ_score (self) :
+    def update_indice_Q_indice_hQ (self) :
         """
-        Generate two dictionaries, first where the key is a tuple of interaction proteins(Uniprot) and the value is the iQ_score, a second where the key is the protein (Uniprot) and the value is a tuple of the better hiQ_score and this homo-oligomerisation.
+        Generate two dictionaries, first where the key is a tuple of interaction proteins(Uniprot) and the value is the indice_Q, a second where the key is the protein (Uniprot) and the value is a tuple of the better indice_hQ and this homo-oligomerisation.
 
         Parameters:
         ----------
@@ -401,23 +401,23 @@ class File_proteins() :
         Returns:
         ----------
         """
-        iQ_score_dic = dict()
+        indice_Q_dic = dict()
         with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
             reader1 = csv.DictReader(file1)
             for row in reader1 :
                 names = row['jobs'].split('_and_')
-                iQ_score_dic[(names[0],names[1])] = row['iQ_score']
-        self.set_iQ_score_dict(iQ_score_dic)
-        hiQ_score_dic = dict()
+                indice_Q_dic[(names[0],names[1])] = row['indice_Q']
+        self.set_indice_Q_dict(indice_Q_dic)
+        indice_hQ_dic = dict()
         with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
             reader2 = csv.DictReader(file2)
             for row in reader2 :
                 prot_name = row['jobs'].split("_and_")[0] #.split("_homo_")[0]
-                if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
+                if prot_name not in indice_hQ_dic.keys() or float(row['indice_hQ']) >= indice_hQ_dic[prot_name][0] :
                     number_homo = len(row['jobs'].split("_and_"))
                     #number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
-                    hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
-        self.set_hiQ_score_dict(hiQ_score_dic)
+                    indice_hQ_dic[prot_name] = (float(row['indice_hQ']),number_homo)
+        self.set_indice_hQ_dict(indice_hQ_dic)
 
     def already_pickle (self, pickle_path) :
         """
