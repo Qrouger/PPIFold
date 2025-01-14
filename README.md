@@ -129,10 +129,10 @@ Color represents the iQ-score, with a better iQ-score indicated by a lighter col
 
 ### Generated Files
 **OOM_int.txt<br>**
-A text file that contains interactions that are too large, based on --max_aa.<br>
+A text file containing interactions that are too large, based on --max_aa.<br>
 
 **Shallow_MSA.txt<br>**
-A text file that contains proteins with an MSA depth lower than 100 sequences.<br>
+A text file containing proteins with an MSA depth lower than 100 sequences.<br>
 > [!WARNING]
 > Results for proteins with fewer than 100 sequences in the MSA are not accurate for validating or invalidating predicted PPIs.
 
