@@ -53,7 +53,7 @@ pip install -U "jax[cuda12]"
 
 ## Initial File
 
-The initial file can be set using a UniProt ID, a FASTA sequence, or both.<br>
+The initial file can be set up using UniProt IDs, FASTA sequences, or both.<br>
 UniProt IDs need to be on the same line, separated by commas.<br>
 
 Ex : <br>
