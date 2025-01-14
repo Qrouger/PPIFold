@@ -283,7 +283,7 @@ def create_out_fig (file) :
 
 def make_table_res_int (path_int) :
         """
-        Generate a table of residue in interactions.
+        Generate a table of residues in interactions.
 
         Parameters:
         ----------
@@ -337,7 +337,8 @@ def make_table_res_int (path_int) :
                 mywriter = csv.writer(file, delimiter=",")
                 mywriter.writerows(np_table)
             print("Write table")
-            
+        color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
+    
 #def make_table_res_int (file, path_int) : #need key distogram in pickle file
 #    """
 #    Generate a table of residue in interactions.
@@ -390,7 +391,7 @@ def make_table_res_int (path_int) :
 
 def plot_Distogram (job) :
     """
-    Generate distogram for interactions of interest, only for best models.
+    Generate distogram, only for best models.
 
     Parameters:
     ----------
@@ -564,7 +565,7 @@ def generate_interaction_network (file) :
 
 def generate_heatmap (file) :
     """
-    Generate heatmap of interactions scores between all proteins.
+    Generate a heatmap of interaction scores between all proteins.
    
     Parameters:
     ----------
@@ -620,7 +621,7 @@ def generate_heatmap (file) :
 ###Probably add to generate_interaction_network ???
 def redef_interface (file) :
     """
-    Compare interface in function of smaller interface and class it with a letter that represent interface.
+    Compare interface in function of smaller interface and classify them with a letter representing the interface.
    
     Parameters:
     ----------
@@ -656,13 +657,14 @@ def redef_interface (file) :
 
 def color_int_residues(pdb_path, residues_to_color, names) :
     """
-    Color residue in interaction on a pdb file.
+    Color residues in interaction in a PDB file.
    
     Parameters:
     ----------
     pdb_path : string
     residues_to_color : dict
     names : string
+    
     Returns:
     ----------
     """
