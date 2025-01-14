@@ -91,7 +91,7 @@ Optional arguments
 --org If you use SignalP, you can select the organism (gram-, gram+, arch or euk), set to Gram- by default <br>
 
 >[!TIP]
-> Save all your pickles files in the same directory. 
+> Save all your pickle files in the same directory. 
 
 ## Results
 
