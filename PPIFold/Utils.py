@@ -245,12 +245,12 @@ def add_iQ_score (dir_alpha) :
     os.system(cmd4)
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ,iQ_score\n"
+        all_lines = "jobsr,pi_score,iptm_ptm,pDockQ,iQ_score\n"
         for row in reader :
             job = row['jobs']
             if '_and_' in job and row['pi_score'] != 'No interface detected' :
                 iQ_score = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
-                line = row['jobs']+","+row['interface']+","+row['Num_intf_residues']+","+row['Polar']+","+row['Hydrophobhic']+","+row['Charged']+","+row['contact_pairs']+","+row[' sc']+","+row[' hb']+","+row[' sb']+","+row[' int_solv_en']+","+row[' int_area']+","+row['pi_score']+","+row['iptm_ptm']+","+row['iptm']+","+row['mpDockQ/pDockQ']+","+str(iQ_score)+"\n"
+                line =f'{row['jobs']},{row['pi_score']},{row['iptm_ptm']},{row['iptm']},{row['mpDockQ/pDockQ']},{str(iQ_score)}\n'
                 all_lines = all_lines + line
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
@@ -460,7 +460,7 @@ def add_hiQ_score (dir_alpha) :
     os.system(cmd4)
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
+        all_lines = "jobs,pi_score,iptm_ptm,mpDockQ,hiQ_score\n"
         all_homo = dict()
         save_pi_score = dict()
         for row in reader :
@@ -484,12 +484,12 @@ def add_hiQ_score (dir_alpha) :
             save_pi_score[key].sort(reverse=True)
             for index in range(0,int(number_oligo)) :
                 new_sum_pi_score += save_pi_score[key][index]
-                hiQ_score = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
-            line = key+","+str(all_homo[key][0])+","+row['iptm_ptm']+","+str(hiQ_score)+"\n"
+                hiQ_score = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
+            line =f'{key},{str(all_homo[key][0])},{row['iptm_ptm']},{row['mpDockQ/pDockQ']},{str(hiQ_score)}\n'
             all_lines += line
         else :
-            hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
-            line = key+","+str(all_homo[key][0])+","+row['iptm_ptm']+","+str(hiQ_score)+"\n"
+            hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
+            line =f'{key},{str(all_homo[key][0])},{row['iptm_ptm']},{row['mpDockQ/pDockQ']},{str(hiQ_score)}\n'
             all_lines += line
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
