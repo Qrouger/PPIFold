@@ -73,7 +73,7 @@ This file needs to be a ".txt" file.<br>
 
 The conf.txt file needs to contains all path.
 
-Path_Uniprot_ID : Path and name of the UniprotID file.<br>
+Path_Uniprot_ID : Path and name of the initial file.<br>
 Path_AlphaFold_Data : Path to the AlphaFold database (default on ./alphadata).<br>
 Path_Singularity_Image : Path to the singularity image.<br>
 Path_Pickle_Feature : Path to your feature folder (default on ./feature).<br>
