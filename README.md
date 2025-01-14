@@ -141,6 +141,3 @@ A file for manually generating a network in Cytoscape.<br>
 
 **.pdb file<br>**
 Model structure, with residues colored according to their interaction. <br>
-
-> [!WARNING]
-> Two pipelines cannot be launched simultaneously on the same PC.
