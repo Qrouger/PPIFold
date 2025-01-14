@@ -126,33 +126,39 @@ def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
     Returns:
     ----------
     """
-    proteins = file.get_new_pickle() #allow to don't generate image twice.
+    old_proteins = file.get_proteins()
+    new_proteins = file.get_new_pickle() 
     shallow_MSA = str()
-    for prot in proteins :
+    if len(new_proteins) > 0 : #if you have new proteins, generate MSA Depth
+        for prot in new_proteins :
+            pre_feature_dict = pickle.load(open(f'{Path_Pickle_Feature}/{prot}.pkl','rb'))
+            feature_dict = pre_feature_dict.feature_dict
+            msa = feature_dict['msa']
+            seqid = (np.array(msa[0] == msa).mean(-1))
+            seqid_sort = seqid.argsort()
+            non_gaps = (msa != 21).astype(float)
+            non_gaps[non_gaps == 0] = np.nan
+            final = non_gaps[seqid_sort] * seqid[seqid_sort, None]
+            plt.figure(figsize=(14, 4), dpi=100)
+            plt.subplot(1, 2, 1)
+            plt.title(f"Sequence coverage ({prot})")
+            plt.imshow(final,
+                interpolation='nearest', aspect='auto',
+                cmap="rainbow_r", vmin=0, vmax=1, origin='lower')
+            plt.plot((msa != 21).sum(0), color='black')
+            plt.xlim(-0.5, msa.shape[1] - 0.5)
+            plt.ylim(-0.5, msa.shape[0] - 0.5)
+            plt.colorbar(label="Sequence identity to query", )
+            plt.xlabel("Positions")
+            plt.ylabel("Sequences")
+            plt.savefig(f"{Path_Pickle_Feature}/{prot+('_' if prot else '')}coverage.pdf")
+            plt.close()
+    for prot in old_proteins : #just make shallow_MSA
         pre_feature_dict = pickle.load(open(f'{Path_Pickle_Feature}/{prot}.pkl','rb'))
         feature_dict = pre_feature_dict.feature_dict
         msa = feature_dict['msa']
         if len(msa) <= 100 :
             shallow_MSA += prot + " : " + str(len(msa)) + " sequences\n"
-        seqid = (np.array(msa[0] == msa).mean(-1))
-        seqid_sort = seqid.argsort()
-        non_gaps = (msa != 21).astype(float)
-        non_gaps[non_gaps == 0] = np.nan
-        final = non_gaps[seqid_sort] * seqid[seqid_sort, None]
-        plt.figure(figsize=(14, 4), dpi=100)
-        plt.subplot(1, 2, 1)
-        plt.title(f"Sequence coverage ({prot})")
-        plt.imshow(final,
-            interpolation='nearest', aspect='auto',
-           cmap="rainbow_r", vmin=0, vmax=1, origin='lower')
-        plt.plot((msa != 21).sum(0), color='black')
-        plt.xlim(-0.5, msa.shape[1] - 0.5)
-        plt.ylim(-0.5, msa.shape[0] - 0.5)
-        plt.colorbar(label="Sequence identity to query", )
-        plt.xlabel("Positions")
-        plt.ylabel("Sequences")
-        plt.savefig(f"{Path_Pickle_Feature}/{prot+('_' if prot else '')}coverage.pdf")
-        plt.close()
     with open("shallow_MSA.txt", "w") as MSA_file :
         MSA_file.write(shallow_MSA)
 
