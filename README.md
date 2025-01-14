@@ -137,7 +137,7 @@ A text file that contains proteins with an MSA depth lower than 100 sequences.<b
 > Results for proteins with fewer than 100 sequences in the MSA are not accurate for validating or invalidating predicted PPIs.
 
 **table.cyt<br>**
-A file to manually create a network in Cytoscape.<br>
+A file for manually generating a network in Cytoscape.<br>
 
 **.pdb file<br>**
 Model structure, with residues colored according to their interaction. <br>
