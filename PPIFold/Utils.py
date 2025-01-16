@@ -245,12 +245,12 @@ def add_indice_Q (dir_alpha) :
     os.system(cmd4)
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,pDockQ,indice_Q\n"
+        all_lines = "jobs,pi_score,iptm,pDockQ,indice_Q\n"
         for row in reader :
             job = row['jobs']
             if '_and_' in job and row['pi_score'] != 'No interface detected' :
-                indice_Q = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
-                line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["iptm"]},{row["mpDockQ/pDockQ"]},{str(indice_Q)}\n'
+                indice_Q = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm'])*30+float(row['mpDockQ/pDockQ'])*30
+                line =f'{row["jobs"]},{row["pi_score"]},{row["iptm"]},{row["mpDockQ/pDockQ"]},{str(indice_Q)}\n'
                 all_lines = all_lines + line
     with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
@@ -461,7 +461,7 @@ def add_indice_hQ (dir_alpha) :
     os.system(cmd4)
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,mpDockQ,indice_hQ\n"
+        all_lines = "jobs,pi_score,iptm,mpDockQ,indice_hQ\n"
         all_homo = dict()
         save_pi_score = dict()
         for row in reader :
@@ -485,12 +485,12 @@ def add_indice_hQ (dir_alpha) :
             save_pi_score[key].sort(reverse=True)
             for index in range(0,int(number_oligo)) :
                 new_sum_pi_score += save_pi_score[key][index]
-                indice_hQ = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
-            line =f'{key},{str(all_homo[key][0])},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(indice_hQ)}\n'
+                indice_hQ = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*40+float(row['iptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm and mpDockQ are always same for each homo of same protein
+            line =f'{key},{str(all_homo[key][0])},{row["iptm"]},{row["mpDockQ/pDockQ"]},{str(indice_hQ)}\n'
             all_lines += line
         else :
             indice_hQ = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
-            line =f'{key},{str(all_homo[key][0])},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(indice_hQ)}\n'
+            line =f'{key},{str(all_homo[key][0])},{row["iptm"]},{row["mpDockQ/pDockQ"]},{str(indice_hQ)}\n'
             all_lines += line
     with open("./result_homo_oligo/new_predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
