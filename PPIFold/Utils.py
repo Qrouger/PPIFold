@@ -252,7 +252,7 @@ def add_indice_Q (dir_alpha) :
                 indice_Q = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
                 line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["iptm"]},{row["mpDockQ/pDockQ"]},{str(indice_Q)}\n'
                 all_lines = all_lines + line
-    with open("result_all_vs_all/predictions_with_good_interpae.csv", "w") as file2 :
+    with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
 
 def create_out_fig (file) :
@@ -492,7 +492,7 @@ def add_indice_hQ (dir_alpha) :
             indice_hQ = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #cause iptm_ptm is always same for each homo of same protein
             line =f'{key},{str(all_homo[key][0])},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(indice_hQ)}\n'
             all_lines += line
-    with open("./result_homo_oligo/predictions_with_good_interpae.csv", "w") as file2 :
+    with open("./result_homo_oligo/new_predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
 
 def generate_interaction_network (file) :
@@ -581,7 +581,7 @@ def generate_heatmap (file) :
     proteins_name = file.get_names()
     index_prot = list()
     iptm_ptm_dict = dict()
-    with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+    with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
         for row in reader :
             iptm_ptm_dict[row['jobs']] = row["iptm_ptm"]
