@@ -224,7 +224,7 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     cmd1 = "export XLA_PYTHON_CLIENT_PREALLOCATE=false"
     cmd2 = "TF_FORCE_UNIFIED_MEMORY=true"
     cmd3 = "XLA_CLIENT_MEM_FRACTION=3.2"
-    cmd4 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--noremove_keys_from_pickles"
+    cmd4 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
     os.system(cmd1)
     os.system(cmd2)
     os.system(cmd3)
@@ -270,7 +270,7 @@ def create_out_fig (file) :
     for interaction in indice_Q_dict.keys() :
         if float(indice_Q_dict[interaction]) >= 50 : #Plot figure of interest just for interesting interactions
             job1 = interaction[0] + "_and_" + interaction[1]
-            plot_Distogram("./result_all_vs_all/" + job1) #need distogram key in pickle file
+            #plot_Distogram("./result_all_vs_all/" + job1) #need distogram key in pickle file
             make_table_res_int("./result_all_vs_all/" + job1)
     indice_hQ_dict = file.get_indice_hQ_dict()
     for homo_oligo in indice_hQ_dict.keys() :
@@ -278,7 +278,7 @@ def create_out_fig (file) :
             job2 = homo_oligo #job2 = homo_oligo + "_homo_" + str(indice_hQ_dict[homo_oligo][1]) + "er" # wait AFPD homo release
             for count in range(1,indice_hQ_dict[homo_oligo][1]) :
                 job2 += "_and_" + homo_oligo
-            plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
+            #plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
             make_table_res_int("./result_homo_oligo/" + job2)
 
 def make_table_res_int (path_int) :
@@ -449,7 +449,7 @@ def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     cmd1 = "export XLA_PYTHON_CLIENT_PREALLOCATE=false"
     cmd2 = "TF_FORCE_UNIFIED_MEMORY=true"
     cmd3 = "XLA_CLIENT_MEM_FRACTION=3.2"
-    cmd4 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_homo_oligo \--data_dir={data_dir} \--protein_lists=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--noremove_keys_from_pickles"
+    cmd4 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_homo_oligo \--data_dir={data_dir} \--protein_lists=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
     os.system(cmd1)
     os.system(cmd2)
     os.system(cmd3)
