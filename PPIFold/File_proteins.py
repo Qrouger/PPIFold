@@ -410,7 +410,7 @@ class File_proteins() :
                 indice_Q_dic[(names[0],names[1])] = row['indice_Q']
         self.set_indice_Q_dict(indice_Q_dic)
         indice_hQ_dic = dict()
-        with open("result_homo_oligo/predictions_with_good_interpae.csv", "r") as file2 :
+        with open("result_homo_oligo/new_predictions_with_good_interpae.csv", "r") as file2 :
             reader2 = csv.DictReader(file2)
             for row in reader2 :
                 prot_name = row['jobs'].split("_and_")[0] #.split("_homo_")[0]
