@@ -584,7 +584,7 @@ def generate_heatmap (file) :
     with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
         for row in reader :
-            iptm_ptm_dict[row['jobs']] = row["iptm_ptm"]
+            iptm_ptm_dict[row['jobs']] = row["iptm"]
     for protein in proteins_list :
         index_prot.append(protein+"_"+proteins_name[protein])
     for protein1 in proteins_list :
