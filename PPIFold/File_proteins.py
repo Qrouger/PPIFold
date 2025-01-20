@@ -403,7 +403,7 @@ class File_proteins() :
         ----------
         """
         indice_Q_dic = dict()
-        with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+        with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "r") as file1 :
             reader1 = csv.DictReader(file1)
             for row in reader1 :
                 names = row['jobs'].split('_and_')
