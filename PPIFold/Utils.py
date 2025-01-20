@@ -40,6 +40,7 @@ def define_path() :
     for path_key in path_dict.keys() :
         if path_key == "Path_Singularity_Image" and ".sif" not in path_dict[path_key] :
             print("You need to specify the name of the Singularity image in Path_Singularity_Image.")
+            exit()
         if len(path_dict[path_key]) == 0 :
             print (f'Path to {path_key} file is empty')
             if path_key == "Path_Uniprot_ID" or path_key == "Path_Singularity_Image" :
