@@ -38,6 +38,8 @@ def define_path() :
             path_dir = lines.split(":")[1].strip().strip("\n")
             path_dict[path_name] = path_dir
     for path_key in path_dict.keys() :
+        if path_key == "Path_Singularity_Image" and ".sif" not in path_dict[path_key] :
+            print("You need to specify the name of the Singularity image in Path_Singularity_Image.")
         if len(path_dict[path_key]) == 0 :
             print (f'Path to {path_key} file is empty')
             if path_key == "Path_Uniprot_ID" or path_key == "Path_Singularity_Image" :
@@ -241,7 +243,7 @@ def add_indice_Q (dir_alpha) :
     Returns:
     ----------
     """
-    cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha}/fold_analysis_latest.sif run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+    cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
     os.system(cmd4)
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
