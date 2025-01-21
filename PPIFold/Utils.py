@@ -302,8 +302,8 @@ def make_table_res_int (path_int) :
         int_already_know = dict()
         proteins = path_int.split('/')[2].split('_and_')
         color_res = dict()
-        color_res[names[0]] = set()
-        color_res[names[1]] = set()
+        color_res[proteins[0]] = set()
+        color_res[proteins[1]] = set()
         atom_possible_contact = ["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
         for model in structure:
             list_chain = model.get_list()
@@ -325,21 +325,21 @@ def make_table_res_int (path_int) :
                                                         dict_int[chain1.get_id()+chain2.get_id()].remove([res_int[0]," "+res_int[1]," "+str(int_already_know[res_int])])
                                                         dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                         int_already_know[res_int] = str(distance)
-                                                        color_res[names[0]].add(res_int[0])
-                                                        color_res[names[1]].add(res_int[1])
+                                                        color_res[proteins[0]].add(res_int[0])
+                                                        color_res[proteins[1]].add(res_int[1])
                                                     elif res_int in int_already_know.keys() and int_already_know[res_int] < str(distance) : #skip double interaction with differents atoms
                                                         pass
                                                     else :
                                                         dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                         int_already_know[res_int] = str(distance)
-                                                        color_res[names[0]].add(res_int[0])
-                                                        color_res[names[1]].add(res_int[1])
+                                                        color_res[proteins[0]].add(res_int[0])
+                                                        color_res[proteins[1]].add(res_int[1])
                                                 else :
                                                     dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id()," Chain "+chain2.get_id()," Distance Ä"]]
                                                     dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                     int_already_know[res_int] = str(distance)
-                                                    color_res[names[0]].add(res_int[0])
-                                                    color_res[names[1]].add(res_int[1])
+                                                    color_res[proteins[0]].add(res_int[0])
+                                                    color_res[proteins[1]].add(res_int[1])
                                             else :
                                                 pass
         for chains in dict_int.keys() :
