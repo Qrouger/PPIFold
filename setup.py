@@ -15,7 +15,7 @@ setup(
     include_package_data=True,
     packages=find_packages(),
     install_requires=[
-        'alphapulldown==2.0.1',
+        'alphapulldown',
         'seaborn',
         'urllib3',
         'matplotlib',
