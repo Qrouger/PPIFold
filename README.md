@@ -139,5 +139,9 @@ A text file containing proteins with an MSA depth lower than 100 sequences.<br>
 **table.cyt<br>**
 A file for manually generating a network in Cytoscape.<br>
 
+**_summary.signalp5<br>**
+A file who resume signal peptides for all proteins.<br>
+
+
 **.pdb file<br>**
 Model structure, with residues colored according to their interaction. <br>
