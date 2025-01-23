@@ -84,17 +84,17 @@ def remove_SP (file, org) :
             new_line2 = line2
             if SP_signal == 0 and line2[0] != ">" :
                 new_line2 = line2
+                new_fasta_dict[save_key] = line2
             if int(SP_signal) > 0 :
                 new_line2 = line2[int(SP_signal)-1:len(line2)]
                 new_fasta_dict[save_key] = line2[int(SP_signal)+1:len(line2)]
                 SP_signal = 0
             if line2[0] == ">" :
+                save_key = line2[1:len(line2)-1]
                 if str(line2[1:len(line2)-1]) in prot_SP.keys() :
                     SP_signal = prot_SP[line2[1:len(line2)-1]]
-                    save_key = line2[1:len(line2)-1]
             final_file = final_file + new_line2
-    if len(new_fasta_dict) > 0 :
-        file.find_prot_lenght(new_fasta_dict)
+    file.find_prot_lenght(new_fasta_dict)
     cmd2 = "rm " + fasta_file
     os.system(cmd2)
     with open(fasta_file, "w") as new_file2 :
