@@ -349,7 +349,7 @@ def make_table_res_int (path_int) :
                 mywriter = csv.writer(file, delimiter=",")
                 mywriter.writerows(np_table)
             print("Write table")
-        color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
+        color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
     
 #def make_table_res_int (file, path_int) : #need key distogram in pickle file
 #    """
