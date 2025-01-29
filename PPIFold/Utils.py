@@ -274,7 +274,7 @@ def create_out_fig (file) :
         if float(indice_Q_dict[interaction]) >= 50 : #Plot figure of interest just for interesting interactions
             job1 = interaction[0] + "_and_" + interaction[1]
             #plot_Distogram("./result_all_vs_all/" + job1) #need distogram key in pickle file
-            make_table_res_int("./result_all_vs_all/" + job1)
+            make_table_res_int(file, "./result_all_vs_all/" + job1)
     indice_hQ_dict = file.get_indice_hQ_dict()
     for homo_oligo in indice_hQ_dict.keys() :
         if float(indice_hQ_dict[homo_oligo][0]) >= 50 :
@@ -282,9 +282,9 @@ def create_out_fig (file) :
             for count in range(1,indice_hQ_dict[homo_oligo][1]) :
                 job2 += "_and_" + homo_oligo
             #plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
-            make_table_res_int("./result_homo_oligo/" + job2)
+            make_table_res_int(file, "./result_homo_oligo/" + job2)
 
-def make_table_res_int (path_int) :
+def make_table_res_int (file, path_int) :
         """
         Generate a table of residues in interactions.
 
@@ -345,10 +345,12 @@ def make_table_res_int (path_int) :
         for chains in dict_int.keys() :
             fileout = chains+"_res_int.csv"
             np_table = np.array(dict_int[chains])
-            with open(f"{path_int}/"+fileout, "w", newline="") as file :
-                mywriter = csv.writer(file, delimiter=",")
+            with open(f"{path_int}/"+fileout, "w", newline="") as csv_table :
+                mywriter = csv.writer(csv_table, delimiter=",")
                 mywriter.writerows(np_table)
             print("Write table")
+            names = path_int.split("/")[2].split("_and_")
+            file.define_interface(dict_int[chains],names) #update interaction interface
         color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
     
 #def make_table_res_int (file, path_int) : #need key distogram in pickle file
