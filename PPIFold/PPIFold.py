@@ -40,7 +40,7 @@ def main() :
         generate_heatmap(A4)
         create_out_fig(A4)
         generate_interaction_network(A4)
-
+        redef_interface(A4)
 #if __name__ == "__main__" :
 #    path_dict = define_path()
 #    parser = argparse.ArgumentParser()
