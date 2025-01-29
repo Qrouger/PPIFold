@@ -318,7 +318,7 @@ def make_table_res_int (path_int) :
                                     for atom2 in residue2 :
                                         if atom2.get_id() in atom_possible_contact :
                                             distance = atom1 - atom2
-                                            if distance <= 3.64 and atom1.bfactor >=70 and atom2.bfactor >= 70 : #filtered on pLDDT and distance, be stringent to avoid false residue interaction (or maybe use PAE ?)
+                                            if distance <= 3.64 : # and atom1.bfactor >=70 and atom2.bfactor >= 70 : #filtered on pLDDT and distance, be stringent to avoid false residue interaction (or maybe use PAE ?)
                                                 res_int = chain1.get_id()+":"+residue1.get_resname()+" "+str(residue1.get_id()[1])," "+chain2.get_id()+":"+residue2.get_resname()+" "+str(residue2.get_id()[1])
                                                 if chain1.get_id()+chain2.get_id() in dict_int.keys() : #to make different table for different interaction
                                                     if res_int in int_already_know.keys() and int_already_know[res_int] > str(distance) :
