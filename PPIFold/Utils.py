@@ -683,7 +683,6 @@ def color_int_residues(pdb_path, residues_to_color, names) :
     name_prot = names[1]
     save_line = str()
     chain1 = "B"
-    residues_to_color
     with open(f'{pdb_path}/ranked_0.pdb', 'r') as file :
         for line in file:
             if line.startswith("ATOM") :
