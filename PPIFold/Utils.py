@@ -498,11 +498,11 @@ def add_indice_hQ (dir_alpha) :
             for index in range(0,int(number_oligo)) :
                 new_sum_pi_score += save_pi_score[key][index]
                 indice_hQ = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm are always same for each homo of same protein
-            line =f'{key},{str(all_homo[key][0]/all_homo[key][1])},{row["iptm_ptm"]},{str(indice_hQ)}\n'
+            line =f'{key},{str(float(new_sum_pi_score)/int(number_oligo))},{row["iptm_ptm"]},{str(indice_hQ)}\n'
             all_lines += line
         else :
             indice_hQ = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
-            line =f'{key},{str(all_homo[key][0]/all_homo[key][1])},{row["iptm_ptm"]},{str(indice_hQ)}\n'
+            line =f'{key},{str(float(all_homo[key][0])/all_homo[key][1])},{row["iptm_ptm"]},{str(indice_hQ)}\n'
             all_lines += line
     with open("./result_homo_oligo/new_predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
