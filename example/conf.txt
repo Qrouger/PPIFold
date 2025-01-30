@@ -1,4 +1,0 @@
-Path_Uniprot_ID : test.txt
-Path_AlphaFold_Data : 
-Path_Singularity_Image : <Singu_path>
-Path_Pickle_Feature :
