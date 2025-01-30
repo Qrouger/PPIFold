@@ -51,8 +51,12 @@ pip install -U "jax[cuda12]"
 ![Rouger_2024_Figure-1](https://github.com/user-attachments/assets/09bacfc4-103c-4910-aeea-2753e0ccca33)
 
 
-## Initial File
+## Initial Files
 
+You need two intial file :
+
+**test.txt**<br>
+This file needs to be a ".txt" file.<br>
 The initial file can be set up using UniProt IDs, FASTA sequences, or both.<br>
 UniProt IDs need to be on the same line, separated by commas.<br>
 
@@ -69,9 +73,8 @@ NFSMLGLTPDGALKACPSLSAAANMLKSRYAGGETIDEKQIALRRAISAYN<br>
 TGNFIRGFANGYVRKVETAAQSLVPALIEPPQDDHKALKSEDTWDVWGSYQ<br>
 RRSQEDGVGGSIAPQPPDQDNGKSADDNQVLFDLY<br>
 
-This file needs to be a ".txt" file.<br>
-
-The conf.txt file needs to contains all path.
+**conf.txt**<br>
+The conf.txt file needs to contains all path.<br>
 
 Path_Uniprot_ID : Path and name of the initial file.<br>
 Path_AlphaFold_Data : Path to the AlphaFold database (default on ./alphadata).<br>
