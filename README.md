@@ -53,7 +53,7 @@ pip install -U "jax[cuda12]"
 
 ## Initial Files
 
-You need two intial file :
+You need two initial files :
 
 **test.txt**<br>
 This file needs to be a ".txt" file.<br>
