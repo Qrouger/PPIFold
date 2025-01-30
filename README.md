@@ -147,4 +147,4 @@ A file who resume signal peptides for all proteins.<br>
 
 
 **.pdb file<br>**
-Model structure, with residues colored according to their interaction. <br>
+Model structure, with residues colored according to their interaction interface. <br>
