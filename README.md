@@ -44,7 +44,7 @@ singularity build alpha-analysis_jax_0.4.sif alpha_analysis_jax0.4.def
 ```
 PPIFold installation :<br>
 ```bash
-conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 hhsuite hmmer modelcif networkx
+conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 networkx
 conda activate PPIFold
 pip install PPIFold
 pip install -U "jax[cuda12]"
