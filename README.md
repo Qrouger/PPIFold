@@ -37,7 +37,9 @@ https://docs.sylabs.io/guides/3.0/user-guide/installation.html#install-on-linux
 
 Download Singularity image (score generation) :<br>
 
-https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-for-the-downstream-analysis-tools
+[https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-for-the-downstream-analysis-tools
+](https://github.com/KosinskiLab/AlphaPulldown/blob/main/alphapulldown/analysis_pipeline/alpha_analysis_jax0.4.def)<br>
+singularity build alpha-analysis_jax_0.4.sif alpha_analysis_jax0.4.def
 
 PPIFold installation :<br>
 ```bash
