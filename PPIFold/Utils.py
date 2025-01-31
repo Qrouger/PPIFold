@@ -304,7 +304,7 @@ def make_table_res_int (file, path_int) :
         color_res = dict()
         color_res[proteins[0]] = set()
         color_res[proteins[1]] = set()
-        #atom_possible_contact = ["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
+        atom_possible_contact = ["C","CA","CB"] #["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
         for model in structure:
             list_chain = model.get_list()
             max_chain = len(list_chain)
@@ -314,12 +314,12 @@ def make_table_res_int (file, path_int) :
                 chain1 = list_chain[index1] #B and C
                 for residue1 in chain1 : #number of residue (len of the chain)
                     for atom1 in residue1 : #type of the atom
-                        #if atom1.get_id() in atom_possible_contact :
+                        if atom1.get_id() in atom_possible_contact :
                             for index2 in range(index1+1,len(list_chain)) :
                                 chain2 = list_chain[index2]
                                 for residue2 in chain2 :
                                     for atom2 in residue2 :
-                                        #if atom2.get_id() in atom_possible_contact :
+                                        if atom2.get_id() in atom_possible_contact :
                                             distance = atom1 - atom2
                                             if distance <= 3.64 : #and atom1.bfactor >=70 and atom2.bfactor >= 70 : #filtered on pLDDT and distance, be stringent to avoid false residue interaction (or maybe use PAE ?)
                                                 res_int = chain1.get_id()+":"+residue1.get_resname()+" "+str(residue1.get_id()[1])," "+chain2.get_id()+":"+residue2.get_resname()+" "+str(residue2.get_id()[1])
