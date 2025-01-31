@@ -466,16 +466,17 @@ class File_proteins() :
             old_interface_dict[protein2] = []
         for line in all_residues_int :
             line[1] = line[1].strip() #remove readability spaces
-            if line[0] != int[0] :
+            if line[0] != int[0] and "chain" not in line[0] :
                 if line[0] not in list_int_protein1 :
                     list_int_protein1.append(line[0])
                 if line[1] not in list_int_protein2 :
                     list_int_protein2.append(line[1])
-        if protein1 == protein2 : #fusion of resdidues at interface for homo-oligomer
+        if protein1 == protein2 : #fusion of residues at interface for homo-oligomer
             for residue in list_int_protein2 :
                 list_int_protein1.append(residue)
             list_int_protein1.append(protein2)
             old_interface_dict[protein1].append(list_int_protein1)
+            print(old_interface_dict)
         else :
             list_int_protein1.append(protein2) #last values of each list is the second proteins
             list_int_protein2.append(protein1)

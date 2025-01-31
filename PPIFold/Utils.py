@@ -304,55 +304,62 @@ def make_table_res_int (file, path_int) :
         color_res = dict()
         color_res[proteins[0]] = set()
         color_res[proteins[1]] = set()
-        atom_possible_contact = ["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
+        #atom_possible_contact = ["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
         for model in structure:
             list_chain = model.get_list()
-            for index1 in range(0,len(list_chain)) :
+            max_chain = len(list_chain)
+            if max_chain > 3 : #for homo-oligo bigger than 3 make interface for third first chains with all other
+                max_chain = 3
+            for index1 in range(0,max_chain) :
                 chain1 = list_chain[index1] #B and C
                 for residue1 in chain1 : #number of residue (len of the chain)
                     for atom1 in residue1 : #type of the atom
-                        if atom1.get_id() in atom_possible_contact :
+                        #if atom1.get_id() in atom_possible_contact :
                             for index2 in range(index1+1,len(list_chain)) :
                                 chain2 = list_chain[index2]
                                 for residue2 in chain2 :
                                     for atom2 in residue2 :
-                                        if atom2.get_id() in atom_possible_contact :
+                                        #if atom2.get_id() in atom_possible_contact :
                                             distance = atom1 - atom2
-                                            if distance <= 3.64 : # and atom1.bfactor >=70 and atom2.bfactor >= 70 : #filtered on pLDDT and distance, be stringent to avoid false residue interaction (or maybe use PAE ?)
+                                            if distance <= 3.64 : #and atom1.bfactor >=70 and atom2.bfactor >= 70 : #filtered on pLDDT and distance, be stringent to avoid false residue interaction (or maybe use PAE ?)
                                                 res_int = chain1.get_id()+":"+residue1.get_resname()+" "+str(residue1.get_id()[1])," "+chain2.get_id()+":"+residue2.get_resname()+" "+str(residue2.get_id()[1])
+                                                res_num = str(residue1.get_id()[1]), str(residue2.get_id()[1])
                                                 if chain1.get_id()+chain2.get_id() in dict_int.keys() : #to make different table for different interaction
                                                     if res_int in int_already_know.keys() and int_already_know[res_int] > str(distance) :
                                                         dict_int[chain1.get_id()+chain2.get_id()].remove([res_int[0]," "+res_int[1]," "+str(int_already_know[res_int])])
                                                         dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                         int_already_know[res_int] = str(distance)
-                                                        color_res[proteins[0]].add(res_int[0])
-                                                        color_res[proteins[1]].add(res_int[1])
+                                                        color_res[proteins[0]].add(res_num[0])
+                                                        color_res[proteins[1]].add(res_num[1])
                                                     elif res_int in int_already_know.keys() and int_already_know[res_int] < str(distance) : #skip double interaction with differents atoms
                                                         pass
                                                     else :
                                                         dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                         int_already_know[res_int] = str(distance)
-                                                        color_res[proteins[0]].add(res_int[0])
-                                                        color_res[proteins[1]].add(res_int[1])
+                                                        color_res[proteins[0]].add(res_num[0])
+                                                        color_res[proteins[1]].add(res_num[1])
                                                 else :
                                                     dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id()," Chain "+chain2.get_id()," Distance Ä"]]
                                                     dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                     int_already_know[res_int] = str(distance)
-                                                    color_res[proteins[0]].add(res_int[0])
-                                                    color_res[proteins[1]].add(res_int[1])
+                                                    color_res[proteins[0]].add(res_num[0])
+                                                    color_res[proteins[1]].add(res_num[1])
                                             else :
                                                 pass
+        index_homo = 0
         for chains in dict_int.keys() :
+            index_homo += 1
             fileout = chains+"_res_int.csv"
             np_table = np.array(dict_int[chains])
             with open(f"{path_int}/"+fileout, "w", newline="") as csv_table :
                 mywriter = csv.writer(csv_table, delimiter=",")
                 mywriter.writerows(np_table)
             print("Write table")
-            names = path_int.split("/")[2].split("_and_")
-            file.define_interface(dict_int[chains],names) #update interaction interface
+            if index_homo <= 1 : #Just take two first interfaces for homo-oligomer
+               names = path_int.split("/")[2].split("_and_")
+               del dict_int[chains][0] #delete chain name for interface definition
+               file.define_interface(dict_int[chains],names) #update interaction interface
         color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
-    
 #def make_table_res_int (file, path_int) : #need key distogram in pickle file
 #    """
 #    Generate a table of residue in interactions.
@@ -648,7 +655,9 @@ def redef_interface (file) :
     interface_dict = file.get_interface_dict()
     for proteins in interface_dict.keys() :
         already_inter = list()
-        interface_dict[proteins] = sorted(interface_dict[proteins]) #sorted all interface in function of number of resiudes
+        print("not sorted",interface_dict[proteins])
+        interface_dict[proteins] = sorted(interface_dict[proteins], key=lambda x : len(x)) #sorted all interface in function of number of residues
+        print("sorted",interface_dict[proteins])
         for interface1 in range(len(interface_dict[proteins])) :
             if interface1 == 0 : #if it's the first interface, define a
                 interface_dict[proteins][interface1].insert(0,alphabet[0])
@@ -656,18 +665,16 @@ def redef_interface (file) :
             for interface2 in range(interface1+1,len(interface_dict[proteins])) :
                 list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
                 simi_inter = len(list_inter)/(len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2])))-3) #indice jaccard # -3 just to remove interface 'a' and uniprotID from .union()
-                print(simi_inter, interface1, interface2)
                 if simi_inter < 0.50 : #create a new interface
                     if interface_dict[proteins][interface2][0] in already_inter : #Don't create new interface if it already has one
                         pass
                     else :
                         interface_dict[proteins][interface2].insert(0,alphabet[interface2])
                         already_inter.append(alphabet[interface2])
-                        print(already_inter)
                 else : #if interfaces got more than 0.50 of same residues, it's the same interface
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
     print(interface_dict)
-    return(interface_dict)
+    #return(interface_dict)
 
 def color_int_residues(pdb_path, residues_to_color, names) :
     """
@@ -682,7 +689,7 @@ def color_int_residues(pdb_path, residues_to_color, names) :
     Returns:
     ----------
     """
-    name_prot = names[1]
+    name_prot = names[0]
     save_line = str()
     chain1 = "B"
     with open(f'{pdb_path}/ranked_0.pdb', 'r') as file :
@@ -690,14 +697,14 @@ def color_int_residues(pdb_path, residues_to_color, names) :
             if line.startswith("ATOM") :
                 chain2 = line[21]
                 if chain1 == chain2 :
-                    res_num = int(line[22:26].strip())
+                    res_num = line[22:26].strip()
                     if res_num in residues_to_color[name_prot] : #change B-factor in color interaction residue
                         line = line[:60] + " 100  " + line[66:]
                     else :
                         line = line[:60] + " 0    " + line[66:]
                 else :
-                    name_prot = names[0] #use new dict to color atoms
-                    res_num = int(line[22:26].strip())
+                    name_prot = names[1] #use new dict to color atoms
+                    res_num = line[22:26].strip()
                     if res_num in residues_to_color[name_prot] :
                         line = line[:60] + " 100  " + line[66:]
                     else :
