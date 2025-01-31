@@ -39,8 +39,9 @@ Download Singularity image (score generation) :<br>
 
 [https://github.com/KosinskiLab/AlphaPulldown?tab=readme-ov-file#03-installation-for-the-downstream-analysis-tools
 ](https://github.com/KosinskiLab/AlphaPulldown/blob/main/alphapulldown/analysis_pipeline/alpha_analysis_jax0.4.def)<br>
+```bash
 singularity build alpha-analysis_jax_0.4.sif alpha_analysis_jax0.4.def
-
+```
 PPIFold installation :<br>
 ```bash
 conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 hhsuite hmmer modelcif networkx
