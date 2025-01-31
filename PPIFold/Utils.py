@@ -655,9 +655,7 @@ def redef_interface (file) :
     interface_dict = file.get_interface_dict()
     for proteins in interface_dict.keys() :
         already_inter = list()
-        print("not sorted",interface_dict[proteins])
         interface_dict[proteins] = sorted(interface_dict[proteins], key=lambda x : len(x)) #sorted all interface in function of number of residues
-        print("sorted",interface_dict[proteins])
         for interface1 in range(len(interface_dict[proteins])) :
             if interface1 == 0 : #if it's the first interface, define a
                 interface_dict[proteins][interface1].insert(0,alphabet[0])
