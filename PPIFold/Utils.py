@@ -100,7 +100,7 @@ def remove_SP (file, org) :
     with open(fasta_file, "w") as new_file2 :
         new_file2.write(final_file)
 
-def create_feature (file, data_dir, Path_Pickle_Feature) :
+def create_feature (file, data_dir, Path_Pickle_Feature, mmseq) :
     """
     Launch command to generate features.
 
@@ -109,12 +109,13 @@ def create_feature (file, data_dir, Path_Pickle_Feature) :
     file : object of class File_proteins
     data_dir : string
     Path_Pickle_Feature : string
-
+    mmseq : boolean
+    
     Returns:
     ----------
     """
     fasta_file = file.get_fasta_file()
-    cmd = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=True \--use_mmseqs2=True"
+    cmd = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=True \--use_mmseqs2=mmseq"
     os.system(cmd)
 
 def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
