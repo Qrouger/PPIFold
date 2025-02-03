@@ -1,4 +1,4 @@
 Path_Uniprot_ID : test.txt
 Path_AlphaFold_Data : /data/alphadata_v2
 Path_Singularity_Image : /Downloads/alpha-analysis_jax_0.4.sif
-Path_Pickle_Feature : /data/pickle_feature
+Path_Pickle_Feature : ./pickle_feature
