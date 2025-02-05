@@ -712,7 +712,6 @@ def plot_sequence_interface (file, cluster_dict) :
       index_to_color = dict()
       uniprot_id_interface = dict()
       for interaction in dict_inter[uniprotID_main] : #list of residue + interface + UniprotID in interaction
-         print(interaction)
          if interaction[0] not in interface_done.keys() :
             interface_done[interaction[0]] = all_color[indice_color]
             uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
@@ -725,7 +724,6 @@ def plot_sequence_interface (file, cluster_dict) :
                if " " in aa_to_color :
                   index_to_color[aa_to_color.split(" ")[1]] = interface_done[interation[0]]
          indice_color += 1
-      print(index_to_color, sequence)
       line_adjust = 125 #max aa per line
       n_lines = (len(sequence) + line_adjust - 1) // line_adjust
       fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
