@@ -344,7 +344,7 @@ def make_table_res_int (file, path_int) :
                                                     color_res[proteins[1]].add(res_num[1])
                                             else :
                                                 pass
-        index_homo = 0
+        index_homo = 1
         for chains in dict_int.keys() :
             index_homo += 1
             fileout = chains+"_res_int.csv"
@@ -353,7 +353,7 @@ def make_table_res_int (file, path_int) :
                 mywriter = csv.writer(csv_table, delimiter=",")
                 mywriter.writerows(np_table)
             print("Write table")
-            if index_homo <= 1 : #Just take two first interfaces for homo-oligomer
+            if index_homo <= 2 : #Just take two first interfaces for homo-oligomer
                names = path_int.split("/")[2].split("_and_")
                del dict_int[chains][0] #delete chain name for interface definition
                file.define_interface(dict_int[chains],names) #update interaction interface
