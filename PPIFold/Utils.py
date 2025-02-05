@@ -667,7 +667,7 @@ def cluster_interface (file) :
                 else : #if interfaces got more than 0.50 of same residues, it's the same interface
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
     print(interface_dict)
-    #return(interface_dict)
+    return(interface_dict)
 
 def color_int_residues(pdb_path, residues_to_color, names) :
     """
@@ -701,4 +701,51 @@ def color_int_residues(pdb_path, residues_to_color, names) :
     with open(f'{pdb_path}/ranked_0.pdb', 'w') as writer:
         writer.write(save_line)
 
+def plot_sequence_interface (file, cluster_dict) :
+   sequence_dict = file.get_proteins_sequence()
+   dict_inter = file.get_interface_dict()
+   all_color= ['red', 'green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'pink', 'brown','lime', 'indigo', 'violet', 'turquoise', 'teal', 'crimson', 'gold', 'salmon', 'plum', 'chartreuse']
+   for uniprotID_main in sequence_dict.keys() :
+      sequence = sequence_dict[uniprotID_main]
+      indice_color = 0
+      interface_done = dict()
+      index_to_color = dict()
+      uniprot_id_interface = dict()
+      for interaction in dict_inter[uniprotID_main] : #list of residue + interface + UniprotID in interaction
+         print(interaction)
+         if interaction[0] not in interface_done.keys() :
+            interface_done[interaction[0]] = all_color[indice_color]
+            uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
+            for aa_to_color in interaction :
+               if " " in aa_to_color :
+                  index_to_color[aa_to_color.split(" ")[1]] = all_color[indice_color]
+         else :
+            uniprot_id_interface[interaction[len(interaction)-1]].append(all_color[indice_color])
+            for aa_to_color in interaction :
+               if " " in aa_to_color :
+                  index_to_color[aa_to_color.split(" ")[1]] = interface_done[interation[0]]
+         indice_color += 1
+      print(index_to_color, sequence)
+      line_adjust = 125 #max aa per line
+      n_lines = (len(sequence) + line_adjust - 1) // line_adjust
+      fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
+      for line_index in range(0, len(sequence), line_adjust) :
+         sub_sequence = sequence[line_index:line_index + line_adjust]
+         y_pos = -line_index // line_adjust * 1.5
+         for i in range(len(sub_sequence)) :
+            aa = sub_sequence[i]
+            total_index = line_index + i
+            if str(total_index+1) in index_to_color.keys() :
+               ax.add_patch(plt.Rectangle((i, y_pos), 1, 1, color=index_to_color[str(total_index+1)]))
+            else :
+               ax.add_patch(plt.Rectangle((i, y_pos), 1, 1, color="gray"))
+            ax.text(i + 0.5, y_pos + 0.5, aa, ha='center', va='center', color='white')
+            ax.text(i + 0.5, y_pos + 1.2, str(total_index+1), ha='center', va='center', color='black', fontsize=5)
+      for index, neigh in enumerate(uniprot_id_interface) :
+         ax.text(index * 4 + 2, -n_lines * 1.7, neigh, ha='center', va='center', color=uniprot_id_interface[neigh], fontsize=8)
+      ax.text(-2, 0.5, uniprotID_main, ha='right', va='center', color='black', fontsize=10, fontweight='bold')
+      ax.set_xlim(0, line_adjust)
+      ax.set_ylim(-n_lines*2, 1)  #Adjust high
+      ax.axis('off')
+      plt.show()
 
