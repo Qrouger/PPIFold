@@ -41,4 +41,4 @@ def main() :
         generate_heatmap(PPI_object)
         create_out_fig(PPI_object)
         generate_interaction_network(PPI_object)
-        redef_interface(PPI_object)
+        cluster_interface(PPI_object)
