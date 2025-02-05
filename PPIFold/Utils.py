@@ -635,7 +635,7 @@ def generate_heatmap (file) :
     plt.close()
 
 ###Probably add to generate_interaction_network ???
-def redef_interface (file) :
+def cluster_interface (file) :
     """
     Compare interface in function of smaller interface and classify them with a letter representing the interface.
    
