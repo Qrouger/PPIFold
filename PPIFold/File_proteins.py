@@ -476,7 +476,6 @@ class File_proteins() :
                 list_int_protein1.append(residue)
             list_int_protein1.append(protein2)
             old_interface_dict[protein1].append(list_int_protein1)
-            print(old_interface_dict)
         else :
             list_int_protein1.append(protein2) #last values of each list is the second proteins
             list_int_protein2.append(protein1)
