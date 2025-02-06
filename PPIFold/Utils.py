@@ -730,7 +730,7 @@ def plot_sequence_interface (file, cluster_dict) :
                if " " in aa_to_color :
                   index_to_color[aa_to_color.split(" ")[1]] = interface_done[interation[0]]
          indice_color += 1
-      line_adjust = 125 #max aa per line
+      line_adjust = 200 #max aa per line
       n_lines = (len(sequence) + line_adjust - 1) // line_adjust
       fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
       for line_index in range(0, len(sequence), line_adjust) :
@@ -740,16 +740,19 @@ def plot_sequence_interface (file, cluster_dict) :
             aa = sub_sequence[i]
             total_index = line_index + i
             if str(total_index+1) in index_to_color.keys() :
-               ax.add_patch(plt.Rectangle((i, y_pos), 1, 1, color=index_to_color[str(total_index+1)]))
+               ax.add_patch(plt.Rectangle((i, y_pos), 1, 0.6, color=index_to_color[str(total_index+1)]))
+               ax.text(i + 0.5, y_pos + 0.25, aa, ha='center', va='center', color='white')
             else :
-               ax.add_patch(plt.Rectangle((i, y_pos), 1, 1, color="gray"))
-            ax.text(i + 0.5, y_pos + 0.5, aa, ha='center', va='center', color='white')
-            ax.text(i + 0.5, y_pos + 1.2, str(total_index+1), ha='center', va='center', color='black', fontsize=5)
-      for index, neigh in enumerate(uniprot_id_interface) :
-         ax.text(index * 4 + 2, -n_lines * 1.7, neigh, ha='center', va='center', color=uniprot_id_interface[neigh], fontsize=8)
+               ax.add_patch(plt.Rectangle((i, y_pos), 1, 0.6, color="white"))
+               ax.text(i + 0.5, y_pos + 0.25, aa, ha='center', va='center', color='black')
+            if (total_index+1) % 10 == 0 or i == 0:
+               ax.text(i + 0.5, y_pos + 0.5, str(total_index+1), ha='center', va='center', color='black', fontsize=7)
+      for index_neigh, neigh in enumerate(uniprot_id_interface) :
+         ax.text(index_neigh * 6, -n_lines * 2, neigh, ha='center', va='center', color=uniprot_id_interface[neigh], fontsize=8)
       ax.text(-2, 0.5, uniprotID_main, ha='right', va='center', color='black', fontsize=10, fontweight='bold')
       ax.set_xlim(0, line_adjust)
       ax.set_ylim(-n_lines*2, 1)  #Adjust high
       ax.axis('off')
       plt.show()
+
 
