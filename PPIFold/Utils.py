@@ -345,6 +345,9 @@ def make_table_res_int (file, path_int) :
                                             else :
                                                 pass
         index_homo = 1
+        int_names = path_int.split("/")[2]
+        residues_at_interface = dict()
+        residues_at_interface[int_names] = []
         for chains in dict_int.keys() :
             index_homo += 1
             fileout = chains+"_res_int.csv"
@@ -353,11 +356,14 @@ def make_table_res_int (file, path_int) :
                 mywriter = csv.writer(csv_table, delimiter=",")
                 mywriter.writerows(np_table)
             print("Write table")
-            if index_homo <= 2 : #Just take two first interfaces for homo-oligomer
-               names = path_int.split("/")[2].split("_and_")
-               del dict_int[chains][0] #delete chain name for interface definition
-               file.define_interface(dict_int[chains],names) #update interaction interface
+            del dict_int[chains][0] #delete title of each col
+            for interaction in dict_int[chains] :
+               if interaction not in residues_at_interface[int_names] :
+                  residues_at_interface[int_names].append(interaction)
+        names = path_int.split("/")[2].split("_and_")
+        file.define_interface(residues_at_interface[int_names],names) #update interaction interface
         color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
+
 #def make_table_res_int (file, path_int) : #need key distogram in pickle file
 #    """
 #    Generate a table of residue in interactions.
