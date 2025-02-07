@@ -651,6 +651,7 @@ def cluster_interface (file) :
 
     Returns:
     ----------
+    interface_dict : dict
     """
     alphabet = string.ascii_lowercase
     interface_dict = file.get_interface_dict()
@@ -672,7 +673,6 @@ def cluster_interface (file) :
                         already_inter.append(alphabet[interface2])
                 else : #if interfaces got more than 0.50 of same residues, it's the same interface
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
-    print(interface_dict)
     return(interface_dict)
 
 def color_int_residues(pdb_path, residues_to_color, names) :
@@ -708,6 +708,16 @@ def color_int_residues(pdb_path, residues_to_color, names) :
         writer.write(save_line)
 
 def plot_sequence_interface (file, cluster_dict) :
+    """
+    Generated figures for interface in one sequence.
+   
+    Parameters:
+    ----------
+    file : object of File_proteins class
+    cluster_dict : dict
+    
+    Returns:
+    """
    sequence_dict = file.get_proteins_sequence()
    dict_inter = file.get_interface_dict()
    all_color= ['red', 'green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'pink', 'brown','lime', 'indigo', 'violet', 'turquoise', 'teal', 'crimson', 'gold', 'salmon', 'plum', 'chartreuse']
@@ -749,7 +759,7 @@ def plot_sequence_interface (file, cluster_dict) :
                ax.text(i + 0.5, y_pos + 0.5, str(total_index+1), ha='center', va='center', color='black', fontsize=7)
       for index_neigh, neigh in enumerate(uniprot_id_interface) :
          ax.text(index_neigh * 6, -n_lines * 2, neigh, ha='center', va='center', color=uniprot_id_interface[neigh], fontsize=8)
-      ax.text(-2, 0.5, uniprotID_main, ha='right', va='center', color='black', fontsize=10, fontweight='bold')
+      ax.text(-2, 0.25, uniprotID_main, ha='right', va='center', color='black', fontsize=10, fontweight='bold')
       ax.set_xlim(0, line_adjust)
       ax.set_ylim(-n_lines*2, 1)  #Adjust high
       ax.axis('off')
