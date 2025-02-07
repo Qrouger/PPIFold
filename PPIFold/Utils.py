@@ -718,6 +718,8 @@ def plot_sequence_interface (file, cluster_dict) :
     
     Returns:
     """
+   if not os.path.exists("./interface_fig/") :
+      os.makedirs("./interface_fig/")
    sequence_dict = file.get_proteins_sequence()
    dict_inter = file.get_interface_dict()
    all_color= ['red', 'green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'pink', 'brown','lime', 'indigo', 'violet', 'turquoise', 'teal', 'crimson', 'gold', 'salmon', 'plum', 'chartreuse']
@@ -763,6 +765,7 @@ def plot_sequence_interface (file, cluster_dict) :
       ax.set_xlim(0, line_adjust)
       ax.set_ylim(-n_lines*2, 1)  #Adjust high
       ax.axis('off')
-      plt.show()
+      plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300)
+
 
 
