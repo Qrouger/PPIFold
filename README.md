@@ -136,7 +136,7 @@ Color represents the iQ-score, with a better iQ-score indicated by a lighter col
 
 **Protein interface<br>**
 Amino acid sequence with different interfaces used in interacations.
-<img src="https://github.com/user-attachments/assets/29f63a4a-9ea0-4eba-bbda-14b0d9403342" alt="interface_figure" width="4000"/><br>
+<img src="https://github.com/user-attachments/assets/29f63a4a-9ea0-4eba-bbda-14b0d9403342" alt="interface_figure" width="8000"/><br>
 
 
 
