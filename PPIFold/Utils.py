@@ -225,11 +225,14 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     Returns:
     ----------
     """
-    os.environ['XLA_PYTHON_CLIENT_PREALLOCATE'] = 'false'
-    os.environ['TF_FORCE_UNIFIED_MEMORY'] = 'true'
-    os.environ['XLA_CLIENT_MEM_FRACTION'] = '3.2'
-    cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
+    cmd1 = "export XLA_PYTHON_CLIENT_PREALLOCATE=false"
+    cmd2 = "TF_FORCE_UNIFIED_MEMORY=true"
+    cmd3 = "XLA_CLIENT_MEM_FRACTION=3.2"
+    cmd4 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
     os.system(cmd1)
+    os.system(cmd2)
+    os.system(cmd3)
+    os.system(cmd4)
 
 def add_indice_Q (dir_alpha) :
     """
@@ -462,11 +465,14 @@ def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     Returns:
     ----------
     """
-    os.environ['XLA_PYTHON_CLIENT_PREALLOCATE'] = 'false'
-    os.environ['TF_FORCE_UNIFIED_MEMORY'] = 'true'
-    os.environ['XLA_CLIENT_MEM_FRACTION'] = '3.2'
-    cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_homo_oligo \--data_dir={data_dir} \--protein_lists=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
+    cmd1 = "export XLA_PYTHON_CLIENT_PREALLOCATE=false"
+    cmd2 = "TF_FORCE_UNIFIED_MEMORY=true"
+    cmd3 = "XLA_CLIENT_MEM_FRACTION=3.2"
+    cmd4 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_homo_oligo \--data_dir={data_dir} \--protein_lists=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
     os.system(cmd1)
+    os.system(cmd2)
+    os.system(cmd3)
+    os.system(cmd4)
 
 def add_indice_hQ (dir_alpha) :
     """
