@@ -134,6 +134,12 @@ Heatmap of iQ-score between each PPI.<br>
 <img src="https://github.com/user-attachments/assets/cf1b8d62-45e8-41a7-a149-e4e466ba251c" alt="iQ_score_heatmap" width="400"/><br>
 Color represents the iQ-score, with a better iQ-score indicated by a lighter color. The black boxes represent either poor PAE, homo-oligomers, or overly large total protein length.
 
+**Protein interface<br>**
+Amino acid sequence with different interfaces used in interacations.
+<img src="https://github.com/user-attachments/assets/29f63a4a-9ea0-4eba-bbda-14b0d9403342" alt="interface_figure" width="400"/><br>
+
+
+
 ### Generated Files
 **OOM_int.txt<br>**
 A text file containing interactions that are too large, based on --max_aa.<br>
