@@ -640,7 +640,6 @@ def generate_heatmap (file) :
     plt.savefig("iptm_ptm_heatmap.png")
     plt.close()
 
-###Probably add to generate_interaction_network ???
 def cluster_interface (file) :
     """
     Compare interface in function of smaller interface and classify them with a letter representing the interface.
