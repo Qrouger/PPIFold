@@ -115,7 +115,7 @@ def create_feature (file, data_dir, Path_Pickle_Feature, mmseq) :
     ----------
     """
     fasta_file = file.get_fasta_file()
-    cmd = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=True \--use_mmseqs2=mmseq"
+    cmd = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=True \--use_mmseqs2={mmseq}"
     os.system(cmd)
 
 def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
