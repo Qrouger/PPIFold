@@ -708,16 +708,16 @@ def color_int_residues(pdb_path, residues_to_color, names) :
         writer.write(save_line)
 
 def plot_sequence_interface (file, cluster_dict) :
-    """
-    Generated figures for interface in one sequence.
-   
-    Parameters:
-    ----------
-    file : object of File_proteins class
-    cluster_dict : dict
+   """
+   Generated figures for interface in one sequence.
+
+   Parameters:
+   ----------
+   file : object of File_proteins class
+   cluster_dict : dict
     
-    Returns:
-    """
+   Returns:
+   """
    if not os.path.exists("./interface_fig/") :
       os.makedirs("./interface_fig/")
    sequence_dict = file.get_proteins_sequence()
