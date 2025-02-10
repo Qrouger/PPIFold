@@ -722,7 +722,7 @@ def plot_sequence_interface (file, cluster_dict) :
    sequence_dict = file.get_proteins_sequence()
    dict_inter = file.get_interface_dict()
    all_color= ['red', 'green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'pink', 'brown','lime', 'indigo', 'violet', 'turquoise', 'teal', 'crimson', 'gold', 'salmon', 'plum', 'chartreuse']
-   for uniprotID_main in sequence_dict.keys() :
+   for uniprotID_main in dict_inter.keys() :
       sequence = sequence_dict[uniprotID_main]
       indice_color = 0
       interface_done = dict()
