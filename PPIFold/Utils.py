@@ -501,7 +501,7 @@ def add_indice_hQ (dir_alpha) :
     for key in all_homo.keys() :
         row = all_homo[key][2]
         #number_oligo = row["jobs"].split("_")[2].replace("er","") #wait AFPD release homo_oligo
-        number_oligo = len(row["jobs"].split("_"))
+        number_oligo = len(row["jobs"].split("_and_"))
         if len(save_pi_score[key]) > int(number_oligo) : #if model have more interface than number of homo-oligomerization
             new_sum_pi_score = 0
             save_pi_score[key].sort(reverse=True)
