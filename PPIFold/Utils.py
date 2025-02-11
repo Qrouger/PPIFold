@@ -167,49 +167,49 @@ def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
         MSA_file.write(shallow_MSA)
 
 def generate_APD_script (file, max_aa) :
-        """
-        Write two local scripts to use AlphaPullDown. These scripts should be written based on the maximum number of amino acids.
+    """
+    Write two local scripts to use AlphaPullDown. These scripts should be written based on the maximum number of amino acids.
 
-        Parameters:
-        ----------
-        file : object of class File_proteins
-        max_aa : integer
+    Parameters:
+    ----------
+    file : object of class File_proteins
+    max_aa : integer
 
-        Returns:
-        ----------
-        """
-        all_vs_all_script = str()
-        homo_oligo_script = str()
-        OOM_int = str()
-        proteins = file.get_proteins()
-        lenght_prot = file.get_lenght_prot()
-        for index_protein in range(len(proteins)) :
-            lenght = lenght_prot[proteins[index_protein]]
-            for index2_protein in range(index_protein+1,len(proteins)) :
-                int_lenght = lenght + lenght_prot[proteins[index2_protein]]
-                if int_lenght >= max_aa :
-                    OOM_int = OOM_int + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
-                elif os.path.exists(f"./result_all_vs_all/{proteins[index_protein]}_and_{proteins[index2_protein]}/ranked_0.pdb") == False : #make interaction if doesn't exist and is not too long
-                    all_vs_all_script = all_vs_all_script + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
-                else :
-                    pass
-            lenght_homo = lenght
-            homo_dir = proteins[index_protein]
-            for nbr_homo in range(2,21) :
-                lenght_homo += lenght
-                homo_dir += "_and_" + proteins[index_protein]
-                if lenght_homo >= max_aa :
-                    OOM_int = OOM_int + proteins[index_protein] + "," + str(nbr_homo) + "\n"
-                elif os.path.exists(f"./result_homo_oligo/{homo_dir}/ranked_0.pdb") == False and len(homo_dir) < 4096 : #homo_oligo is too long to create a directory
-                    homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
-                else :
-                    pass
-        with open("homo_oligo.txt", "w") as homo_file:
-            homo_file.write(homo_oligo_script)
-        with open("all_vs_all.txt", "w") as all_file:
-            all_file.write(all_vs_all_script)
-        with open("OOM_int.txt", "w") as OOM_file :
-            OOM_file.write(OOM_int)
+    Returns:
+    ----------
+    """
+    all_vs_all_script = str()
+    homo_oligo_script = str()
+    OOM_int = str()
+    proteins = file.get_proteins()
+    lenght_prot = file.get_lenght_prot()
+    for index_protein in range(len(proteins)) :
+        lenght = lenght_prot[proteins[index_protein]]
+        for index2_protein in range(index_protein+1,len(proteins)) :
+            int_lenght = lenght + lenght_prot[proteins[index2_protein]]
+            if int_lenght >= max_aa :
+                OOM_int = OOM_int + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
+            elif os.path.exists(f"./result_all_vs_all/{proteins[index_protein]}_and_{proteins[index2_protein]}/ranked_0.pdb") == False : #make interaction if doesn't exist and is not too long
+                all_vs_all_script = all_vs_all_script + proteins[index_protein] + ";" +  proteins[index2_protein]+ "\n"
+            else :
+                pass
+        lenght_homo = lenght
+        homo_dir = proteins[index_protein]
+        for nbr_homo in range(2,21) :
+           lenght_homo += lenght
+           homo_dir += "_and_" + proteins[index_protein]
+           if lenght_homo >= max_aa :
+               OOM_int = OOM_int + proteins[index_protein] + "," + str(nbr_homo) + "\n"
+           elif os.path.exists(f"./result_homo_oligo/{homo_dir}/ranked_0.pdb") == False and len(homo_dir) < 4096 : #homo_oligo is too long to create a directory
+               homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
+           else :
+               pass
+    with open("homo_oligo.txt", "w") as homo_file:
+       homo_file.write(homo_oligo_script)
+    with open("all_vs_all.txt", "w") as all_file:
+       all_file.write(all_vs_all_script)
+    with open("OOM_int.txt", "w") as OOM_file :
+       OOM_file.write(OOM_int)
 
 ### Generating Multimers
 
@@ -358,7 +358,7 @@ def make_table_res_int (file, path_int) :
             with open(f"{path_int}/"+fileout, "w", newline="") as csv_table :
                 mywriter = csv.writer(csv_table, delimiter=",")
                 mywriter.writerows(np_table)
-            print("Write table")
+            print("Write residue table")
             del dict_int[chains][0] #delete title of each col
             for interaction in dict_int[chains] :
                if interaction not in residues_at_interface[int_names] :
