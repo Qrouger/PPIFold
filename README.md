@@ -161,7 +161,7 @@ Model structure, with residues colored according to their interaction interface.
 
 ### Example
 
-After downloading test.txt and conf.txt, you need to complete the conf.txt file with all your paths.<br>
+After completing test.txt and conf.txt, you need to complete the conf.txt file with all your paths.<br>
 Activate your Conda environment.<br>
 You must run the command in the directory.<br>
 Command : <br>
