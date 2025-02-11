@@ -740,14 +740,21 @@ def plot_sequence_interface (file, cluster_dict) :
             uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
             for aa_to_color in interaction :
                if " " in aa_to_color :
-                  index_to_color[aa_to_color.split(" ")[1]] = all_color[indice_color]
+                  if aa_to_color.split(" ")[1] not in index_to_color.keys() :
+                     index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
+                  if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
+                     index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
          else :
             uniprot_id_interface[interaction[len(interaction)-1]].append(all_color[indice_color])
             for aa_to_color in interaction :
                if " " in aa_to_color :
-                  index_to_color[aa_to_color.split(" ")[1]] = interface_done[interation[0]]
+                  if aa_to_color.split(" ")[1] not in index_to_color.keys() : 
+                     index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
+                  if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
+                     index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
          indice_color += 1
       line_adjust = 150 #max aa per line
+      print(index_to_color)
       n_lines = (len(sequence) + line_adjust - 1) // line_adjust
       fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
       for line_index in range(0, len(sequence), line_adjust) :
@@ -756,8 +763,11 @@ def plot_sequence_interface (file, cluster_dict) :
          for i in range(len(sub_sequence)) :
             aa = sub_sequence[i]
             total_index = line_index + i
-            if str(total_index+1) in index_to_color.keys() :
-               ax.add_patch(plt.Rectangle((i, y_pos), 1, 0.6, color=index_to_color[str(total_index+1)]))
+            if str(total_index + 1) in index_to_color.keys() :
+               colors = index_to_color[str(total_index + 1)]
+               height = 0.5 / len(colors)
+               for color_index, color in enumerate(colors) :
+                  ax.add_patch(plt.Rectangle((i, y_pos +color_index * height), 1, height, color=color))
                ax.text(i + 0.5, y_pos + 0.25, aa, ha='center', va='center', color='white')
             else :
                ax.add_patch(plt.Rectangle((i, y_pos), 1, 0.6, color="white"))
@@ -771,6 +781,7 @@ def plot_sequence_interface (file, cluster_dict) :
       ax.set_ylim(-n_lines*2, 1)  #Adjust high
       ax.axis('off')
       plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300, bbox_inches='tight')
+
 
 
 
