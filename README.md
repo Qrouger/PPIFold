@@ -5,7 +5,7 @@ PPIFold is a tool for analyzing Protein-Protein Interactions from [AlphaPulldown
 
 ## Requirements
 - AlphaFold data base
-- Anaconda
+- Conda
 - SignalP5 (optional)
 - Singularity and Singularity Image
 
