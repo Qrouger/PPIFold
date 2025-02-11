@@ -158,3 +158,10 @@ A file who resume signal peptides for all proteins.<br>
 
 **.pdb file<br>**
 Model structure, with residues colored according to their interaction interface. <br>
+
+### Example
+After complet your conf.txt file with all your path you have to run the command.
+Command : <br>
+```bash
+  PPIFold
+```
