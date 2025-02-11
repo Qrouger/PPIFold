@@ -161,9 +161,9 @@ Model structure, with residues colored according to their interaction interface.
 
 ### Example
 
-After download test.txt and conf.txt, you need to complet your conf.txt file with all your path.
-Activate your conda environnement.
-You need to launch your command in the directory.
+After downloading test.txt and conf.txt, you need to complete the conf.txt file with all your paths.<br>
+Activate your Conda environment.<br>
+You must run the command in the directory.<br>
 Command : <br>
 ```bash
 PPIFold
