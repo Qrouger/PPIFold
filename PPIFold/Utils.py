@@ -754,7 +754,6 @@ def plot_sequence_interface (file, cluster_dict) :
                      index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
          indice_color += 1
       line_adjust = 150 #max aa per line
-      print(index_to_color)
       n_lines = (len(sequence) + line_adjust - 1) // line_adjust
       fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
       for line_index in range(0, len(sequence), line_adjust) :
