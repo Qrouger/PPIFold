@@ -11,8 +11,8 @@ PPIFold is a tool for analyzing Protein-Protein Interactions from [AlphaPulldown
 - [Initial Files](#initial-files)
 - [Arguments<br>](#arguments)
 - [Results](#results)
-  * [Figures](#figures)
-  * [Generated Files](#generated-files)
+  + [Figures](#figures)
+  + [Generated Files](#generated-files)
 - [Example](#example)
 
 <!-- TOC end -->
