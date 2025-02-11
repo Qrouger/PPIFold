@@ -3,6 +3,9 @@ Automated pipeline for massive PPI prediction and figure creation.
 
 PPIFold is a tool for analyzing Protein-Protein Interactions from [AlphaPulldown](https://github.com/KosinskiLab/AlphaPulldown#alphapulldown-version-200), with automated pre- and post-processing. It is used to generate PPI predictions for multiple systems without wasting time on generating initial files and sorting results. It predicts the best homo-oligomer for a protein and the best interface for interacting with specific proteins. This allows for the prediction of massive multimeric complexes with numerous PPIs.
 
+- Requirements
+- Installations
+
 ## Requirements
 - AlphaFold data base
 - Conda
