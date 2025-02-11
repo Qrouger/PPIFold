@@ -467,10 +467,10 @@ class File_proteins() :
         for line in all_residues_int :
             line[1] = line[1].strip() #remove readability spaces
             if line[0] != int[0] and "chain" not in line[0] :
-                if line[0] not in list_int_protein1 :
-                    list_int_protein1.append(line[0])
-                if line[1] not in list_int_protein2 :
-                    list_int_protein2.append(line[1])
+                if line[0].split(":")[1] not in list_int_protein1 :
+                    list_int_protein1.append(line[0].split(":")[1])
+                if line[1].split(":")[1] not in list_int_protein2 :
+                    list_int_protein2.append(line[1].split(":")[1])
         if protein1 == protein2 : #fusion of residues at interface for homo-oligomer
             for residue in list_int_protein2 :
                 list_int_protein1.append(residue)
