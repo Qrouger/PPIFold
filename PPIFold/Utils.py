@@ -232,9 +232,9 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False 2>&1 | tee -a PPI.log"
     os.system(cmd1)
 
-def add_indice_Q (dir_alpha) :
+def add_iQ_score (dir_alpha) :
     """
-    Generate indice_Q for all interactions.
+    Generate iQ_score for all interactions.
 
     Parameters:
     ----------
@@ -247,19 +247,19 @@ def add_indice_Q (dir_alpha) :
     os.system(cmd4)
     with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,pDockQ,indice_Q\n"
+        all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
         for row in reader :
             job = row['jobs']
             if '_and_' in job and row['pi_score'] != 'No interface detected' :
-                indice_Q = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
-                line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(indice_Q)}\n'
+                iQ_score = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
+                line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
                 all_lines = all_lines + line
     with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
 
 def create_out_fig (file) :
     """
-    Generate result figure for validate interaction (indice_Q) and better interaction (indice_hQ).
+    Generate result figure for validate interaction (iQ_score) and better interaction (indice_hQ).
 
     Parameters:
     ----------
@@ -268,9 +268,9 @@ def create_out_fig (file) :
     Returns:
     ----------
     """
-    indice_Q_dict = file.get_indice_Q_dict()
-    for interaction in indice_Q_dict.keys() :
-        if float(indice_Q_dict[interaction]) >= 50 : #Plot figure of interest just for interesting interactions
+    iQ_score_dict = file.get_iQ_score_dict()
+    for interaction in iQ_score_dict.keys() :
+        if float(iQ_score_dict[interaction]) >= 50 : #Plot figure of interest just for interesting interactions
             job1 = interaction[0] + "_and_" + interaction[1]
             #plot_Distogram("./result_all_vs_all/" + job1) #need distogram key in pickle file
             make_table_res_int(file, "./result_all_vs_all/" + job1)
@@ -521,7 +521,7 @@ def add_indice_hQ (dir_alpha) :
 
 def generate_interaction_network (file) :
     """
-    Generate interaction network, colored by indice_Q.
+    Generate interaction network, colored by iQ_score.
    
     Parameters:
     ----------
@@ -531,11 +531,11 @@ def generate_interaction_network (file) :
     ----------
     """
     valid_interactions = list()
-    indice_Q_dict = file.get_indice_Q_dict()
-    for interactions in indice_Q_dict.keys() :
+    iQ_score_dict = file.get_iQ_score_dict()
+    for interactions in iQ_score_dict.keys() :
         names = [interactions[0], interactions[1]]
-        if names not in [x[0] for x in valid_interactions] and float(indice_Q_dict[interactions]) >= 50 :
-            valid_interactions.append([names, float(indice_Q_dict[interactions])])
+        if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 50 :
+            valid_interactions.append([names, float(iQ_score_dict[interactions])])
     indice_hQ_dict = file.get_indice_hQ_dict()
     for homo_oligomer in indice_hQ_dict.keys() :
         if float(indice_hQ_dict[homo_oligomer][0]) >= 50 :
@@ -583,7 +583,7 @@ def generate_interaction_network (file) :
     nx.draw(int_graph, pos, edge_color=edge_colors_list, node_color='lightblue', node_size=500, ax=ax)
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
-    plt.colorbar(sm, ax=ax, label="indice_Q")
+    plt.colorbar(sm, ax=ax, label="iQ_score")
     plt.savefig("network.png")
     plt.close()
 
@@ -598,9 +598,9 @@ def generate_heatmap (file) :
     Returns:
     ----------
     """
-    indice_Q_data_matrix = list()
+    iQ_score_data_matrix = list()
     iptm_ptm_data_matrix = list()
-    indice_Q_dict = file.get_indice_Q_dict()
+    iQ_score_dict = file.get_iQ_score_dict()
     proteins_list = file.get_proteins()
     proteins_name = file.get_names()
     index_prot = list()
@@ -612,30 +612,30 @@ def generate_heatmap (file) :
     for protein in proteins_list :
         index_prot.append(protein+"_"+proteins_name[protein])
     for protein1 in proteins_list :
-        indice_Q_line = list()
+        iQ_score_line = list()
         iptm_ptm_line = list()
         for protein2 in proteins_list :
             if protein1 == protein2 :
-                indice_Q_line.append(0)
+                iQ_score_line.append(0)
                 iptm_ptm_line.append(0)
             else :
-                if (protein1,protein2) in indice_Q_dict.keys() :
-                    indice_Q_line.append(float(indice_Q_dict[(protein1,protein2)]))
+                if (protein1,protein2) in iQ_score_dict.keys() :
+                    iQ_score_line.append(float(iQ_score_dict[(protein1,protein2)]))
                     iptm_ptm_line.append(float(iptm_ptm_dict[protein1+"_and_"+protein2]))
-                elif (protein2,protein1) in indice_Q_dict.keys() :
-                    indice_Q_line.append(float(indice_Q_dict[(protein2,protein1)]))
+                elif (protein2,protein1) in iQ_score_dict.keys() :
+                    iQ_score_line.append(float(iQ_score_dict[(protein2,protein1)]))
                     iptm_ptm_line.append(float(iptm_ptm_dict[protein2+"_and_"+protein1]))
                 else :
-                    indice_Q_line.append(0)
+                    iQ_score_line.append(0)
                     iptm_ptm_line.append(0)
                     print (protein1 + " and " + protein2 + " are not in score table or have bad inter PAE")
-        indice_Q_data_matrix.append(indice_Q_line)
+        iQ_score_data_matrix.append(iQ_score_line)
         iptm_ptm_data_matrix.append(iptm_ptm_line)
-    indice_Q_complet_matrix = pd.DataFrame(indice_Q_data_matrix,index = index_prot, columns = index_prot)
+    iQ_score_complet_matrix = pd.DataFrame(iQ_score_data_matrix,index = index_prot, columns = index_prot)
     iptm_ptm_complet_matrix = pd.DataFrame(iptm_ptm_data_matrix,index = index_prot, columns = index_prot)
-    ax2 = seaborn.heatmap(indice_Q_complet_matrix, cbar_kws = {'label' : 'indice_Q'}, xticklabels=True, yticklabels=True)
+    ax2 = seaborn.heatmap(iQ_score_complet_matrix, cbar_kws = {'label' : 'iQ_score'}, xticklabels=True, yticklabels=True)
     ax2.figure.tight_layout()
-    plt.savefig("indice_Q_heatmap.png")
+    plt.savefig("iQ_score_heatmap.png")
     plt.close()
     ax2 = seaborn.heatmap(iptm_ptm_complet_matrix, cbar_kws = {'label' : 'iptm_ptm'}, xticklabels=True, yticklabels=True)
     ax2.figure.tight_layout()
