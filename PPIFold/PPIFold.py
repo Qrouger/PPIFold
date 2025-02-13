@@ -34,10 +34,10 @@ def main() :
     generate_APD_script(PPI_object, args.max_aa)
     if args.make_multimers == True :
         Make_all_vs_all(path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
-        add_indice_Q(path_dict["Path_Singularity_Image"])
+        add_iQ_score(path_dict["Path_Singularity_Image"])
         Make_homo_oligo(path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
-        add_indice_hQ(path_dict["Path_Singularity_Image"])
-        PPI_object.update_indice_Q_indice_hQ()
+        add_hiQ_score(path_dict["Path_Singularity_Image"])
+        PPI_object.update_iQ_score_hiQ_score()
         generate_heatmap(PPI_object)
         create_out_fig(PPI_object)
         generate_interaction_network(PPI_object)
