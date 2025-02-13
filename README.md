@@ -27,7 +27,7 @@ PPIFold is a tool for analyzing Protein-Protein Interactions from [AlphaPulldown
 
 <!-- TOC --><a name="installations"></a>
 ## Installations
-Installation of AlphaFold database :<br>
+Installation of AlphaFold data base :<br>
 ```bash
 sudo apt install aria2
 git clone https://github.com/deepmind/alphafold.git
