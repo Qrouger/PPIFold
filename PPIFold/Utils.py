@@ -259,7 +259,7 @@ def add_iQ_score (dir_alpha) :
 
 def create_out_fig (file) :
     """
-    Generate result figure for validate interaction (iQ_score) and better interaction (indice_hQ).
+    Generate result figure for validate interaction (iQ_score) and better interaction (hiQ_score).
 
     Parameters:
     ----------
@@ -274,11 +274,11 @@ def create_out_fig (file) :
             job1 = interaction[0] + "_and_" + interaction[1]
             #plot_Distogram("./result_all_vs_all/" + job1) #need distogram key in pickle file
             make_table_res_int(file, "./result_all_vs_all/" + job1)
-    indice_hQ_dict = file.get_indice_hQ_dict()
-    for homo_oligo in indice_hQ_dict.keys() :
-        if float(indice_hQ_dict[homo_oligo][0]) >= 50 :
-            job2 = homo_oligo #job2 = homo_oligo + "_homo_" + str(indice_hQ_dict[homo_oligo][1]) + "er" # wait AFPD homo release
-            for count in range(1,indice_hQ_dict[homo_oligo][1]) :
+    hiQ_score_dict = file.get_hiQ_score_dict()
+    for homo_oligo in hiQ_score_dict.keys() :
+        if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
+            job2 = homo_oligo #job2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er" # wait AFPD homo release
+            for count in range(1,hiQ_score_dict[homo_oligo][1]) :
                 job2 += "_and_" + homo_oligo
             #plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
             make_table_res_int(file, "./result_homo_oligo/" + job2)
@@ -470,7 +470,7 @@ def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_homo_oligo \--data_dir={data_dir} \--protein_lists=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False 2>&1 | tee -a PPI.log"
     os.system(cmd1)
 
-def add_indice_hQ (dir_alpha) :
+def add_hiQ_score (dir_alpha) :
     """
     Generate a score table for all homo-oligomer.
 
@@ -485,7 +485,7 @@ def add_indice_hQ (dir_alpha) :
     os.system(cmd4)
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,indice_hQ\n"
+        all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
         all_homo = dict()
         save_pi_score = dict()
         for row in reader :
@@ -509,12 +509,12 @@ def add_indice_hQ (dir_alpha) :
             save_pi_score[key].sort(reverse=True)
             for index in range(0,int(number_oligo)) :
                 new_sum_pi_score += save_pi_score[key][index]
-                indice_hQ = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm are always same for each homo of same protein
-            line =f'{key},{str(float(new_sum_pi_score)/int(number_oligo))},{row["iptm_ptm"]},{str(indice_hQ)}\n'
+                hiQ_score = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm are always same for each homo of same protein
+            line =f'{key},{str(float(new_sum_pi_score)/int(number_oligo))},{row["iptm_ptm"]},{str(hiQ_score)}\n'
             all_lines += line
         else :
-            indice_hQ = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
-            line =f'{key},{str(float(all_homo[key][0])/all_homo[key][1])},{row["iptm_ptm"]},{str(indice_hQ)}\n'
+            hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
+            line =f'{key},{str(float(all_homo[key][0])/all_homo[key][1])},{row["iptm_ptm"]},{str(hiQ_score)}\n'
             all_lines += line
     with open("./result_homo_oligo/new_predictions_with_good_interpae.csv", "w") as file2 :
         file2.write(all_lines)
@@ -536,10 +536,10 @@ def generate_interaction_network (file) :
         names = [interactions[0], interactions[1]]
         if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 50 :
             valid_interactions.append([names, float(iQ_score_dict[interactions])])
-    indice_hQ_dict = file.get_indice_hQ_dict()
-    for homo_oligomer in indice_hQ_dict.keys() :
-        if float(indice_hQ_dict[homo_oligomer][0]) >= 50 :
-            valid_interactions.append([[homo_oligomer,homo_oligomer], indice_hQ_dict[homo_oligomer][1]])
+    hiQ_score_dict = file.get_hiQ_score_dict()
+    for homo_oligomer in hiQ_score_dict.keys() :
+        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
+            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
     int_graph = nx.Graph()
     list_inter_score = list()
     prots = set()
