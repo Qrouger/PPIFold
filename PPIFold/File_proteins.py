@@ -302,7 +302,7 @@ class File_proteins() :
         already_fasta = dict()
         with open(path_txt,"r") as in_file :
             for line in in_file :
-                if "," in str(line) :
+                if "," in str(line) or line[0] != ">" and len(line) <= 7 :
                     save_prot = ""
                     new_line = (line.split(","))
                     for prot in new_line :
