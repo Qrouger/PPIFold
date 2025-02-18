@@ -564,22 +564,25 @@ def generate_interaction_network (file) :
         else :
             color_label[prot_int] = edge_labels[prot_int]
     selected_weights = {edge: edge_labels[edge] for edge in color_label.keys()}
-    norm = mcolors.Normalize(vmin=min(selected_weights.values()), vmax=max(selected_weights.values()))
-    cmap = plt.cm.coolwarm
-    edge_colors = {}
-    for edge in int_graph.edges():
-        if edge in color_label.keys() or (edge[1], edge[0]) in color_label.keys():
-            edge_colors[edge] = cmap(norm(edge_labels[edge]))
-        else:
-            edge_colors[edge] = 'gray'
-    edge_colors_list = [edge_colors[edge] for edge in int_graph.edges()]
-    nx.draw_networkx_edge_labels(int_graph, pos, homo_label_dict, verticalalignment = 'bottom')
-    nx.draw(int_graph, pos, edge_color=edge_colors_list, node_color='lightblue', node_size=500, ax=ax)
-    sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
-    sm.set_array([])
-    plt.colorbar(sm, ax=ax, label="iQ_score")
-    plt.savefig("network.png")
-    plt.close()
+    if len(selected_weights) != 0 :
+       norm = mcolors.Normalize(vmin=min(selected_weights.values()), vmax=max(selected_weights.values()))
+       cmap = plt.cm.coolwarm
+       edge_colors = {}
+       for edge in int_graph.edges():
+          if edge in color_label.keys() or (edge[1], edge[0]) in color_label.keys():
+             edge_colors[edge] = cmap(norm(edge_labels[edge]))
+          else:
+             edge_colors[edge] = 'gray'
+       edge_colors_list = [edge_colors[edge] for edge in int_graph.edges()]
+       nx.draw_networkx_edge_labels(int_graph, pos, homo_label_dict, verticalalignment = 'bottom')
+       nx.draw(int_graph, pos, edge_color=edge_colors_list, node_color='lightblue', node_size=500, ax=ax)
+       sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+       sm.set_array([])
+       plt.colorbar(sm, ax=ax, label="iQ_score")
+       plt.savefig("network.png")
+       plt.close()
+    else :
+        print("no PPI interactions for network")
 
 def generate_heatmap (file) :
     """
