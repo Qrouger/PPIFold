@@ -159,7 +159,7 @@ Color represents the iQ-score, with a better iQ-score indicated by a lighter col
 **Protein interface<br>**
 Amino acid sequence with different interfaces used in interacations.
 <img src="https://github.com/user-attachments/assets/29f63a4a-9ea0-4eba-bbda-14b0d9403342" alt="interface_figure" width="4000"/><br>
-Each interface with a protein is represented by all contact residues, which are colored. The last interaction represents the interface used in homo-oligomerization.
+Each interface with a protein is represented by all contact residues, which are colored. The last interaction represents the interface used in homo-oligomerization. If two proteins use the same interface, they will have the same colors.
 
 
 <!-- TOC --><a name="generated-files"></a>
