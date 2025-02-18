@@ -242,21 +242,23 @@ def add_iQ_score (dir_alpha) :
 
     Returns:
     ----------
-    """
-    cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-    os.system(cmd4)
-    with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
-        reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
-        for row in reader :
-            job = row['jobs']
-            if '_and_' in job and row['pi_score'] != 'No interface detected' :
+    """    
+    if os.path.isdir("./result_all_vs_all") == True :
+       cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+       os.system(cmd4)
+       with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+          reader = csv.DictReader(file1)
+          all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
+          for row in reader :
+             job = row['jobs']
+             if '_and_' in job and row['pi_score'] != 'No interface detected' :
                 iQ_score = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
                 line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
                 all_lines = all_lines + line
-    with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
-        file2.write(all_lines)
-
+       with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
+          file2.write(all_lines)
+    else : #allow to do PPIFold for only one protein
+       print("all_vs_all directory is empty")
 def create_out_fig (file) :
     """
     Generate result figure for validate interaction (iQ_score) and better interaction (hiQ_score).
