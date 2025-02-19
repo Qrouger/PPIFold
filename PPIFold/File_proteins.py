@@ -300,9 +300,10 @@ class File_proteins() :
         new_proteins = list()
         interface_dict = dict()
         already_fasta = dict()
+        save_prot = ""
         with open(path_txt,"r") as in_file :
             for line in in_file :
-                if "," in str(line) or line[0] != ">" and len(line) <= 7 :
+                if "," in str(line) or (line[0] != ">" and save_prot == "") :
                     save_prot = ""
                     new_line = (line.split(","))
                     for prot in new_line :
