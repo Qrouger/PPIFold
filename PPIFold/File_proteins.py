@@ -363,6 +363,7 @@ class File_proteins() :
         Returns:
         ----------
         """
+        lenght_prot = self.get_lenght_prot()
         if prot_dict == None :
             proteins = self.get_proteins()
         else :
