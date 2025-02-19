@@ -259,6 +259,7 @@ def add_iQ_score (dir_alpha) :
           file2.write(all_lines)
     else : #allow to do PPIFold for only one protein
        print("all_vs_all directory is empty")
+        
 def create_out_fig (file) :
     """
     Generate result figure for validate interaction (iQ_score) and better interaction (hiQ_score).
