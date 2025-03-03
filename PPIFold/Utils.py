@@ -716,22 +716,23 @@ def plot_sequence_interface (file, cluster_dict) :
    ----------
    file : object of File_proteins class
    cluster_dict : dict
-    
+
    Returns:
    """
    if not os.path.exists("./interface_fig/") :
       os.makedirs("./interface_fig/")
    sequence_dict = file.get_proteins_sequence()
    dict_inter = file.get_interface_dict()
-   all_color= ['red', 'green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'pink', 'brown','lime', 'indigo', 'violet', 'turquoise', 'teal', 'crimson', 'gold', 'salmon', 'plum', 'chartreuse']
+   all_color= ['red','green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'pink', 'brown','lime', 'indigo', 'violet', 'turquoise', 'teal', 'crimson', 'gold', 'salmon', 'plum', 'chartreuse']
    for uniprotID_main in dict_inter.keys() :
       sequence = sequence_dict[uniprotID_main]
-      indice_color = 0
+      indice_color = -1
       interface_done = dict()
       index_to_color = dict()
       uniprot_id_interface = dict()
       for interaction in dict_inter[uniprotID_main] : #list of residue + interface + UniprotID in interaction
-         if interaction[0] not in interface_done.keys() :
+         if interaction[0] not in interface_done.keys() : #if it's a new interface
+            indice_color += 1
             interface_done[interaction[0]] = all_color[indice_color]
             uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
             for aa_to_color in interaction :
@@ -741,14 +742,13 @@ def plot_sequence_interface (file, cluster_dict) :
                   if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
                      index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
          else :
-            uniprot_id_interface[interaction[len(interaction)-1]].append(all_color[indice_color])
+            uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
             for aa_to_color in interaction :
                if " " in aa_to_color :
-                  if aa_to_color.split(" ")[1] not in index_to_color.keys() : 
+                  if aa_to_color.split(" ")[1] not in index_to_color.keys() :
                      index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
                   if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
                      index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
-         indice_color += 1
       line_adjust = 150 #max aa per line
       n_lines = (len(sequence) + line_adjust - 1) // line_adjust
       fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
@@ -776,7 +776,3 @@ def plot_sequence_interface (file, cluster_dict) :
       ax.set_ylim(-n_lines*2, 1)  #Adjust high
       ax.axis('off')
       plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300, bbox_inches='tight')
-
-
-
-
