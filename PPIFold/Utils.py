@@ -229,7 +229,7 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     os.environ['TF_FORCE_UNIFIED_MEMORY'] = 'true'
     os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = '3.2'
     os.environ['XLA_FLAGS'] = '--xla_gpu_enable_triton_gemm=false'
-    cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False 2>&1 | tee -a PPI.log"
+    cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
     os.system(cmd1)
 
 def add_iQ_score (dir_alpha) :
