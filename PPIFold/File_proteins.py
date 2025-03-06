@@ -363,7 +363,7 @@ class File_proteins() :
         Returns:
         ----------
         """
-        lenght_prot = self.get_lenght_prot()
+        #lenght_prot = self.get_lenght_prot() #not already set
         if prot_dict == None :
             proteins = self.get_proteins()
         else :
