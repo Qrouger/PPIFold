@@ -544,11 +544,13 @@ def generate_interaction_network (file) :
     with open('table.cyt', 'w') as f :
         f.write(('source,targer,interaction,score\n'))
         for inter, score in valid_interactions :
-            if protein in proteins_name.keys() :
+            if inter[0] in dict_name.keys() :
                inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
-               inter1 = inter[1]+f"({dict_name[inter[1]]})"
             else :
                inter0 = inter[0]
+            if inter[1] in dict_name.keys() :
+               inter1 = inter[1]+f"({dict_name[inter[1]]})"
+            else :
                inter1 = inter[1]
             f.write(f'{inter0},{inter1},pp,{round(score,2)}\n')
             prots.add(inter0)
