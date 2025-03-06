@@ -342,7 +342,7 @@ def make_table_res_int (file, path_int) :
                                                   elif res_int in int_already_know.keys() and int_already_know[res_int] < str(distance) : #skip double interaction with differents atoms
                                                       pass
                                                   else :
-                                                      dict_int[chain1.get_id()+chain2.get_id()].append(res_int[0][2:len(res_int[0])]+":"+res_num[0]," "+res_int[1][2:len(res_int[1])]+":"+res_num[1]," "+str(distance)])
+                                                      dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0][2:len(res_int[0])]+":"+res_num[0]," "+res_int[1][2:len(res_int[1])]+":"+res_num[1]," "+str(distance)])
                                                       int_already_know[res_int] = str(distance)
                                                       color_res[proteins[0]].add(res_num[0])
                                                       color_res[proteins[1]].add(res_num[1])
