@@ -334,8 +334,8 @@ def make_table_res_int (file, path_int) :
                                               res_num = str(residue1.get_id()[1]), str(residue2.get_id()[1])
                                               if chain1.get_id()+chain2.get_id() in dict_int.keys() : #to make different table for different interaction
                                                   if res_int in int_already_know.keys() and int_already_know[res_int] > str(distance) :
-                                                      dict_int[chain1.get_id()+chain2.get_id()].remove([res_num[0]," "+res_num[1]," "+str(int_already_know[res_int])])
-                                                      dict_int[chain1.get_id()+chain2.get_id()].append([res_num[0]," "+res_num[1]," "+str(distance)])
+                                                      dict_int[chain1.get_id()+chain2.get_id()].remove([res_int[0]," "+res_int[1]," "+str(int_already_know[res_int])])
+                                                      dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                       int_already_know[res_int] = str(distance)
                                                       color_res[proteins[0]].add(res_num[0])
                                                       color_res[proteins[1]].add(res_num[1])
@@ -348,7 +348,7 @@ def make_table_res_int (file, path_int) :
                                                       color_res[proteins[1]].add(res_num[1])
                                               else :
                                                   dict_int[chain1.get_id()+chain2.get_id()] = [["Chain "+chain1.get_id()," Chain "+chain2.get_id()," Distance Ä"]]
-                                                  dict_int[chain1.get_id()+chain2.get_id()].append([res_num[0]," "+res_num[1]," "+str(distance)])
+                                                  dict_int[chain1.get_id()+chain2.get_id()].append([res_int[0]," "+res_int[1]," "+str(distance)])
                                                   int_already_know[res_int] = str(distance)
                                                   color_res[proteins[0]].add(res_num[0])
                                                   color_res[proteins[1]].add(res_num[1])
