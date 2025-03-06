@@ -376,8 +376,7 @@ def make_table_res_int (file, path_int) :
                 for distance in dist[line] :
                    hori_index += 1
                    if hori_index < lenght_prot[names[1]] :
-                      if distance <= 10 :
-                         if pae_mtx[line][hori_index] < 5 :
+                      if distance <= 10 and pae_mtx[line][hori_index] < 5 :
                              residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
                              residue2 = seq_prot[names[1]][hori_index]
                              dict_interface[chains].append([residue1+" "+str(line-lenght_prot[names[1]]+1)," "+residue2+" "+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
@@ -402,7 +401,7 @@ def make_table_res_int (file, path_int) :
         with open(f"{path_int}/"+fileout, "w", newline="") as csv_table :
              mywriter = csv.writer(csv_table, delimiter=",")
              mywriter.writerows(np_table)
-        print("Write residue table")
+    print("Write residue table")
         del dict_int[chains][0] #delete title of each col
         for interaction in dict_int[chains] :
             if interaction not in residues_at_interface[int_names] :
