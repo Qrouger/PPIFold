@@ -673,7 +673,7 @@ def cluster_interface (file) :
                 already_inter.append(alphabet[0])
             for interface2 in range(interface1+1,len(interface_dict[proteins])) :
                 list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
-                if len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2]))) == 0 : #if no similar residue
+                if len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2])))-3 == 0 : #if no similar residue
                    simi_inter = 0
                 else :
                    simi_inter = len(list_inter)/(len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2])))-3) #indice jaccard # -3 just to remove interface 'a' and uniprotID from .union()
