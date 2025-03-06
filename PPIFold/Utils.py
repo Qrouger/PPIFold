@@ -354,12 +354,12 @@ def make_table_res_int (file, path_int) :
                                                   color_res[proteins[1]].add(res_num[1])
                                           else :
                                               pass
-       else : #last version of APD
+      else : #last version of APD
           lenght_prot = file.get_lenght_prot()
           seq_prot = file.get_proteins_sequence()
           names = path_int.split("/")[2].split("_and_")
           chains = path_int.split("/")[2]
-          dict_interface = dict()
+          dict_int = dict()
           color_res = dict()
           color_res[names[0]] = set()
           color_res[names[1]] = set()
@@ -370,16 +370,17 @@ def make_table_res_int (file, path_int) :
              bin_edges = np.insert(bin_edges, 0, 0)
              distogram_softmax = softmax(pickle_dict["distogram"]["logits"], axis=2)
              dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2) #center of the residue
-             dict_interface[chains] = [[names[0]," "+names[1]," Distance Ä"," PAE score"]]
+             dict_int[chains] = [[names[0]," "+names[1]," Distance Ä"," PAE score"]]
              for line in range(lenght_prot[names[1]],len(dist)) :
                 hori_index = 0
                 for distance in dist[line] :
                    hori_index += 1
                    if hori_index < lenght_prot[names[1]] :
-                      if distance <= 10 and pae_mtx[line][hori_index] < 5 :
+                      if distance <= 10 :
+                         if pae_mtx[line][hori_index] < 5 :
                              residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
                              residue2 = seq_prot[names[1]][hori_index]
-                             dict_interface[chains].append([residue1+" "+str(line-lenght_prot[names[1]]+1)," "+residue2+" "+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
+                             dict_int[chains].append([residue1+":"+str(line-lenght_prot[names[1]]+1)," "+residue2+":"+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
                              color_res[names[0]].add(line-lenght_prot[names[1]]+1)
                              color_res[names[1]].add(hori_index+1)
 #    file.define_interface(dict_interface[chains],names) #update interaction interface
@@ -401,12 +402,13 @@ def make_table_res_int (file, path_int) :
         with open(f"{path_int}/"+fileout, "w", newline="") as csv_table :
              mywriter = csv.writer(csv_table, delimiter=",")
              mywriter.writerows(np_table)
-    print("Write residue table")
         del dict_int[chains][0] #delete title of each col
         for interaction in dict_int[chains] :
             if interaction not in residues_at_interface[int_names] :
                 residues_at_interface[int_names].append(interaction)
+    print("Write residue table")
     names = path_int.split("/")[2].split("_and_")
+    print(residues_at_interface[int_names],names)
     file.define_interface(residues_at_interface[int_names],names) #update interaction interface
     color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
 
