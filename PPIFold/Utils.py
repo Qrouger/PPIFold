@@ -408,7 +408,6 @@ def make_table_res_int (file, path_int) :
                 residues_at_interface[int_names].append(interaction)
     print("Write residue table")
     names = path_int.split("/")[2].split("_and_")
-    print(residues_at_interface[int_names],names)
     file.define_interface(residues_at_interface[int_names],names) #update interaction interface
     color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
 
