@@ -544,8 +544,12 @@ def generate_interaction_network (file) :
     with open('table.cyt', 'w') as f :
         f.write(('source,targer,interaction,score\n'))
         for inter, score in valid_interactions :
-            inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
-            inter1 = inter[1]+f"({dict_name[inter[1]]})"
+            if protein in proteins_name.keys() :
+               inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
+               inter1 = inter[1]+f"({dict_name[inter[1]]})"
+            else :
+               inter0 = inter[0]
+               inter1 = inter[1]
             f.write(f'{inter0},{inter1},pp,{round(score,2)}\n')
             prots.add(inter0)
             prots.add(inter1)
@@ -610,7 +614,10 @@ def generate_heatmap (file) :
         for row in reader :
             iptm_ptm_dict[row['jobs']] = row["iptm_ptm"]
     for protein in proteins_list :
-        index_prot.append(protein+"_"+proteins_name[protein])
+        if protein in proteins_name.keys() :
+          index_prot.append(protein+"_"+proteins_name[protein])
+       else :
+          index_prot.append(protein)
     for protein1 in proteins_list :
         iQ_score_line = list()
         iptm_ptm_line = list()
