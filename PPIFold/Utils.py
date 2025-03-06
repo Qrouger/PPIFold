@@ -312,7 +312,7 @@ def make_table_res_int (file, path_int) :
     atom_possible_contact = ["C","CA","CB"] #["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
     with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
        pickle_dict = pickle.load(gzip.open(gz_file))
-       if "distogram" not in pickle_dict.keys() or "" not in pickle_dict.keys() :
+       if "distogram" not in pickle_dict.keys() or "predicted_aligned_error" not in pickle_dict.keys() :
           for model in structure:
              list_chain = model.get_list()
              max_chain = len(list_chain)
