@@ -750,6 +750,11 @@ def plot_sequence_interface (file, cluster_dict) :
                      index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
                   if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
                      index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
+               else : #for seconde residue table
+                  if aa_to_color not in index_to_color.keys() :
+                     index_to_color[aa_to_color] = [all_color[indice_color]]
+                  if aa_to_color in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
+                     index_to_color[aa_to_color].append(all_color[indice_color])
          else :
             uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
             for aa_to_color in interaction :
@@ -758,6 +763,11 @@ def plot_sequence_interface (file, cluster_dict) :
                      index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
                   if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
                      index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
+               else : #for seconde residue table
+                  if aa_to_color not in index_to_color.keys() :
+                     index_to_color[aa_to_color] = [all_color[indice_color]]
+                  if aa_to_color in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
+                     index_to_color[aa_to_color].append(all_color[indice_color])
       line_adjust = 150 #max aa per line
       n_lines = (len(sequence) + line_adjust - 1) // line_adjust
       fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
