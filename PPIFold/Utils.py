@@ -618,7 +618,7 @@ def generate_heatmap (file) :
     for protein in proteins_list :
         if protein in proteins_name.keys() :
           index_prot.append(protein+"_"+proteins_name[protein])
-       else :
+        else :
           index_prot.append(protein)
     for protein1 in proteins_list :
         iQ_score_line = list()
