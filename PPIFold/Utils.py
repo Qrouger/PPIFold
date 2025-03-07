@@ -381,8 +381,8 @@ def make_table_res_int (file, path_int) :
                              residue1 = seq_prot[names[0]][line-lenght_prot[names[1]]]
                              residue2 = seq_prot[names[1]][hori_index]
                              dict_int[chains].append([residue1+":"+str(line-lenght_prot[names[1]]+1)," "+residue2+":"+str(hori_index+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
-                             color_res[names[0]].add(line-lenght_prot[names[1]]+1)
-                             color_res[names[1]].add(hori_index+1)
+                             color_res[names[0]].add(str(line-lenght_prot[names[1]]+1))
+                             color_res[names[1]].add(str(hori_index+1))
 #    file.define_interface(dict_interface[chains],names) #update interaction interface
 #    color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
 #    fileout = chains+"_res_int.csv"
@@ -408,8 +408,9 @@ def make_table_res_int (file, path_int) :
                 residues_at_interface[int_names].append(interaction)
     print("Write residue table")
     names = path_int.split("/")[2].split("_and_")
-    file.define_interface(residues_at_interface[int_names],names) #update interaction interface
-    color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
+    if residues_at_interface[int_names] != [] : #can arrive if it don't fin atom with distance < 10 or PAE < 10
+       file.define_interface(residues_at_interface[int_names],names) #update interaction interface
+       color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
 
 def plot_Distogram (job) :
     """
