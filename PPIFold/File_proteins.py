@@ -321,7 +321,7 @@ class File_proteins() :
  
     def find_proteins_sequence (self) :
         """
-        Search for the amino acid sequence on the UniProt website and clean it.
+        Search for the amino acid sequence on the UniProt website and clean it and the name of proteins.
         
         Parameters:
         ----------
