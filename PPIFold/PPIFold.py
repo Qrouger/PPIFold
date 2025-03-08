@@ -24,7 +24,7 @@ def main() :
     add_arguments(parser)
     args = parser.parse_args()
     PPI_object = File_proteins(path_dict["Path_Uniprot_ID"])
-    PPI_object.find_proteins_sequence()
+    PPI_object.find_proteins_sequence() #and real name of proteins
     if len(PPI_object.already_pickle(path_dict["Path_Pickle_Feature"])) > 0 : #if new feature pickle is need
         PPI_object.create_fasta_file()
         if args.use_signalP == True :
