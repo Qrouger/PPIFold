@@ -94,7 +94,7 @@ def remove_SP (file, org) :
                 if str(line2[1:len(line2)-1]) in prot_SP.keys() :
                     SP_signal = prot_SP[line2[1:len(line2)-1]]
             final_file = final_file + new_line2
-    file.find_prot_lenght(new_fasta_dict)
+    file.set_proteins_sequence(new_fasta_dict)
     cmd2 = "rm " + fasta_file
     os.system(cmd2)
     with open(fasta_file, "w") as new_file2 :
