@@ -793,3 +793,15 @@ def plot_sequence_interface (file, cluster_dict) :
       ax.set_ylim(-n_lines*2, 1)  #Adjust high
       ax.axis('off')
       plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300, bbox_inches='tight')
+def recover_prot_lenght(self, path_pkl) :
+   list_proteins = self.get_proteins()
+   new_dict_lenght = dict()
+   new_dict_sequence = dict()
+   for protein in list_proteins :
+      with open(os.path.join(f'{path_pkl}/{protein}.pkl'), 'rb') as pkl_file :
+         pickle_dict = pickle.load(pkl_file)
+         new_dict_sequence[protein] = pickle_dict.sequence
+         new_dict_lenght[protein] = len(pickle_dict.sequence)
+   self.find_prot_lenght(new_dict_lenght)
+   self.set_proteins_sequence(new_dict_sequence)
+
