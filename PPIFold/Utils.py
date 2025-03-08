@@ -354,7 +354,7 @@ def make_table_res_int (file, path_int) :
                                                   color_res[proteins[1]].add(res_num[1])
                                           else :
                                               pass
-      else : #last version of APD
+       else : #last version of APD
           lenght_prot = file.get_lenght_prot()
           seq_prot = file.get_proteins_sequence()
           names = path_int.split("/")[2].split("_and_")
