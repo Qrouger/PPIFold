@@ -24,15 +24,16 @@ def main() :
     add_arguments(parser)
     args = parser.parse_args()
     PPI_object = File_proteins(path_dict["Path_Uniprot_ID"])
-    PPI_object.find_proteins_sequence()
+    #PPI_object.find_proteins_sequence()
     #PPI_object.find_prot_lenght()
     if len(PPI_object.already_pickle(path_dict["Path_Pickle_Feature"])) > 0 : #if new feature pickle is need
+        PPI_object.find_proteins_sequence()
         PPI_object.create_fasta_file()
         if args.use_signalP == True :
             remove_SP(PPI_object,args.org)
         create_feature(PPI_object,path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"],args.use_mmseq)
     else :
-        recover_prot_lenght()
+        recover_prot_lenght()#PPI_object.find_proteins_sequence()  #PPI_object.find_prot_lenght()
     Make_all_MSA_coverage(PPI_object,path_dict["Path_Pickle_Feature"])
     generate_APD_script(PPI_object, args.max_aa)
     if args.make_multimers == True :
