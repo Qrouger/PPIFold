@@ -11,11 +11,11 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'AlphaPulldown')))
 
 def add_arguments(parser) :
-    parser.add_argument("--use_mmseq", help = "Use mmseq for feature generation", required = False, default = True)
-    parser.add_argument("--make_multimers", help = "If you just want make feature set on False", required = False, default = True)
-    parser.add_argument("--max_aa" , help = "Maximum amino acids can be generate by your cluster", required = False, default = 2500, type = int)
-    parser.add_argument("--use_signalP" , help = "Used or not SignalP", required = False, default = True)
-    parser.add_argument("--org" , help = "Organism of interest : arch, gram+, gram- or euk", required = False, default = "gram-", type = str)
+    parser.add_argument("--use_mmseq", help = "Use MMseqs2 for feature generation (True/False)", required = False, default = True)
+    parser.add_argument("--make_multimers", help = "Enable or disable multimer model generation (True/False)", required = False, default = True)
+    parser.add_argument("--max_aa" , help = "Maximum number of amino acids that can be generated per cluster", required = False, default = 2500, type = int)
+    parser.add_argument("--use_signalP" , help = "Enable or disable SignalP for signal peptide detection (True/False)", required = False, default = True)
+    parser.add_argument("--org" , help = "Organism of interest: arch, gram+, gram-, or euk", required = False, default = "gram-", type = str)
 
 def main() :
     sys.stdout = open('./PPI.log', 'w')
