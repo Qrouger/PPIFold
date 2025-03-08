@@ -794,13 +794,13 @@ def plot_sequence_interface (file, cluster_dict) :
       ax.axis('off')
       plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300, bbox_inches='tight')
 
-def recover_prot_sequence(self, path_pkl) :
-   list_proteins = self.get_proteins()
+def recover_prot_sequence(file, path_pkl) :
+   list_proteins = file.get_proteins()
    new_dict_sequence = dict()
    for protein in list_proteins :
       with open(os.path.join(f'{path_pkl}/{protein}.pkl'), 'rb') as pkl_file :
          pickle_dict = pickle.load(pkl_file)
          new_dict_sequence[protein] = pickle_dict.sequence
-   self.set_proteins_sequence(new_dict_sequence)
+   file.set_proteins_sequence(new_dict_sequence)
 
 
