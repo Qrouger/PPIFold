@@ -354,7 +354,7 @@ class File_proteins() :
 
     def find_prot_lenght (self, prot_dict = None) :
         """
-        Set the lenght for all proteins.
+        Set the lenght for all proteins from a dictionary of amino acid sequence.
 
         Parameters:
         ----------
