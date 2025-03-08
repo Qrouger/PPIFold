@@ -32,9 +32,9 @@ def main() :
         if args.use_signalP == True :
             remove_SP(PPI_object,args.org)
         create_feature(PPI_object,path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"],args.use_mmseq)
+        Make_all_MSA_coverage(PPI_object,path_dict["Path_Pickle_Feature"])
     else :
         recover_prot_lenght()#PPI_object.find_proteins_sequence()  #PPI_object.find_prot_lenght()
-    Make_all_MSA_coverage(PPI_object,path_dict["Path_Pickle_Feature"])
     generate_APD_script(PPI_object, args.max_aa)
     if args.make_multimers == True :
         Make_all_vs_all(path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
