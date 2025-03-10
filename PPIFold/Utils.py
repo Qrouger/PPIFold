@@ -375,8 +375,8 @@ def make_table_res_int (file, path_int) :
                    if hori_index < lenght_prot[names[0]] :
                       if distance <= 10 :
                          if pae_mtx[line][hori_index] < 5 :
-                             residue1 = seq_prot[names[0]][hori_index+1]
-                             residue2 = seq_prot[names[1]][line-lenght_prot[names[0]]+1]
+                             residue1 = seq_prot[names[0]][hori_index]
+                             residue2 = seq_prot[names[1]][line-lenght_prot[names[0]]]
                              dict_int[chains].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[names[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
                              color_res[names[0]].add(str(hori_index+1))
                              color_res[names[1]].add(str(line-lenght_prot[names[0]]+1))
