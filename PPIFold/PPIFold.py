@@ -7,8 +7,26 @@ import argparse
 from .Utils import *
 from .File_proteins import *
 import sys
+import logging
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'AlphaPulldown')))
+
+log_filename = "./PPI.log"
+logging.basicConfig(filename=log_filename, filemode="w", level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",)
+class Logger(object):
+    def __init__(self, log_file):
+        self.terminal = sys.stdout
+        self.log = open(log_file, "a")  # Mode append pour conserver l'historique
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+        
+sys.stdout = Logger(log_filename)
+sys.stderr = Logger(log_filename)
+
 
 def add_arguments(parser) :
     parser.add_argument("--use_mmseq", help = "Use MMseqs2 for feature generation (True/False)", required = False, default = True)
@@ -18,7 +36,6 @@ def add_arguments(parser) :
     parser.add_argument("--org" , help = "Organism of interest: arch, gram+, gram-, or euk", required = False, default = "gram-", type = str)
 
 def main() :
-    #sys.stdout = open('./PPI.log', 'w')
     path_dict = define_path()
     parser = argparse.ArgumentParser()
     add_arguments(parser)
@@ -45,4 +62,3 @@ def main() :
         create_out_fig(PPI_object)
         generate_interaction_network(PPI_object)
         plot_sequence_interface(PPI_object,cluster_interface(PPI_object))
-    #sys.stdout.close()
