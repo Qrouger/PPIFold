@@ -796,7 +796,7 @@ def plot_sequence_interface (file, cluster_dict) :
 
 def recover_prot_sequence(file, path_pkl) :
    list_proteins = file.get_proteins()
-   new_dict_sequence = dict()
+   new_dict_sequence = file.get_proteins_sequence()
    for protein in list_proteins :
       with open(os.path.join(f'{path_pkl}/{protein}.pkl'), 'rb') as pkl_file :
          pickle_dict = pickle.load(pkl_file)
