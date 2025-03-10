@@ -18,7 +18,7 @@ def add_arguments(parser) :
     parser.add_argument("--org" , help = "Organism of interest: arch, gram+, gram-, or euk", required = False, default = "gram-", type = str)
 
 def main() :
-    sys.stdout = open('./PPI.log', 'w')
+    #sys.stdout = open('./PPI.log', 'w')
     path_dict = define_path()
     parser = argparse.ArgumentParser()
     add_arguments(parser)
@@ -45,4 +45,4 @@ def main() :
         create_out_fig(PPI_object)
         generate_interaction_network(PPI_object)
         plot_sequence_interface(PPI_object,cluster_interface(PPI_object))
-    sys.stdout.close()
+    #sys.stdout.close()
