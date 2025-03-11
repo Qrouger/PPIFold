@@ -795,6 +795,16 @@ def plot_sequence_interface (file, cluster_dict) :
       plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300, bbox_inches='tight')
 
 def recover_prot_sequence(file, path_pkl) :
+   """
+   Take sequence from pickle files.
+
+   Parameters:
+   ----------
+   file : object of File_proteins class
+   path_pkl : string
+
+   Returns:
+   """
    list_proteins = file.get_proteins()
    new_dict_sequence = file.get_proteins_sequence()
    for protein in list_proteins :
