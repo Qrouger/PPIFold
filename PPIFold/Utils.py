@@ -368,18 +368,19 @@ def make_table_res_int (file, path_int) :
              distogram_softmax = softmax(pickle_dict["distogram"]["logits"], axis=2)
              dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2) #center of the residue
              dict_int[chains] = [[names[0]," "+names[1]," Distance Ä"," PAE score"]]
-             for line in range(lenght_prot[names[0]],len(dist)) :
-                hori_index = 0
+             for line in range(lenght_prot[names[0]],lenght_prot[names[0]]+lenght_prot[names[1]]) :
+                hori_index = -1
                 for distance in dist[line] :
                    hori_index += 1
                    if hori_index < lenght_prot[names[0]] :
                       if distance <= 10 :
                          if pae_mtx[line][hori_index] < 5 :
-                             residue1 = seq_prot[names[0]][hori_index]
-                             residue2 = seq_prot[names[1]][line-lenght_prot[names[0]]]
-                             dict_int[chains].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[names[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])]) #+1 to match with pdb model
-                             color_res[names[0]].add(str(hori_index+1))
-                             color_res[names[1]].add(str(line-lenght_prot[names[0]]+1))
+                            residue1 = seq_prot[names[0]][hori_index]
+                            residue2 = seq_prot[names[1]][line-lenght_prot[names[0]]]
+                            dict_int[chains].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[names[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
+                            color_res[names[0]].add(str(hori_index))
+                            color_res[names[1]].add(str(line-lenght_prot[names[0]]))
+
 #    file.define_interface(dict_interface[chains],names) #update interaction interface
 #    color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
 #    fileout = chains+"_res_int.csv"
