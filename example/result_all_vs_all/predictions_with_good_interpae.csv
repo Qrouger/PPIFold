@@ -1,0 +1,3 @@
+jobs,interface,Num_intf_residues,Polar,Hydrophobhic,Charged,contact_pairs, sc, hb, sb, int_solv_en, int_area,pi_score,iptm_ptm,iptm,mpDockQ/pDockQ
+P0A3W6_and_P0A3W4,C_B,36,0.194,0.444,0.139,41,0.695,7,1,-12.67,1084.92,2.23,0.6629034457774783,0.7079401,0.3228330326193098
+P0A3W6_and_P09783,C_B,51,0.275,0.471,0.176,59,0.655,24,5,-9.45,2078.54,1.35,0.6395373906669651,0.65671295,0.6114305586420031
