@@ -643,13 +643,21 @@ def generate_heatmap (file) :
                     print (protein1 + " and " + protein2 + " are not in score table or have bad inter PAE")
         iQ_score_data_matrix.append(iQ_score_line)
         iptm_ptm_data_matrix.append(iptm_ptm_line)
+    if len(proteins_list) > 20 :
+        font_size = 6
+    else :
+        font_size = 8
     iQ_score_complet_matrix = pd.DataFrame(iQ_score_data_matrix,index = index_prot, columns = index_prot)
     iptm_ptm_complet_matrix = pd.DataFrame(iptm_ptm_data_matrix,index = index_prot, columns = index_prot)
     ax1 = seaborn.heatmap(iQ_score_complet_matrix, cbar_kws = {'label' : 'iQ_score'}, xticklabels=True, yticklabels=True)
+    plt.xticks(fontsize=font_size)
+    plt.yticks(fontsize=font_size)
     ax1.figure.tight_layout()
     plt.savefig("iQ_score_heatmap.png")
     plt.close()
     ax2 = seaborn.heatmap(iptm_ptm_complet_matrix, cbar_kws = {'label' : 'iptm_ptm'}, xticklabels=True, yticklabels=True)
+    plt.xticks(fontsize=font_size)
+    plt.yticks(fontsize=font_size)
     ax2.figure.tight_layout()
     plt.savefig("iptm_ptm_heatmap.png")
     plt.close()
