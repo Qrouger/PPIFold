@@ -806,6 +806,7 @@ def plot_sequence_interface (file, cluster_dict) :
       ax.set_ylim(-n_lines*2, 1)  #Adjust high
       ax.axis('off')
       plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300, bbox_inches='tight')
+      plt.close()
 
 def recover_prot_sequence(file, path_pkl) :
    """
