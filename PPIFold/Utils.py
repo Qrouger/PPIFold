@@ -255,7 +255,7 @@ def add_iQ_score (dir_alpha) :
                  else :
                      iQ_score = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
                      line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
-          all_lines = all_lines + line
+             all_lines = all_lines + line
        with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
           file2.write(all_lines)
     else : #allow to do PPIFold for only one protein
