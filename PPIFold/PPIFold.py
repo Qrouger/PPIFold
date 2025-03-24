@@ -47,7 +47,7 @@ def main() :
         if args.use_signalP == True :
             remove_SP(PPI_object,args.org)
         create_feature(PPI_object,path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"],args.use_mmseq)
-        Make_all_MSA_coverage(PPI_object,path_dict["Path_Pickle_Feature"])
+    Make_all_MSA_coverage(PPI_object,path_dict["Path_Pickle_Feature"]) #make MSA depth for new pickle and set shallow_MSA.txt
     recover_prot_sequence(PPI_object,path_dict["Path_Pickle_Feature"]) #set sequence dict without peptide signal
     PPI_object.find_prot_lenght()
     generate_APD_script(PPI_object, args.max_aa)
