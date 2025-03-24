@@ -130,7 +130,7 @@ def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
     Returns:
     ----------
     """
-    old_proteins = file.get_proteins()
+    all_proteins = file.get_proteins()
     new_proteins = file.get_new_pickle() 
     shallow_MSA = str()
     for prot in new_proteins :
@@ -154,7 +154,7 @@ def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
         plt.ylabel("Sequences")
         plt.savefig(f"{Path_Pickle_Feature}/{prot+('_' if prot else '')}coverage.pdf")
         plt.close()
-    for prot in old_proteins : #just write shallow_MSA.txt
+    for prot in all_proteins : #just write shallow_MSA.txt
         pre_feature_dict = pickle.load(open(f'{Path_Pickle_Feature}/{prot}.pkl','rb'))
         feature_dict = pre_feature_dict.feature_dict
         msa = feature_dict['msa']
