@@ -438,7 +438,7 @@ def plot_Distogram (job) :
            lenght_list = []
            for seq in results["seqs"] :
               lenght_list.append(len(seq))
-           print("make Distogram")
+           print(f"make {job} Distogram")
            initial_lenght = 0
            fig, ax = plt.subplots()
            d = ax.imshow(dist)
