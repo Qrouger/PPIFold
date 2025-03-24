@@ -737,6 +737,7 @@ def plot_sequence_interface (file, cluster_dict) :
    cluster_dict : dict
 
    Returns:
+   ----------
    """
    if not os.path.exists("./interface_fig/") :
       os.makedirs("./interface_fig/")
@@ -817,6 +818,7 @@ def recover_prot_sequence(file, path_pkl) :
    path_pkl : string
 
    Returns:
+   ----------
    """
    list_proteins = file.get_proteins()
    new_dict_sequence = file.get_proteins_sequence()
