@@ -120,7 +120,7 @@ def create_feature (file, data_dir, Path_Pickle_Feature, mmseq) :
 
 def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
     """
-    Generating MSA coverage for all proteins.
+    Generating MSA coverage for all proteins and write shallow_MSA text file.
 
     Parameters:
     ----------
