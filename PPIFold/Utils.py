@@ -692,6 +692,8 @@ def cluster_interface (file) :
                         interface_dict[proteins][interface2].insert(0,alphabet[interface2])
                         already_inter.append(alphabet[interface2])
                 else : #if interfaces got more than 0.20 of same residues, it's the same interface
+                    if interface_dict[proteins][interface2][0] in alphabet :
+                       interface_dict[proteins][interface2].pop(0)
                     interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
     return(interface_dict)
 
@@ -767,7 +769,7 @@ def plot_sequence_interface (file, cluster_dict) :
                   if aa_to_color in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
                      index_to_color[aa_to_color].append(all_color[indice_color])
          else :
-            uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
+            uniprot_id_interface[interaction[len(interaction)-1]] = interface_done[interaction[0]]
             for aa_to_color in interaction :
                if " " in aa_to_color :
                   if aa_to_color.split(" ")[1] not in index_to_color.keys() :
@@ -776,9 +778,9 @@ def plot_sequence_interface (file, cluster_dict) :
                      index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
                else : #for seconde residue table
                   if aa_to_color not in index_to_color.keys() :
-                     index_to_color[aa_to_color] = [all_color[indice_color]]
-                  if aa_to_color in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
-                     index_to_color[aa_to_color].append(all_color[indice_color])
+                     index_to_color[aa_to_color] = [interface_done[interaction[0]]]
+                  if aa_to_color in index_to_color.keys() and interface_done[interaction[0]] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
+                     index_to_color[aa_to_color].append(interface_done[interaction[0]])
       line_adjust = 150 #max aa per line
       n_lines = (len(sequence) + line_adjust - 1) // line_adjust
       fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
