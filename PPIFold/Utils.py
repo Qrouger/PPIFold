@@ -258,7 +258,7 @@ def add_iQ_score (dir_alpha) :
              all_lines = all_lines + line
        with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
           file2.write(all_lines)
-    else : #allow to do PPIFold for only one protein
+    else : #allow to run PPIFold for only one protein
        print("all_vs_all directory is empty")
         
 def create_out_fig (file) :
