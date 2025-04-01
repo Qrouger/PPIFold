@@ -385,7 +385,7 @@ class File_proteins() :
         ----------
         """
         line = str()
-        proteins = self.get_new_pickle()
+        proteins = self.get_proteins()
         sequences = self.get_proteins_sequence()
         for protein in proteins :
             line = line + ">" + protein + "\n" + sequences[protein] + "\n"        
