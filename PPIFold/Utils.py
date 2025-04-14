@@ -382,8 +382,8 @@ def make_table_res_int (file, path_int) :
                             residue1 = seq_prot[names[0]][hori_index]
                             residue2 = seq_prot[names[1]][line-lenght_prot[names[0]]]
                             dict_int[chains].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[names[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
-                            color_res[names[0]].add(str(hori_index))
-                            color_res[names[1]].add(str(line-lenght_prot[names[0]]))
+                            color_res[names[0]].add(str(hori_index+1))
+                            color_res[names[1]].add(str(line-lenght_prot[names[0]]+1))
 
 #    file.define_interface(dict_interface[chains],names) #update interaction interface
 #    color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
