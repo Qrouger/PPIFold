@@ -32,7 +32,7 @@ Installation of AlphaFold data base :<br>
 sudo apt install aria2
 git clone https://github.com/deepmind/alphafold.git
 cd alphafold
-scripts/download_all_data.sh /<Directory></Directory> > download.log 2> download_all.log
+scripts/download_all_data.sh /<Directory> > download.log 2> download_all.log
 ```
 
 SignalP5 installation (optional) :<br>
