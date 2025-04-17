@@ -64,7 +64,7 @@ PPIFold installation :<br>
 conda create -n PPIFold -c omnia -c bioconda -c conda-forge python==3.11 openmm==8.0 pdbfixer==1.9 kalign2 networkx hhsuite hmmer
 conda activate PPIFold
 pip install PPIFold
-pip install -U "jax[cuda12]"
+pip install -U "jax[cuda12]"==0.5.3
 ```
 <!-- TOC --><a name="pipeline"></a>
 ## Pipeline
