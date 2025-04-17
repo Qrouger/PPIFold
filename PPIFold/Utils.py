@@ -249,7 +249,7 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     "--output_path=./result_all_vs_all",
     f"--data_dir={data_dir}",
     "--protein_lists=all_vs_all.txt",
-    f"--monomer_objects_dir=/data/{Path_Pickle_Feature}",
+    f"--monomer_objects_dir={Path_Pickle_Feature}",
     "--remove_keys_from_pickles=False"]
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
     for line in process.stdout:
