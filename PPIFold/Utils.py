@@ -17,6 +17,9 @@ import gzip
 import string
 import seaborn
 from Bio import PDB
+import logging
+import subprocess
+
 
 from .File_proteins import *
 
@@ -115,8 +118,20 @@ def create_feature (file, data_dir, Path_Pickle_Feature, mmseq) :
     ----------
     """
     fasta_file = file.get_fasta_file()
-    cmd = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=True \--use_mmseqs2={mmseq} >> PPI.log"
-    os.system(cmd)
+    cmd = ["create_individual_features.py",
+    f"--fasta_paths=./{fasta_file}",
+    f"--data_dir={data_dir}",
+    "--save_msa_files=True",
+    f"--output_dir={Path_Pickle_Feature}",
+    "--max_template_date=2024-05-02",
+    "--skip_existing=True",
+    f"--use_mmseqs2={mmseq}"]
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
+    for line in process.stdout:
+       print(line, end="")
+    process.stdout.close()
+    process.wait()
+
 
 def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
     """
@@ -226,8 +241,22 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     os.environ['TF_FORCE_UNIFIED_MEMORY'] = 'true'
     os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = '3.2'
     os.environ['XLA_FLAGS'] = '--xla_gpu_enable_triton_gemm=false'
-    cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False >> PPI.log"
-    os.system(cmd1)
+    --use_mmseqs2={mmseq}
+    cmd = ["run_multimer_jobs.py",
+    "--mode=custom",
+    "--num_cycle=3",
+    "--num_predictions_per_model=1",
+    "--compress_result_pickles=True",
+    "--output_path=./result_all_vs_all",
+    f"--data_dir={data_dir}",
+    "--protein_lists=all_vs_all.txt",
+    f"--monomer_objects_dir=/data/{Path_Pickle_Feature}",
+    "--remove_keys_from_pickles=False"]
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
+    for line in process.stdout:
+       print(line, end="")
+    process.stdout.close()
+    process.wait()
 
 def add_iQ_score (dir_alpha) :
     """
@@ -241,8 +270,17 @@ def add_iQ_score (dir_alpha) :
     ----------
     """    
     if os.path.isdir("./result_all_vs_all") == True :
-       cmd4 = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-       os.system(cmd4)
+       cmd = ["singularity exec",
+       "--no-home",
+       f"--bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh",
+       "--output_dir=/mnt",
+       "--compress_result_pickles=True",
+       "universal_newlines=True"]
+       process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
+       for line in process.stdout:
+          print(line, end="")
+       process.stdout.close()
+       process.wait()
        with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
           reader = csv.DictReader(file1)
           all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
@@ -301,7 +339,6 @@ def make_table_res_int (file, path_int) :
     """
     ranking_results = json.load(open(os.path.join(f'{path_int}/ranking_debug.json')))
     best_model = ranking_results["order"][0]
-    
     parser = PDB.PDBParser(QUIET=True)
     structure = parser.get_structure('protein', path_int + "/ranked_0.pdb")
     dict_int = dict()
@@ -383,16 +420,7 @@ def make_table_res_int (file, path_int) :
                             residue2 = seq_prot[names[1]][line-lenght_prot[names[0]]]
                             dict_int[chains].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[names[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
                             color_res[names[0]].add(str(hori_index+1))
-                            color_res[names[1]].add(str(line-lenght_prot[names[0]]+1))
-
-#    file.define_interface(dict_interface[chains],names) #update interaction interface
-#    color_int_residues(path_int,color_res,names) #color residue in interaction on the pdb
-#    fileout = chains+"_res_int.csv"
-#    np_table = np.array(dict_interface[chains])
-#    with open(f"{path_int}/"+fileout, "w", newline="") as file :
-#        mywriter = csv.writer(file, delimiter=",")
-#        mywriter.writerows(np_table) 
-    
+                            color_res[names[1]].add(str(line-lenght_prot[names[0]]+1))  
     index_homo = 1
     int_names = path_int.split("/")[2]
     residues_at_interface = dict()
@@ -467,8 +495,21 @@ def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     os.environ['TF_FORCE_UNIFIED_MEMORY'] = 'true'
     os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = '3.2'
     os.environ['XLA_FLAGS'] = '--xla_gpu_enable_triton_gemm=false'
-    cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_homo_oligo \--data_dir={data_dir} \--protein_lists=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False >> PPI.log"
-    os.system(cmd1)
+    cmd = ["run_multimer_jobs.py",
+    "--mode=custom",
+    "--num_cycle=3",
+    "--num_predictions_per_model=1",
+    "--compress_result_pickles=True",
+    "--output_path=./result_homo_oligo",
+    f"--data_dir={data_dir}",
+    "--protein_lists=homo_oligo.txt",
+    f"--monomer_objects_dir={Path_Pickle_Feature}",
+    "--remove_keys_from_pickles=False"]
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
+    for line in process.stdout:
+       print(line, end="")
+    process.stdout.close()
+    process.wait()
 
 def add_hiQ_score (dir_alpha) :
     """
@@ -481,8 +522,17 @@ def add_hiQ_score (dir_alpha) :
     Returns:
     ----------
     """
-    cmd4 = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-    os.system(cmd4)
+    cmd = ["singularity exec",
+    "--no-home",
+    "--bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh",
+    "--output_dir=/mnt",
+    "--compress_result_pickles=True",
+    "--cutoff=10"]
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
+    for line in process.stdout:
+       print(line, end="")
+    process.stdout.close()
+    process.wait()
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
         all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
