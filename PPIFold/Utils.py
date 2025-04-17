@@ -241,7 +241,6 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     os.environ['TF_FORCE_UNIFIED_MEMORY'] = 'true'
     os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = '3.2'
     os.environ['XLA_FLAGS'] = '--xla_gpu_enable_triton_gemm=false'
-    --use_mmseqs2={mmseq}
     cmd = ["run_multimer_jobs.py",
     "--mode=custom",
     "--num_cycle=3",
@@ -250,6 +249,7 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     "--output_path=./result_all_vs_all",
     f"--data_dir={data_dir}",
     "--protein_lists=all_vs_all.txt",
+    f"--use_mmseqs2={mmseq}",
     f"--monomer_objects_dir=/data/{Path_Pickle_Feature}",
     "--remove_keys_from_pickles=False"]
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
