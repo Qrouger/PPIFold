@@ -269,12 +269,15 @@ def add_iQ_score (dir_alpha) :
     ----------
     """    
     if os.path.isdir("./result_all_vs_all") == True :
-       cmd = ["singularity exec",
+       cmd = ["singularity",
+       "exec",
        "--no-home",
-       f"--bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh",
+       "--bind",
+       "result_all_vs_all:/mnt",
+       f"{dir_alpha}",
+       "run_get_good_pae.sh",
        "--output_dir=/mnt",
-       "--compress_result_pickles=True",
-       "universal_newlines=True"]
+       "--cutoff=10"]
        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
        for line in process.stdout:
           print(line, end="")
@@ -521,12 +524,15 @@ def add_hiQ_score (dir_alpha) :
     Returns:
     ----------
     """
-    cmd = ["singularity exec",
-    "--no-home",
-    "--bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh",
-    "--output_dir=/mnt",
-    "--compress_result_pickles=True",
-    "--cutoff=10"]
+    cmd = ["singularity",
+       "exec",
+       "--no-home",
+       "--bind",
+       "result_homo_oligo:/mnt",
+       f"{dir_alpha}",
+       "run_get_good_pae.sh",
+       "--output_dir=/mnt",
+       "--cutoff=10"]
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
     for line in process.stdout:
        print(line, end="")
