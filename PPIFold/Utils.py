@@ -125,7 +125,8 @@ def create_feature (file, data_dir, Path_Pickle_Feature, mmseq) :
     f"--output_dir={Path_Pickle_Feature}",
     "--max_template_date=2024-05-02",
     "--skip_existing=True",
-    f"--use_mmseqs2={mmseq}"]
+    f"--use_mmseqs2={mmseq}",
+    "--use_precomputed_msas=True"]
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
     for line in process.stdout:
        print(line, end="")
