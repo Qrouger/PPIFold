@@ -122,7 +122,7 @@ Optional arguments
 <!-- TOC --><a name="results"></a>
 ## Results
 
-This pipeline have a cutoff on PAE (10), iQ-score (35) and hiQ-score (50).
+This pipeline have a cutoff on PAE (10), iQ-score (50) and hiQ-score (50).
 
 <!-- TOC --><a name="figures"></a>
 ### Figures
