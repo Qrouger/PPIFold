@@ -18,7 +18,6 @@ import string
 import seaborn
 from Bio import PDB
 import logging
-import subprocess
 
 
 from .File_proteins import *
