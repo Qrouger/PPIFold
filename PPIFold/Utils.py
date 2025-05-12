@@ -250,20 +250,8 @@ def add_iQ_score (dir_alpha) :
     ----------
     """    
     if os.path.isdir("./result_all_vs_all") == True :
-       cmd = ["singularity",
-       "exec",
-       "--no-home",
-       "--bind",
-       "result_all_vs_all:/mnt",
-       f"{dir_alpha}",
-       "run_get_good_pae.sh",
-       "--output_dir=/mnt",
-       "--cutoff=10"]
-       process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
-       for line in process.stdout:
-          print(line, end="")
-       process.stdout.close()
-       process.wait()
+       cmd = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+       os.system(cmd)
        with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
           reader = csv.DictReader(file1)
           all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
@@ -492,20 +480,8 @@ def add_hiQ_score (dir_alpha) :
     Returns:
     ----------
     """
-    cmd = ["singularity",
-       "exec",
-       "--no-home",
-       "--bind",
-       "result_homo_oligo:/mnt",
-       f"{dir_alpha}",
-       "run_get_good_pae.sh",
-       "--output_dir=/mnt",
-       "--cutoff=10"]
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
-    for line in process.stdout:
-       print(line, end="")
-    process.stdout.close()
-    process.wait()
+    cmd = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+    os.system(cmd)
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
         all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
