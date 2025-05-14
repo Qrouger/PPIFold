@@ -16,7 +16,7 @@ logging.basicConfig(filename=log_filename, filemode="w", level=logging.INFO, for
 class Logger(object):
     def __init__(self, log_file):
         self.terminal = sys.stdout
-        self.log = open(log_file, "a")  # Mode append pour conserver l'historique
+        self.log = open(log_file, "a")
     def write(self, message):
         self.terminal.write(message)
         self.log.write(message)
