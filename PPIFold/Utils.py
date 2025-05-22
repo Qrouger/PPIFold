@@ -318,7 +318,12 @@ def make_table_res_int (file, path_int) :
     structure = parser.get_structure('protein', path_int + "/ranked_0.pdb")
     dict_int = dict()
     int_already_know = dict()
-    proteins = path_int.split('/')[2].split('_and_')
+    names_int = path_int.split('/')[2]
+    if "and" in names_int.split("_") :
+       proteins = names_int.split('_and_')
+    else :
+       proteins = [names_int.split("_")[0]] * int(names_int.split("_")[2].replace("er",""))
+    print(proteins)
     color_res = dict()
     color_res[proteins[0]] = set()
     color_res[proteins[1]] = set()
@@ -370,12 +375,10 @@ def make_table_res_int (file, path_int) :
        else : #last version of APD
           lenght_prot = file.get_lenght_prot()
           seq_prot = file.get_proteins_sequence()
-          names = path_int.split("/")[2].split("_and_")
-          chains = path_int.split("/")[2]
           dict_int = dict()
           color_res = dict()
-          color_res[names[0]] = set()
-          color_res[names[1]] = set()
+          color_res[proteins[0]] = set()
+          color_res[proteins[1]] = set()
           with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
              pickle_dict = pickle.load(gzip.open(gz_file))
              pae_mtx = pickle_dict['predicted_aligned_error']#take PAE
@@ -383,23 +386,22 @@ def make_table_res_int (file, path_int) :
              bin_edges = np.insert(bin_edges, 0, 0)
              distogram_softmax = softmax(pickle_dict["distogram"]["logits"], axis=2)
              dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2) #center of the residue
-             dict_int[chains] = [[names[0]," "+names[1]," Distance Ä"," PAE score"]]
-             for line in range(lenght_prot[names[0]],lenght_prot[names[0]]+lenght_prot[names[1]]) :
+             dict_int[names_int] = [[proteins[0]," "+proteins[1]," Distance Ä"," PAE score"]]
+             for line in range(lenght_prot[proteins[0]],lenght_prot[proteins[0]]+lenght_prot[proteins[1]]) :
                 hori_index = -1
                 for distance in dist[line] :
                    hori_index += 1
-                   if hori_index < lenght_prot[names[0]] :
+                   if hori_index < lenght_prot[proteins[0]] :
                       if distance <= 10 :
                          if pae_mtx[line][hori_index] < 5 :
-                            residue1 = seq_prot[names[0]][hori_index]
-                            residue2 = seq_prot[names[1]][line-lenght_prot[names[0]]]
-                            dict_int[chains].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[names[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
-                            color_res[names[0]].add(str(hori_index+1))
-                            color_res[names[1]].add(str(line-lenght_prot[names[0]]+1))  
+                            residue1 = seq_prot[proteins[0]][hori_index]
+                            residue2 = seq_prot[proteins[1]][line-lenght_prot[proteins[0]]]
+                            dict_int[names_int].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[proteins[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
+                            color_res[proteins[0]].add(str(hori_index+1))
+                            color_res[proteins[1]].add(str(line-lenght_prot[proteins[0]]+1))  
     index_homo = 1
-    int_names = path_int.split("/")[2]
     residues_at_interface = dict()
-    residues_at_interface[int_names] = []
+    residues_at_interface[names_int] = []
     for chains in dict_int.keys() :
         index_homo += 1
         fileout = chains+"_res_int.csv"
@@ -409,12 +411,11 @@ def make_table_res_int (file, path_int) :
              mywriter.writerows(np_table)
         del dict_int[chains][0] #delete title of each col
         for interaction in dict_int[chains] :
-            if interaction not in residues_at_interface[int_names] :
-                residues_at_interface[int_names].append(interaction)
+            if interaction not in residues_at_interface[names_int] :
+                residues_at_interface[names_int].append(interaction)
     print("Write residue table")
-    names = path_int.split("/")[2].split("_and_")
-    if residues_at_interface[int_names] != [] : #can arrive if it don't fin atom with distance < 10 or PAE < 10
-       file.define_interface(residues_at_interface[int_names],names) #update interaction interface
+    if residues_at_interface[names_int] != [] : #can arrive if it don't fin atom with distance < 10 or PAE < 10
+       file.define_interface(residues_at_interface[names_int],proteins) #update interaction interface
        color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
 
 def plot_Distogram (job) :
@@ -493,6 +494,7 @@ def add_hiQ_score (dir_alpha) :
         save_pi_score = dict()
         for row in reader :
             job = row['jobs']
+            #if 'homo' in job and row['pi_score'] != 'No interface detected' : #need AFPD release with homo-oligo ####_homo_2er
             if row['pi_score'] != 'No interface detected' :
                 if job not in all_homo.keys() :
                     all_homo[job] = (row['pi_score'],1,row)
