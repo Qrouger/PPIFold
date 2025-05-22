@@ -286,11 +286,18 @@ def create_out_fig (file) :
     hiQ_score_dict = file.get_hiQ_score_dict()
     for homo_oligo in hiQ_score_dict.keys() :
         if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
-            job2 = homo_oligo #job2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er" # wait AFPD homo release
+            homo_dir_1 = homo_oligo
             for count in range(1,hiQ_score_dict[homo_oligo][1]) :
-                job2 += "_and_" + homo_oligo
-            plot_Distogram("./result_homo_oligo/" + job2) #need distogram key in pickle file
-            make_table_res_int(file, "./result_homo_oligo/" + job2)
+                homo_dir_1 += "_and_" + homo_oligo
+            homo_dir2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er" 
+
+            if os.path.exists(f"./result_homo_oligo/{homo_dir1}/ranked_0.pdb") == True : #AFPD2.0.3
+                plot_Distogram("./result_homo_oligo/" + homo_dir2) #need distogram key in pickle file
+                make_table_res_int(file, "./result_homo_oligo/" + homo_dir2)
+
+            if os.path.exists(f"./result_homo_oligo/{homo_dir2}/ranked_0.pdb") == True : #AFPD2.0.4
+                plot_Distogram("./result_homo_oligo/" + homo_dir2) #need distogram key in pickle file
+                make_table_res_int(file, "./result_homo_oligo/" + homo_dir2)
 
 def make_table_res_int (file, path_int) :
     """
