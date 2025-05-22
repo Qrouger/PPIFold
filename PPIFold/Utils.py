@@ -287,9 +287,9 @@ def create_out_fig (file) :
     hiQ_score_dict = file.get_hiQ_score_dict()
     for homo_oligo in hiQ_score_dict.keys() :
         if float(hiQ_score_dict[homo_oligo][0]) >= 50 :
-            homo_dir_1 = homo_oligo
+            homo_dir1 = homo_oligo
             for count in range(1,hiQ_score_dict[homo_oligo][1]) :
-                homo_dir_1 += "_and_" + homo_oligo
+                homo_dir1 += "_and_" + homo_oligo
             homo_dir2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er" 
 
             if os.path.exists(f"./result_homo_oligo/{homo_dir1}/ranked_0.pdb") == True : #AFPD2.0.3
@@ -493,7 +493,6 @@ def add_hiQ_score (dir_alpha) :
         save_pi_score = dict()
         for row in reader :
             job = row['jobs']
-            #if 'homo' in job and row['pi_score'] != 'No interface detected' : #need AFPD release with homo-oligo ####_homo_2er
             if row['pi_score'] != 'No interface detected' :
                 if job not in all_homo.keys() :
                     all_homo[job] = (row['pi_score'],1,row)
@@ -505,7 +504,7 @@ def add_hiQ_score (dir_alpha) :
                     all_homo[job] = (sum_pi_score,sum_int,row)
     for key in all_homo.keys() :
         row = all_homo[key][2]
-        if "homo" in row.split("_") :
+        if "homo" in row["jobs"].split("_") :
             number_oligo = row["jobs"].split("_")[2].replace("er","") #AFPD 2.0.4
         else :
             number_oligo = len(row["jobs"].split("_and_")) #AFPD 2.0.3
