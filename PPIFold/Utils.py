@@ -119,11 +119,6 @@ def create_feature (file, data_dir, Path_Pickle_Feature, mmseq) :
     fasta_file = file.get_fasta_file()
     cmd = f"create_individual_features.py --fasta_paths=./{fasta_file} \--data_dir={data_dir} \--save_msa_files=True \--output_dir={Path_Pickle_Feature} \--max_template_date=2024-05-02 \--skip_existing=True \--use_mmseqs2={mmseq} \--use_precomputed_msas=True"
     os.system(cmd)
-#    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, universal_newlines=True)
-#    for line in process.stdout:
-#       print(line, end="")
-#    process.stdout.close()
-#    process.wait()
 
 
 def Make_all_MSA_coverage (file, Path_Pickle_Feature) :
@@ -202,11 +197,13 @@ def generate_APD_script (file, max_aa) :
         homo_dir = proteins[index_protein]
         for nbr_homo in range(2,21) :
            lenght_homo += lenght
-           homo_dir += "_and_" + proteins[index_protein]
+           homo_dir1 += "_and_" + proteins[index_protein] #AFPD 2.0.3
+           homo_dir2 = homo_dir +"_homo_"+nbr_homo+"er" #AFPD 2.0.4
            if lenght_homo >= max_aa :
                OOM_int = OOM_int + proteins[index_protein] + "," + str(nbr_homo) + "\n"
-           elif os.path.exists(f"./result_homo_oligo/{homo_dir}/ranked_0.pdb") == False and len(homo_dir) < 260 : #homo_oligo is too long to create a directory
-               homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
+           elif os.path.exists(f"./result_homo_oligo/{homo_dir1}/ranked_0.pdb") == False and len(homo_dir) < 260 : #homo_oligo is too long to create a directory
+               if os.path.exists(f"./result_homo_oligo/{homo_dir2}/ranked_0.pdb") == False
+                   homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
            else :
                pass
     with open("homo_oligo.txt", "w") as homo_file:
@@ -500,8 +497,10 @@ def add_hiQ_score (dir_alpha) :
                     all_homo[job] = (sum_pi_score,sum_int,row)
     for key in all_homo.keys() :
         row = all_homo[key][2]
-        #number_oligo = row["jobs"].split("_")[2].replace("er","") #wait AFPD release homo_oligo
-        number_oligo = len(row["jobs"].split("_and_"))
+        if "homo" in row.split("_") :
+            number_oligo = row["jobs"].split("_")[2].replace("er","") #AFPD 2.0.4
+        else :
+            number_oligo = len(row["jobs"].split("_and_")) #AFPD 2.0.3
         if len(save_pi_score[key]) > int(number_oligo) : #if model have more interface than number of homo-oligomerization
             new_sum_pi_score = 0
             save_pi_score[key].sort(reverse=True)
