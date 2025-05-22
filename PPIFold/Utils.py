@@ -293,8 +293,8 @@ def create_out_fig (file) :
             homo_dir2 = homo_oligo + "_homo_" + str(hiQ_score_dict[homo_oligo][1]) + "er" 
 
             if os.path.exists(f"./result_homo_oligo/{homo_dir1}/ranked_0.pdb") == True : #AFPD2.0.3
-                plot_Distogram("./result_homo_oligo/" + homo_dir2) #need distogram key in pickle file
-                make_table_res_int(file, "./result_homo_oligo/" + homo_dir2)
+                plot_Distogram("./result_homo_oligo/" + homo_dir1) #need distogram key in pickle file
+                make_table_res_int(file, "./result_homo_oligo/" + homo_dir1)
 
             if os.path.exists(f"./result_homo_oligo/{homo_dir2}/ranked_0.pdb") == True : #AFPD2.0.4
                 plot_Distogram("./result_homo_oligo/" + homo_dir2) #need distogram key in pickle file
