@@ -195,14 +195,15 @@ def generate_APD_script (file, max_aa) :
                 pass
         lenght_homo = lenght
         homo_dir = proteins[index_protein]
+        homo_dir1 = homo_dir
         for nbr_homo in range(2,21) :
            lenght_homo += lenght
            homo_dir1 += "_and_" + proteins[index_protein] #AFPD 2.0.3
-           homo_dir2 = homo_dir +"_homo_"+nbr_homo+"er" #AFPD 2.0.4
+           homo_dir2 = homo_dir +"_homo_"+str(nbr_homo)+"er" #AFPD 2.0.4
            if lenght_homo >= max_aa :
                OOM_int = OOM_int + proteins[index_protein] + "," + str(nbr_homo) + "\n"
            elif os.path.exists(f"./result_homo_oligo/{homo_dir1}/ranked_0.pdb") == False and len(homo_dir) < 260 : #homo_oligo is too long to create a directory
-               if os.path.exists(f"./result_homo_oligo/{homo_dir2}/ranked_0.pdb") == False
+               if os.path.exists(f"./result_homo_oligo/{homo_dir2}/ranked_0.pdb") == False :
                    homo_oligo_script = homo_oligo_script + proteins[index_protein] + "," + str(nbr_homo) + "\n"
            else :
                pass
