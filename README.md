@@ -46,7 +46,7 @@ sudo cp -r lib/* /usr/local/lib
 ```
 
 > [!NOTE]
-> If you do not want to use SignalP, set --use_signalP to False.
+> If you don't want to use SignalP, set --use_signalP to False and don't install SignalP5.
 
 Singularity installation :<br>
 
