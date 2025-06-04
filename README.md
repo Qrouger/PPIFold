@@ -98,7 +98,7 @@ NIYQNMIATVTIKSISFLSKDLIQVRYYKTVRELNDKENISHWVSILNFSY
 INAQISTQDRLINPLGFQVSEYRSDPEVIQ
 ```
 **conf.txt**<br>
-The conf.txt file needs to contains all path.<br>
+The conf.txt file needs to contains all paths.<br>
 
 ```bash
 Path_Uniprot_ID : Path and name of the initial file.<br>
