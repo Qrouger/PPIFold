@@ -83,22 +83,29 @@ UniProt IDs need to be on the same line, separated by commas.<br>
 
 Ex : <br>
 ```bash
-UniprotID1,UniprotID2,UniprotID
->UniprotID4
+UniprotID1,UniprotID2,UniprotID3
+>ProtName4
 MFKRSGSLSLALMSSFCSSSLATPLSSAEFDHVARKCAPSVATSTLAAIAK
 VESRFDPLAIHDNTTGETLHWQDHTQATQVVRHRLDARHSLDVGLMQINSR
 NFSMLGLTPDGALKACPSLSAAANMLKSRYAGGETIDEKQIALRRAISAYN
 TGNFIRGFANGYVRKVETAAQSLVPALIEPPQDDHKALKSEDTWDVWGSYQ
-RRSQEDGVGGSIAPQPPDQDNGKSADDNQVLFDLY<br>
+RRSQEDGVGGSIAPQPPDQDNGKSADDNQVLFDLY
+>ProtName5
+MKHSLRTLWRLRVKINEFNEYIKEARSFDIDRMHGMRQRMRIAMALTVLFG
+LMTIALALAVAALTPLKTVEPFVIRVDNSTGIIETVSALKETPNDYDEAIT
+RYFASKYVRAREGFQLSEAEHNFRLVSLLSSPEEQSRFAKWYAGNNPESPQ
+NIYQNMIATVTIKSISFLSKDLIQVRYYKTVRELNDKENISHWVSILNFSY
+INAQISTQDRLINPLGFQVSEYRSDPEVIQ
 ```
 **conf.txt**<br>
 The conf.txt file needs to contains all path.<br>
 
+```bash
 Path_Uniprot_ID : Path and name of the initial file.<br>
 Path_AlphaFold_Data : Path to the AlphaFold database (default on ./alphadata).<br>
 Path_Singularity_Image : Path and name of the singularity image.<br>
 Path_Pickle_Feature : Path to your feature folder (default on ./feature).<br>
-
+```
 <!-- TOC --><a name="arguments"></a>
 ## Arguments<br>
 To use PPIFold, simply run the PPIFold command in the folder containing conf.txt and test.txt.<br>
