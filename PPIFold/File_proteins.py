@@ -407,20 +407,24 @@ class File_proteins() :
         ----------
         """
         iQ_score_dic = dict()
-        with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "r") as file1 :
-            reader1 = csv.DictReader(file1)
-            for row in reader1 :
-                names = row['jobs'].split('_and_')
-                iQ_score_dic[(names[0],names[1])] = row['iQ_score']
+        if interaction == "all" or interaction == "inter" :
+           with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "r") as file1 :
+              reader1 = csv.DictReader(file1)
+              for row in reader1 :
+                 names = row['jobs'].split('_and_')
+                 iQ_score_dic[(names[0],names[1])] = row['iQ_score']
         self.set_iQ_score_dict(iQ_score_dic)
         hiQ_score_dic = dict()
-        with open("result_homo_oligo/new_predictions_with_good_interpae.csv", "r") as file2 :
-            reader2 = csv.DictReader(file2)
-            for row in reader2 :
-                prot_name = row['jobs'].split("_and_")[0] #.split("_homo_")[0]
-                if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
-                    number_homo = len(row['jobs'].split("_and_"))
-                    #number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
+        if interaction == "all" or interaction == "intra" :
+           with open("result_homo_oligo/new_predictions_with_good_interpae.csv", "r") as file2 :
+              reader2 = csv.DictReader(file2)
+              for row in reader2 :
+                 prot_name = row['jobs'].split("_and_")[0] #.split("_homo_")[0]
+                 if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
+                    if "and" in row['jobs'].split("_") : #old AFPD version
+                        number_homo = len(row['jobs'].split("_and_"))
+                    else :
+                        number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
                     hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
         self.set_hiQ_score_dict(hiQ_score_dic)
 
