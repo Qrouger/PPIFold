@@ -400,11 +400,9 @@ def make_table_res_int (file, path_int) :
                             dict_int[names_int].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[proteins[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
                             color_res[proteins[0]].add(str(hori_index+1))
                             color_res[proteins[1]].add(str(line-lenght_prot[proteins[0]]+1))  
-    index_homo = 1
     residues_at_interface = dict()
     residues_at_interface[names_int] = []
     for chains in dict_int.keys() :
-        index_homo += 1
         fileout = chains+"_res_int.csv"
         np_table = np.array(dict_int[chains])
         with open(f"{path_int}/"+fileout, "w", newline="") as csv_table :
