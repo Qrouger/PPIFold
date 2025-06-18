@@ -30,7 +30,7 @@ sys.stderr = Logger(log_filename)
 
 def add_arguments(parser) :
     parser.add_argument("--use_mmseq", help = "Use MMseqs2 for feature generation (True/False)", required = False, default = True)
-    parser.add_argument("--make_multimers", help = "Enable or disable multimer model generation (True/False) and analyse", required = False, default = True)
+    parser.add_argument("--make_multimers", help = "Select the type of interactions to generate. all : both inter and intra-interaction, inter : only between distinct proteins, or intra : only wi>
     parser.add_argument("--max_aa" , help = "Maximum number of amino acids that can be generated per cluster", required = False, default = 2500, type = int)
     parser.add_argument("--use_signalP" , help = "Enable or disable SignalP for signal peptide detection (True/False)", required = False, default = True)
     parser.add_argument("--org" , help = "Organism of interest: arch, gram+, gram-, or euk for SignalP", required = False, default = "gram-", type = str)
@@ -51,13 +51,15 @@ def main() :
     recover_prot_sequence(PPI_object,path_dict["Path_Pickle_Feature"]) #set sequence dict without peptide signal
     PPI_object.find_prot_lenght()
     generate_APD_script(PPI_object, args.max_aa)
-    if args.make_multimers == True :
+    if args.make_multimers == "all" or args.make_multimers == "inter" :
         Make_all_vs_all(path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
         add_iQ_score(path_dict["Path_Singularity_Image"])
+    if args.make_multimers == "all" or args.make_multimers == "intra" :
         Make_homo_oligo(path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
         add_hiQ_score(path_dict["Path_Singularity_Image"])
-        PPI_object.update_iQ_score_hiQ_score()
-        generate_heatmap(PPI_object)
-        create_out_fig(PPI_object)
-        generate_interaction_network(PPI_object)
-        plot_sequence_interface(PPI_object,cluster_interface(PPI_object))
+    PPI_object.update_iQ_score_hiQ_score(args.make_multimers)
+    generate_heatmap(PPI_object)
+    create_out_fig(PPI_object)
+    generate_interaction_network(PPI_object)
+    plot_sequence_interface(PPI_object,cluster_interface(PPI_object))
+
