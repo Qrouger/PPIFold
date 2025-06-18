@@ -11,7 +11,7 @@ import logging
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'AlphaPulldown')))
 
-log_filename = "./PPI.log"
+log_filename = "./PPIFold.log"
 logging.basicConfig(filename=log_filename, filemode="w", level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",)
 class Logger(object):
     def __init__(self, log_file):
