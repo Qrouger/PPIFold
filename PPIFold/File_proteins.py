@@ -395,7 +395,7 @@ class File_proteins() :
             fh.write(line)
         self.set_fasta_file(file_out)
 
-    def update_iQ_score_hiQ_score (self) :
+    def update_iQ_score_hiQ_score (self, interaction) :
         """
         Generate two dictionaries: the first with a tuple of interacting proteins (UniProt) as the key and iQ_score as the value; 
         the second with the protein (UniProt) as the key and a tuple containing the best hiQ_score and its homo-oligomerization as the value.
