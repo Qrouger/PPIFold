@@ -419,12 +419,9 @@ class File_proteins() :
            with open("result_homo_oligo/new_predictions_with_good_interpae.csv", "r") as file2 :
               reader2 = csv.DictReader(file2)
               for row in reader2 :
-                 prot_name = row['jobs'].split("_and_")[0] #.split("_homo_")[0]
+                 prot_name = row['jobs'].split("_homo_")[0]
                  if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
-                    if "and" in row['jobs'].split("_") : #old AFPD version
-                        number_homo = len(row['jobs'].split("_and_"))
-                    else :
-                        number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
+                    number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0]) #to take the number of homo-oligomerisation of the protein and this score
                     hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
         self.set_hiQ_score_dict(hiQ_score_dic)
 
