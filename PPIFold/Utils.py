@@ -334,7 +334,7 @@ def make_table_res_int (file, path_int) :
     if os.path.isfile(f'{path_int}/result_{best_model}.pkl') :
        path_file = f'{path_int}/result_{best_model}.pkl'
     with open(os.path.join(path_file), 'rb') as inf_file :
-       if ".gz" in inf_file :
+       if ".gz" in path_file :
           pickle_dict = pickle.load(gzip.open(inf_file))
        else :
           pickle_dict = pickle.load(inf_file)
