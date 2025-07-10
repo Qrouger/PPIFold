@@ -423,11 +423,12 @@ class File_proteins() :
                     prot_name = row['jobs'].split("_homo_")[0]
                     if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
                        number_homo = int((row['jobs'].split("homo_")[1]).split("er")[0])
+                       hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
                  else :
                     prot_name = row['jobs'].split("_and_")[0]
                     if prot_name not in hiQ_score_dic.keys() or float(row['hiQ_score']) >= hiQ_score_dic[prot_name][0] :
                         number_homo = len(row['jobs'].split("_and_"))
-                 hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
+                        hiQ_score_dic[prot_name] = (float(row['hiQ_score']),number_homo)
         self.set_hiQ_score_dict(hiQ_score_dic)
 
 
