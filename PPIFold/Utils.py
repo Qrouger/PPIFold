@@ -329,7 +329,15 @@ def make_table_res_int (file, path_int) :
     color_res[proteins[0]] = set()
     color_res[proteins[1]] = set()
     atom_possible_contact = ["C","CA","CB"] #["O","OH","NH2","NH1","OG","NE2","ND2","NZ","NE","N","OE1","OE2","OD2","OG1"] #hydrogen bond
-    with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
+    if os.path.isfile(f'{path_int}/result_{best_model}.pkl.gz') :
+       path_file = f'{path_int}/result_{best_model}.pkl.gz'
+    if os.path.isfile(f'{path_int}/result_{best_model}.pkl') :
+       path_file = f'{path_int}/result_{best_model}.pkl'
+    with open(os.path.join(path_file), 'rb') as inf_file :
+       if ".gz" in inf_file :
+          pickle_dict = pickle.load(gzip.open(inf_file))
+       else :
+          pickle_dict = pickle.load(inf_file)
        pickle_dict = pickle.load(gzip.open(gz_file))
        if "distogram" not in pickle_dict.keys() or "predicted_aligned_error" not in pickle_dict.keys() :
           for model in structure:
