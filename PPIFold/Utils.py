@@ -434,8 +434,11 @@ def plot_Distogram (job) :
        path_file = f'{job}/result_{best_model}.pkl.gz'
     if os.path.isfile(f'{job}/result_{best_model}.pkl') :
        path_file = f'{job}/result_{best_model}.pkl'
-    with open(os.path.join(path_file), 'rb') as gz_file :
-        results = pickle.load(gzip.open(gz_file))
+    with open(os.path.join(path_file), 'rb') as inf_file :
+        if ".gz" in path_file :
+           results = pickle.load(gzip.open(inf_file))
+        else : 
+           results = pickle.load(inf_file)
         if "distogram" in results.keys() : #avoid error from APD release 
            bin_edges = results["distogram"]["bin_edges"]
            bin_edges = np.insert(bin_edges, 0, 0)
