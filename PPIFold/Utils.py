@@ -430,7 +430,11 @@ def plot_Distogram (job) :
     """
     ranking_results = json.load(open(os.path.join(f'{job}/ranking_debug.json')))
     best_model = ranking_results["order"][0]
-    with open(os.path.join(f'{job}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
+    if os.path.isfile(f'{job}/result_{best_model}.pkl.gz') :
+       path_file = f'{job}/result_{best_model}.pkl.gz'
+    if os.path.isfile(f'{job}/result_{best_model}.pkl') :
+       path_file = f'{job}/result_{best_model}.pkl'
+    with open(os.path.join(path_file), 'rb') as gz_file :
         results = pickle.load(gzip.open(gz_file))
         if "distogram" in results.keys() : #avoid error from APD release 
            bin_edges = results["distogram"]["bin_edges"]
