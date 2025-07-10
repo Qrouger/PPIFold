@@ -388,26 +388,24 @@ def make_table_res_int (file, path_int) :
           color_res = dict()
           color_res[proteins[0]] = set()
           color_res[proteins[1]] = set()
-          with open(os.path.join(f'{path_int}/result_{best_model}.pkl.gz'), 'rb') as gz_file :
-             pickle_dict = pickle.load(gzip.open(gz_file))
-             pae_mtx = pickle_dict['predicted_aligned_error']#take PAE
-             bin_edges = pickle_dict["distogram"]["bin_edges"]#take distogram for distance
-             bin_edges = np.insert(bin_edges, 0, 0)
-             distogram_softmax = softmax(pickle_dict["distogram"]["logits"], axis=2)
-             dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2) #center of the residue
-             dict_int[names_int] = [[proteins[0]," "+proteins[1]," Distance Ä"," PAE score"]]
-             for line in range(lenght_prot[proteins[0]],lenght_prot[proteins[0]]+lenght_prot[proteins[1]]) :
-                hori_index = -1
-                for distance in dist[line] :
-                   hori_index += 1
-                   if hori_index < lenght_prot[proteins[0]] :
-                      if distance <= 10 :
-                         if pae_mtx[line][hori_index] < 5 :
-                            residue1 = seq_prot[proteins[0]][hori_index]
-                            residue2 = seq_prot[proteins[1]][line-lenght_prot[proteins[0]]]
-                            dict_int[names_int].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[proteins[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
-                            color_res[proteins[0]].add(str(hori_index+1))
-                            color_res[proteins[1]].add(str(line-lenght_prot[proteins[0]]+1))  
+          pae_mtx = pickle_dict['predicted_aligned_error']#take PAE
+          bin_edges = pickle_dict["distogram"]["bin_edges"]#take distogram for distance
+          bin_edges = np.insert(bin_edges, 0, 0)
+          distogram_softmax = softmax(pickle_dict["distogram"]["logits"], axis=2)
+          dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2) #center of the residue
+          dict_int[names_int] = [[proteins[0]," "+proteins[1]," Distance Ä"," PAE score"]]
+          for line in range(lenght_prot[proteins[0]],lenght_prot[proteins[0]]+lenght_prot[proteins[1]]) :
+             hori_index = -1
+             for distance in dist[line] :
+                hori_index += 1
+                if hori_index < lenght_prot[proteins[0]] :
+                   if distance <= 10 :
+                      if pae_mtx[line][hori_index] < 5 :
+                         residue1 = seq_prot[proteins[0]][hori_index]
+                         residue2 = seq_prot[proteins[1]][line-lenght_prot[proteins[0]]]
+                         dict_int[names_int].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[proteins[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
+                         color_res[proteins[0]].add(str(hori_index+1))
+                         color_res[proteins[1]].add(str(line-lenght_prot[proteins[0]]+1))  
     residues_at_interface = dict()
     residues_at_interface[names_int] = []
     for chains in dict_int.keys() :
