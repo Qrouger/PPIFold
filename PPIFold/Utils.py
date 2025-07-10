@@ -8,8 +8,8 @@ import csv
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from scipy.special import softmax
+from PIL import Image
 import os
-import networkx as nx
 from math import *
 import pandas as pd
 import json
@@ -539,81 +539,78 @@ def add_hiQ_score (dir_alpha) :
 
 def generate_interaction_network (file) :
     """
-    Generate interaction network, colored by iQ_score.
-   
-    Parameters:
+    Generate interaction network with Graphviz, colored by iQ_score.
+    
+    Parameters
     ----------
     file : object of File_proteins class
 
     Returns:
     ----------
     """
-    valid_interactions = list()
+    valid_interactions = []
     iQ_score_dict = file.get_iQ_score_dict()
-    for interactions in iQ_score_dict.keys() :
+    for interactions in iQ_score_dict:
         names = [interactions[0], interactions[1]]
-        if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 50 :
+        if names not in [x[0] for x in valid_interactions] and float(iQ_score_dict[interactions]) >= 50:
             valid_interactions.append([names, float(iQ_score_dict[interactions])])
     hiQ_score_dict = file.get_hiQ_score_dict()
-    for homo_oligomer in hiQ_score_dict.keys() :
-        if float(hiQ_score_dict[homo_oligomer][0]) >= 50 :
-            valid_interactions.append([[homo_oligomer,homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
-    int_graph = nx.Graph()
-    list_inter_score = list()
-    prots = set()
+    for homo_oligomer in hiQ_score_dict:
+        if float(hiQ_score_dict[homo_oligomer][0]) >= 50:
+            valid_interactions.append([[homo_oligomer, homo_oligomer], hiQ_score_dict[homo_oligomer][1]])
     dict_name = file.get_names()
-    with open('table.cyt', 'w') as f :
-        f.write(('source,targer,interaction,score\n'))
-        for inter, score in valid_interactions :
-            if inter[0] in dict_name.keys() :
-               inter0 = inter[0]+f"({dict_name[inter[0]]})" #set uniprotID with the name of protein
-            else :
-               inter0 = inter[0]
-            if inter[1] in dict_name.keys() :
-               inter1 = inter[1]+f"({dict_name[inter[1]]})"
-            else :
-               inter1 = inter[1]
-            f.write(f'{inter0},{inter1},pp,{round(score,2)}\n')
-            prots.add(inter0)
-            prots.add(inter1)
-            list_inter_score.append((inter0,inter1,round(score,2)))
-    prots = list(prots)
-    int_graph.add_nodes_from(prots)
-    int_graph.add_weighted_edges_from(list_inter_score)
-    fig, ax = plt.subplots(figsize=(10, 6), dpi = 300)
-    pos = nx.spring_layout(int_graph, k = 5, iterations = 20, seed = 8)
-    nx.draw_networkx_nodes(int_graph,pos)
-    nx.draw_networkx_edges(int_graph,pos, node_size = 100, edgelist = int_graph.edges, width = 1, style = "solid")
-    nx.draw_networkx_labels(int_graph, pos, font_size = 10, font_family = "sans-serif", hide_ticks = 'True')
-    edge_labels = nx.get_edge_attributes(int_graph, "weight")
-    homo_label_dict = dict()
-    color_label = dict()
-    for prot_int in edge_labels.keys() :
-        if len(str(edge_labels[prot_int])) < 3 :
-            homo_label_dict[prot_int] = edge_labels[prot_int]
-        else :
-            color_label[prot_int] = edge_labels[prot_int]
-    selected_weights = {edge: edge_labels[edge] for edge in color_label.keys()}
-    if len(selected_weights) != 0 :
-       norm = mcolors.Normalize(vmin=min(selected_weights.values()), vmax=max(selected_weights.values()))
-       cmap = plt.cm.coolwarm
-       edge_colors = {}
-       for edge in int_graph.edges():
-          if edge in color_label.keys() or (edge[1], edge[0]) in color_label.keys():
-             edge_colors[edge] = cmap(norm(edge_labels[edge]))
-          else:
-             edge_colors[edge] = 'gray'
-       edge_colors_list = [edge_colors[edge] for edge in int_graph.edges()]
-       nx.draw_networkx_edge_labels(int_graph, pos, homo_label_dict, verticalalignment = 'bottom')
-       nx.draw(int_graph, pos, edge_color=edge_colors_list, node_color='lightblue', node_size=500, ax=ax)
-       sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
-       sm.set_array([])
-       plt.colorbar(sm, ax=ax, label="iQ_score")
-       plt.savefig("network.png")
-       plt.close()
-    else :
-        print("no PPI interactions for network")
+    scores = [score for _, score in valid_interactions if isinstance(score, float)]
+    norm = mcolors.Normalize(vmin=min(scores), vmax=max(scores)) if scores else None
+    cmap = plt.cm.coolwarm if scores else None
+    g = Graph('Interactome', engine='neato', format='png')
+    g.attr(overlap='false', fontsize='10', splines='true')
+    with open('table.cyt', 'w') as f:
+        f.write('source,target,interaction,score\n')
+        for inter, score in valid_interactions:
+            inter0 = f"{inter[0]}({dict_name[inter[0]]})" if inter[0] in dict_name else inter[0]
+            inter1 = f"{inter[1]}({dict_name[inter[1]]})" if inter[1] in dict_name else inter[1]
+            f.write(f'{inter0},{inter1},pp,{round(score, 2)}\n')
+            if inter0 == inter1:  # homo-oligomère
+                g.edge(inter0, inter1, color='black', penwidth='2', label=str(round(score, 2)))
+            else:
+                hex_color = mcolors.to_hex(cmap(norm(score))) if norm else 'gray'
+                g.edge(inter0, inter1, color=hex_color, penwidth='2')
+    if scores:
+        fig, ax = plt.subplots(figsize=(1, 6))  # étroit et haut
+        fig.subplots_adjust(left=0.5)
+        cb = plt.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), cax=ax, orientation='vertical')
+        cb.set_label('iQ_score')
+        plt.savefig('colorbar.png', dpi=300, bbox_inches='tight')
+        plt.close()
+    g.render('interactome.gv', view=False)
+    merge_graph_and_colorbar()
 
+def merge_graph_and_colorbar(graph_path='interactome.gv.png', colorbar_path='colorbar.png', output='interaction_network.png'):
+    """
+    Merge graph with the colorbar.
+    
+    Parameters
+    ----------
+    
+    Returns:
+    ----------
+    """
+    graph_img = Image.open(graph_path)
+    colorbar_img = Image.open(colorbar_path)
+    new_height = graph_img.height
+    new_width = int(colorbar_img.width * (new_height / colorbar_img.height))
+    colorbar_img = colorbar_img.resize((new_width, new_height))
+    total_width = graph_img.width + colorbar_img.width #create a ,ew fussioned img
+    total_height = graph_img.height
+    merged = Image.new('RGB', (total_width, total_height), color=(255, 255, 255))
+    merged.paste(graph_img, (0, 0))
+    merged.paste(colorbar_img, (graph_img.width, 0))
+    merged.save(output)
+    cmd1 = f"rm {graph_path}"
+    os.system(cmd1)
+    cmd2 = f"rm {colorbar_path}"
+    os.system(cmd2)
+    
 def generate_heatmap (file) :
     """
     Generate a heatmap of interaction scores between all proteins.
