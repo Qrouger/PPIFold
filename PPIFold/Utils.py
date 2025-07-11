@@ -338,7 +338,6 @@ def make_table_res_int (file, path_int) :
           pickle_dict = pickle.load(gzip.open(inf_file))
        else :
           pickle_dict = pickle.load(inf_file)
-       pickle_dict = pickle.load(gzip.open(inf_file))
        if "distogram" not in pickle_dict.keys() or "predicted_aligned_error" not in pickle_dict.keys() :
           for model in structure:
              list_chain = model.get_list()
