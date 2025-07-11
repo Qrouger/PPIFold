@@ -18,7 +18,8 @@ setup(
         'alphapulldown',
         'seaborn',
         'matplotlib',
-        'scipy'
+        'scipy',
+        'graphviz'
     ],
     entry_points={'console_scripts': ['PPIFold=PPIFold.PPIFold:main',],}
 )
