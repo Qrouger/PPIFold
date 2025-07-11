@@ -8,6 +8,7 @@ import csv
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from scipy.special import softmax
+from graphviz import Graph
 from PIL import Image
 import os
 from math import *
