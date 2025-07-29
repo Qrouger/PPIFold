@@ -199,3 +199,7 @@ Command : <br>
 ```bash
 PPIFold
 ```
+
+### Citations
+
+Quentin Rouger, Emmanuel Giudice, Damien F Meyer, Kévin Macé, PPIFold: a tool for analysis of protein–protein interaction from AlphaPullDown, Bioinformatics Advances, Volume 5, Issue 1, 2025, vbaf090, https://doi.org/10.1093/bioadv/vbaf090
