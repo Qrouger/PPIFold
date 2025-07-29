@@ -138,7 +138,7 @@ The y-axis represents the number of homologous sequences, the x-axis represents 
 
 **Residue interaction table<br>**
 Table of distance between two atoms of O50331 and O5333.<br>
-<img width="400" alt="residue_interaction_table" src="https://github.com/user-attachments/assets/ffdddb90-db4b-42ab-bdfe-41f09eae98f4" /><br>
+<img width="300" alt="residue_interaction_table" src="https://github.com/user-attachments/assets/ffdddb90-db4b-42ab-bdfe-41f09eae98f4" /><br>
 
 Chains represent different proteins. Two residues in contact are specified, along with their distances. Distances are calculated from the center of mass of the residues. The distance threshold is 10 angtroms, and the PAE is 5.
 <br>
