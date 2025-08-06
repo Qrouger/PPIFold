@@ -419,7 +419,7 @@ def make_table_res_int (file, path_int) :
             if interaction not in residues_at_interface[names_int] :
                 residues_at_interface[names_int].append(interaction)
     print("Write residue table")
-    if residues_at_interface[names_int] != [] : #can arrive if it don't fin atom with distance < 10 or PAE < 10
+    if residues_at_interface[names_int] != [] : #can arrive if it don't find atom with distance < 10 or PAE < 10
        file.define_interface(residues_at_interface[names_int],proteins) #update interaction interface
        color_int_residues(path_int,color_res,proteins) #color residue in interaction on the pdb
 
@@ -844,5 +844,6 @@ def recover_prot_sequence(file, path_pkl) :
          pickle_dict = pickle.load(pkl_file)
          new_dict_sequence[protein] = pickle_dict.sequence
    file.set_proteins_sequence(new_dict_sequence)
+
 
 
