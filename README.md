@@ -130,7 +130,7 @@ This pipeline have a cutoff on PAE (10), iQ-score (50) and hiQ-score (50).
 
 <!-- TOC --><a name="figures"></a>
 ### Figures
-**MSA depth<br>**<ins>
+<ins>**MSA depth<br>**
 All aligned homologous sequences for O50333.<br>
 <img alt="MSA Depth" src="https://github.com/user-attachments/assets/d31c276a-ac54-4b22-a305-531d30e8c270" width="400"/><br>
 
