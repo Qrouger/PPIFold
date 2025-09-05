@@ -171,22 +171,22 @@ Each interface with a protein is represented by all contact residues, which are 
 
 <!-- TOC --><a name="generated-files"></a>
 ### Generated Files
-**OOM_int.txt<br>**
+<ins>**OOM_int.txt<br>**</ins>
 A text file containing interactions that are too large, based on --max_aa.<br>
 
-**Shallow_MSA.txt<br>**
+<ins>**Shallow_MSA.txt<br>**</ins>
 A text file containing proteins with an MSA depth lower than 100 sequences.<br>
 > [!WARNING]
 > Results for proteins with fewer than 100 sequences in the MSA are not accurate for validating or invalidating predicted PPIs.
 
-**table.cyt<br>**
+<ins>**table.cyt<br>**</ins>
 A file for manually generating a network in Cytoscape.<br>
 
-**_summary.signalp5<br>**
+<ins>**_summary.signalp5<br>**</ins>
 A file who resume signal peptides for all proteins.<br>
 
 
-**.pdb file<br>**
+<ins>**.pdb file<br>**</ins>
 Model structure, with residues colored according to their interaction interface. <br>
 
 <!-- TOC --><a name="example"></a>
