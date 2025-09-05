@@ -130,40 +130,40 @@ This pipeline have a cutoff on PAE (10), iQ-score (50) and hiQ-score (50).
 
 <!-- TOC --><a name="figures"></a>
 ### Figures
-<ins>**MSA depth<br>**<ins>
+<ins>**MSA depth<br>**</ins>
 All aligned homologous sequences for O50333.<br>
 <img alt="MSA Depth" src="https://github.com/user-attachments/assets/d31c276a-ac54-4b22-a305-531d30e8c270" width="400"/><br>
 
 The y-axis represents the number of homologous sequences, the x-axis represents the positions in the sequence. The color represents the sequence identity.
 
-**Residue interaction table<br>**
+<ins>**Residue interaction table<br>**</ins>
 Table of distance between two atoms of O50331 and O5333.<br>
 <img width="300" alt="residue_interaction_table" src="https://github.com/user-attachments/assets/ffdddb90-db4b-42ab-bdfe-41f09eae98f4" /><br>
 
 Chains represent different proteins. Two residues in contact are specified, along with their distances. Distances are calculated from the center of mass of the residues. The distance threshold is 10 angtroms, and the PAE is 7.
 <br>
 
-**Distogram<br>**
+<ins>**Distogram<br>**</ins>
 Distance map between each atom of O50331 and O5333.<br>
 <img width="400" alt="Distogram" src="https://github.com/user-attachments/assets/42476dbd-7c90-4a3c-b95f-84ee6c495b34" /><br>
 
 The x and y axes represent interacting proteins. Pixels inside the black squares represent intra-protein residue distances, while pixels outside represent inter-protein residue distances. The color represents the distance in angstroms: blue indicates a short distance between two residues, and yellow indicates a large distance.
 <br>
 
-**Interaction network<br>**
+<ins>**Interaction network<br>**</ins>
 Protein-protein interaction network with iQ-score and homo-oligomers (hiQ-score) predictions.<br>
 
 <img src="https://github.com/user-attachments/assets/8af56e6d-3548-452a-b720-4c4d6c2dac68" alt="interaction_network" width="400"/><br>
 This network represents interactions between R388 proteins. Each interaction is represented by a line connecting two proteins, colored according to the corresponding iQ-score. A loop on a protein indicates the best homo-oligomers with the highest hiQ-score.
 <br>
 
-**iQ-Score heatmap<br>**
+<ins>**iQ-Score heatmap<br>**</ins>
 Heatmap of iQ-score between each PPI.<br>
 <img src="https://github.com/user-attachments/assets/cf1b8d62-45e8-41a7-a149-e4e466ba251c" alt="iQ_score_heatmap" width="400"/><br>
 Color represents the iQ-score, with a better iQ-score indicated by a lighter color. The black boxes represent either poor PAE, homo-oligomers, or overly large total protein length.
 <br>
 
-**Protein interface<br>**
+<ins>**Protein interface<br>**</ins>
 Amino acid sequence with different interfaces used in interacations.
 <img src="https://github.com/user-attachments/assets/29f63a4a-9ea0-4eba-bbda-14b0d9403342" alt="interface_figure" width="4000"/><br>
 Each interface with a protein is represented by all contact residues, which are colored. The last interaction represents the interface used in homo-oligomerization. If two proteins use the same interface, they will have the same colors.
