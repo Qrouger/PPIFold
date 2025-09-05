@@ -182,7 +182,7 @@ A text file containing proteins with an MSA depth lower than 100 sequences.<br>
 <ins>**table.cyt<br>**</ins>
 A file for manually generating a network in Cytoscape.<br>
 
-<ins>**_summary.signalp5<br>**</ins>
+<ins>**summary.signalp5<br>**</ins>
 A file who resume signal peptides for all proteins.<br>
 
 
