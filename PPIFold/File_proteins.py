@@ -486,6 +486,7 @@ class File_proteins() :
         if protein1 == protein2 : #fusion of residues at interface for homo-oligomer
             for residue in list_int_protein2 :
                 list_int_protein1.append(residue)
+            list_int_protein1 = list(set(list_int_protein1))
             list_int_protein1.append(protein2)
             old_interface_dict[protein1].append(list_int_protein1)
         else :

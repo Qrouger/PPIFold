@@ -249,8 +249,8 @@ def add_iQ_score (dir_alpha) :
     ----------
     """    
     if os.path.isdir("./result_all_vs_all") == True :
-       cmd = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-       os.system(cmd)
+       #cmd = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+       #os.system(cmd)
        with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
           reader = csv.DictReader(file1)
           all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
@@ -325,7 +325,6 @@ def make_table_res_int (file, path_int) :
        proteins = names_int.split('_and_')
     else :
        proteins = [names_int.split("_")[0]] * int(names_int.split("_")[2].replace("er",""))
-    print(proteins)
     color_res = dict()
     color_res[proteins[0]] = set()
     color_res[proteins[1]] = set()
@@ -400,7 +399,7 @@ def make_table_res_int (file, path_int) :
                 hori_index += 1
                 if hori_index < lenght_prot[proteins[0]] :
                    if distance <= 10 :
-                      if pae_mtx[line][hori_index] < 5 :
+                      if pae_mtx[line][hori_index] < 7 :
                          residue1 = seq_prot[proteins[0]][hori_index]
                          residue2 = seq_prot[proteins[1]][line-lenght_prot[proteins[0]]]
                          dict_int[names_int].append([residue1+":"+str(hori_index+1)," "+residue2+":"+str(line-lenght_prot[proteins[0]]+1)," "+str(distance), " "+str(pae_mtx[line][hori_index])])
@@ -480,7 +479,7 @@ def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     ----------
     """
     os.environ['XLA_PYTHON_CLIENT_PREALLOCATE'] = 'false'
-    os.environ['TF_FORCE_UNIFIED_MEMORY'] = '1'
+    os.environ['TF_FORCE_UNIFIED_MEMORY'] = 'true'
     os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = '3.2'
     os.environ['XLA_FLAGS'] = '--xla_gpu_enable_triton_gemm=false'
     cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_homo_oligo \--data_dir={data_dir} \--protein_lists=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
@@ -497,8 +496,8 @@ def add_hiQ_score (dir_alpha) :
     Returns:
     ----------
     """
-    cmd = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-    os.system(cmd)
+    #cmd = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+    #os.system(cmd)
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
         all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
@@ -576,25 +575,28 @@ def generate_interaction_network (file) :
                 hex_color = mcolors.to_hex(cmap(norm(score))) if norm else 'gray'
                 g.edge(inter0, inter1, color=hex_color, penwidth='2')
     if scores:
-        fig, ax = plt.subplots(figsize=(1, 6))  # étroit et haut
+        fig, ax = plt.subplots(figsize=(1, 6))
         fig.subplots_adjust(left=0.5)
         cb = plt.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), cax=ax, orientation='vertical')
         cb.set_label('iQ_score')
         plt.savefig('colorbar.png', dpi=300, bbox_inches='tight')
         plt.close()
-    g.render('interactome.gv', view=False)
-    merge_graph_and_colorbar()
+    g.render('Interaction_Network.gv', view=False)
+    merge_graph_and_colorbar("Interaction_Network.gv")
 
-def merge_graph_and_colorbar(graph_path='interactome.gv.png', colorbar_path='colorbar.png', output='interaction_network.png'):
+def merge_graph_and_colorbar(graph_path, colorbar_path='colorbar.png') :
     """
     Merge graph with the colorbar.
     
     Parameters
     ----------
+    graph_path = string
     
     Returns:
     ----------
     """
+    output = graph_path.replace('.gv', '.png')
+    graph_path = graph_path+".png"
     graph_img = Image.open(graph_path)
     colorbar_img = Image.open(colorbar_path)
     new_height = graph_img.height
@@ -608,8 +610,10 @@ def merge_graph_and_colorbar(graph_path='interactome.gv.png', colorbar_path='col
     merged.save(output)
     cmd1 = f"rm {graph_path}"
     os.system(cmd1)
-    cmd2 = f"rm {colorbar_path}"
+    cmd2 = f"rm {graph_path.replace('.png', '')}"
     os.system(cmd2)
+    cmd3 = f"rm {colorbar_path}"
+    os.system(cmd3)
     
 def generate_heatmap (file) :
     """
@@ -686,11 +690,11 @@ def cluster_interface (file) :
 
     Returns:
     ----------
-    interface_dict : dict
     """
     alphabet = string.ascii_lowercase
     interface_dict = file.get_interface_dict()
     for proteins in interface_dict.keys() :
+        alpha_index = 0
         already_inter = list()
         interface_dict[proteins] = sorted(interface_dict[proteins], key=lambda x : len(x)) #sorted all interface in function of number of residues
         for interface1 in range(len(interface_dict[proteins])) :
@@ -698,19 +702,21 @@ def cluster_interface (file) :
                 interface_dict[proteins][interface1].insert(0,alphabet[0])
                 already_inter.append(alphabet[0])
             for interface2 in range(interface1+1,len(interface_dict[proteins])) :
+                alpha_index += 1
                 list_inter = list(set(interface_dict[proteins][interface1]).intersection(set(interface_dict[proteins][interface2])))
                 simi_inter = len(list_inter)/(len(set(interface_dict[proteins][interface1]).union(set(interface_dict[proteins][interface2])))-3) #indice jaccard # -3 just to remove interface 'a' and uniprotID from .union()
                 if simi_inter < 0.20: #create a new interface
                     if interface_dict[proteins][interface2][0] in already_inter : #Don't create new interface if it already has one
                         pass
                     else :
-                        interface_dict[proteins][interface2].insert(0,alphabet[interface2])
-                        already_inter.append(alphabet[interface2])
+                        interface_dict[proteins][interface2].insert(0,alphabet[alpha_index])
+                        already_inter.append(alphabet[alpha_index])
                 else : #if interfaces got more than 0.20 of same residues, it's the same interface
                     if interface_dict[proteins][interface2][0] in alphabet :
                        interface_dict[proteins][interface2].pop(0)
-                    interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0])
-    return(interface_dict)
+                    interface_dict[proteins][interface2].insert(0,interface_dict[proteins][interface1][0]) #set same letter for same interface
+                    alpha_index -= 1
+    file.set_interface_dict(interface_dict)
 
 def color_int_residues(pdb_path, residues_to_color, names) :
     """
@@ -744,18 +750,18 @@ def color_int_residues(pdb_path, residues_to_color, names) :
     with open(f'{pdb_path}/ranked_0.pdb', 'w') as writer:
         writer.write(save_line)
 
-def plot_sequence_interface (file, cluster_dict) :
+def plot_sequence_interface (file) :
    """
    Generated figures for interface in one sequence.
 
    Parameters:
    ----------
    file : object of File_proteins class
-   cluster_dict : dict
 
    Returns:
    ----------
    """
+   cluster_dict = file.get_interface_dict()
    if not os.path.exists("./interface_fig/") :
       os.makedirs("./interface_fig/")
    sequence_dict = file.get_proteins_sequence()
@@ -826,24 +832,161 @@ def plot_sequence_interface (file, cluster_dict) :
       plt.close()
 
 def recover_prot_sequence(file, path_pkl) :
-   """
-   Take sequence from pickle files.
+    """
+    Take sequence from pickle files.
 
-   Parameters:
-   ----------
-   file : object of File_proteins class
-   path_pkl : string
+    Parameters:
+    ----------
+    file : object of File_proteins class
+    path_pkl : string
 
-   Returns:
-   ----------
-   """
-   list_proteins = file.get_proteins()
-   new_dict_sequence = file.get_proteins_sequence()
-   for protein in list_proteins :
-      with open(os.path.join(f'{path_pkl}/{protein}.pkl'), 'rb') as pkl_file :
-         pickle_dict = pickle.load(pkl_file)
-         new_dict_sequence[protein] = pickle_dict.sequence
-   file.set_proteins_sequence(new_dict_sequence)
+    Returns:
+    ----------
+    """
+    list_proteins = file.get_proteins()
+    new_dict_sequence = file.get_proteins_sequence()
+    for protein in list_proteins :
+        with open(os.path.join(f'{path_pkl}/{protein}.pkl'), 'rb') as pkl_file :
+            pickle_dict = pickle.load(pkl_file)
+            new_dict_sequence[protein] = pickle_dict.sequence
+    file.set_proteins_sequence(new_dict_sequence)
 
 
+def compatible_inter (complex_keys, new_key, all_int) :
+    """
+    Check if interactions are compatible.
 
+    Parameters:
+    ----------
+    complex_keys : set of tuples
+    new_key : tuple
+    all_int : dict
+
+    Returns:
+    ----------
+    Boolean
+    """
+    used_int = {}
+    for k in complex_keys :
+        for p, i in all_int[k].items() :
+            used_int.setdefault(p, set()).add(i)
+    for p, i in all_int[new_key].items() :
+        if p in used_int and i in used_int[p] : #if interface is already used
+            return False
+    return True
+
+def define_subcomplexes (file) :
+    """
+    Generate subcomplexes multimer with compatible interactions.
+
+    Parameters:
+    ----------
+    file : object of File_proteins class
+
+    Returns:
+    ----------
+    subcomplexes : list of list of strings
+    """
+    interactions = file.get_interface_dict()
+    all_int = {}
+    for prot, int_list in interactions.items() : #extract interaction informations
+        for info in int_list :
+            key = tuple(sorted([prot, info[-1]])) #create a specific key for each interactions
+            if key not in all_int :
+                all_int[key] = {}
+            all_int[key][prot] = info[0]
+    
+    complexes, used = [], set()
+    for key in all_int : #generated maximal complexes
+        if key in used :
+            continue
+
+        comp = {key}
+        for candidate in all_int : #check all candidates
+            if candidate not in comp and compatible_inter(comp, candidate, all_int) :
+                comp.add(candidate)
+        used.update(comp)
+        complexes.append([[k[0], k[1]] for k in comp])
+    
+    subcomplexes = []
+    for comp in complexes : #create connected subcomplexes
+        remaining = comp[:]
+        while remaining:
+            subcomp, proteins = [], []
+            if remaining:
+                first = remaining.pop(0)
+                subcomp.append(first)
+                proteins.extend(first)
+
+            changed = True
+            while changed:
+                changed = False
+                for inter in remaining[:]:
+                    if inter[0] in proteins or inter[1] in proteins:
+                        subcomp.append(inter)
+                        proteins.extend(inter)
+                        remaining.remove(inter)
+                        changed = True
+            formatted = sorted([f"{i[0]}:{i[1]}" for i in subcomp])
+            if formatted not in subcomplexes:
+                subcomplexes.append(formatted)
+    for idx1, subcomplexe1 in enumerate(subcomplexes) :
+        for idx2, subcomplexe2 in enumerate(subcomplexes) :
+            if idx1 != idx2 :
+                intersection = set(subcomplexe1) & set(subcomplexe2) #check if subcomplexe1 is in subcomplexe2
+                if intersection == set(subcomplexe1) :
+                    subcomplexes.remove(subcomplexe1)
+    return (subcomplexes)
+
+def subcomplexes_figures (file, subcomplexes) :
+    """
+    Generate figures for subcomplexes.
+
+    Parameters:
+    ----------
+    file : object of File_proteins class
+    subcomplexes : list of list of strings
+
+    Returns:
+    ----------
+    """
+    iQ_score_dict = file.get_iQ_score_dict()
+    hiQ_score_dict = file.get_hiQ_score_dict()
+    dict_name = file.get_names()
+    if not os.path.exists("./subcomplexes_fig/"):
+        os.makedirs("./subcomplexes_fig/")
+
+    scores = [float(score) for score in iQ_score_dict.values()]
+    norm = mcolors.Normalize(vmin=50, vmax=max(scores)) if scores else None
+    cmap = plt.cm.coolwarm if scores else None
+    color_dict = {}
+    for (p1, p2), score in iQ_score_dict.items():
+        hex_color = mcolors.to_hex(cmap(norm(float(score)))) if norm else 'gray'
+        color_dict[(p1, p2)] = hex_color
+        color_dict[(p2, p1)] = hex_color 
+
+    for index, complexe in enumerate(subcomplexes) : #one figure per subcomplex
+        g = Graph(f'Sub_Complex_{index+1}', engine='neato', format='png')
+        g.attr(overlap='false', fontsize='10', splines='true')
+
+        for inter in complexe:
+            p1, p2 = inter.split(':')
+            if p1 == p2 :
+                score = str(hiQ_score_dict.get((p1, p2), hiQ_score_dict.get(p2, p1))[1]) #take p1;p2 or p2,p1
+            color = color_dict.get((p1, p2), 'gray')
+            p1_label = f"{p1}({dict_name[p1]})" if p1 in dict_name else p1
+            p2_label = f"{p2}({dict_name[p2]})" if p2 in dict_name else p2
+            if p1 == p2 :  # homo-oligomère
+                g.edge(p1_label, p2_label, color='black', penwidth='2', label=score)
+            else:
+                g.edge(p1_label, p2_label, color=color, penwidth='2')
+        output_path = os.path.join("./subcomplexes_fig", f'Sub_Complex_{index+1}.gv')
+        g.render(output_path, view=False)
+        if scores:
+            fig, ax = plt.subplots(figsize=(1, 6))
+            fig.subplots_adjust(left=0.5)
+            cb = plt.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), cax=ax, orientation='vertical')
+            cb.set_label('iQ_score')
+            plt.savefig('colorbar.png', dpi=300, bbox_inches='tight')
+            plt.close()
+        merge_graph_and_colorbar(output_path)

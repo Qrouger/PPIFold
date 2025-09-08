@@ -62,5 +62,6 @@ def main() :
         PPI_object.update_iQ_score_hiQ_score(args.make_multimers)
     create_out_fig(PPI_object)
     generate_interaction_network(PPI_object)
-    plot_sequence_interface(PPI_object,cluster_interface(PPI_object))
-
+    cluster_interface(PPI_object)
+    plot_sequence_interface(PPI_object)
+    subcomplexes_figures(PPI_object,define_subcomplexes(PPI_object))
