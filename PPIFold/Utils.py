@@ -249,8 +249,8 @@ def add_iQ_score (dir_alpha) :
     ----------
     """    
     if os.path.isdir("./result_all_vs_all") == True :
-       #cmd = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-       #os.system(cmd)
+       cmd = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+       os.system(cmd)
        with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
           reader = csv.DictReader(file1)
           all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
@@ -496,8 +496,8 @@ def add_hiQ_score (dir_alpha) :
     Returns:
     ----------
     """
-    #cmd = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-    #os.system(cmd)
+    cmd = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
+    os.system(cmd)
     with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
         reader = csv.DictReader(file1)
         all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
@@ -989,4 +989,5 @@ def subcomplexes_figures (file, subcomplexes) :
             cb.set_label('iQ_score')
             plt.savefig('colorbar.png', dpi=300, bbox_inches='tight')
             plt.close()
+
         merge_graph_and_colorbar(output_path)
