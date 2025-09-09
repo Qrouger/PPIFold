@@ -15,7 +15,7 @@ setup(
     include_package_data=True,
     packages=find_packages(),
     install_requires=[
-        'alphapulldown',
+        'alphapulldown==2.0.4',
         'seaborn',
         'matplotlib',
         'scipy',
