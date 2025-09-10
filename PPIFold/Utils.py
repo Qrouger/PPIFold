@@ -934,7 +934,7 @@ def define_subcomplexes (file) :
         for idx2, subcomplexe2 in enumerate(subcomplexes) :
             if idx1 != idx2 :
                 intersection = set(subcomplexe1) & set(subcomplexe2) #check if subcomplexe1 is in subcomplexe2
-                if intersection == set(subcomplexe1) :
+                if intersection == set(subcomplexe1) and subcomplexe1 in subcomplexes :
                     subcomplexes.remove(subcomplexe1)
     return (subcomplexes)
 
@@ -991,3 +991,4 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
+
