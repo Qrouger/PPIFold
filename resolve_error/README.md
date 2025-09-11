@@ -16,3 +16,7 @@ nvidia-cusparselt-cu12==0.6.3 \\ \
 nvidia-nccl-cu12==2.26.2 \\ \
 nvidia-nvjitlink-cu12==12.6.85 \\ \
 nvidia-nvtx-cu12==12.6.77
+\
+and
+\
+pip install -U "jax[cuda12]"==0.5.3
