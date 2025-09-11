@@ -1,8 +1,8 @@
 If you have core dumped error try :
 
-pip install "\"
-nvidia-cublas-cu12==12.6.4.1 \
-nvidia-cuda-cupti-cu12==12.6.80 \
+pip install \\
+nvidia-cublas-cu12==12.6.4.1 \\
+nvidia-cuda-cupti-cu12==12.6.80 \\
 nvidia-cuda-nvcc-cu12==12.8.93 \
 nvidia-cuda-nvrtc-cu12==12.6.77 \
 nvidia-cuda-runtime-cu12==12.6.77 \
