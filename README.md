@@ -101,7 +101,7 @@ INAQISTQDRLINPLGFQVSEYRSDPEVIQ
 The conf.txt file needs to contains all paths.<br>
 
 ```bash
-Path_Uniprot_ID : Path and name of the initial file.
+Path_Uniprot_ID : Path and name of the Uniprot/fasta file.
 Path_AlphaFold_Data : Path to the AlphaFold database (default on ./alphadata).
 Path_Singularity_Image : Path and name of the singularity image.
 Path_Pickle_Feature : Path to your feature folder (default on ./feature).
