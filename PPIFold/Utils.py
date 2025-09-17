@@ -321,10 +321,10 @@ def make_table_res_int (file, path_int) :
     dict_int = dict()
     int_already_know = dict()
     names_int = path_int.split('/')[2]
-    if "and" in names_int.split("_") :
+    if '_and_' in names_int :
        proteins = names_int.split('_and_')
     else :
-       proteins = [names_int.split("_")[0]] * int(names_int.split("_")[2].replace("er",""))
+       proteins = [names_int.split('_homo_')[0]] * int(names_int.split('_homo_')[1].replace('er',''))
     color_res = dict()
     color_res[proteins[0]] = set()
     color_res[proteins[1]] = set()
@@ -991,5 +991,6 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
+
 
 
