@@ -751,85 +751,88 @@ def color_int_residues(pdb_path, residues_to_color, names) :
         writer.write(save_line)
 
 def plot_sequence_interface (file) :
-   """
-   Generated figures for interface in one sequence.
+    """
+    Generated figures for interface in one sequence.
 
-   Parameters:
-   ----------
-   file : object of File_proteins class
+    Parameters:
+    ----------
+    file : object of File_proteins class
 
-   Returns:
-   ----------
-   """
-   cluster_dict = file.get_interface_dict()
-   if not os.path.exists("./interface_fig/") :
-      os.makedirs("./interface_fig/")
-   sequence_dict = file.get_proteins_sequence()
-   dict_inter = file.get_interface_dict()
-   all_color= ['red','green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'pink', 'brown','lime', 'indigo', 'violet', 'turquoise', 'teal', 'crimson', 'gold', 'salmon', 'plum', 'chartreuse']
-   for uniprotID_main in dict_inter.keys() :
-      sequence = sequence_dict[uniprotID_main]
-      indice_color = -1
-      interface_done = dict()
-      index_to_color = dict()
-      uniprot_id_interface = dict()
-      for interaction in dict_inter[uniprotID_main] : #list of residue + interface + UniprotID in interaction
-         if interaction[0] not in interface_done.keys() : #if it's a new interface
-            indice_color += 1
-            interface_done[interaction[0]] = all_color[indice_color]
-            uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
-            for aa_to_color in interaction :
-               if " " in aa_to_color :
-                  if aa_to_color.split(" ")[1] not in index_to_color.keys() :
-                     index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
-                  if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
-                     index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
-               else : #for seconde residue table
-                  if aa_to_color not in index_to_color.keys() :
-                     index_to_color[aa_to_color] = [all_color[indice_color]]
-                  if aa_to_color in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
-                     index_to_color[aa_to_color].append(all_color[indice_color])
-         else :
-            uniprot_id_interface[interaction[len(interaction)-1]] = interface_done[interaction[0]]
-            for aa_to_color in interaction :
-               if " " in aa_to_color :
-                  if aa_to_color.split(" ")[1] not in index_to_color.keys() :
-                     index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
-                  if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
-                     index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
-               else : #for seconde residue table
-                  if aa_to_color not in index_to_color.keys() :
-                     index_to_color[aa_to_color] = [interface_done[interaction[0]]]
-                  if aa_to_color in index_to_color.keys() and interface_done[interaction[0]] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
-                     index_to_color[aa_to_color].append(interface_done[interaction[0]])
-      line_adjust = 150 #max aa per line
-      n_lines = (len(sequence) + line_adjust - 1) // line_adjust
-      fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
-      for line_index in range(0, len(sequence), line_adjust) :
-         sub_sequence = sequence[line_index:line_index + line_adjust]
-         y_pos = -line_index // line_adjust * 1.5
-         for i in range(len(sub_sequence)) :
-            aa = sub_sequence[i]
-            total_index = line_index + i
-            if str(total_index + 1) in index_to_color.keys() :
-               colors = index_to_color[str(total_index + 1)]
-               height = 0.5 / len(colors)
-               for color_index, color in enumerate(colors) :
-                  ax.add_patch(plt.Rectangle((i, y_pos +color_index * height), 1, height, color=color))
-               ax.text(i + 0.5, y_pos + 0.25, aa, ha='center', va='center', color='white')
+    Returns:
+    ----------
+    """
+    cluster_dict = file.get_interface_dict()
+    if not os.path.exists("./interface_fig/") :
+        os.makedirs("./interface_fig/")
+    sequence_dict = file.get_proteins_sequence()
+    dict_inter = file.get_interface_dict()
+    all_color = ['red','green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'yellow', 'pink', 'brown','lime', 'indigo', 'violet', 'turquoise', 'teal', 'crimson', 'gold', 'salmon', 'plum', 'chartreuse']
+    for uniprotID_main in dict_inter.keys() :
+        sequence = sequence_dict[uniprotID_main]
+        indice_color = -1
+        interface_done = dict()
+        index_to_color = dict()
+        uniprot_id_interface = dict()
+        for interaction in dict_inter[uniprotID_main] : #list of residue + interface + UniprotID in interaction
+            if interaction[0] not in interface_done.keys() : #if it's a new interface
+                indice_color += 1
+                interface_done[interaction[0]] = all_color[indice_color]
+                uniprot_id_interface[interaction[len(interaction)-1]] = all_color[indice_color]
+                for aa_to_color in interaction :
+                    if " " in aa_to_color :
+                        if aa_to_color.split(" ")[1] not in index_to_color.keys() :
+                            index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
+                        if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
+                            index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
+                    else : #for seconde residue table
+                        if aa_to_color not in index_to_color.keys() :
+                            index_to_color[aa_to_color] = [all_color[indice_color]]
+                        if aa_to_color in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
+                            index_to_color[aa_to_color].append(all_color[indice_color])
             else :
-               ax.add_patch(plt.Rectangle((i, y_pos), 1, 0.6, color="white"))
-               ax.text(i + 0.5, y_pos + 0.25, aa, ha='center', va='center', color='black')
-            if (total_index+1) % 10 == 0 or i == 0:
-               ax.text(i + 0.5, y_pos + 0.5, str(total_index+1), ha='center', va='center', color='black', fontsize=7)
-      for index_neigh, neigh in enumerate(uniprot_id_interface) :
-         ax.text(index_neigh * 6, -n_lines * 2, neigh, ha='center', va='center', color=uniprot_id_interface[neigh], fontsize=8)
-      ax.text(-2, 0.25, uniprotID_main, ha='right', va='center', color='black', fontsize=10, fontweight='bold')
-      ax.set_xlim(0, line_adjust)
-      ax.set_ylim(-n_lines*2, 1)  #Adjust high
-      ax.axis('off')
-      plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300, bbox_inches='tight')
-      plt.close()
+                uniprot_id_interface[interaction[len(interaction)-1]] = interface_done[interaction[0]]
+                for aa_to_color in interaction :
+                    if " " in aa_to_color :
+                        if aa_to_color.split(" ")[1] not in index_to_color.keys() :
+                            index_to_color[aa_to_color.split(" ")[1]] = [all_color[indice_color]]
+                        if aa_to_color.split(" ")[1] in index_to_color.keys() and all_color[indice_color] not in index_to_color[aa_to_color.split(" ")[1]] : #add two colour if it's in two interface
+                            index_to_color[aa_to_color.split(" ")[1]].append(all_color[indice_color])
+                    else : #for seconde residue table
+                        if aa_to_color not in index_to_color.keys() :
+                            index_to_color[aa_to_color] = [interface_done[interaction[0]]]
+                        if aa_to_color in index_to_color.keys() and interface_done[interaction[0]] not in index_to_color[aa_to_color] : #add two colour if it's in two interface
+                            index_to_color[aa_to_color].append(interface_done[interaction[0]])
+        line_adjust = 150 #max aa per line
+        dict_name = file.get_names()
+        n_lines = (len(sequence) + line_adjust - 1) // line_adjust
+        fig, ax = plt.subplots(figsize=(line_adjust / 4, n_lines*1.5)) #Adjust figsize
+        for line_index in range(0, len(sequence), line_adjust) :
+            sub_sequence = sequence[line_index:line_index + line_adjust]
+            y_pos = -line_index // line_adjust * 1.5
+            for i in range(len(sub_sequence)) :
+                aa = sub_sequence[i]
+                total_index = line_index + i
+                if str(total_index + 1) in index_to_color.keys() :
+                    colors = index_to_color[str(total_index + 1)]
+                    height = 0.5 / len(colors)
+                    for color_index, color in enumerate(colors) :
+                        ax.add_patch(plt.Rectangle((i, y_pos + color_index * height), 1, height, color=color))
+                    ax.text(i + 0.5, y_pos + 0.25, aa, ha='center', va='center', color='white')
+                else :
+                    ax.add_patch(plt.Rectangle((i, y_pos), 1, 0.6, color="white"))
+                    ax.text(i + 0.5, y_pos + 0.25, aa, ha='center', va='center', color='black')
+                if (total_index+1) % 10 == 0 or i == 0:
+                    ax.text(i + 0.5, y_pos + 0.5, str(total_index + 1), ha='center', va='center', color='black', fontsize=7)
+        for index_neigh, neigh in enumerate(uniprot_id_interface) :
+            name_neigh = f"{neigh}({dict_name[neigh]})" if neigh in dict_name else neigh
+            ax.text(index_neigh * 6, - n_lines * 2, name_neigh, ha='center', va='center', color=uniprot_id_interface[neigh], fontsize=8)
+        uniprotID_main_name = f"{uniprotID_main}({dict_name[uniprotID_main]})" if uniprotID_main in dict_name else uniprotID_main
+        ax.text(-2, 0.25, uniprotID_main_name, ha='right', va='center', color='black', fontsize=10, fontweight='bold')
+        ax.set_xlim(0, line_adjust)
+        ax.set_ylim(-n_lines*2, 1)  #Adjust high
+        ax.axis('off')
+        plt.savefig("./interface_fig/"+uniprotID_main+"_interface_fig.png", dpi=300, bbox_inches='tight')
+        plt.close()
 
 def recover_prot_sequence(file, path_pkl) :
     """
