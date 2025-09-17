@@ -518,7 +518,7 @@ def add_hiQ_score (dir_alpha) :
     for key in all_homo.keys() :
         row = all_homo[key][2]
         if "homo" in row["jobs"].split("_") :
-            number_oligo = row["jobs"].split("_")[2].replace("er","") #AFPD 2.0.4
+            number_oligo = row["jobs"].split("_homo_")[1].replace("er","") #AFPD 2.0.4
         else :
             number_oligo = len(row["jobs"].split("_and_")) #AFPD 2.0.3
         if len(save_pi_score[key]) > int(number_oligo) : #if model have more interface than number of homo-oligomerization
@@ -991,4 +991,5 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
+
 
