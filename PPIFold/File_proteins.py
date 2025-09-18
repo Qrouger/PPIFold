@@ -156,7 +156,7 @@ class File_proteins() :
         
     def get_proteins_sequence (self) :
         """
-        Return the new amino acid sequence list.
+        Return the new amino acid sequence dictionary.
         
         Parameters:
         ----------
