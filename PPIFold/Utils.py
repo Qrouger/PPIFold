@@ -90,7 +90,7 @@ def remove_SP (file, org) :
                 new_fasta_dict[save_key] = line2
             if int(SP_signal) > 0 :
                 new_line2 = line2[int(SP_signal)-1:len(line2)]
-                new_fasta_dict[save_key] = line2[int(SP_signal)+1:len(line2)]
+                new_fasta_dict[save_key] = line2[int(SP_signal)-1:len(line2)]
                 SP_signal = 0
             if line2[0] == ">" :
                 save_key = line2[1:len(line2)-1]
@@ -994,6 +994,7 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
+
 
 
 
