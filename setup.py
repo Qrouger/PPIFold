@@ -19,7 +19,8 @@ setup(
         'seaborn',
         'matplotlib',
         'scipy',
-        'graphviz'
+        'graphviz',
+        'numpy==1.26.4'
     ],
     entry_points={'console_scripts': ['PPIFold=PPIFold.PPIFold:main',],}
 )
