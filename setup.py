@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='PPIFold',
-    version='1.0.5',
+    version='1.0.6',
     description=(
         'Automatic pipeline using AlphaPulldown to predict PPI and homo-oligomer'
     ),
