@@ -439,32 +439,33 @@ def plot_Distogram (job) :
        path_file = f'{job}/result_{best_model}.pkl.gz'
     if os.path.isfile(f'{job}/result_{best_model}.pkl') :
        path_file = f'{job}/result_{best_model}.pkl'
-    with open(os.path.join(path_file), 'rb') as inf_file :
-        if ".gz" in path_file :
-           results = pickle.load(gzip.open(inf_file))
-        else : 
-           results = pickle.load(inf_file)
-        if "distogram" in results.keys() : #avoid error from APD release 
-           bin_edges = results["distogram"]["bin_edges"]
-           bin_edges = np.insert(bin_edges, 0, 0)
-           distogram_softmax = softmax(results["distogram"]["logits"], axis=2)
-           dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2)
-           np.savetxt(f"{job}/result_{best_model}.pkl.dmap", dist)
-           lenght_list = []
-           for seq in results["seqs"] :
-              lenght_list.append(len(seq))
-           print(f"Generate {job} Distogram")
-           initial_lenght = 0
-           fig, ax = plt.subplots()
-           d = ax.imshow(dist)
-           plt.colorbar(d, ax=ax, fraction=0.046, pad=0.04)
-           ax.title.set_text("Distance map")
-           for index in range(len(lenght_list)-1) :
-              initial_lenght += lenght_list[index]
-              ax.axhline(initial_lenght, color="black", linewidth=1.5)
-              ax.axvline(initial_lenght, color="black", linewidth=1.5)
-           plt.savefig(f"{job}/result_{best_model}.dmap.png", dpi=600)
-           plt.close()
+    if path_file.endswith(".gz") :
+        with gzip.open(path_file, "rb") as f:
+            results = pickle.load(f)
+    else :
+        with open(path_file, "rb") as f:
+            results = pickle.load(f)
+    if "distogram" in results.keys() : #avoid error from APD release 
+        bin_edges = results["distogram"]["bin_edges"]
+        bin_edges = np.insert(bin_edges, 0, 0)
+        distogram_softmax = softmax(results["distogram"]["logits"], axis=2)
+        dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2)
+        np.savetxt(f"{job}/result_{best_model}.pkl.dmap", dist)
+        lenght_list = []
+        for seq in results["seqs"] :
+           lenght_list.append(len(seq))
+        print(f"Generate {job} Distogram")
+        initial_lenght = 0
+        fig, ax = plt.subplots()
+        d = ax.imshow(dist)
+        plt.colorbar(d, ax=ax, fraction=0.046, pad=0.04)
+        ax.title.set_text("Distance map")
+        for index in range(len(lenght_list)-1) :
+           initial_lenght += lenght_list[index]
+           ax.axhline(initial_lenght, color="black", linewidth=1.5)
+           ax.axvline(initial_lenght, color="black", linewidth=1.5)
+        plt.savefig(f"{job}/result_{best_model}.dmap.png", dpi=600)
+        plt.close()
             
 def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     """
@@ -994,6 +995,7 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
+
 
 
 
