@@ -453,7 +453,7 @@ def plot_Distogram (job) :
            lenght_list = []
            for seq in results["seqs"] :
               lenght_list.append(len(seq))
-           print(f"make {job} Distogram")
+           print(f"Generate {job} Distogram")
            initial_lenght = 0
            fig, ax = plt.subplots()
            d = ax.imshow(dist)
@@ -994,6 +994,7 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
+
 
 
 
