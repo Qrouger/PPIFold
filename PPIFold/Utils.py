@@ -19,6 +19,7 @@ import string
 import seaborn
 from Bio import PDB
 import logging
+import gc
 
 
 from .File_proteins import *
@@ -466,7 +467,13 @@ def plot_Distogram (job) :
            ax.axvline(initial_lenght, color="black", linewidth=1.5)
         plt.savefig(f"{job}/result_{best_model}.dmap.png", dpi=600)
         plt.close()
-            
+        del dist
+        del results
+        del distogram_softmax
+        del bin_edges
+        del d
+        gc.collect()
+
 def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     """
     Use Alphapulldown script to generate all homo-oligomer.
@@ -995,6 +1002,7 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
+
 
 
 
