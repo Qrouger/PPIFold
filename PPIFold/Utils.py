@@ -440,10 +440,10 @@ def plot_Distogram (job) :
     if os.path.isfile(f'{job}/result_{best_model}.pkl') :
        path_file = f'{job}/result_{best_model}.pkl'
     if path_file.endswith(".gz") :
-        with gzip.open(path_file, "rb") as f:
+        with gzip.open(path_file, "rb") as f :
             results = pickle.load(f)
     else :
-        with open(path_file, "rb") as f:
+        with open(path_file, "rb") as f :
             results = pickle.load(f)
     if "distogram" in results.keys() : #avoid error from APD release 
         bin_edges = results["distogram"]["bin_edges"]
@@ -995,6 +995,7 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
+
 
 
 
