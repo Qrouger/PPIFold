@@ -258,7 +258,7 @@ def add_iQ_score (dir_alpha) :
           for row in reader :
              job = row['jobs']
              if '_and_' in job :
-                 if row['pi_score'] == 'No interface detected' :
+                 if row['pi_score'] == 'No interface detected' and row['pi_score'] != 'None' :
                      iQ_score = float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #pi_score don't detect interface so is set on -2.63
                      line =f'{row["jobs"]},-2.63,{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
                  else :
@@ -514,7 +514,7 @@ def add_hiQ_score (dir_alpha) :
         for row in reader :
             job = row['jobs']
             #if 'homo' in job and row['pi_score'] != 'No interface detected' : #need AFPD release with homo-oligo ####_homo_2er
-            if row['pi_score'] != 'No interface detected' :
+            if row['pi_score'] != 'No interface detected' and row['pi_score'] != 'None' :
                 if job not in all_homo.keys() :
                     all_homo[job] = (row['pi_score'],1,row)
                     save_pi_score[job] = [float(row['pi_score'])]
