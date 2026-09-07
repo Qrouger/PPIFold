@@ -20,7 +20,8 @@ setup(
         'matplotlib',
         'scipy',
         'graphviz',
-        'numpy==1.26.4'
+        'numpy==1.26.4',
+        'gemmi'
     ],
     entry_points={'console_scripts': ['PPIFold=PPIFold.PPIFold:main',],}
 )
