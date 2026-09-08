@@ -73,7 +73,7 @@ pip install PPIFold
 pip install -U "jax[cuda12]"==0.5.3
 ```
 
-```
+
 <br>
 
 <!-- TOC --><a name="pipeline"></a>
