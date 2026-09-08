@@ -35,6 +35,9 @@ cd alphafold
 scripts/download_all_data.sh /<Directory> > download.log 2> download_all.log
 ```
 
+<br>
+<br>
+
 SignalP5 installation (optional) :<br>
 
 https://services.healthtech.dtu.dk/services/SignalP-5.0/9-Downloads.php<br>
@@ -48,13 +51,17 @@ sudo cp -r lib/* /usr/local/lib
 > [!NOTE]
 > If you don't want to use SignalP, set --use_signalP to False and don't install SignalP5.
 
-Singularity installation :<br>
+<br>
+<br>
 
-https://docs.sylabs.io/guides/3.0/user-guide/installation.html#install-on-linux
+CCP4 installation :<br>
 
-Download Singularity image (score generation) from zenodo :<br>
+Download the ccp4 package from: https://www.ccp4.ac.uk/download/#os=linux
 
-https://zenodo.org/records/15358984?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjI3ZjU1OGFlLWQ1MDItNDk1ZS1iNzdmLTNjZjkxY2NiZTAxNCIsImRhdGEiOnt9LCJyYW5kb20iOiIxZjM2OTU0OTM5MWY4ZDA4OTliMWMyYWU3M2JhOTcwNCJ9.mAtQqhZh6xrUR_Pm3dx40jGek_6cC7TaXjeY25IOo73ulkZwoclvFjSzcOp7-9PPtbTef_dbDN5Y4p3LyeSaxg 
+```bash
+tar xvzf ccp4-9-setup.tar.gz
+./ccp4-9-setup
+```
 <br>
 <br>
 
@@ -65,6 +72,10 @@ conda activate PPIFold
 pip install PPIFold
 pip install -U "jax[cuda12]"==0.5.3
 ```
+
+```
+<br>
+
 <!-- TOC --><a name="pipeline"></a>
 ## Pipeline
 
@@ -103,7 +114,7 @@ The conf.txt file needs to contains all paths.<br>
 ```bash
 Path_Uniprot_ID : Path and name of the Uniprot/fasta file.
 Path_AlphaFold_Data : Path to the AlphaFold database (default on ./alphadata).
-Path_Singularity_Image : Path and name of the singularity image.
+Path_CCP4 : Path for ccp4 installation. (default on /opt/xtal/ccp4-9).
 Path_Pickle_Feature : Path to your feature folder (default on ./feature).
 ```
 <!-- TOC --><a name="arguments"></a>
