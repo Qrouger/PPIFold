@@ -18,11 +18,12 @@ import gzip
 import string
 import seaborn
 from Bio import PDB
+import multiprocessing
 import logging
-import gc
-
-
+from .get_good_inter_pae import *
 from .File_proteins import *
+from tqdm import tqdm
+
 
 def define_path() :
     """
@@ -42,19 +43,19 @@ def define_path() :
             path_dir = lines.split(":")[1].strip().strip("\n")
             path_dict[path_name] = path_dir
     for path_key in path_dict.keys() :
-        if path_key == "Path_Singularity_Image" and ".sif" not in path_dict[path_key] :
-            print("You need to specify the name of the Singularity image in Path_Singularity_Image.")
-            exit()
         if len(path_dict[path_key]) == 0 :
             print (f'Path to {path_key} file is empty')
-            if path_key == "Path_Uniprot_ID" or path_key == "Path_Singularity_Image" :
+            if path_key == "Path_Uniprot_ID" :
                 exit()
             elif path_key == "Path_AlphaFold_Data" :
-                print("set by default on ./alphadata")
+                print("Path_AlphaFold_Data set by default on ./alphadata")
                 path_dict[path_key] = "./alphadata"
             elif path_key == "Path_Pickle_Feature" :
-                print("set by default on ./feature")
+                print("Path_Pickle_Feature set by default on ./feature")
                 path_dict[path_key] = "./feature"
+            elif path_key == "Path_CCP4" :
+                print("Path_CCP4 set by default on /opt/xtal/ccp4-9")
+                path_dict[path_key] = "/opt/xtal/ccp4-9"
     return(path_dict)
 
 def remove_SP (file, org) :
@@ -238,35 +239,79 @@ def Make_all_vs_all (data_dir, Path_Pickle_Feature) :
     cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_all_vs_all \--data_dir={data_dir} \--protein_lists=all_vs_all.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
     os.system(cmd1)
 
-def add_iQ_score (dir_alpha) :
+def run_scoring (args) :
+    """
+    Wrapper function executed by multiprocessing workers to score a single AlphaFold interaction using inter-chain PAE metrics.
+
+    - it unpacks arguments passed by the multiprocessing Pool
+    - calls the get_good_inter_pae scoring routine
+    - returns the resulting DataFrame
+
+    Parameters :
+    ----------
+    args : tuple
+
+    Returns :
+    ----------
+    result : pandas.DataFrame
+    """
+    interaction, file, AF_version, Path_ccp4 = args
+    try :
+        result = main(interaction, 10, 2, file, AF_version, Path_ccp4) #normal PAE is 10
+        return  result
+    except Exception as e:
+        pid = os.getpid()
+        logging.error(f"ERROR in worker PID={pid}")
+        logging.error(f"Interaction: {interaction}")
+        raise
+
+def add_iQ_score (file, Path_ccp4) :
     """
     Generate iQ_score for all interactions.
 
     Parameters:
     ----------
+    file : object of class File_proteins
     dir_alpha : string
 
     Returns:
     ----------
     """    
     if os.path.isdir("./result_all_vs_all") == True :
-       cmd = f"singularity exec --no-home --bind result_all_vs_all:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-       os.system(cmd)
-       with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
-          reader = csv.DictReader(file1)
-          all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
-          for row in reader :
-             job = row['jobs']
-             if '_and_' in job :
-                 if row['pi_score'] == 'No interface detected' and row['pi_score'] != 'None' :
-                     iQ_score = float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #pi_score don't detect interface so is set on -2.63
-                     line =f'{row["jobs"]},-2.63,{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
-                 else :
-                     iQ_score = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
-                     line =f'{row["jobs"]},{row["pi_score"]},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
-             all_lines = all_lines + line
-       with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
-          file2.write(all_lines)
+        results = []
+        CPU = int(multiprocessing.cpu_count()/2)
+        print(file.get_proteins())
+        ppi_list = ["./result_all_vs_all/"+ppi for ppi in os.listdir("./result_all_vs_all") if os.path.isdir(os.path.join("./result_all_vs_all", ppi)) and ppi.split("_and_")[0] in file.get_proteins() and ppi.split("_and_")[1] in file.get_proteins()]
+        AF_version = "2"
+        print(ppi_list)
+        with multiprocessing.Pool(CPU) as pool : #just run scoring for interactions without score
+            tasks = [(ppi, file, AF_version, Path_ccp4) for ppi in ppi_list]
+            results_iter = pool.imap_unordered(run_scoring, tasks)
+            for df in tqdm(results_iter, total=len(ppi_list), desc="Scoring interactions") :
+                if df is not None and not df.empty :
+                    results.append(df)
+            pool.close()
+            pool.join()
+
+        merged_df = pd.concat(results, ignore_index=True) if results else pd.DataFrame() #write an empty dataframe if no result
+        merged_df.to_csv(os.path.join(f"./result_all_vs_all", "predictions_with_good_interpae.csv"), index=False)
+
+        with open("result_all_vs_all/predictions_with_good_interpae.csv", "r") as file1 :
+            reader = csv.DictReader(file1)
+            all_lines = "jobs,pi_score,iptm_ptm,pDockQ,iQ_score\n"
+            for row in reader :
+                job = row['jobs'].replace("_ranked_0","")
+                if '_and_' in job :
+                    if row['pi_score'] == 'No interface detected' :
+                        iQ_score = float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30 #pi_score don't detect interface so is set on -2.63
+                        line =f'{job},-2.63,{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
+                    else :
+                        iQ_score = ((float(row['pi_score'])+2.63)/5.26)*40+float(row['iptm_ptm'])*30+float(row['mpDockQ/pDockQ'])*30
+                        line =f'{job},{row["pi_score"]},{row["iptm_ptm"]},{row["mpDockQ/pDockQ"]},{str(iQ_score)}\n'
+                all_lines = all_lines + line
+        with open("result_all_vs_all/new_predictions_with_good_interpae.csv", "w") as file2 :
+            file2.write(all_lines)
+
     else : #allow to run PPIFold for only one protein
        print("all_vs_all directory is empty")
         
@@ -440,40 +485,33 @@ def plot_Distogram (job) :
        path_file = f'{job}/result_{best_model}.pkl.gz'
     if os.path.isfile(f'{job}/result_{best_model}.pkl') :
        path_file = f'{job}/result_{best_model}.pkl'
-    if path_file.endswith(".gz") :
-        with gzip.open(path_file, "rb") as f :
-            results = pickle.load(f)
-    else :
-        with open(path_file, "rb") as f :
-            results = pickle.load(f)
-    if "distogram" in results.keys() : #avoid error from APD release 
-        bin_edges = results["distogram"]["bin_edges"]
-        bin_edges = np.insert(bin_edges, 0, 0)
-        distogram_softmax = softmax(results["distogram"]["logits"], axis=2)
-        dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2)
-        np.savetxt(f"{job}/result_{best_model}.pkl.dmap", dist)
-        lenght_list = []
-        for seq in results["seqs"] :
-           lenght_list.append(len(seq))
-        print(f"Generate {job} Distogram")
-        initial_lenght = 0
-        fig, ax = plt.subplots()
-        d = ax.imshow(dist)
-        plt.colorbar(d, ax=ax, fraction=0.046, pad=0.04)
-        ax.title.set_text("Distance map")
-        for index in range(len(lenght_list)-1) :
-           initial_lenght += lenght_list[index]
-           ax.axhline(initial_lenght, color="black", linewidth=1.5)
-           ax.axvline(initial_lenght, color="black", linewidth=1.5)
-        plt.savefig(f"{job}/result_{best_model}.dmap.png", dpi=600)
-        plt.close()
-        del dist
-        del results
-        del distogram_softmax
-        del bin_edges
-        del d
-        gc.collect()
-
+    with open(os.path.join(path_file), 'rb') as inf_file :
+        if ".gz" in path_file :
+           results = pickle.load(gzip.open(inf_file))
+        else : 
+           results = pickle.load(inf_file)
+        if "distogram" in results.keys() : #avoid error from APD release 
+           bin_edges = results["distogram"]["bin_edges"]
+           bin_edges = np.insert(bin_edges, 0, 0)
+           distogram_softmax = softmax(results["distogram"]["logits"], axis=2)
+           dist = np.sum(np.multiply(distogram_softmax, bin_edges), axis=2)
+           np.savetxt(f"{job}/result_{best_model}.pkl.dmap", dist)
+           lenght_list = []
+           for seq in results["seqs"] :
+              lenght_list.append(len(seq))
+           print(f"make {job} Distogram")
+           initial_lenght = 0
+           fig, ax = plt.subplots()
+           d = ax.imshow(dist)
+           plt.colorbar(d, ax=ax, fraction=0.046, pad=0.04)
+           ax.title.set_text("Distance map")
+           for index in range(len(lenght_list)-1) :
+              initial_lenght += lenght_list[index]
+              ax.axhline(initial_lenght, color="black", linewidth=1.5)
+              ax.axvline(initial_lenght, color="black", linewidth=1.5)
+           plt.savefig(f"{job}/result_{best_model}.dmap.png", dpi=600)
+           plt.close()
+            
 def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     """
     Use Alphapulldown script to generate all homo-oligomer.
@@ -493,7 +531,7 @@ def Make_homo_oligo (data_dir, Path_Pickle_Feature) :
     cmd1 =f"run_multimer_jobs.py --mode=custom \--num_cycle=3 \--num_predictions_per_model=1 \--compress_result_pickles=True \--output_path=./result_homo_oligo \--data_dir={data_dir} \--protein_lists=homo_oligo.txt \--monomer_objects_dir={Path_Pickle_Feature} \--remove_keys_from_pickles=False"
     os.system(cmd1)
 
-def add_hiQ_score (dir_alpha) :
+def add_hiQ_score (file, Path_ccp4) :
     """
     Generate a score table for all homo-oligomer.
 
@@ -504,45 +542,60 @@ def add_hiQ_score (dir_alpha) :
     Returns:
     ----------
     """
-    cmd = f"singularity exec --no-home --bind result_homo_oligo:/mnt {dir_alpha} run_get_good_pae.sh --output_dir=/mnt --cutoff=10"
-    os.system(cmd)
-    with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
-        reader = csv.DictReader(file1)
-        all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
-        all_homo = dict()
-        save_pi_score = dict()
-        for row in reader :
-            job = row['jobs']
-            #if 'homo' in job and row['pi_score'] != 'No interface detected' : #need AFPD release with homo-oligo ####_homo_2er
-            if row['pi_score'] != 'No interface detected' and row['pi_score'] != 'None' :
-                if job not in all_homo.keys() :
-                    all_homo[job] = (row['pi_score'],1,row)
-                    save_pi_score[job] = [float(row['pi_score'])]
-                else :
-                    save_pi_score[job].append(float(row['pi_score']))
-                    sum_pi_score = float(all_homo[job][0]) + float(row['pi_score'])
-                    sum_int = all_homo[job][1] + 1
-                    all_homo[job] = (sum_pi_score,sum_int,row)
-    for key in all_homo.keys() :
-        row = all_homo[key][2]
-        if "homo" in row["jobs"].split("_") :
-            number_oligo = row["jobs"].split("_homo_")[1].replace("er","") #AFPD 2.0.4
-        else :
-            number_oligo = len(row["jobs"].split("_and_")) #AFPD 2.0.3
-        if len(save_pi_score[key]) > int(number_oligo) : #if model have more interface than number of homo-oligomerization
-            new_sum_pi_score = 0
-            save_pi_score[key].sort(reverse=True)
-            for index in range(0,int(number_oligo)) :
-                new_sum_pi_score += save_pi_score[key][index]
-                hiQ_score = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm are always same for each homo of same protein
-            line =f'{key},{str(float(new_sum_pi_score)/int(number_oligo))},{row["iptm_ptm"]},{str(hiQ_score)}\n'
-            all_lines += line
-        else :
-            hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
-            line =f'{key},{str(float(all_homo[key][0])/all_homo[key][1])},{row["iptm_ptm"]},{str(hiQ_score)}\n'
-            all_lines += line
-    with open("./result_homo_oligo/new_predictions_with_good_interpae.csv", "w") as file2 :
-        file2.write(all_lines)
+    if os.path.isdir("./result_homo_oligo") == True :
+        results = []
+        CPU = int(multiprocessing.cpu_count()/2)
+        ppi_list = ["./result_homo_oligo/"+ppi for ppi in os.listdir("./result_homo_oligo") if os.path.isdir(os.path.join("./result_homo_oligo", ppi)) and ppi.split("_homo_")[0] in file.get_proteins()]
+        AF_version = "2"
+        with multiprocessing.Pool(CPU) as pool : #just run scoring for interactions without score
+            tasks = [(ppi, file, AF_version, Path_ccp4) for ppi in ppi_list]
+            results_iter = pool.imap_unordered(run_scoring, tasks)
+            for df in tqdm(results_iter, total=len(ppi_list), desc="Scoring interactions") :
+                if df is not None and not df.empty :
+                    results.append(df)
+            pool.close()
+            pool.join()
+
+        merged_df = pd.concat(results, ignore_index=True) if results else pd.DataFrame() #write an empty dataframe if no result
+        merged_df.to_csv(os.path.join(f"./result_homo_oligo", "predictions_with_good_interpae.csv"), index=False)
+
+        with open("./result_homo_oligo/predictions_with_good_interpae.csv", "r") as file1 :
+            reader = csv.DictReader(file1)
+            all_lines = "jobs,pi_score,iptm_ptm,hiQ_score\n"
+            all_homo = dict()
+            save_pi_score = dict()
+            for row in reader :
+                job = row['jobs'].replace("_ranked_0","")
+                #if 'homo' in job and row['pi_score'] != 'No interface detected' : #need AFPD release with homo-oligo ####_homo_2er
+                if row['pi_score'] != 'No interface detected' :
+                    if job not in all_homo.keys() :
+                        all_homo[job] = (row['pi_score'],1,row)
+                        save_pi_score[job] = [float(row['pi_score'])]
+                    else :
+                        save_pi_score[job].append(float(row['pi_score']))
+                        sum_pi_score = float(all_homo[job][0]) + float(row['pi_score'])
+                        sum_int = all_homo[job][1] + 1
+                        all_homo[job] = (sum_pi_score,sum_int,row)
+        for key in all_homo.keys() :
+            row = all_homo[key][2]
+            if "homo" in row["jobs"].split("_") :
+                number_oligo = row["jobs"].split("_homo_")[1].split("_ranked")[0].replace("er","") #AFPD 2.0.4
+            else :
+                number_oligo = len(row["jobs"].split("_ranked")[0].split("_and_")) #AFPD 2.0.3
+            if len(save_pi_score[key]) > int(number_oligo) : #if model have more interface than number of homo-oligomerization
+                new_sum_pi_score = 0
+                save_pi_score[key].sort(reverse=True)
+                for index in range(0,int(number_oligo)) :
+                    new_sum_pi_score += save_pi_score[key][index]
+                    hiQ_score = (((float(new_sum_pi_score)/int(number_oligo))+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm are always same for each homo of same protein
+                line =f'{key},{str(float(new_sum_pi_score)/int(number_oligo))},{row["iptm_ptm"]},{str(hiQ_score)}\n'
+                all_lines += line
+            else :
+                hiQ_score = (((float(all_homo[key][0])/all_homo[key][1])+2.63)/5.26)*60+float(row['iptm_ptm'])*40 #cause iptm_ptm is always same for each homo of same protein
+                line =f'{key},{str(float(all_homo[key][0])/all_homo[key][1])},{row["iptm_ptm"]},{str(hiQ_score)}\n'
+                all_lines += line
+        with open("./result_homo_oligo/new_predictions_with_good_interpae.csv", "w") as file2 :
+            file2.write(all_lines)
 
 def generate_interaction_network (file) :
     """
@@ -1002,10 +1055,6 @@ def subcomplexes_figures (file, subcomplexes) :
             plt.close()
 
         merge_graph_and_colorbar(output_path)
-
-
-
-
 
 
 
