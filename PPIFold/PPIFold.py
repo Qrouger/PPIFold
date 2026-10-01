@@ -54,12 +54,12 @@ def main() :
     if args.make_multimers == "all" or args.make_multimers == "inter" :
         Make_all_vs_all(path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
         add_iQ_score(PPI_object, path_dict["Path_CCP4"])
-        PPI_object.update_iQ_score_hiQ_score(args.make_multimers)
+        PPI_object.update_iQ_score_hiQ_score("inter")
         generate_heatmap(PPI_object)
     if args.make_multimers == "all" or args.make_multimers == "intra" :
         Make_homo_oligo(path_dict["Path_AlphaFold_Data"],path_dict["Path_Pickle_Feature"])
         add_hiQ_score(PPI_object, path_dict["Path_CCP4"])
-        PPI_object.update_iQ_score_hiQ_score(args.make_multimers)
+        PPI_object.update_iQ_score_hiQ_score("intra")
     create_out_fig(PPI_object)
     generate_interaction_network(PPI_object)
     cluster_interface(PPI_object)
